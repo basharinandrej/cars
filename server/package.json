@@ -29,6 +29,8 @@
     "@models": "./dist/models/",
     "@routers": "./dist/routers/",
     "@common": "./dist/common/",
-    "@db": "./dist/db/"
+    "@db": "./dist/db/",
+    "@controllers": "./dist/controllers/",
+    "@services": "./dist/services/"
   }
 }

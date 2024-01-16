@@ -13,6 +13,8 @@
       "@routers*": ["routers/*"],
       "@common*": ["common/*"],
       "@db*": ["db/*"],
+      "@controllers*": ["controllers/*"],
+      "@services*": ["services/*"],
     }, 
   }
 }

@@ -10,4 +10,4 @@ interface GetBrands {
     offset?: number
 }
 
-export interface getBrandsRequest extends Request<EmptyString, EmptyString, EmptyString, GetBrands> {}
+export interface GetBrandsRequest extends Request<EmptyString, EmptyString, EmptyString, GetBrands> {}
