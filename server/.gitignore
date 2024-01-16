@@ -1,7 +1,0 @@
-dist
-.env
-node_modules
-
-examples
-.idea
-package-lock.json
