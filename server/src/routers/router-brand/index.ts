@@ -4,7 +4,7 @@ import controllerBrand from '@controllers/controller-brand'
 const routers = Router()
 
 
-routers.post('', controllerBrand.create)
+routers.post('', controllerBrand.createBrand)
 routers.get('', controllerBrand.getAllBrands)
 
 

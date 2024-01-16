@@ -8,4 +8,4 @@ interface GetModels {
     limit?: number,
     offset?: number
 }
-export interface getModelsRequest extends Request<EmptyString, EmptyString, EmptyString, GetModels> {}
+export interface GetModelsRequest extends Request<EmptyString, EmptyString, EmptyString, GetModels> {}

@@ -4,13 +4,13 @@ import {CreateBrandRequest, GetBrandsRequest} from '@routers/router-brand/types'
 import {CreateBrandDto, GetBrandsDto} from '@common/dto'
 
 class ControllerBrand {
-    async create(req: CreateBrandRequest, res: Response) {
+    async createBrand(req: CreateBrandRequest, res: Response) {
         try {
             const createBrandDto: CreateBrandDto = {
                 name: req.body.name
             }
 
-            serviceBrand.create(createBrandDto, res)
+            serviceBrand.createBrand(createBrandDto, res)
         } catch (error) {
             
         }

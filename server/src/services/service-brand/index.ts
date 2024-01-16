@@ -5,7 +5,7 @@ import Model from '@models/model'
 
 
 class ServiceBrand {
-    async create(createBrandDto: CreateBrandDto, res: Response) {
+    async createBrand(createBrandDto: CreateBrandDto, res: Response) {
 
         const brand = await Brand.create({
             name: createBrandDto.name
