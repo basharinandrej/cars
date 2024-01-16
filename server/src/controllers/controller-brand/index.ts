@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import serviceBrand from '@services/service-brand'
 import {CreateBrandRequest, GetBrandsRequest} from '@routers/router-brand/types'
-import {CreateBrandDto, GetBrandDto} from '@common/dto'
+import {CreateBrandDto, GetBrandsDto} from '@common/dto'
 
 class ControllerBrand {
     async create(req: CreateBrandRequest, res: Response) {
@@ -18,7 +18,7 @@ class ControllerBrand {
 
     async getAllBrands(req: GetBrandsRequest, res: Response) {
         try {
-            const getBrandsDto: GetBrandDto = {
+            const getBrandsDto: GetBrandsDto = {
                 limit: req.query.limit,
                 offset: req.query.offset
             }

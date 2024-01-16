@@ -1,5 +1,5 @@
 import {Response} from 'express'
-import {CreateBrandDto, GetBrandDto} from '@common/dto'
+import {CreateBrandDto, GetBrandsDto} from '@common/dto'
 import Brand from '@models/brand'
 import Model from '@models/model'
 
@@ -14,7 +14,7 @@ class ServiceBrand {
     }
 
 
-    async getAllBrands(getBrandsDto: GetBrandDto, res: Response) {
+    async getAllBrands(getBrandsDto: GetBrandsDto, res: Response) {
 
         const brands = await Brand?.findAndCountAll({
             limit: getBrandsDto.limit,
