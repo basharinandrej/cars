@@ -1,28 +1,11 @@
-import {Router, Response} from 'express'
-import TypeCar from '@models/type-car'
-import PartsOfCar from '@models/parts-of-car'
-import {CreateTypeCarRequest, GetTypeCarRequest} from './types'
+import {Router} from 'express'
+import controllerTypeCar from "@controllers/controller-type-car"
 
 const routers = Router()
 
-routers.post('', async (req: CreateTypeCarRequest, res: Response) => {
-    const {name} = req.body
 
-    const typeCar = await TypeCar.create<any>({
-        name
-    })
+routers.post('', controllerTypeCar.createTypeCar)
+routers.get('', controllerTypeCar.getAllTypesCar)
 
-    res.send({typeCar})
-})
-
-routers.get('', async (req: GetTypeCarRequest, res: Response) => {
-    const { limit = 10, offset = 0 } = req.query
-
-    const typeCar = await TypeCar?.findAndCountAll({
-        limit, offset, include: PartsOfCar
-    })
-
-    res.send({typeCar})
-})
 
 export const routerTypeCar = routers

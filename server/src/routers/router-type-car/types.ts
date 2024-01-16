@@ -8,4 +8,4 @@ interface GetTypeCar {
     limit?: number,
     offset?: number
 }
-export interface GetTypeCarRequest extends Request<EmptyString, EmptyString, EmptyString, GetTypeCar> {}
+export interface GetTypesCarRequest extends Request<EmptyString, EmptyString, EmptyString, GetTypeCar> {}
