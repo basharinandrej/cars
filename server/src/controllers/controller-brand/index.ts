@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import serviceBrand from '@services/service-brand'
 import {CreateBrandRequest, GetBrandsRequest} from '@routers/router-brand/types'
-import {CreateBrandDto, GetBrandsDto} from '@common/dto'
+import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
 
 class ControllerBrand {
     async createBrand(req: CreateBrandRequest, res: Response) {

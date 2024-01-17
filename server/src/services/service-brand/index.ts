@@ -1,5 +1,5 @@
 import {Response} from 'express'
-import {CreateBrandDto, GetBrandsDto} from '@common/dto'
+import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
 import Brand from '@models/brand'
 import Model from '@models/model'
 

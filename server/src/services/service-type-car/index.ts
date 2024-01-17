@@ -1,5 +1,5 @@
 import {Response} from 'express'
-import {CreateTypeCarDto, GetTypesCarDto} from '@common/dto'
+import {CreateTypeCarDto, GetTypesCarDto} from '@common/dtos'
 import TypeCar from '@models/type-car'
 import PartsOfCar from '@models/parts-of-car'
 

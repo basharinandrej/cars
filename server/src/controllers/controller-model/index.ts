@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import serviceModel from '@services/service-model'
 import {CreateModelRequest, GetModelsRequest} from '@routers/router-model/types'
-import {CreateModelDto, GetModelsDto} from '@common/dto'
+import {CreateModelDto, GetModelsDto} from '@common/dtos'
 
 
 class ControllerModel {

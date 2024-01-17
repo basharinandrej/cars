@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import serviceTypeCar from '@services/service-type-car'
 import {CreateTypeCarRequest, GetTypesCarRequest} from '@routers/router-type-car/types'
-import {CreateTypeCarDto, GetTypesCarDto} from '@common/dto'
+import {CreateTypeCarDto, GetTypesCarDto} from '@common/dtos'
 
 
 class ControllerTypeCar {
