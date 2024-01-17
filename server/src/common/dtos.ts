@@ -1,3 +1,4 @@
+import { State } from "@common/enums"
 
 export interface CreateBrandDto {
     name: string
@@ -24,6 +25,23 @@ export interface CreateTypeCarDto {
 }
 
 export interface GetTypesCarDto {
+    limit: number
+    offset: number
+}
+
+export interface CreateDetailDto {
+    name: string
+    vendorCode: number
+    wear: number
+    year: number
+    description: string
+    price: number
+    photos: number
+    state: State
+    typeDetailId: number
+}
+
+export interface GetDetailsDto {
     limit: number
     offset: number
 }

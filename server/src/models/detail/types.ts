@@ -1,7 +1,4 @@
-enum State {
-    NEW,
-    SECOND_HAND
-}
+import {State} from '@common/enums'
 
 export interface DetailAttributes {
     name: string
