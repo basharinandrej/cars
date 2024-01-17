@@ -3,6 +3,7 @@ import express, {Express} from 'express'
 import dotenv from 'dotenv';
 import {instanceSequelize} from './db'
 import './models/associations'
+import middlewareError from './middlewares/middleware-error'
 
 import routers from './routers'
 
@@ -22,5 +23,8 @@ app.listen(PORT, async () => {
 
 app.use(express.json())
 app.use('/api', routers)
+
+// last middleware
+app.use(middlewareError)
 
 

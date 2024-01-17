@@ -1,19 +1,21 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import serviceTypeCar from '@services/service-type-car'
 import {CreateTypeCarRequest, GetTypesCarRequest} from '@routers/router-type-car/types'
 import {CreateTypeCarDto, GetTypesCarDto} from '@common/dtos'
-
+import ApiError from '@api-error/index'
 
 class ControllerTypeCar {
-    async createTypeCar(req: CreateTypeCarRequest , res: Response) {
+    async createTypeCar(req: CreateTypeCarRequest, res: Response, next: NextFunction) {
         try {
             const createTypeCarDto: CreateTypeCarDto = {
                 name: req.body.name
             }
 
-            serviceTypeCar.createTypeCar(createTypeCarDto, res)
+            serviceTypeCar.createTypeCar(createTypeCarDto, res, next)
         } catch (error) {
-            
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
         }
     }
 
