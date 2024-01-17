@@ -5,6 +5,7 @@ import {routerDetail} from './router-detail'
 import {routerTypeCar} from './router-type-car'
 import {routerPartsOfCar} from './router-parts-of-car'
 import {routerTypeDetail} from './router-type-detail'
+import { routerDataBase } from './router-data-base'
 
 const routers = Router()
 
@@ -14,5 +15,6 @@ routers.use('/detail', routerDetail)
 routers.use('/type-car', routerTypeCar)
 routers.use('/parts-of-car', routerPartsOfCar)
 routers.use('/type-detail', routerTypeDetail)
+routers.use('/data-base', routerDataBase)
 
 export default routers
