@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import {CreatePartsOfCarDto, GetPartsOfCarsDto} from '@common/dtos'
 import PartsOfCar from '@models/parts-of-car'
-import Model from '@models/model'
+import TypeDetail from '@models/type-detail'
 
 
 class ServicePartsOfCar {
@@ -16,12 +16,12 @@ class ServicePartsOfCar {
 
     async getAllPartsOfCars(getPartsOfCarsDto: GetPartsOfCarsDto, res: Response) {
 
-        const PartsOfCars = await PartsOfCar?.findAndCountAll({
+        const partsOfCars = await PartsOfCar?.findAndCountAll({
             limit: getPartsOfCarsDto.limit,
             offset: getPartsOfCarsDto.offset,
-            include: Model
+            include: TypeDetail
         })
-        res.send({PartsOfCars})
+        res.send({partsOfCars})
     }
 }
 
