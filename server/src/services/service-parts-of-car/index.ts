@@ -8,7 +8,8 @@ class ServicePartsOfCar {
     async createPartsOfCar(createPartsOfCarDto: CreatePartsOfCarDto, res: Response) {
 
         const partsOfCar = await PartsOfCar.create({
-            name: createPartsOfCarDto.name
+            name: createPartsOfCarDto.name,
+            typeCarId: createPartsOfCarDto.typeCarId
         })
         res.send({partsOfCar})
     }
