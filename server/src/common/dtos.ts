@@ -55,3 +55,13 @@ export interface GetPartsOfCarsDto {
     limit: number
     offset: number
 }
+
+export interface CreateTypeDetailDto {
+    name: string,
+    partsOfCarId: number
+}
+
+export interface GetTypeDetailsDto {
+    limit: number, 
+    offset: number 
+}
