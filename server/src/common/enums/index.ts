@@ -1,4 +1,4 @@
 export enum State {
-    NEW,
-    SECOND_HAND
+    NEW = 'NEW',
+    SECOND_HAND = 'SECOND_HAND'
 }

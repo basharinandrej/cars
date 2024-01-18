@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 import ApiError from '@api-error/index';
 
 
-export default (req: CreateTypeCarRequest, _, next: NextFunction) => {
+export default (req: unknown, _, next: NextFunction) => {
     const errors = validationResult(req)
 
     if(!errors.isEmpty()) {

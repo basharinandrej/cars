@@ -1,10 +1,11 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
 import {CreateDetailRequest, GetDetailsRequest} from '@routers/router-detail/types'
 import {CreateDetailDto, GetDetailsDto} from '@common/dtos'
+import ApiError from '@api-error/index'
 
 class ControllerDetail {
-    async createDetail(req: CreateDetailRequest, res: Response) {
+    async createDetail(req: CreateDetailRequest, res: Response, next: NextFunction) {
         try {
             const createDetailDto: CreateDetailDto = {
                 name: req.body.name,
@@ -18,9 +19,11 @@ class ControllerDetail {
                 typeDetailId: req.body.typeDetailId
             }
 
-            serviceDetail.createDetail(createDetailDto, res)
+            serviceDetail.createDetail(createDetailDto, res, next)
         } catch (error) {
-            
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
         }
     }
 

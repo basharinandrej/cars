@@ -1,25 +1,32 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import {CreateDetailDto, GetDetailsDto} from '@common/dtos'
 import Detail from '@models/detail'
 import TypeDetail from '@models/type-detail'
+import ApiError from '@api-error/index'
 
 
 class ServiceDetail {
-    async createDetail(createDetailDto: CreateDetailDto, res: Response) {
+    async createDetail(createDetailDto: CreateDetailDto, res: Response, next: NextFunction) {
 
-        const detail = await Detail.create({
-            name: createDetailDto.name,
-            vendorCode: createDetailDto.vendorCode,
-            wear: createDetailDto.wear,
-            year: createDetailDto.year,
-            description: createDetailDto.description,
-            price: createDetailDto.price,
-            photos: createDetailDto.photos,
-            state: createDetailDto.state,
-            typeDetailId: createDetailDto.typeDetailId
-        })
-    
-        res.send({detail})
+       try {
+            const detail = await Detail.create({
+                name: createDetailDto.name,
+                vendorCode: createDetailDto.vendorCode,
+                wear: createDetailDto.wear,
+                year: createDetailDto.year,
+                description: createDetailDto.description,
+                price: createDetailDto.price,
+                photos: createDetailDto.photos,
+                state: createDetailDto.state,
+                typeDetailId: createDetailDto.typeDetailId
+            })
+        
+            res.send({detail})
+       } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+       }
     }
 
 
