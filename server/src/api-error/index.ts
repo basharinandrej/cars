@@ -9,10 +9,10 @@ class ApiError extends Error{
         this.status = status
     }
 
-    static bedRequest(status = 404, message) {
+    static bedRequest(message) {
         const defaultMessage = 'Некорректный запрос'
 
-        return new ApiError(status, message || defaultMessage)
+        return new ApiError(404, message || defaultMessage)
     }
 
     static internal(message) {

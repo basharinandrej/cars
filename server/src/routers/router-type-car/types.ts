@@ -2,7 +2,7 @@ import { Request } from "express";
 import { TypeCarAttributes } from '@models/type-car/types'
 import {EmptyString} from '@common/types'
 
-export interface CreateTypeCarRequest extends Request<EmptyString, EmptyString, TypeCarAttributes> {}
+export interface CreateTypeCarRequest extends Request<Record<string, unknown>, EmptyString, TypeCarAttributes> {}
 
 interface GetTypeCar {
     limit?: number,
