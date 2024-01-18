@@ -4,7 +4,8 @@ import Model from '@models/model'
 import TypeCar from '@models/type-car'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
-
+import {mapperCreateModel} from './model-mappers/create-mapper'
+import {mapperGetAllModel} from './model-mappers/get-all-mapper'
 
 class ServiceModel {
     async createModel(createModelDto: CreateModelDto, res: Response, next: NextFunction) {
@@ -15,7 +16,7 @@ class ServiceModel {
                 brandId: createModelDto.brandId,
                 typeCarId: createModelDto.typeCarId
             })
-            res.send({model})
+            res.send(mapperCreateModel(model))
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -31,7 +32,7 @@ class ServiceModel {
             offset: getModelsDto.offset,
             include: [TypeCar,Brand]
         })
-        res.send({models})
+        res.send(mapperGetAllModel(models))
     }
 }
 
