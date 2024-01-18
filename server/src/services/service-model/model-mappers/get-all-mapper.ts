@@ -13,15 +13,11 @@ export const mapperGetAllModel = (models: Models) => {
                 id: model.dataValues.id,
                 name: model.dataValues.name,
                 typeCar: {
-                                    //@ts-ignore
                     id: model.dataValues.TypeCar.id,
-                                    //@ts-ignore
                     name: model.dataValues.TypeCar.name
                 },
                 brand: {
-                                    //@ts-ignore
                     id: model.dataValues.Brand.id,
-                                    //@ts-ignore
                     name: model.dataValues.Brand.name,
                 }
             }
