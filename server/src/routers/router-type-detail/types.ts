@@ -2,7 +2,7 @@ import { Request } from "express";
 import { TypeDetailAttributes } from '@models/type-detail/types'
 import {EmptyString} from '@common/types'
 
-export interface CreateTypeDetailRequest extends Request<EmptyString, EmptyString, TypeDetailAttributes> {}
+export interface CreateTypeDetailRequest extends Request<Record<string, unknown>, EmptyString, TypeDetailAttributes> {}
 
 interface GetTypeDetails {
     limit?: number,
