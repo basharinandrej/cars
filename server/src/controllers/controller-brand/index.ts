@@ -1,18 +1,21 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import serviceBrand from '@services/service-brand'
 import {CreateBrandRequest, GetBrandsRequest} from '@routers/router-brand/types'
 import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
+import ApiError from '@api-error/index'
 
 class ControllerBrand {
-    async createBrand(req: CreateBrandRequest, res: Response) {
+    async createBrand(req: CreateBrandRequest, res: Response, next: NextFunction) {
         try {
             const createBrandDto: CreateBrandDto = {
                 name: req.body.name
             }
 
-            serviceBrand.createBrand(createBrandDto, res)
+            serviceBrand.createBrand(createBrandDto, res, next)
         } catch (error) {
-            
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
         }
     }
 

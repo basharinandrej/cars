@@ -1,17 +1,25 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import {CreatePartsOfCarDto, GetPartsOfCarsDto} from '@common/dtos'
 import PartsOfCar from '@models/parts-of-car'
 import TypeDetail from '@models/type-detail'
+import ApiError from '@api-error/index'
 
 
 class ServicePartsOfCar {
-    async createPartsOfCar(createPartsOfCarDto: CreatePartsOfCarDto, res: Response) {
+    async createPartsOfCar(createPartsOfCarDto: CreatePartsOfCarDto, res: Response, next: NextFunction) {
 
-        const partsOfCar = await PartsOfCar.create({
-            name: createPartsOfCarDto.name,
-            typeCarId: createPartsOfCarDto.typeCarId
-        })
-        res.send({partsOfCar})
+        try {
+            const partsOfCar = await PartsOfCar.create({
+                name: createPartsOfCarDto.name,
+                typeCarId: createPartsOfCarDto.typeCarId
+            })
+            res.send({partsOfCar})
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
+
     }
 
 

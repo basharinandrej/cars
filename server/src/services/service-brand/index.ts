@@ -1,16 +1,23 @@
-import {Response} from 'express'
+import {NextFunction, Response} from 'express'
 import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
 import Brand from '@models/brand'
 import Model from '@models/model'
+import ApiError from '@api-error/index'
 
 
 class ServiceBrand {
-    async createBrand(createBrandDto: CreateBrandDto, res: Response) {
+    async createBrand(createBrandDto: CreateBrandDto, res: Response, next: NextFunction) {
 
-        const brand = await Brand.create({
-            name: createBrandDto.name
-        })
-        res.send({brand})
+        try {
+            const brand = await Brand.create({
+                name: createBrandDto.name
+            })
+            res.send({brand})
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
     }
 
 

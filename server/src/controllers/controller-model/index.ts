@@ -2,6 +2,7 @@ import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
 import {CreateModelRequest, GetModelsRequest} from '@routers/router-model/types'
 import {CreateModelDto, GetModelsDto} from '@common/dtos'
+import ApiError from '@api-error/index'
 
 
 class ControllerModel {
@@ -15,7 +16,9 @@ class ControllerModel {
 
             serviceModel.createModel(createModelDto, res, next)
         } catch (error) {
-            
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
         }
     }
 
