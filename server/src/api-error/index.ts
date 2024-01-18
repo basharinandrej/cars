@@ -20,6 +20,11 @@ class ApiError extends Error{
 
         return new ApiError(500, message || defaultMessage)
     }
+
+    static unauthorized(message) {
+        const defaultMessage = 'Неавторизован'
+        return new ApiError(403, message || defaultMessage)
+    }
 }
 
 export default ApiError

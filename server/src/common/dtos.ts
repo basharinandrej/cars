@@ -1,4 +1,4 @@
-import { State } from "@common/enums"
+import { State, UserRoles } from "@common/enums"
 
 export interface CreateBrandDto {
     name: string
@@ -64,4 +64,18 @@ export interface CreateTypeDetailDto {
 export interface GetTypeDetailsDto {
     limit: number, 
     offset: number 
+}
+
+export interface CreateUserDto {
+    id: number
+    name: string
+    surname: string
+    email: string
+    role: UserRoles
+    phoneNumber: number
+    password: string
+    balance?: number
+    banType?: number
+    avatar?: string
+    addres?: number
 }
