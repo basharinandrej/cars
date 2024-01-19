@@ -11,4 +11,4 @@ interface GetUsers {
     offset?: number
 }
 
-export interface GetUsersRequest extends Request<EmptyString, EmptyString, EmptyString, GetUsers> {}
+export interface GetUsersRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, GetUsers> {}

@@ -1,3 +1,4 @@
+import { UserRoles } from "@common/enums";
 
 export const errorStrings = {
 
@@ -8,5 +9,8 @@ export const errorStrings = {
     shouldHaveString: (field: string, value: Array<unknown>) => `Значение поля ${field} должно быть одной из этой строки ${value.join(', ')}`,
     userAlreadyExist: (email: string) => `Пользователь с таким email - ${email} уже существует`,
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
-    errorPassword: () => `Неверный пароль`
+    errorPassword: () => `Неверный пароль`,
+    onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
+    unauthorized: () => `Неавторизон`,
+    expireToken: () => `Токен истёк`,
 }

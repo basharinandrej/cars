@@ -1,9 +1,7 @@
-// import { NextFunction } from 'express';
 import Token from '@models/token'
 import { EMPTY_STRING } from '@common/constans';
 import jwt from 'jsonwebtoken'
-// import ApiError from '@api-error/index'
-import {PayloadToken} from './types'
+import {PayloadToken} from '@common/types'
 
 class ServiceToken {
     private secretString = process.env.SECRET_KEY || EMPTY_STRING
@@ -23,18 +21,9 @@ class ServiceToken {
         return {accessToken, refreshToken}
     }
 
-    // public validationToken(token: string, next?: NextFunction) {
-    //     try {
-    //         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
-    //     } catch (error) {
-    //         if(error instanceof Error) {
-    //             next?.(ApiError.unauthorized(error?.message))
-    //             // if(!next) {
-    //             //     throw new Error(error.message) 
-    //             // }
-    //         }
-    //     }
-    // }
+    public validationToken(token: string): PayloadToken {
+        return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
+    }
     
     public async saveToken(token: string, userId: number) {
         return await Token?.create({

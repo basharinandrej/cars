@@ -2,7 +2,7 @@ import { body } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import { State } from '@common/enums';
 
-export const validationCreateDetail= {
+export const validationCreateDetail = {
     createChain() {
         return  [
             body('name')
