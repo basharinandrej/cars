@@ -12,6 +12,7 @@ export const errorStrings = {
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     errorPassword: () => `Неверный пароль`,
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
+    onlyForModeratorOrOrganizationOrPerson: () => `Доступно только для пользователя с ролью ${UserRoles.MODERATOR} или  ${UserRoles.ORGANIZATION} или  ${UserRoles.PERSON}`,
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
     uncorrectEmail: () => `Некорректный email`,

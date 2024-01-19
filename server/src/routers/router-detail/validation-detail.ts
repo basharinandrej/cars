@@ -1,6 +1,11 @@
-import { body } from 'express-validator';
+import { body, header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import { State } from '@common/enums';
+import {extractAccessToken} from '@common/utils/extract-tokens'
+import {serviceToken} from '@services/service-token'
+import ApiError from '@api-error/index'
+import { UserRoles } from '@common/enums';
+
 
 export const validationCreateDetail = {
     createChain() {
@@ -24,7 +29,26 @@ export const validationCreateDetail = {
                 .withMessage(errorStrings.maxLength('year', 4)).trim(),
 
             body('state')
-                .isIn([State.NEW, State.SECOND_HAND]).withMessage(errorStrings.shouldHaveString('state', [State.NEW, State.SECOND_HAND]))
+                .isIn([State.NEW, State.SECOND_HAND]).withMessage(errorStrings.shouldHaveString('state', [State.NEW, State.SECOND_HAND])),
+
+
+            header('authorization').custom((value: string) => {
+                const token = extractAccessToken(value)
+
+                try {
+                    const result = serviceToken.validationToken(token)
+                    const checkOnModeratorOrOrganization = UserRoles.MODERATOR || UserRoles.ORGANIZATION || UserRoles.PERSON
+
+                    if(result.role === checkOnModeratorOrOrganization) {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.onlyForModeratorOrOrganizationOrPerson()));
+                    }
+
+                } catch (error) {
+                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                }
+            })
         ]
     }
 }
