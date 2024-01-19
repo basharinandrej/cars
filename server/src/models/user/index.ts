@@ -1,8 +1,8 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {UserAttributes} from './types'
+import {UserAttributes, UserCreation} from './types'
 
-class User extends ModelSequelize<UserAttributes, any> {}
+class User extends ModelSequelize<UserAttributes, UserCreation> {}
 
 User.init({
     id: {

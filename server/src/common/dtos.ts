@@ -79,3 +79,11 @@ export interface CreateUserDto {
     avatar?: string
     addres?: number
 }
+
+export interface LoginUserDto {
+    id: number
+    name: string
+    role: UserRoles
+    email: string
+    password: string
+}

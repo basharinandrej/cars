@@ -1,11 +1,12 @@
 import { NextFunction } from 'express';
 import Token from '@models/token'
+import { EMPTY_STRING } from '@common/constans';
 import jwt from 'jsonwebtoken'
 import ApiError from '@api-error/index'
 import {PayloadToken} from './types'
 
 class ServiceToken {
-    private secretString = process.env.SECRET_KEY || ''
+    private secretString = process.env.SECRET_KEY || EMPTY_STRING
 
     private createToken(payloadToken: PayloadToken, expiresIn: string) {
         return jwt.sign(
@@ -24,7 +25,7 @@ class ServiceToken {
 
     public validationToken(token: string, next?: NextFunction) {
         try {
-            return jwt.verify(token, process.env.SECRET_KEY || '')
+            return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
         } catch (error) {
             if(error instanceof Error) {
                 next?.(ApiError.unauthorized(error?.message))
