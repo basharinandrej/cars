@@ -89,7 +89,10 @@ class ServiceUser {
     async getAllUsers(getAllUserDto: GetAllUserDto, next: NextFunction) {
 
         try {
-            const users = await User.findAndCountAll()
+            const users = await User.findAndCountAll({
+                limit: getAllUserDto.limit,
+                offset: getAllUserDto.offset
+            })
             return  getAllUserMapper(users)
         } catch (error) {
             if(error instanceof Error) {

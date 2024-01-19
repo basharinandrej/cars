@@ -38,11 +38,12 @@ class ControllerUser {
     async getAllUsers(req: GetUsersRequest, res: Response, next: NextFunction) {
 
         const getAllUserDto = dto.getAllUsersDto(req.query)
-
         const result = await serviceUser.getAllUsers(getAllUserDto, next)
 
         res.send(result)
     }
+
+    // async logout() {}
 }
 
 export default new ControllerUser()
