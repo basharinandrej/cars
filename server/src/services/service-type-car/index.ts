@@ -4,7 +4,7 @@ import TypeCar from '@models/type-car'
 import PartsOfCar from '@models/parts-of-car'
 import ApiError from '@api-error/index'
 import {errorStrings} from '@common/error-strings'
-import {typeCarMapper} from './type-car-mapper/type-car-mapper'
+import {createTypeCarMapper} from './type-car-mapper/create-type-car-mapper'
 
 class ServiceTypeCar {
     async createTypeCar(createTypeCar: CreateTypeCarDto, next: NextFunction) {
@@ -22,7 +22,7 @@ class ServiceTypeCar {
             const typeCar =  await TypeCar.create({
                 name: createTypeCar.name
             })
-            return typeCarMapper(typeCar)
+            return createTypeCarMapper(typeCar)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

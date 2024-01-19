@@ -11,7 +11,9 @@ class ControllerBrand {
                 name: req.body.name
             }
 
-            serviceBrand.createBrand(createBrandDto, res, next)
+            const brand = await serviceBrand.createBrand(createBrandDto, next)
+
+            res.send(brand)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
