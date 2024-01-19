@@ -66,7 +66,7 @@ export interface GetTypeDetailsDto {
     offset: number 
 }
 
-export interface CreateUserDto {
+export interface RegistrationUserDto {
     id: number
     name: string
     surname: string
@@ -81,9 +81,6 @@ export interface CreateUserDto {
 }
 
 export interface LoginUserDto {
-    id: number
-    name: string
-    role: UserRoles
     email: string
     password: string
 }

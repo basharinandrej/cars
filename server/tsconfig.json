@@ -16,6 +16,7 @@
       "@controllers*": ["controllers/*"],
       "@services*": ["services/*"],
       "@api-error*": ["api-error/*"],
+      "@dto*": ["dto/*"],
     }, 
   }
 }

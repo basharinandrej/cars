@@ -34,6 +34,7 @@
     "@db": "./dist/db/",
     "@controllers": "./dist/controllers/",
     "@services": "./dist/services/",
-    "@api-error": "./dist/api-error/"
+    "@api-error": "./dist/api-error/",
+    "@dto": "./dist/dto/"
   }
 }

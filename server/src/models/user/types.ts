@@ -8,7 +8,7 @@ export interface UserAttributes {
     email: string
     role: UserRoles
     phoneNumber: number
-    addres: number
+    addres?: number
     password: string
     balance?: number
     banType?: number

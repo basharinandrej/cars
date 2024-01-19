@@ -3,7 +3,7 @@ import { UserAttributes } from '@models/user/types'
 import {EmptyString} from '@common/types'
 
 
-export interface CreateUserRequest extends Request<Record<string, unknown>, EmptyString, UserAttributes> {}
+export interface RegistrationUserRequest extends Request<Record<string, unknown>, EmptyString, UserAttributes> {}
 
 interface GetUsers {
     limit?: number,

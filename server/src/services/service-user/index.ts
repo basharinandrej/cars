@@ -1,14 +1,15 @@
-import { NextFunction, Response } from "express"
+import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {CreateUserDto, LoginUserDto} from '@common/dtos'
+import {RegistrationUserDto, LoginUserDto} from '@common/dtos'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
-import {getHashPassword} from './utils/get-hash-password'
-import {compareHashPassword} from './utils/compare-hash-password'
+import {getHashPassword} from './user-utils/get-hash-password'
+import {compareHashPassword} from './user-utils/compare-hash-password'
+import {loginUserMapper} from './user-mappers/login-user-mapper'
 
 class ServiceUser {
-    async registration(createUserDto: CreateUserDto, res: Response, next: NextFunction) {
+    async registration(createUserDto: RegistrationUserDto, next: NextFunction) {
         try {
             const canditate = await User.findOne({where: {email: createUserDto.email}})
 
@@ -35,9 +36,12 @@ class ServiceUser {
             })
 
             await serviceToken.saveToken(refreshToken, user.dataValues.id)
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
 
-            res.send({user, accessToken})
+            return {
+                refreshToken, 
+                user, 
+                accessToken
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
@@ -45,7 +49,7 @@ class ServiceUser {
         }
     }
 
-    async login(loginUserDto: LoginUserDto, res: Response, next: NextFunction) {
+    async login(loginUserDto: LoginUserDto, next: NextFunction) {
         try {
             const canditate = await User.findOne({where: {email: loginUserDto.email}})
 
@@ -58,14 +62,17 @@ class ServiceUser {
   
             if(isMatchPasswords) {
                 const {accessToken, refreshToken} = serviceToken.generateTokens({
-                    id: loginUserDto.id,
-                    name: loginUserDto.name,
-                    role: loginUserDto.role
+                    id: canditate.dataValues.id,
+                    name: canditate.dataValues.name,
+                    role: canditate.dataValues.role
                 })
-                await serviceToken.saveToken(refreshToken, loginUserDto.id)
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                await serviceToken.saveToken(refreshToken, canditate.dataValues.id)
 
-                res.send({user: canditate, accessToken})
+                return {
+                    refreshToken,
+                    user: loginUserMapper(canditate),
+                    accessToken
+                }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
             }
