@@ -14,7 +14,8 @@ class ControllerModel {
                 typeCarId: req.body.typeCarId
             }
 
-            serviceModel.createModel(createModelDto, res, next)
+            const model = await serviceModel.createModel(createModelDto, next)
+            res.send(model)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

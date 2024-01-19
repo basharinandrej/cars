@@ -8,7 +8,7 @@ import {mapperCreateModel} from './model-mappers/create-mapper'
 import {mapperGetAllModel} from './model-mappers/get-all-mapper'
 
 class ServiceModel {
-    async createModel(createModelDto: CreateModelDto, res: Response, next: NextFunction) {
+    async createModel(createModelDto: CreateModelDto, next: NextFunction) {
 
         try {
             const model = await Model.create({
@@ -16,7 +16,7 @@ class ServiceModel {
                 brandId: createModelDto.brandId,
                 typeCarId: createModelDto.typeCarId
             })
-            res.send(mapperCreateModel(model))
+            return mapperCreateModel(model)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
