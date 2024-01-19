@@ -84,3 +84,9 @@ export interface LoginUserDto {
     email: string
     password: string
 }
+
+
+export interface GetAllUserDto {
+    limit: number, 
+    offset: number 
+}

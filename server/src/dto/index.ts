@@ -1,4 +1,4 @@
-import {RegistrationUserDto, LoginUserDto} from '@common/dtos'
+import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@common/dtos'
 import {UserAttributes} from '@models/user/types'
 
 
@@ -26,6 +26,14 @@ class Dto {
         return {
             email: user.email,
             password: user.password
+        }
+    }
+
+    getAllUsersDto(query: any): GetAllUserDto {
+
+        return {
+            limit: query.limit,
+            offset: query.offset
         }
     }
 }

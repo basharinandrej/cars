@@ -1,12 +1,14 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {RegistrationUserDto, LoginUserDto} from '@common/dtos'
+import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@common/dtos'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from './user-utils/get-hash-password'
 import {compareHashPassword} from './user-utils/compare-hash-password'
 import {loginUserMapper} from './user-mappers/login-user-mapper'
+import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
+
 
 class ServiceUser {
     async registration(createUserDto: RegistrationUserDto, next: NextFunction) {
@@ -77,6 +79,18 @@ class ServiceUser {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
             }
 
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
+    }
+
+    async getAllUsers(getAllUserDto: GetAllUserDto, next: NextFunction) {
+
+        try {
+            const users = await User.findAndCountAll()
+            return  getAllUserMapper(users)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

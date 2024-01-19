@@ -4,6 +4,7 @@ import {EmptyString} from '@common/types'
 
 
 export interface RegistrationUserRequest extends Request<Record<string, unknown>, EmptyString, UserAttributes> {}
+export interface LoginUserRequest extends Request<Record<string, unknown>, EmptyString, UserAttributes> {}
 
 interface GetUsers {
     limit?: number,
