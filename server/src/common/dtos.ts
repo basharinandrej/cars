@@ -88,5 +88,6 @@ export interface LoginUserDto {
 
 export interface GetAllUserDto {
     limit: number, 
-    offset: number 
+    offset: number,
+    role?: UserRoles
 }

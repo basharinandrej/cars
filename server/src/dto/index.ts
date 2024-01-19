@@ -1,5 +1,6 @@
 import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@common/dtos'
 import {UserAttributes} from '@models/user/types'
+import { GetUsersRequest} from '@routers/router-user/types'
 
 
 class Dto {
@@ -29,11 +30,12 @@ class Dto {
         }
     }
 
-    getAllUsersDto(query: any): GetAllUserDto {
+    getAllUsersDto(req: GetUsersRequest): GetAllUserDto {
 
         return {
-            limit: query.limit,
-            offset: query.offset
+            limit: req.query.limit,
+            offset: req.query.offset,
+            role: req.query.role
         }
     }
 }
