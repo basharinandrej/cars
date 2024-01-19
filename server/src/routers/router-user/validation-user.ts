@@ -1,5 +1,5 @@
 
-import { header } from 'express-validator';
+import { header, body } from 'express-validator';
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
@@ -25,6 +25,39 @@ export const validationUser = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             })
+        ]
+    },
+    registrationChain() {
+        return [
+            body('name')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('name'))
+                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
+
+            body('surname')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('surname'))
+                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
+
+            body('password')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+
+            body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
+            
+            body('role').isIn([
+                UserRoles.ADMIN, 
+                UserRoles.MODERATOR, 
+                UserRoles.ORGANIZATION, 
+                UserRoles.PERSON
+            ]).withMessage(errorStrings.shouldHaveString('role',[
+                UserRoles.ADMIN, 
+                UserRoles.MODERATOR, 
+                UserRoles.ORGANIZATION, 
+                UserRoles.PERSON
+            ])).trim(),
+
+            body('phoneNumber')
+                .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
+                .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim()
         ]
     }
 }

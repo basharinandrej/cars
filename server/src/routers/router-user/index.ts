@@ -6,7 +6,12 @@ import middlewareValidation from '../middlewares/middleware-validation'
 const routers = Router()
 
 
-routers.post('/registration', controllerUser.registration)
+routers.post(
+    '/registration', 
+    validationUser.registrationChain(),
+    middlewareValidation,
+    controllerUser.registration
+)
 routers.post('/login', controllerUser.login)
 
 routers.get('', 

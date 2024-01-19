@@ -13,4 +13,7 @@ export const errorStrings = {
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
+    uncorrectEmail: () => `Некорректный email`,
+    uncorrectRole: () => `Некорректная роль у пользователя`,
+    checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`
 }
