@@ -3,15 +3,26 @@ import {CreateTypeCarDto, GetTypesCarDto} from '@common/dtos'
 import TypeCar from '@models/type-car'
 import PartsOfCar from '@models/parts-of-car'
 import ApiError from '@api-error/index'
-
+import {errorStrings} from '@common/error-strings'
+import {typeCarMapper} from './type-car-mapper/type-car-mapper'
 
 class ServiceTypeCar {
-    async createTypeCar(createTypeCar: CreateTypeCarDto, res: Response, next: NextFunction) {
+    async createTypeCar(createTypeCar: CreateTypeCarDto, next: NextFunction) {
         try {
-            const typeCar = await TypeCar.create({
+            const candidate = await TypeCar.findOne({
+                where: {
+                    name: createTypeCar.name
+                }
+            })
+
+            if(candidate) {
+                next(ApiError.bedRequest(errorStrings.typeCarAlreadyExist(candidate.dataValues.name)))
+            }
+
+            const typeCar =  await TypeCar.create({
                 name: createTypeCar.name
             })
-            res.send({ typeCar })
+            return typeCarMapper(typeCar)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

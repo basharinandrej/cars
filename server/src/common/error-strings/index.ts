@@ -8,6 +8,7 @@ export const errorStrings = {
     beNumber: (field: string) => `Значение поля ${field} должно быть числом`,
     shouldHaveString: (field: string, value: Array<unknown>) => `Значение поля ${field} должно быть одной из этой строки ${value.join(', ')}`,
     userAlreadyExist: (email: string) => `Пользователь с таким email - ${email} уже существует`,
+    typeCarAlreadyExist: (value: string) => `Такой тип машины - ${value} уже есть. Тип машины должен быть уникальным`,
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     errorPassword: () => `Неверный пароль`,
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
