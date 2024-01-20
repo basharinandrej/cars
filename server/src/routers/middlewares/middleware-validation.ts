@@ -1,5 +1,4 @@
 import {NextFunction} from 'express'
-import {CreateTypeCarRequest} from '@routers/router-type-car/types';
 import { validationResult } from "express-validator";
 import ApiError from '@api-error/index';
 

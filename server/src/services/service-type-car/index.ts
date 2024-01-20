@@ -16,7 +16,7 @@ class ServiceTypeCar {
             })
 
             if(candidate) {
-                next(ApiError.bedRequest(errorStrings.typeCarAlreadyExist(candidate.dataValues.name)))
+                return next(ApiError.bedRequest(errorStrings.typeCarAlreadyExist(candidate.dataValues.name)))
             }
 
             const typeCar =  await TypeCar.create({

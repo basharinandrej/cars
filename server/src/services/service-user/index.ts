@@ -56,12 +56,12 @@ class ServiceUser {
             const canditate = await User.findOne({where: {email: loginUserDto.email}})
 
             if(!canditate) {
-                next(ApiError.bedRequest(errorStrings.notFoundUser(canditate.dataValues.email)))
-            }
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(loginUserDto.email)))
+            } 
 
             const hashPassword = await getHashPassword(loginUserDto.password)
             const isMatchPasswords = await compareHashPassword(loginUserDto.password, hashPassword)
-  
+
             if(isMatchPasswords) {
                 const {accessToken, refreshToken} = serviceToken.generateTokens({
                     id: canditate.dataValues.id,
@@ -78,7 +78,6 @@ class ServiceUser {
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
             }
-
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

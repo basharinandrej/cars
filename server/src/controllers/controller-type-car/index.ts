@@ -11,7 +11,7 @@ class ControllerTypeCar {
             const createTypeCarDto = dtoTypeCar.createTypeCarDto(req.body)
             const serviceType = await serviceTypeCar.createTypeCar(createTypeCarDto, next)
             
-            res.send({serviceType})
+            res.send(serviceType)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

@@ -23,13 +23,18 @@ class ControllerUser {
     async login(req: LoginUserRequest, res: Response, next: NextFunction) {
         try {
             const loginUserDto = dtoUser.loginUserDto(req.body)
-            const {refreshToken, user, accessToken} = await serviceUser.login(loginUserDto, next)
+            const result = await serviceUser.login(loginUserDto, next)
 
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-            res.send({user, accessToken})
+            if(result) {
+                const {refreshToken, user, accessToken} = result
+                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.send({user, accessToken})
+            }
+        } catch (error) {                
 
-        } catch (error) {
+            console.log('>>> error 2', error)
             if(error instanceof Error) {
+
                 next(ApiError.internal(error))
             }
         }
