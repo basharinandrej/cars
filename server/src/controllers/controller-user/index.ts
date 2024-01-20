@@ -44,6 +44,10 @@ class ControllerUser {
     }
 
     // async logout() {}
+
+    // async dropPassword
+
+    // async changePassword ?
 }
 
 export default new ControllerUser()
