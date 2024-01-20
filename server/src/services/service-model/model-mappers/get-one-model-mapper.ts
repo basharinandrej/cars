@@ -19,8 +19,6 @@ export const getOneModelMapper = (model: Model) => {
                 proce: detail.price,
                 photos: detail.photos,
                 state: detail.state,
-                typeDetailId: detail.typeDetailId,
-                modelId: detail.modelId
             }
         })
     }

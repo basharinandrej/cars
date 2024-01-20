@@ -48,6 +48,7 @@ class ServiceModel {
 
     async getOneModel(modelId: number, next: NextFunction) {
 
+        //pagination, filters, sorts
         try {
             const model = await Model.findOne({
                 where: {

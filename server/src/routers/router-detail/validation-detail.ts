@@ -4,7 +4,6 @@ import { State } from '@common/enums';
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
-import { UserRoles } from '@common/enums';
 
 
 export const validationCreateDetail = {
@@ -19,6 +18,7 @@ export const validationCreateDetail = {
                 .isLength({min: 2}).withMessage(errorStrings.minLength('vendorCode', 2)),
 
             body('typeDetailId').isNumeric().withMessage(errorStrings.beNumber('typeDetailId')).trim(),
+            body('modelId').isNumeric().withMessage(errorStrings.beNumber('modelId')).trim(),
             body('wear').isNumeric().withMessage(errorStrings.beNumber('wear')).trim(),
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
 
