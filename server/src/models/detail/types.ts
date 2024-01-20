@@ -12,6 +12,7 @@ export interface DetailAttributes {
     photos: number
     state: State
     typeDetailId?: number
+    modelId?: number
 }
 
 

@@ -18,7 +18,8 @@ class ServiceDetail {
                 price: createDetailDto.price,
                 photos: createDetailDto.photos,
                 state: createDetailDto.state,
-                typeDetailId: createDetailDto.typeDetailId
+                typeDetailId: createDetailDto.typeDetailId,
+                modelId: createDetailDto.modelId
             })
         
             return createDetailMapper(detail)

@@ -4,6 +4,7 @@ import Model from '@models/model'
 import TypeCar from '@models/type-car'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
+import Detail from '@models/detail'
 import {mapperCreateModel} from './model-mappers/create-mapper'
 import {mapperGetAllModel} from './model-mappers/get-all-mapper'
 import {getOneModelMapper} from './model-mappers/get-one-mapper'
@@ -51,7 +52,9 @@ class ServiceModel {
             const model = await Model.findOne({
                 where: {
                     id: modelId
-                }
+                    
+                },
+                include: Detail
             })
             return getOneModelMapper(model)
         } catch (error) {

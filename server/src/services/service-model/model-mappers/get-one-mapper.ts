@@ -3,7 +3,7 @@ import Model from "@models/model"
 
 export const getOneModelMapper = (model: Model) => {
 
-
+return model
     return {
         id: model.dataValues.id,
         name: model.dataValues.name,

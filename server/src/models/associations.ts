@@ -24,3 +24,6 @@ TypeDetail.belongsTo(PartsOfCar, {foreignKey: 'partsOfCarId'})
 
 TypeDetail.hasMany(Detail,  {foreignKey: 'typeDetailId'})
 Detail.belongsTo(TypeDetail,  {foreignKey: 'typeDetailId'})
+
+Model.hasMany(Detail,  {foreignKey: 'modelId'})
+Detail.belongsTo(Model,  {foreignKey: 'modelId'})

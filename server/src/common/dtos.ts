@@ -50,6 +50,7 @@ export interface CreateDetailDto {
     photos: number
     state: State
     typeDetailId: number
+    modelId: number
 }
 
 export interface GetDetailsDto {
