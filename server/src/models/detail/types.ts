@@ -1,6 +1,8 @@
 import {State} from '@common/enums'
+import {Optional} from "sequelize/types";
 
 export interface DetailAttributes {
+    id: number
     name: string
     vendorCode: number
     wear: number
@@ -12,3 +14,5 @@ export interface DetailAttributes {
     typeDetailId?: number
 }
 
+
+export interface CreationDetail extends Optional<DetailAttributes, 'id'> {}

@@ -37,12 +37,11 @@ export const validationCreateDetail = {
 
                 try {
                     const result = serviceToken.validationToken(token)
-                    const checkOnModeratorOrOrganization = UserRoles.MODERATOR || UserRoles.ORGANIZATION || UserRoles.PERSON
 
-                    if(result.role === checkOnModeratorOrOrganization) {
+                    if(result.id) {
                         return Promise.resolve(true);
                     } else {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.onlyForModeratorOrOrganizationOrPerson()));
+                        return Promise.reject(ApiError.bedRequest(errorStrings.unauthorized()));
                     }
 
                 } catch (error) {

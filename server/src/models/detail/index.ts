@@ -1,11 +1,16 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import { DetailAttributes } from './types'
+import { DetailAttributes, CreationDetail } from './types'
 
 
-class Detail extends Model<DetailAttributes, DetailAttributes> {}
+class Detail extends Model<DetailAttributes, CreationDetail> {}
 
 Detail.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -13,7 +18,6 @@ Detail.init({
     vendorCode: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
     },
     wear: {
         type: DataTypes.INTEGER,
