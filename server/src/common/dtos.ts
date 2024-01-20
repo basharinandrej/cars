@@ -27,6 +27,10 @@ export interface GetAllModelsDto {
     brandId?: number
 }
 
+export interface GetOneModelDto {
+    id: number
+}
+
 export interface CreateTypeCarDto {
     name: string
 }

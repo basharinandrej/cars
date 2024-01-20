@@ -6,6 +6,7 @@ import Brand from '@models/brand'
 import ApiError from '@api-error/index'
 import {mapperCreateModel} from './model-mappers/create-mapper'
 import {mapperGetAllModel} from './model-mappers/get-all-mapper'
+import {getOneModelMapper} from './model-mappers/get-one-mapper'
 
 class ServiceModel {
     async createModel(createModelDto: CreateModelDto, next: NextFunction) {
@@ -37,6 +38,22 @@ class ServiceModel {
                 include: [TypeCar,Brand]
             })
             return mapperGetAllModel(models)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
+    }
+
+    async getOneModel(modelId: number, next: NextFunction) {
+
+        try {
+            const model = await Model.findOne({
+                where: {
+                    id: modelId
+                }
+            })
+            return getOneModelMapper(model)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

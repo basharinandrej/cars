@@ -1,5 +1,6 @@
-import {CreateModelDto, GetAllModelsDto} from '@common/dtos'
+import {CreateModelDto, GetAllModelsDto, GetOneModelDto} from '@common/dtos'
 import {ModelAttributes} from '@models/model/types'
+import {GetModels, GetOneModel} from '@routers/router-model/types'
 
 class DtoModels {
     createModelDto(model: ModelAttributes): CreateModelDto {
@@ -10,11 +11,17 @@ class DtoModels {
         }
     }
 
-    getAllModelsDto(query): GetAllModelsDto {
+    getAllModelsDto(query: GetModels): GetAllModelsDto {
         return {
             limit: query.limit,
             offset: query.offset,
             brandId: query.brandId
+        }
+    }
+
+    getOneModelDto(query: GetOneModel): GetOneModelDto {
+        return {
+            id: query.id
         }
     }
 }
