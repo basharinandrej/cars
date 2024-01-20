@@ -3,17 +3,18 @@ import {CreatePartsOfCarDto, GetPartsOfCarsDto} from '@common/dtos'
 import PartsOfCar from '@models/parts-of-car'
 import TypeDetail from '@models/type-detail'
 import ApiError from '@api-error/index'
-
+import {createPartsOfCarMappers} from './parts-of-car-mappers/create-parts-of-car-mapper'
 
 class ServicePartsOfCar {
-    async createPartsOfCar(createPartsOfCarDto: CreatePartsOfCarDto, res: Response, next: NextFunction) {
+    async createPartsOfCar(createPartsOfCarDto: CreatePartsOfCarDto, next: NextFunction) {
 
         try {
             const partsOfCar = await PartsOfCar.create({
                 name: createPartsOfCarDto.name,
                 typeCarId: createPartsOfCarDto.typeCarId
             })
-            res.send({partsOfCar})
+            
+            return createPartsOfCarMappers(partsOfCar)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

@@ -1,19 +1,17 @@
 import {NextFunction, Response} from 'express'
 import servicePartsOfCar from '@services/service-parts-of-car'
 import {CreatePartsOfCarRequest, GetPartsOfCarRequest} from '@routers/router-parts-of-car/types'
-import {CreatePartsOfCarDto, GetPartsOfCarsDto} from '@common/dtos'
+import {GetPartsOfCarsDto} from '@common/dtos'
 import ApiError from '@api-error/index'
-
+import dtoPartsOfCar from '@dtos/dto-parts-of-car'
 
 class ControllerPartsOfCar {
     async createPartsOfCar(req: CreatePartsOfCarRequest, res: Response, next: NextFunction) {
         try {
-            const createPartsOfCarDto: CreatePartsOfCarDto = {
-                name: req.body.name,
-                typeCarId: req.body.typeCarId
-            }
+            const createPartsOfCarDto = dtoPartsOfCar.createPartsOfCar(req.body)
+            const partOfcar = await servicePartsOfCar.createPartsOfCar(createPartsOfCarDto, next)
 
-            servicePartsOfCar.createPartsOfCar(createPartsOfCarDto, res, next)
+            res.send(partOfcar)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
