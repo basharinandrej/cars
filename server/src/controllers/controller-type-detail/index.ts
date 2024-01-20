@@ -1,17 +1,16 @@
 import {NextFunction, Response} from 'express'
 import serviceTypeDetail from '@services/service-type-detail'
 import {CreateTypeDetailRequest, GetTypeDetailsRequest} from '@routers/router-type-detail/types'
-import {CreateTypeDetailDto, GetTypeDetailsDto} from '@common/dtos'
+import  {GetTypeDetailsDto} from '@common/dtos'
+import dtoTypeDetail from '@dtos/dto-type-detail'
 
 class ControllerTypeDetail {
     async createTypeDetail(req: CreateTypeDetailRequest, res: Response, next: NextFunction) {
         try {
-            const createTypeDetailDto: CreateTypeDetailDto = {
-                name: req.body.name,
-                partsOfCarId: req.body.partsOfCarId
-            }
+            const createTypeDetailDto = dtoTypeDetail.createTypeDetailDto(req.body)
+            const typeDetail = await serviceTypeDetail.createTypeDetail(createTypeDetailDto, next)
 
-            serviceTypeDetail.createTypeDetail(createTypeDetailDto, res, next)
+            res.send(typeDetail)
         } catch (error) {
             
         }

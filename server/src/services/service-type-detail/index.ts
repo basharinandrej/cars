@@ -3,17 +3,17 @@ import {CreateTypeDetailDto, GetTypeDetailsDto} from '@common/dtos'
 import TypeDetail from '@models/type-detail'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
-
+import {createTypeDetailMapper} from './type-detail-mapper/create-type-detail-mapper'
 
 class ServiceTypeDetail {
-    async createTypeDetail(createTypeDetailDto: CreateTypeDetailDto, res: Response, next: NextFunction) {
+    async createTypeDetail(createTypeDetailDto: CreateTypeDetailDto, next: NextFunction) {
 
         try {
             const typeDetail = await TypeDetail.create({
                 name: createTypeDetailDto.name,
                 partsOfCarId: createTypeDetailDto.partsOfCarId
             })
-            res.send({typeDetail})
+            return createTypeDetailMapper(typeDetail)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
