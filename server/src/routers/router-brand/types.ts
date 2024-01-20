@@ -14,3 +14,9 @@ export interface GetBrands {
 }
 
 export interface GetBrandsRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, GetBrands> {}
+
+export interface GetOneBrand {
+    id: number
+}
+
+export interface GetOneBrandRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, GetOneBrand> {}

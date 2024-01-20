@@ -1,6 +1,6 @@
 import {NextFunction, Response} from 'express'
 import serviceBrand from '@services/service-brand'
-import {CreateBrandRequest, GetBrandsRequest} from '@routers/router-brand/types'
+import {CreateBrandRequest, GetBrandsRequest, GetOneBrandRequest} from '@routers/router-brand/types'
 import ApiError from '@api-error/index'
 import dtoBrand from '@dtos/dto-brand'
 
@@ -24,6 +24,21 @@ class ControllerBrand {
             const brands = await serviceBrand.getAllBrands(getBrandsDto, next)
 
             res.send(brands)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
+    }
+
+    async getOne(req: GetOneBrandRequest, res: Response, next: NextFunction) {
+        try {
+            const getOneBrandDto = dtoBrand.getOneBrandDto(req.query)
+            const brandOne = await serviceBrand.getOne(getOneBrandDto.id, next)
+
+            if(brandOne) {
+                res.send(brandOne)
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

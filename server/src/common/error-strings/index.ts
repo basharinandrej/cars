@@ -12,6 +12,7 @@ export const errorStrings = {
     typeCarAlreadyExist: (value: string) => `Такой тип машины - ${value} уже есть. Тип машины должен быть уникальным`,
     
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
+    notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
     errorPassword: () => `Неверный пароль`,
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
     unauthorized: () => `Неавторизон`,

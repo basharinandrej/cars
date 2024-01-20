@@ -19,4 +19,9 @@ routers.get('',
 )
 
 
+routers.get('/getOne',
+    middlewareValidation,
+    controllerBrand.getOne
+)
+
 export const routerBrand = routers

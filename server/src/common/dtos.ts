@@ -11,6 +11,10 @@ export interface GetBrandsDto {
     order?: SortOrder
 }
 
+export interface GetOneBrandDto {
+    id: number
+}
+
 export interface CreateModelDto {
     name: string
     brandId: number
