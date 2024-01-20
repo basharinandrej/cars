@@ -1,20 +1,16 @@
 import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
 import {CreateModelRequest, GetModelsRequest} from '@routers/router-model/types'
-import {CreateModelDto, GetModelsDto} from '@common/dtos'
+import {GetModelsDto} from '@common/dtos'
 import ApiError from '@api-error/index'
-
+import dtoModel from '@dtos/dto-models'
 
 class ControllerModel {
     async createModel(req: CreateModelRequest, res: Response, next: NextFunction) {
         try {
-            const createModelDto: CreateModelDto = {
-                name: req.body.name,
-                brandId: req.body.brandId,
-                typeCarId: req.body.typeCarId
-            }
-
+            const createModelDto = dtoModel.createModelDto(req.body)
             const model = await serviceModel.createModel(createModelDto, next)
+            
             res.send(model)
         } catch (error) {
             if(error instanceof Error) {
