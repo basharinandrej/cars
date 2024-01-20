@@ -7,7 +7,7 @@ import ApiError from '@api-error/index'
 import Detail from '@models/detail'
 import {mapperCreateModel} from './model-mappers/create-mapper'
 import {mapperGetAllModel} from './model-mappers/get-all-mapper'
-import {getOneModelMapper} from './model-mappers/get-one-mapper'
+import {getOneModelMapper} from './model-mappers/get-one-model-mapper'
 
 class ServiceModel {
     async createModel(createModelDto: CreateModelDto, next: NextFunction) {
