@@ -10,10 +10,10 @@ import { routerUser } from './router-user'
 
 const routers = Router()
 
+routers.use('/type-car', routerTypeCar)
 routers.use('/brand', routerBrand)
 routers.use('/model', routerModel)
 routers.use('/detail', routerDetail)
-routers.use('/type-car', routerTypeCar)
 routers.use('/parts-of-car', routerPartsOfCar)
 routers.use('/type-detail', routerTypeDetail)
 routers.use('/data-base', routerDataBase)

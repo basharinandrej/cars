@@ -21,9 +21,10 @@ export interface CreateModelDto {
     typeCarId: number
 }
 
-export interface GetModelsDto {
+export interface GetAllModelsDto {
     limit: number
     offset: number
+    brandId?: number
 }
 
 export interface CreateTypeCarDto {

@@ -1,7 +1,6 @@
 import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
 import {CreateModelRequest, GetModelsRequest} from '@routers/router-model/types'
-import {GetModelsDto} from '@common/dtos'
 import ApiError from '@api-error/index'
 import dtoModel from '@dtos/dto-models'
 
@@ -19,16 +18,16 @@ class ControllerModel {
         }
     }
 
-    async getAllModels(req: GetModelsRequest, res: Response) {
+    async getAllModels(req: GetModelsRequest, res: Response, next: NextFunction) {
         try {
-            const getModelsDto: GetModelsDto = {
-                limit: req.query.limit,
-                offset: req.query.offset
-            }
+            const getModelsDto = dtoModel.getAllModelsDto(req.query)
+            const models = await serviceModel.getAllModels(getModelsDto, next)
 
-            serviceModel.getAllModels(getModelsDto, res)
+            res.send(models)
         } catch (error) {
-            
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
         }
     }
 }

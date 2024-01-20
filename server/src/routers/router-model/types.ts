@@ -7,5 +7,6 @@ export interface CreateModelRequest extends Request<Record<string, unknown>, Emp
 interface GetModels {
     limit?: number,
     offset?: number
+    brandId?: number
 }
-export interface GetModelsRequest extends Request<EmptyString, EmptyString, EmptyString, GetModels> {}
+export interface GetModelsRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, GetModels> {}

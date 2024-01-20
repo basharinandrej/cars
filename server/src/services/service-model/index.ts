@@ -1,5 +1,5 @@
-import {NextFunction, Response} from 'express'
-import {CreateModelDto, GetModelsDto} from '@common/dtos'
+import {NextFunction} from 'express'
+import {CreateModelDto, GetAllModelsDto} from '@common/dtos'
 import Model from '@models/model'
 import TypeCar from '@models/type-car'
 import Brand from '@models/brand'
@@ -25,14 +25,23 @@ class ServiceModel {
     }
 
 
-    async getAllModels(getModelsDto: GetModelsDto, res: Response) {
+    async getAllModels(getModelsDto: GetAllModelsDto, next: NextFunction) {
 
-        const models = await Model?.findAndCountAll({
-            limit: getModelsDto.limit,
-            offset: getModelsDto.offset,
-            include: [TypeCar,Brand]
-        })
-        res.send(mapperGetAllModel(models))
+        try {
+            const models = await Model?.findAndCountAll({
+                limit: getModelsDto.limit,
+                offset: getModelsDto.offset,
+                where: {
+                    brandId: getModelsDto.brandId
+                },
+                include: [TypeCar,Brand]
+            })
+            return mapperGetAllModel(models)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
     }
 }
 

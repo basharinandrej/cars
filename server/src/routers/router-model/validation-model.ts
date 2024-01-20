@@ -1,4 +1,4 @@
-import { body, header } from 'express-validator';
+import { body, header, query } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
@@ -28,6 +28,14 @@ export const validationCreateModel = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             })
+        ]
+    }
+}
+
+export const validationGetAllModels = {
+    createChain() {
+        return [
+            query('brandId').notEmpty().withMessage(errorStrings.notBeEmptyField('brandId')).trim()
         ]
     }
 }
