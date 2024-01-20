@@ -1,4 +1,4 @@
-import { UserRoles } from "@common/enums";
+import { SortOrder, UserRoles } from "@common/enums";
 
 export const errorStrings = {
 
@@ -18,5 +18,12 @@ export const errorStrings = {
     expireToken: () => `Токен истёк`,
     uncorrectEmail: () => `Некорректный email`,
     uncorrectRole: () => `Некорректная роль у пользователя`,
-    checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`
+    checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,
+
+
+    sorderValue: () => `Направление сортировки может быть только ${SortOrder.ASC}, ${SortOrder.DESC}`,
+    //SORT
+    sort: {
+        brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`
+    }
 }

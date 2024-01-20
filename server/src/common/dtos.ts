@@ -1,4 +1,4 @@
-import { State, UserRoles } from "@common/enums"
+import { State, UserRoles, SortOrder } from "@common/enums"
 
 export interface CreateBrandDto {
     name: string
@@ -7,6 +7,8 @@ export interface CreateBrandDto {
 export interface GetBrandsDto {
     limit: number
     offset: number
+    sort?: string
+    order?: SortOrder
 }
 
 export interface CreateModelDto {

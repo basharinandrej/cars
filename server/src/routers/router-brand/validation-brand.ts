@@ -1,8 +1,8 @@
-import { body, header } from 'express-validator';
+import { body, query, header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
-import { UserRoles } from '@common/enums';
+import { SortOrder, UserRoles } from '@common/enums';
 import ApiError from '@api-error/index'
 
 
@@ -25,6 +25,28 @@ export const validationCreateBrand = {
 
                 } catch (error) {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                }
+            })
+        ]
+    }
+}
+
+export const validationGetAllBrands = {
+    createChain() {
+        return [
+            query('sort')
+                .custom((value) => {
+                    if(value === 'name') {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(errorStrings.sort.brandSort('name', value));
+                    }
+                }),
+            query('order').custom((value: SortOrder) => {
+                if(value === SortOrder.ASC || value === SortOrder.DESC) {
+                    return Promise.resolve(true);
+                } else {
+                    return Promise.reject(errorStrings.sorderValue());
                 }
             })
         ]

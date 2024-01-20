@@ -9,3 +9,8 @@ export const enum UserRoles {
     ADMIN = 'ADMIN',
     MODERATOR = 'MODERATOR'
 }
+
+export const enum SortOrder {
+    ASC = 'ASC',
+    DESC = 'DESC'
+}

@@ -1,9 +1,10 @@
-import {NextFunction, Response} from 'express'
+import {NextFunction} from 'express'
 import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
 import {createBrandMapper} from './brand-mapper/create-brand-mapper'
+import {getAllBrandsMapper} from './brand-mapper/get-all-brands-mapper'
 
 class ServiceBrand {
     async createBrand(createBrandDto: CreateBrandDto, next: NextFunction) {
@@ -12,6 +13,7 @@ class ServiceBrand {
             const brand = await Brand.create({
                 name: createBrandDto.name
             })
+
             return createBrandMapper(brand)
         } catch (error) {
             if(error instanceof Error) {
@@ -21,14 +23,33 @@ class ServiceBrand {
     }
 
 
-    async getAllBrands(getBrandsDto: GetBrandsDto, res: Response) {
+    async getAllBrands({order, sort, limit, offset}: GetBrandsDto, next: NextFunction) {
 
-        const brands = await Brand?.findAndCountAll({
-            limit: getBrandsDto.limit,
-            offset: getBrandsDto.offset,
-            include: Model
-        })
-        res.send({brands})
+        try {
+            if(order && sort) {
+                const brands = await Brand?.findAndCountAll({
+                    limit,
+                    offset,
+                    order: [
+                        [sort, order],
+                    ]
+                })
+                return getAllBrandsMapper(brands)
+
+            } else {
+                const brands = await Brand?.findAndCountAll({
+                    limit,
+                    offset
+                })
+        
+                return getAllBrandsMapper(brands)
+            }
+
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
     }
 }
 
