@@ -11,3 +11,9 @@ interface GetDetails {
     modelId?: number
 }
 export interface GetDetailsRequest extends Request<EmptyString, EmptyString, EmptyString, GetDetails> {}
+
+
+export interface DetailSearch {
+    keyword: string
+}
+export interface SearchDetailsRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, DetailSearch> {}

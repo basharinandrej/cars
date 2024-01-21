@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import controllerDetail from '@controllers/controller-detail'
 import middlewareValidation from '../middlewares/middleware-validation'
-import {validationCreateDetail} from './validation-detail'
+import {validationCreateDetail, validationSearchDetail} from './validation-detail'
 
 const routers = Router()
 
@@ -12,6 +12,12 @@ routers.post('',
     controllerDetail.createDetail
 )
 routers.get('', controllerDetail.getAllDetails)
+
+routers.get('/search', 
+    validationSearchDetail.createChain(),
+    middlewareValidation,
+    controllerDetail.search
+)
 
 
 export const routerDetail = routers

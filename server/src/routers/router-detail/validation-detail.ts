@@ -1,4 +1,4 @@
-import { body, header } from 'express-validator';
+import { body, header, query } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import { State } from '@common/enums';
 import {extractAccessToken} from '@common/utils/extract-tokens'
@@ -48,6 +48,15 @@ export const validationCreateDetail = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             })
+        ]
+    }
+}
+
+export const validationSearchDetail = {
+    createChain() {
+        return [
+            query('keyword')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('keyword'))
         ]
     }
 }

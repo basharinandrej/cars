@@ -1,10 +1,9 @@
 import { DetailAttributes } from "@models/detail/types"
-import {CreateDetailDto} from "./types"
+import {DtoDetailCreation, DtoDetailSearch} from "./types"
+import {DetailSearch} from "@routers/router-detail/types"
 
 class DtoDetail {
-
-
-    createDetailDto(detail: DetailAttributes): CreateDetailDto {
+    getDtoDetailCreation(detail: DetailAttributes): DtoDetailCreation {
 
         return {
             name: detail.name,
@@ -17,6 +16,12 @@ class DtoDetail {
             state: detail.state,
             modelId: detail.modelId,
             categoryId: detail.categoryId
+        }
+    }
+
+    getDtoDetailSearch(query: DetailSearch): DtoDetailSearch {
+        return {
+            keyword: query.keyword
         }
     }
 }

@@ -4,7 +4,7 @@ import {Optional} from "sequelize/types";
 export interface DetailAttributes {
     id: number
     name: string
-    vendorCode: number
+    vendorCode: string
     wear: number
     year: number
     description: string

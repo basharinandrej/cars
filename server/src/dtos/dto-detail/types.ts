@@ -1,8 +1,8 @@
 import { State } from "@common/enums"
 
-export interface CreateDetailDto {
+export interface DtoDetailCreation {
     name: string
-    vendorCode: number
+    vendorCode: string
     wear: number
     year: number
     description: string
@@ -18,4 +18,8 @@ export interface GetDetailsDto {
     offset: number
     categoryId?: number
     modelId?: number
+}
+
+export interface DtoDetailSearch {
+    keyword: string
 }

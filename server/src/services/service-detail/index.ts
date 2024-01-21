@@ -1,17 +1,18 @@
-import {NextFunction, Response} from 'express'
-import {CreateDetailDto, GetDetailsDto} from '@dtos/dto-detail/types'
+import {NextFunction} from 'express'
+import {DtoDetailCreation, GetDetailsDto} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
 import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
+import { Op } from 'sequelize'
 
 
 class ServiceDetail {
-    async createDetail(createDetailDto: CreateDetailDto, next: NextFunction) {
+    async createDetail(createDetailDto: DtoDetailCreation, next: NextFunction) {
 
        try {
             const detail = await Detail.create({
-                name: createDetailDto.name,
+                name: createDetailDto.name.toLocaleLowerCase(),
                 vendorCode: createDetailDto.vendorCode,
                 wear: createDetailDto.wear,
                 year: createDetailDto.year,
@@ -69,6 +70,26 @@ class ServiceDetail {
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
+            }
+        }
+    }
+
+
+    async search(keyword: string, next: NextFunction) {
+        try {
+            const details = await Detail.findAndCountAll({
+                where: {
+                    [Op.or]: [
+                        {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
+                        {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}
+                    ]
+                }
+            })
+            return mapperGetAllDetails(details)
+            
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
             }
         }
     }
