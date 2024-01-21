@@ -4,7 +4,7 @@ import {EmptyString} from '@common/types'
 
 export interface CreateDetailRequest extends Request<Record<string, unknown>, EmptyString, DetailAttributes> {}
 
-interface GetDetails {
+export interface GetDetails {
     limit?: number,
     offset?: number
     categoryId?: number
@@ -15,5 +15,9 @@ export interface GetDetailsRequest extends Request<EmptyString, EmptyString, Emp
 
 export interface DetailSearch {
     keyword: string
+    limit?: number,
+    offset?: number,
+    categoryId?: number
+    modelId?: number
 }
 export interface SearchDetailsRequest extends Request<Record<string, unknown>, EmptyString, EmptyString, DetailSearch> {}

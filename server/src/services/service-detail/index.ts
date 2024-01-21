@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {DtoDetailCreation, GetDetailsDto} from '@dtos/dto-detail/types'
+import {DtoDetailCreation, DtoDetailGetAll, DtoDetailSearch} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
@@ -33,7 +33,7 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails({limit, offset, modelId, categoryId}: GetDetailsDto, next: NextFunction) {
+    async getAllDetails({limit, offset, modelId, categoryId}: DtoDetailGetAll, next: NextFunction) {
 
         try {
             if(categoryId && modelId) {
@@ -75,9 +75,12 @@ class ServiceDetail {
     }
 
 
-    async search(keyword: string, next: NextFunction) {
+    async search(query: DtoDetailSearch, next: NextFunction) {
         try {
+            const {keyword, limit, offset} = query
+
             const details = await Detail.findAndCountAll({
+                offset, limit,
                 where: {
                     [Op.or]: [
                         {name: {[Op.substring]: keyword.toLocaleLowerCase() }},

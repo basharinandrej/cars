@@ -1,6 +1,10 @@
 import { DetailAttributes } from "@models/detail/types"
-import {DtoDetailCreation, DtoDetailSearch} from "./types"
-import {DetailSearch} from "@routers/router-detail/types"
+import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetAll} from "./types"
+import {DetailSearch, GetDetails} from "@routers/router-detail/types"
+import {
+    PAGINATION_DEFAULT_LIMIT,
+    PAGINATION_DEFAULT_OFFSET
+} from '@common/constans/index'
 
 class DtoDetail {
     getDtoDetailCreation(detail: DetailAttributes): DtoDetailCreation {
@@ -19,9 +23,23 @@ class DtoDetail {
         }
     }
 
+    getDtoDetailsGetAll(query: GetDetails): DtoDetailGetAll {
+
+        return {
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            categoryId: query.categoryId,
+            modelId: query.modelId
+        }
+    }
+
     getDtoDetailSearch(query: DetailSearch): DtoDetailSearch {
         return {
-            keyword: query.keyword
+            keyword: query.keyword,
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            categoryId: query.categoryId,
+            modelId: query.modelId
         }
     }
 }

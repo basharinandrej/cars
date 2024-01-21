@@ -1,1 +1,4 @@
 export const EMPTY_STRING = ''
+
+export const PAGINATION_DEFAULT_LIMIT = 10
+export const PAGINATION_DEFAULT_OFFSET = 0

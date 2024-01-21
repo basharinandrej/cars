@@ -13,7 +13,7 @@ export interface DtoDetailCreation {
     categoryId: number
 }
 
-export interface GetDetailsDto {
+export interface DtoDetailGetAll {
     limit: number
     offset: number
     categoryId?: number
@@ -21,5 +21,9 @@ export interface GetDetailsDto {
 }
 
 export interface DtoDetailSearch {
-    keyword: string
+    keyword: string,
+    limit: number,
+    offset: number,
+    categoryId?: number
+    modelId?: number
 }
