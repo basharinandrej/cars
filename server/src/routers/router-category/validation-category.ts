@@ -1,15 +1,14 @@
-import { body, header, query } from 'express-validator';
+import { header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
-import ApiError from '@api-error/index'
 import { UserRoles } from '@common/enums';
+import ApiError from '@api-error/index'
 
 
-export const validationCreateModel = {
+export const validationCreateCategory = {
     createChain() {
         return  [
-            body('name').notEmpty().withMessage(errorStrings.notBeEmptyField('name')).trim(),
             header('authorization').custom((value: string) => {
                 const token = extractAccessToken(value)
 
@@ -26,14 +25,6 @@ export const validationCreateModel = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             })
-        ]
-    }
-}
-
-export const validationGetAllModels = {
-    createChain() {
-        return [
-            query('brandId').notEmpty().withMessage(errorStrings.notBeEmptyField('brandId')).trim()
         ]
     }
 }

@@ -1,9 +1,10 @@
 import {NextFunction, Response} from 'express'
-import {CreateDetailDto, GetDetailsDto} from '@common/dtos'
+import {CreateDetailDto, GetDetailsDto} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
-import TypeDetail from '@models/type-detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
+import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
+
 
 class ServiceDetail {
     async createDetail(createDetailDto: CreateDetailDto, next: NextFunction) {
@@ -18,8 +19,8 @@ class ServiceDetail {
                 price: createDetailDto.price,
                 photos: createDetailDto.photos,
                 state: createDetailDto.state,
-                typeDetailId: createDetailDto.typeDetailId,
-                modelId: createDetailDto.modelId
+                modelId: createDetailDto.modelId,
+                categoryId: createDetailDto.categoryId
             })
         
             return createDetailMapper(detail)
@@ -31,14 +32,45 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails(getDetailsDto: GetDetailsDto, res: Response) {
+    async getAllDetails({limit, offset, modelId, categoryId}: GetDetailsDto, next: NextFunction) {
 
-        const details = await Detail?.findAndCountAll({
-            limit: getDetailsDto.limit,
-            offset: getDetailsDto.offset,
-            include: TypeDetail
-        })
-        res.send({details})
+        try {
+            if(categoryId && modelId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { modelId, categoryId }
+                })
+                return mapperGetAllDetails(details)
+            }
+            if(modelId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { modelId }
+                })
+                return mapperGetAllDetails(details)
+            }
+    
+            if(categoryId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { categoryId }
+                })
+                return mapperGetAllDetails(details)
+            }
+    
+            const details = await Detail?.findAndCountAll({
+                limit,
+                offset,
+            })
+            return mapperGetAllDetails(details)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
     }
 }
 

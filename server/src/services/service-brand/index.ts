@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {CreateBrandDto, GetBrandsDto} from '@common/dtos'
+import {CreateBrandDto, GetBrandsDto} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'

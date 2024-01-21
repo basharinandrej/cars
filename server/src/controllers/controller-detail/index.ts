@@ -1,9 +1,9 @@
 import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
 import {CreateDetailRequest, GetDetailsRequest} from '@routers/router-detail/types'
-import {GetDetailsDto} from '@common/dtos'
+import {GetDetailsDto} from '@dtos/dto-detail/types'
 import ApiError from '@api-error/index'
-import dtoDetail from '@dtos/dto-detail'
+import dtoDetail from '@dtos/dto-detail/dto-detail'
 
 class ControllerDetail {
     async createDetail(req: CreateDetailRequest, res: Response, next: NextFunction) {
@@ -19,14 +19,17 @@ class ControllerDetail {
         }
     }
 
-    async getAllDetails(req: GetDetailsRequest, res: Response) {
+    async getAllDetails(req: GetDetailsRequest, res: Response, next: NextFunction) {
         try {
             const getDetailsDto: GetDetailsDto = {
-                limit: req.query.limit,
-                offset: req.query.offset
+                limit: req.query.limit || 10,
+                offset: req.query.offset || 0,
+                categoryId: req.query.categoryId,
+                modelId: req.query.modelId
             }
 
-            serviceDetail.getAllDetails(getDetailsDto, res)
+            const details = await serviceDetail.getAllDetails(getDetailsDto, next)
+            res.send(details)
         } catch (error) {
             
         }

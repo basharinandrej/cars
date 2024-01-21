@@ -1,7 +1,7 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@common/dtos'
+import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from './user-utils/get-hash-password'

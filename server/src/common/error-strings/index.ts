@@ -9,7 +9,7 @@ export const errorStrings = {
     shouldHaveString: (field: string, value: Array<unknown>) => `Значение поля ${field} должно быть одним из этой строки ${value.join(', ')}`,
     
     userAlreadyExist: (email: string) => `Пользователь с таким email - ${email} уже существует`,
-    typeCarAlreadyExist: (value: string) => `Такой тип машины - ${value} уже есть. Тип машины должен быть уникальным`,
+    categoryAlreadyExist: (value: string) => `Категория - ${value} уже есть. Категория должна быть уникальной`,
     
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
