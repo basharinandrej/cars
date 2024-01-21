@@ -2,7 +2,6 @@ import {Router} from 'express'
 import {routerBrand} from './router-brand'
 import {routerModel} from './router-model'
 import {routerDetail} from './router-detail'
-import {routerTypeDetail} from './router-type-detail'
 import { routerDataBase } from './router-data-base'
 import { routerUser } from './router-user'
 

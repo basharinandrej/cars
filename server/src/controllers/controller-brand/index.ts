@@ -2,7 +2,7 @@ import {NextFunction, Response} from 'express'
 import serviceBrand from '@services/service-brand'
 import {CreateBrandRequest, GetBrandsRequest, GetOneBrandRequest} from '@routers/router-brand/types'
 import ApiError from '@api-error/index'
-import dtoBrand from '@dtos/dto-brand'
+import dtoBrand from '@dtos/dto-brand/dto-brand'
 
 class ControllerBrand {
     async createBrand(req: CreateBrandRequest, res: Response, next: NextFunction) {

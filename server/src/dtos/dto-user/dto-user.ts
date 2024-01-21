@@ -1,4 +1,4 @@
-import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@common/dtos'
+import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from './types'
 import {UserAttributes} from '@models/user/types'
 import { GetUsersRequest} from '@routers/router-user/types'
 

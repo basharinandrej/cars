@@ -1,5 +1,5 @@
 import { DetailAttributes } from "@models/detail/types"
-import {CreateDetailDto} from "@common/dtos"
+import {CreateDetailDto} from "./types"
 
 class DtoDetail {
 

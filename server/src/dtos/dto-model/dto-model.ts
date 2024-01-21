@@ -1,4 +1,4 @@
-import {CreateModelDto, GetAllModelsDto, GetOneModelDto} from '@common/dtos'
+import {CreateModelDto, GetAllModelsDto, GetOneModelDto} from './types'
 import {ModelAttributes} from '@models/model/types'
 import {GetModels, GetOneModel} from '@routers/router-model/types'
 

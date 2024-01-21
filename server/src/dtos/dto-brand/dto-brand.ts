@@ -1,10 +1,9 @@
-import {CreateBrandDto, GetBrandsDto, GetOneBrandDto} from "@common/dtos"
+import {CreateBrandDto, GetBrandsDto, GetOneBrandDto} from "./types"
 import { BrandAttributes } from "@models/brand/types"
 import { GetBrands, GetOneBrand} from '@routers/router-brand/types'
 
 
 class DtoDetail {
-
 
     createBrandDto(brand: BrandAttributes): CreateBrandDto {
         return {

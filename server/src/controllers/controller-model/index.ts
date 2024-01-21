@@ -2,7 +2,7 @@ import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
 import {CreateModelRequest, GetModelsRequest, GetOneModelRequest} from '@routers/router-model/types'
 import ApiError from '@api-error/index'
-import dtoModel from '@dtos/dto-models'
+import dtoModel from '@dtos/dto-model/dto-model'
 
 class ControllerModel {
     async createModel(req: CreateModelRequest, res: Response, next: NextFunction) {

@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express"
 import ApiError from '@api-error/index'
 import {RegistrationUserRequest, LoginUserRequest, GetUsersRequest} from '@routers/router-user/types'
 import serviceUser from '@services/service-user'
-import dtoUser from '@dtos/dto-user'
+import dtoUser from '@dtos/dto-user/dto-user'
 
 class ControllerUser {
     async registration(req: RegistrationUserRequest, res: Response, next: NextFunction) {
