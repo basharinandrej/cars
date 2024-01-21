@@ -15,7 +15,6 @@ class ServiceModel {
             const model = await Model.create({
                 name: createModelDto.name,
                 brandId: createModelDto.brandId,
-                typeCarId: createModelDto.typeCarId
             })
             return mapperCreateModel(model)
         } catch (error) {

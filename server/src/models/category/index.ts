@@ -12,11 +12,12 @@ Category.init({
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     }
 }, { 
     sequelize,
-    tableName: 'details',
+    tableName: 'categories',
     updatedAt: false
 })
 

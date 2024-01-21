@@ -15,7 +15,8 @@ class DtoDetail {
             price: detail.price,
             photos: detail.photos,
             state: detail.state,
-            modelId: detail.modelId
+            modelId: detail.modelId,
+            categoryId: detail.categoryId
         }
     }
 }

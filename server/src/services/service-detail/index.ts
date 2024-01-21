@@ -17,7 +17,8 @@ class ServiceDetail {
                 price: createDetailDto.price,
                 photos: createDetailDto.photos,
                 state: createDetailDto.state,
-                modelId: createDetailDto.modelId
+                modelId: createDetailDto.modelId,
+                categoryId: createDetailDto.categoryId
             })
         
             return createDetailMapper(detail)
@@ -29,13 +30,39 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails(getDetailsDto: GetDetailsDto, res: Response) {
+    async getAllDetails({limit, offset, modelId, categoryId}: GetDetailsDto, res: Response) {
+
+        if(categoryId && modelId) {
+            const details = await Detail?.findAndCountAll({
+                limit,
+                offset,
+                where: { modelId, categoryId }
+            })
+            return res.send({details})
+        }
+        if(modelId) {
+            const details = await Detail?.findAndCountAll({
+                limit,
+                offset,
+                where: { modelId }
+            })
+            return res.send({details})
+        }
+
+        if(categoryId) {
+            const details = await Detail?.findAndCountAll({
+                limit,
+                offset,
+                where: { categoryId }
+            })
+            return res.send({details})
+        }
 
         const details = await Detail?.findAndCountAll({
-            limit: getDetailsDto.limit,
-            offset: getDetailsDto.offset,
+            limit,
+            offset,
         })
-        res.send({details})
+        return res.send({details})
     }
 }
 

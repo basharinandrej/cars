@@ -22,8 +22,10 @@ class ControllerDetail {
     async getAllDetails(req: GetDetailsRequest, res: Response) {
         try {
             const getDetailsDto: GetDetailsDto = {
-                limit: req.query.limit,
-                offset: req.query.offset
+                limit: req.query.limit || 10,
+                offset: req.query.offset || 0,
+                categoryId: req.query.categoryId,
+                modelId: req.query.modelId
             }
 
             serviceDetail.getAllDetails(getDetailsDto, res)

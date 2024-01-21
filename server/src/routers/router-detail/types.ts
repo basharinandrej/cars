@@ -7,5 +7,7 @@ export interface CreateDetailRequest extends Request<Record<string, unknown>, Em
 interface GetDetails {
     limit?: number,
     offset?: number
+    categoryId?: number
+    modelId?: number
 }
 export interface GetDetailsRequest extends Request<EmptyString, EmptyString, EmptyString, GetDetails> {}

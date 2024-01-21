@@ -10,6 +10,5 @@ export const mapperCreateModel = (model: Model): ReturnModelDto => {
         id: model.dataValues.id,
         name: model.dataValues.name,
         brandId: model.dataValues.brandId,
-        typeCarId: model.dataValues.typeCarId,
     }
 }

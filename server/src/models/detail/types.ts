@@ -13,6 +13,7 @@ export interface DetailAttributes {
     state: State
     typeDetailId?: number
     modelId?: number
+    categoryId?: number
 }
 
 
