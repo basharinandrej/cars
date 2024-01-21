@@ -7,7 +7,7 @@ interface Models {
 
 export const mapperGetAllModel = (models: Models) => {
     return {
-        length: models.rows.length,
+        total: models.rows.length,
         items: models.rows.map((model) => {
             return {
                 id: model.dataValues.id,

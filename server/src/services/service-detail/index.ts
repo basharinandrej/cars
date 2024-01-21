@@ -3,6 +3,8 @@ import {CreateDetailDto, GetDetailsDto} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
+import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
+
 
 class ServiceDetail {
     async createDetail(createDetailDto: CreateDetailDto, next: NextFunction) {
@@ -30,39 +32,45 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails({limit, offset, modelId, categoryId}: GetDetailsDto, res: Response) {
+    async getAllDetails({limit, offset, modelId, categoryId}: GetDetailsDto, next: NextFunction) {
 
-        if(categoryId && modelId) {
+        try {
+            if(categoryId && modelId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { modelId, categoryId }
+                })
+                return mapperGetAllDetails(details)
+            }
+            if(modelId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { modelId }
+                })
+                return mapperGetAllDetails(details)
+            }
+    
+            if(categoryId) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: { categoryId }
+                })
+                return mapperGetAllDetails(details)
+            }
+    
             const details = await Detail?.findAndCountAll({
                 limit,
                 offset,
-                where: { modelId, categoryId }
             })
-            return res.send({details})
+            return mapperGetAllDetails(details)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
         }
-        if(modelId) {
-            const details = await Detail?.findAndCountAll({
-                limit,
-                offset,
-                where: { modelId }
-            })
-            return res.send({details})
-        }
-
-        if(categoryId) {
-            const details = await Detail?.findAndCountAll({
-                limit,
-                offset,
-                where: { categoryId }
-            })
-            return res.send({details})
-        }
-
-        const details = await Detail?.findAndCountAll({
-            limit,
-            offset,
-        })
-        return res.send({details})
     }
 }
 

@@ -19,7 +19,7 @@ class ControllerDetail {
         }
     }
 
-    async getAllDetails(req: GetDetailsRequest, res: Response) {
+    async getAllDetails(req: GetDetailsRequest, res: Response, next: NextFunction) {
         try {
             const getDetailsDto: GetDetailsDto = {
                 limit: req.query.limit || 10,
@@ -28,7 +28,8 @@ class ControllerDetail {
                 modelId: req.query.modelId
             }
 
-            serviceDetail.getAllDetails(getDetailsDto, res)
+            const details = await serviceDetail.getAllDetails(getDetailsDto, next)
+            res.send(details)
         } catch (error) {
             
         }

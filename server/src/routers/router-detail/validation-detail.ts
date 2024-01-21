@@ -17,7 +17,7 @@ export const validationCreateDetail = {
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('vendorCode')).trim()
                 .isLength({min: 2}).withMessage(errorStrings.minLength('vendorCode', 2)),
 
-            body('typeDetailId').isNumeric().withMessage(errorStrings.beNumber('typeDetailId')).trim(),
+            body('categoryId').isNumeric().withMessage(errorStrings.beNumber('categoryId')).trim(),
             body('modelId').isNumeric().withMessage(errorStrings.beNumber('modelId')).trim(),
             body('wear').isNumeric().withMessage(errorStrings.beNumber('wear')).trim(),
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
