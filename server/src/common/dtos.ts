@@ -31,15 +31,6 @@ export interface GetOneModelDto {
     id: number
 }
 
-export interface CreateTypeCarDto {
-    name: string
-}
-
-export interface GetTypesCarDto {
-    limit: number
-    offset: number
-}
-
 export interface CreateDetailDto {
     name: string
     vendorCode: number
