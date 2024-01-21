@@ -1,7 +1,7 @@
 import Brand from './brand'
 import Model from './model'
 import Detail from './detail'
-import Category from '@modelscategory'
+import Category from './category'
 
 
 Brand.hasMany(Model, {foreignKey: 'brandId'})

@@ -7,7 +7,6 @@ class DtoModels {
         return {
             name: model.name,
             brandId: model.brandId,
-            typeCarId: model.typeCarId
         }
     }
 

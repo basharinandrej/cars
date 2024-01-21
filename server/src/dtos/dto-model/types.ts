@@ -1,7 +1,6 @@
 export interface CreateModelDto {
     name: string
     brandId: number
-    typeCarId: number
 }
 
 export interface GetAllModelsDto {

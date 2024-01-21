@@ -1,7 +1,7 @@
 import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
 import {CreateDetailRequest, GetDetailsRequest} from '@routers/router-detail/types'
-import {GetDetailsDto} from '@common/dtos'
+import {GetDetailsDto} from '@dtos/dto-detail/types'
 import ApiError from '@api-error/index'
 import dtoDetail from '@dtos/dto-detail/dto-detail'
 

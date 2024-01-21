@@ -1,5 +1,5 @@
 import Model from '@models/model'
-import {CreateModelDto} from '@common/dtos'
+import {CreateModelDto} from '@dtos/dto-model/types'
 
 interface ReturnModelDto extends CreateModelDto {
     id: number

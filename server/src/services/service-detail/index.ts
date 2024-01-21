@@ -1,7 +1,6 @@
 import {NextFunction, Response} from 'express'
-import {CreateDetailDto, GetDetailsDto} from '@common/dtos'
+import {CreateDetailDto, GetDetailsDto} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
-import TypeDetail from '@models/type-detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
 
@@ -18,7 +17,6 @@ class ServiceDetail {
                 price: createDetailDto.price,
                 photos: createDetailDto.photos,
                 state: createDetailDto.state,
-                typeDetailId: createDetailDto.typeDetailId,
                 modelId: createDetailDto.modelId
             })
         
@@ -36,7 +34,6 @@ class ServiceDetail {
         const details = await Detail?.findAndCountAll({
             limit: getDetailsDto.limit,
             offset: getDetailsDto.offset,
-            include: TypeDetail
         })
         res.send({details})
     }

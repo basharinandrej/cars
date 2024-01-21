@@ -9,7 +9,6 @@ export interface CreateDetailDto {
     price: number
     photos: number
     state: State
-    typeDetailId: number
     modelId: number
 }
 

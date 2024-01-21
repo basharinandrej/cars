@@ -1,7 +1,6 @@
 import {NextFunction} from 'express'
-import {CreateModelDto, GetAllModelsDto} from '@common/dtos'
+import {CreateModelDto, GetAllModelsDto} from '@dtos/dto-model/types'
 import Model from '@models/model'
-import TypeCar from '@models/type-car'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
 import Detail from '@models/detail'
@@ -36,7 +35,7 @@ class ServiceModel {
                 where: {
                     brandId: getModelsDto.brandId
                 },
-                include: [TypeCar,Brand]
+                include: [Brand]
             })
             return mapperGetAllModel(models)
         } catch (error) {
