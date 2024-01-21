@@ -49,16 +49,6 @@ export interface GetDetailsDto {
     offset: number
 }
 
-export interface CreatePartsOfCarDto {
-    name: string,
-    typeCarId: number
-}
-
-export interface GetPartsOfCarsDto {
-    limit: number
-    offset: number
-}
-
 export interface CreateTypeDetailDto {
     name: string,
     partsOfCarId: number
