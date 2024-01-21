@@ -32,7 +32,6 @@ class ControllerUser {
             }
         } catch (error) {                
 
-            console.log('>>> error 2', error)
             if(error instanceof Error) {
 
                 next(ApiError.internal(error))
@@ -43,9 +42,9 @@ class ControllerUser {
     async getAllUsers(req: GetUsersRequest, res: Response, next: NextFunction) {
 
         const getAllUserDto = dtoUser.getAllUsersDto(req)
-        const result = await serviceUser.getAllUsers(getAllUserDto, next)
+        const users = await serviceUser.getAllUsers(getAllUserDto, next)
 
-        res.send(result)
+        res.send(users)
     }
 
     // async logout() {}

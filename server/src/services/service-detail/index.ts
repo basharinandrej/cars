@@ -1,10 +1,10 @@
+import { Op } from 'sequelize'
 import {NextFunction} from 'express'
 import {DtoDetailCreation, DtoDetailGetAll, DtoDetailSearch} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import {createDetailMapper} from './detail-mapper/create-detail-mappper'
 import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
-import { Op } from 'sequelize'
 
 
 class ServiceDetail {

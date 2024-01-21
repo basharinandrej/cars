@@ -85,23 +85,22 @@ class ServiceUser {
         }
     }
 
-    async getAllUsers(getAllUserDto: GetAllUserDto, next: NextFunction) {
+    async getAllUsers({role, limit, offset}: GetAllUserDto, next: NextFunction) {
 
         try {
-            if(getAllUserDto.role) {
+            if(role) {
                 const users = await User.findAndCountAll({
-                    limit: getAllUserDto.limit,
-                    offset: getAllUserDto.offset,
-                    where: {
-                        role: getAllUserDto.role
-                    }
+                    limit,
+                    offset,
+                    where: { role }
                 })
                 return getAllUserMapper(users)
             }
-            if(getAllUserDto.limit && getAllUserDto.offset) {
+            
+            if(limit && offset) {
                 const users = await User.findAndCountAll({
-                    limit: getAllUserDto.limit,
-                    offset: getAllUserDto.offset,
+                    limit,
+                    offset,
                 })
                 return getAllUserMapper(users)
             }
