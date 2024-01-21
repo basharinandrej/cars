@@ -2,7 +2,7 @@ import serviceWear from '@services/service-wear'
 import { NextFunction, Response } from 'express'
 import {CreateWearRequest, GetWearsRequest, GetByIdWearRequest} from '@routers/router-wear/types'
 import dtoWear from '@dtos/dto-wear/dto-wear'
-import ApiError from "@api-errorindex"
+import ApiError from "@api-error/index"
 
 
 class ControllerWear {

@@ -1,4 +1,4 @@
-import ApiError from "@api-errorindex"
+import ApiError from "@api-error/index"
 import { DtoWearCreation, DtoWearGetAll, DtoWearGetById } from "@dtos/dto-wear/types"
 import Wear from "@models/wear"
 import { NextFunction } from "express"

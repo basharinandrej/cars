@@ -19,7 +19,7 @@ export const validationCreateDetail = {
 
             body('categoryId').isNumeric().withMessage(errorStrings.beNumber('categoryId')).trim(),
             body('modelId').isNumeric().withMessage(errorStrings.beNumber('modelId')).trim(),
-            body('wear').isNumeric().withMessage(errorStrings.beNumber('wear')).trim(),
+            body('wearId').isNumeric().withMessage(errorStrings.beNumber('wearId')).trim(),
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
 
             //todo валидация для photo

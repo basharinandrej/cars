@@ -14,6 +14,7 @@ export interface DetailAttributes {
     typeDetailId?: number
     modelId?: number
     categoryId?: number
+    wearId?: number
 }
 
 

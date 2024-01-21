@@ -23,4 +23,4 @@ routers.get('',
 )
 
 
-export const routerUser = routers
+export const routerWear = routers

@@ -21,6 +21,7 @@ export const mapperGetAllDetails = (details: DetailsData) => {
                 state: detail.dataValues.state,
                 modelId: detail.dataValues.modelId,
                 categoryId: detail.dataValues.categoryId,
+                wearId: detail.dataValues.wearId
             }
         })
     }

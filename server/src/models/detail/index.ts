@@ -19,6 +19,7 @@ Detail.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
+    //delete
     wear: {
         type: DataTypes.INTEGER,
         allowNull: true

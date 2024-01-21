@@ -21,7 +21,8 @@ class ServiceDetail {
                 photos: createDetailDto.photos,
                 state: createDetailDto.state,
                 modelId: createDetailDto.modelId,
-                categoryId: createDetailDto.categoryId
+                categoryId: createDetailDto.categoryId,
+                wearId: createDetailDto.wearId
             })
         
             return createDetailMapper(detail)

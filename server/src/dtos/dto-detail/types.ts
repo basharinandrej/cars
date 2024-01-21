@@ -11,6 +11,7 @@ export interface DtoDetailCreation {
     state: State
     modelId: number
     categoryId: number
+    wearId: number
 }
 
 export interface DtoDetailGetAll {
