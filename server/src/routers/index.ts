@@ -11,7 +11,6 @@ const routers = Router()
 routers.use('/brand', routerBrand)
 routers.use('/model', routerModel)
 routers.use('/detail', routerDetail)
-routers.use('/type-detail', routerTypeDetail)
 routers.use('/data-base', routerDataBase)
 routers.use('/user', routerUser)
 
