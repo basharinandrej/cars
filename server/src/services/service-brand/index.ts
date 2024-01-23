@@ -3,9 +3,9 @@ import {CreateBrandDto, GetBrandsDto} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
-import {createBrandMapper} from './brand-mapper/create-brand-mapper'
-import {getAllBrandsMapper} from './brand-mapper/get-all-brands-mapper'
-import {getOneBrandMapper} from './brand-mapper/get-one-brand-mapper'
+import {mapperBrandCreation} from './brand-mapper/mapper-brand-creation'
+import {mapperBrandGetAll} from './brand-mapper/mapper-brand-get-all'
+import {mappperBrandGetById} from './brand-mapper/mapper-brand-get-by-id'
 import { errorStrings } from '@common/error-strings'
 
 class ServiceBrand {
@@ -16,7 +16,7 @@ class ServiceBrand {
                 name: createBrandDto.name
             })
 
-            return createBrandMapper(brand)
+            return mapperBrandCreation(brand)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -36,7 +36,7 @@ class ServiceBrand {
                         [sort, order],
                     ]
                 })
-                return getAllBrandsMapper(brands)
+                return mapperBrandGetAll(brands)
 
             } else {
                 const brands = await Brand?.findAndCountAll({
@@ -44,7 +44,7 @@ class ServiceBrand {
                     offset
                 })
         
-                return getAllBrandsMapper(brands)
+                return mapperBrandGetAll(brands)
             }
 
         } catch (error) {
@@ -54,7 +54,7 @@ class ServiceBrand {
         }
     }
 
-    async getOne(id: number, next: NextFunction) {
+    async getById(id: number, next: NextFunction) {
         try {
             const brand = await Brand.findOne({
                 where: {id},
@@ -65,7 +65,7 @@ class ServiceBrand {
                 return next(ApiError.bedRequest(errorStrings.notFoundBrand(id)))
             }
 
-            return getOneBrandMapper(brand)
+            return mappperBrandGetById(brand)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

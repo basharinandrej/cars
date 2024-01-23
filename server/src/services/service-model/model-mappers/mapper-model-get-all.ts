@@ -5,7 +5,7 @@ interface Models {
     count: number;
 }
 
-export const mapperGetAllModel = (models: Models) => {
+export const mapperModelGetAll = (models: Models) => {
     return {
         total: models.rows.length,
         items: models.rows.map((model) => {

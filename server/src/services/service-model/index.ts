@@ -4,9 +4,9 @@ import Model from '@models/model'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
 import Detail from '@models/detail'
-import {mapperCreateModel} from './model-mappers/create-mapper'
-import {mapperGetAllModel} from './model-mappers/get-all-mapper'
-import {getOneModelMapper} from './model-mappers/get-one-model-mapper'
+import {mapperModelCreation} from './model-mappers/mapper-model-creation'
+import {mapperModelGetAll} from './model-mappers/mapper-model-get-all'
+import {mapperModelGetById} from './model-mappers/mapper-model-get-by-id'
 
 class ServiceModel {
     async createModel(createModelDto: CreateModelDto, next: NextFunction) {
@@ -16,7 +16,7 @@ class ServiceModel {
                 name: createModelDto.name,
                 brandId: createModelDto.brandId,
             })
-            return mapperCreateModel(model)
+            return mapperModelCreation(model)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -36,7 +36,7 @@ class ServiceModel {
                 },
                 include: [Brand]
             })
-            return mapperGetAllModel(models)
+            return mapperModelGetAll(models)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -44,7 +44,7 @@ class ServiceModel {
         }
     }
 
-    async getOneModel(modelId: number, next: NextFunction) {
+    async getByIdModel(modelId: number, next: NextFunction) {
 
         //pagination, filters, sorts
         try {
@@ -55,7 +55,7 @@ class ServiceModel {
                 },
                 include: Detail
             })
-            return getOneModelMapper(model)
+            return mapperModelGetById(model)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

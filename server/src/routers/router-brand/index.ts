@@ -19,8 +19,8 @@ routers.get('',
 )
 
 
-routers.get('/getOne',
-    controllerBrand.getOne
+routers.get('/getById',
+    controllerBrand.getById
 )
 
 export const routerBrand = routers

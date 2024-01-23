@@ -2,7 +2,7 @@ import Brand from "@models/brand";
 
 
 
-export const getOneBrandMapper = (brand: Brand) => {
+export const mappperBrandGetById = (brand: Brand) => {
 
     return {
         id: brand.dataValues.id,

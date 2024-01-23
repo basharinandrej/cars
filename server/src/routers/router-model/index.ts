@@ -18,8 +18,8 @@ routers.get('',
     controllerModel.getAllModels
 )
 
-routers.get('/getOne', 
-    controllerModel.getOneModel
+routers.get('/getById', 
+    controllerModel.getByIdModel
 )
 
 export const routerModel = routers

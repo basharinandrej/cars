@@ -6,7 +6,7 @@ interface Brands {
     count: number
 }
 
-export const getAllBrandsMapper = (brands: Brands) => {
+export const mapperBrandGetAll = (brands: Brands) => {
 
     return {
         total: brands.count,

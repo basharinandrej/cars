@@ -5,7 +5,7 @@ interface ReturnModelDto extends CreateModelDto {
     id: number
 }
 
-export const mapperCreateModel = (model: Model): ReturnModelDto => {
+export const mapperModelCreation = (model: Model): ReturnModelDto => {
     return {
         id: model.dataValues.id,
         name: model.dataValues.name,

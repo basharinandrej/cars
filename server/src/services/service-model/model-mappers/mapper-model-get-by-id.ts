@@ -1,7 +1,7 @@
 import Model from "@models/model"
 
 
-export const getOneModelMapper = (model: Model) => {
+export const mapperModelGetById = (model: Model) => {
 
     return {
         id: model.dataValues.id,

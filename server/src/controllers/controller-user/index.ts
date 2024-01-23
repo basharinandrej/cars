@@ -33,7 +33,6 @@ class ControllerUser {
         } catch (error) {                
 
             if(error instanceof Error) {
-
                 next(ApiError.internal(error))
             }
         }

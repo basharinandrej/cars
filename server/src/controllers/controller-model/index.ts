@@ -31,10 +31,10 @@ class ControllerModel {
         }
     }
 
-    async getOneModel(req: GetOneModelRequest, res: Response, next:NextFunction) {
+    async getByIdModel(req: GetOneModelRequest, res: Response, next:NextFunction) {
         try {
             const oneModelDto = dtoModel.getOneModelDto(req.query)
-            const models = await serviceModel.getOneModel(oneModelDto.id, next)
+            const models = await serviceModel.getByIdModel(oneModelDto.id, next)
 
             res.send(models)
         } catch (error) {

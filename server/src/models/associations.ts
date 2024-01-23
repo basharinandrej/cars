@@ -12,6 +12,8 @@ Model.belongsTo(Brand, {foreignKey: 'brandId'})
 Model.hasMany(Detail, {foreignKey: 'modelId'})
 Detail.belongsTo(Model, {foreignKey: 'modelId'})
 
+
 Category.hasMany(Detail, {foreignKey: 'categoryId'})
+
 
 Wear.hasMany(Detail, {foreignKey: 'wearId'})

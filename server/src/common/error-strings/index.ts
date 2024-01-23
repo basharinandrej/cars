@@ -26,5 +26,6 @@ export const errorStrings = {
     //SORT
     sort: {
         brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`
-    }
+    },
+    withoutOrganization: () => `Организация не может закрепить за собой машину`
 }
