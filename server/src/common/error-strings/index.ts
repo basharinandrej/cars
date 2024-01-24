@@ -15,6 +15,7 @@ export const errorStrings = {
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
     errorPassword: () => `Неверный пароль`,
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
+    onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
     uncorrectEmail: () => `Некорректный email`,

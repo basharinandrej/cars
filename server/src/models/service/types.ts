@@ -1,3 +1,5 @@
+import { UserAttributes } from "@models/user/types";
+import { ServiceCategoryAttributes } from "@models/service-category/types";
 import {Optional} from "sequelize/types";
 
 export interface ServiceAttributes {
@@ -5,6 +7,10 @@ export interface ServiceAttributes {
     name: string
     description: string
     price: number
+    userId?: number
+    serviceCategoryId?: number
+    User?: UserAttributes
+    ServiceCategory?: ServiceCategoryAttributes
 }
 
 

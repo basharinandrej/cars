@@ -20,7 +20,7 @@ Service.init({
         allowNull: true
     },
     price: {
-        type: DataTypes.SMALLINT,
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 }, { 

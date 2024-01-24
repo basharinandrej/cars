@@ -1,39 +1,35 @@
-import { body, header, query } from 'express-validator';
+import { body, header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
-import { isAdministrator } from '@common/checks';
+import { isOrganization } from '@common/checks';
 
 
-export const validationCreateModel = {
+export const validationServiceCreation = {
     createChain() {
         return  [
             body('name').notEmpty().withMessage(errorStrings.notBeEmptyField('name')).trim(),
+            body('description').notEmpty().withMessage(errorStrings.notBeEmptyField('description')).trim(),
+            body('price').notEmpty().withMessage(errorStrings.notBeEmptyField('price')).trim(),
+            body('userId').isNumeric().withMessage(errorStrings.beNumber('userId')).trim(),
+            body('serviceCategoryId').isNumeric().withMessage(errorStrings.beNumber('serviceCategoryId')).trim(),
             header('authorization').custom((value: string) => {
                 const token = extractAccessToken(value)
 
                 try {
                     const result = serviceToken.validationToken(token)
 
-                    if(isAdministrator(result)) {
+                    if(isOrganization(result)) {
                         return Promise.resolve(true);
                     } else {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.onlyForAdmin()));
+                        return Promise.reject(ApiError.bedRequest(errorStrings.onlyForOrganiztion()));
                     }
 
                 } catch (error) {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             })
-        ]
-    }
-}
-
-export const validationGetAllModels = {
-    createChain() {
-        return [
-            query('brandId').notEmpty().withMessage(errorStrings.notBeEmptyField('brandId')).trim()
         ]
     }
 }
