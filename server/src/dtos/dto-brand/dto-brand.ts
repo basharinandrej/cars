@@ -1,26 +1,26 @@
-import {CreateBrandDto, GetBrandsDto, GetOneBrandDto} from "./types"
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@commonconstans"
 import { BrandAttributes } from "@models/brand/types"
-import { GetBrands, GetOneBrand} from '@routers/router-brand/types'
+import { ParamsGetAllBrands, ParamsGetOneBrand} from '@routers/router-brand/types'
+import {DtoBrandCreation, DtoBrandGetById, DtoBrandGetAll} from "./types"
 
 
 class DtoDetail {
-
-    createBrandDto(brand: BrandAttributes): CreateBrandDto {
+    getDtoBrandCreation(brand: BrandAttributes): DtoBrandCreation {
         return {
             name: brand.name,
         }
     }
 
-    getBrandDto(query: GetBrands): GetBrandsDto {
+    getDtoBrandsGetAll(query: ParamsGetAllBrands): DtoBrandGetAll {
         return {
-            limit: query.limit || 10,
-            offset: query.offset || 0,
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
             order: query.order,
             sort: query.sort
         }
     }
 
-    getOneBrandDto(query: GetOneBrand): GetOneBrandDto {
+    getDtoBrandGetById(query: ParamsGetOneBrand): DtoBrandGetById {
         return {
             id: query.id
         }

@@ -1,14 +1,17 @@
 import {NextFunction, Response} from 'express'
+import { BrandAttributes } from '@models/brand/types'
+import { ParamsGetAllBrands, ParamsGetOneBrand} from '@routers/router-brand/types'
 import serviceBrand from '@services/service-brand'
-import {CreateBrandRequest, GetBrandsRequest, GetOneBrandRequest} from '@routers/router-brand/types'
 import ApiError from '@api-error/index'
 import dtoBrand from '@dtos/dto-brand/dto-brand'
+import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
+
 
 class ControllerBrand {
-    async createBrand(req: CreateBrandRequest, res: Response, next: NextFunction) {
+    async createBrand(req: RequestCreation<BrandAttributes>, res: Response, next: NextFunction) {
         try {
-            const createBrandDto = dtoBrand.createBrandDto(req.body)
-            const brand = await serviceBrand.createBrand(createBrandDto, next)
+            const dtoBrandCreation = dtoBrand.getDtoBrandCreation(req.body)
+            const brand = await serviceBrand.createBrand(dtoBrandCreation, next)
 
             res.send(brand)
         } catch (error) {
@@ -18,10 +21,10 @@ class ControllerBrand {
         }
     }
 
-    async getAllBrands(req: GetBrandsRequest,res: Response, next: NextFunction) {
+    async getAllBrands(req: RequestGetAll<ParamsGetAllBrands>, res: Response, next: NextFunction) {
         try {
-            const getBrandsDto = dtoBrand.getBrandDto(req.query)
-            const brands = await serviceBrand.getAllBrands(getBrandsDto, next)
+            const dtoBrandsGetAll = dtoBrand.getDtoBrandsGetAll(req.query)
+            const brands = await serviceBrand.getAllBrands(dtoBrandsGetAll, next)
 
             res.send(brands)
         } catch (error) {
@@ -31,10 +34,10 @@ class ControllerBrand {
         }
     }
 
-    async getById(req: GetOneBrandRequest, res: Response, next: NextFunction) {
+    async getById(req: RequestGetOne<ParamsGetOneBrand>, res: Response, next: NextFunction) {
         try {
-            const getOneBrandDto = dtoBrand.getOneBrandDto(req.query)
-            const brandOne = await serviceBrand.getById(getOneBrandDto.id, next)
+            const dtoBrandGetById = dtoBrand.getDtoBrandGetById(req.query)
+            const brandOne = await serviceBrand.getById(dtoBrandGetById, next)
 
             if(brandOne) {
                 res.send(brandOne)

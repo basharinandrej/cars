@@ -1,16 +1,16 @@
 import { SortOrder } from "@common/enums"
 
-export interface CreateBrandDto {
+export interface DtoBrandCreation {
     name: string
 }
 
-export interface GetBrandsDto {
+export interface DtoBrandGetAll {
     limit: number
     offset: number
     sort?: string
     order?: SortOrder
 }
 
-export interface GetOneBrandDto {
+export interface DtoBrandGetById {
     id: number
 }

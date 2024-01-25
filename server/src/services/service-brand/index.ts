@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {CreateBrandDto, GetBrandsDto} from '@dtos/dto-brand/types'
+import {DtoBrandCreation, DtoBrandGetAll, DtoBrandGetById} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
@@ -8,12 +8,13 @@ import {mapperBrandGetAll} from './brand-mapper/mapper-brand-get-all'
 import {mappperBrandGetById} from './brand-mapper/mapper-brand-get-by-id'
 import { errorStrings } from '@common/error-strings'
 
+
 class ServiceBrand {
-    async createBrand(createBrandDto: CreateBrandDto, next: NextFunction) {
+    async createBrand(dtoBrandCreation: DtoBrandCreation, next: NextFunction) {
 
         try {
             const brand = await Brand.create({
-                name: createBrandDto.name
+                name: dtoBrandCreation.name
             })
 
             return mapperBrandCreation(brand)
@@ -25,7 +26,7 @@ class ServiceBrand {
     }
 
 
-    async getAllBrands({order, sort, limit, offset}: GetBrandsDto, next: NextFunction) {
+    async getAllBrands({order, sort, limit, offset}: DtoBrandGetAll, next: NextFunction) {
 
         try {
             if(order && sort) {
@@ -54,15 +55,15 @@ class ServiceBrand {
         }
     }
 
-    async getById(id: number, next: NextFunction) {
+    async getById(dtoBrandGetById: DtoBrandGetById, next: NextFunction) {
         try {
             const brand = await Brand.findOne({
-                where: {id},
+                where: {id: dtoBrandGetById.id},
                 include: Model
             })
 
             if(!brand) {
-                return next(ApiError.bedRequest(errorStrings.notFoundBrand(id)))
+                return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoBrandGetById.id)))
             }
 
             return mappperBrandGetById(brand)
