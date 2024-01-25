@@ -1,24 +1,25 @@
-import {CreateModelDto, GetAllModelsDto, GetOneModelDto} from './types'
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
+import {DtoModelCreation, DtoModelGetAll, DtoModelGetById} from './types'
 import {ModelAttributes} from '@models/model/types'
-import {GetModels, GetOneModel} from '@routers/router-model/types'
+import {ParamsGetAllModels, ParamsGetOneModel} from '@routers/router-model/types'
 
 class DtoModels {
-    createModelDto(model: ModelAttributes): CreateModelDto {
+    getDtoModelCreation(model: ModelAttributes): DtoModelCreation {
         return {
             name: model.name,
             brandId: model.brandId,
         }
     }
 
-    getAllModelsDto(query: GetModels): GetAllModelsDto {
+    getDtoModelsGetAll(query: ParamsGetAllModels): DtoModelGetAll {
         return {
-            limit: query.limit,
-            offset: query.offset,
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
             brandId: query.brandId
         }
     }
 
-    getOneModelDto(query: GetOneModel): GetOneModelDto {
+    getDtoModelGetById(query: ParamsGetOneModel): DtoModelGetById {
         return {
             id: query.id
         }

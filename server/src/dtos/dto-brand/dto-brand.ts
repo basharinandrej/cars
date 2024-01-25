@@ -1,4 +1,4 @@
-import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@commonconstans"
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans"
 import { BrandAttributes } from "@models/brand/types"
 import { ParamsGetAllBrands, ParamsGetOneBrand} from '@routers/router-brand/types'
 import {DtoBrandCreation, DtoBrandGetById, DtoBrandGetAll} from "./types"

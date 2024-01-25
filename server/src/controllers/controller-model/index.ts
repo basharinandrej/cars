@@ -1,14 +1,17 @@
 import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
-import {CreateModelRequest, GetModelsRequest, GetOneModelRequest} from '@routers/router-model/types'
 import ApiError from '@api-error/index'
 import dtoModel from '@dtos/dto-model/dto-model'
+import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
+import { ModelAttributes } from '@models/model/types'
+import { ParamsGetAllModels, ParamsGetOneModel } from '@routers/router-model/types'
+
 
 class ControllerModel {
-    async createModel(req: CreateModelRequest, res: Response, next: NextFunction) {
+    async createModel(req: RequestCreation<ModelAttributes>, res: Response, next: NextFunction) {
         try {
-            const modelDtoCreate = dtoModel.createModelDto(req.body)
-            const model = await serviceModel.createModel(modelDtoCreate, next)
+            const dtoModelCreation = dtoModel.getDtoModelCreation(req.body)
+            const model = await serviceModel.createModel(dtoModelCreation, next)
             
             res.send(model)
         } catch (error) {
@@ -18,10 +21,10 @@ class ControllerModel {
         }
     }
 
-    async getAllModels(req: GetModelsRequest, res: Response, next: NextFunction) {
+    async getAllModels(req: RequestGetAll<ParamsGetAllModels>, res: Response, next: NextFunction) {
         try {
-            const allModelsDto = dtoModel.getAllModelsDto(req.query)
-            const models = await serviceModel.getAllModels(allModelsDto, next)
+            const dtoModelsGetAll = dtoModel.getDtoModelsGetAll(req.query)
+            const models = await serviceModel.getAllModels(dtoModelsGetAll, next)
 
             res.send(models)
         } catch (error) {
@@ -31,10 +34,10 @@ class ControllerModel {
         }
     }
 
-    async getByIdModel(req: GetOneModelRequest, res: Response, next:NextFunction) {
+    async getByIdModel(req: RequestGetOne<ParamsGetOneModel>, res: Response, next:NextFunction) {
         try {
-            const oneModelDto = dtoModel.getOneModelDto(req.query)
-            const models = await serviceModel.getByIdModel(oneModelDto.id, next)
+            const dtoModelGetById = dtoModel.getDtoModelGetById(req.query)
+            const models = await serviceModel.getByIdModel(dtoModelGetById, next)
 
             res.send(models)
         } catch (error) {

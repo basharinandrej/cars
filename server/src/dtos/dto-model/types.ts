@@ -1,14 +1,14 @@
-export interface CreateModelDto {
+export interface DtoModelCreation {
     name: string
     brandId: number
 }
 
-export interface GetAllModelsDto {
+export interface DtoModelGetAll {
     limit: number
     offset: number
     brandId?: number
 }
 
-export interface GetOneModelDto {
+export interface DtoModelGetById {
     id: number
 }
