@@ -1,5 +1,5 @@
 import { WearAttributes } from "@models/wear/types";
-import {GetWears, GetByIdWear} from '@routers/router-wear/types'
+import {ParamsGetAllWears, ParamsGetOneWear} from '@controllers/controller-wear/types'
 import {DtoWearCreation, DtoWearGetAll, DtoWearGetById} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 
@@ -14,14 +14,14 @@ class DtoWear {
         }
     }
 
-    getDtoWearGetAll(query: GetWears):DtoWearGetAll {
+    getDtoWearGetAll(query: ParamsGetAllWears):DtoWearGetAll {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET
         }
     }
 
-    getDtoWearGetById(query: GetByIdWear): DtoWearGetById {
+    getDtoWearGetById(query: ParamsGetOneWear): DtoWearGetById {
         return {
             id: query.id
         }

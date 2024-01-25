@@ -1,12 +1,15 @@
 import serviceWear from '@services/service-wear'
 import { NextFunction, Response } from 'express'
-import {CreateWearRequest, GetWearsRequest, GetByIdWearRequest} from '@routers/router-wear/types'
 import dtoWear from '@dtos/dto-wear/dto-wear'
 import ApiError from "@api-error/index"
+import { WearAttributes } from '@models/wear/types'
+import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
+import {ParamsGetOneWear, ParamsGetAllWears } from './types'
+
 
 
 class ControllerWear {
-    async createWear(req: CreateWearRequest, res: Response, next: NextFunction) {
+    async createWear(req: RequestCreation<WearAttributes>, res: Response, next: NextFunction) {
         try {
             const dtoWearCreation = dtoWear.getDtoWearCreation(req.body)
             const wear = await serviceWear.createWear(dtoWearCreation, next)
@@ -19,7 +22,7 @@ class ControllerWear {
         }
     }
 
-    async getAllWear(req: GetWearsRequest, res: Response, next: NextFunction) {
+    async getAllWear(req: RequestGetAll<ParamsGetAllWears>, res: Response, next: NextFunction) {
         try {
             const dtoWearCreation = dtoWear.getDtoWearGetAll(req.query)
             const wears = await serviceWear.getAllWear(dtoWearCreation, next)
@@ -32,7 +35,7 @@ class ControllerWear {
         }
     }
 
-    async getByIdWear(req: GetByIdWearRequest, res: Response, next: NextFunction) {
+    async getByIdWear(req: RequestGetOne<ParamsGetOneWear>, res: Response, next: NextFunction) {
         try {
             const dtoWearGetById = dtoWear.getDtoWearGetById(req.query)
             const wear = await serviceWear.getByIdWear(dtoWearGetById, next)
