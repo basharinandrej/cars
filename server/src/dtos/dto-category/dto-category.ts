@@ -1,10 +1,11 @@
 import { CategoryAttributes } from "@models/category/types"
-import {CreateCategoryDto, DtoCategoryGetAll} from "./types"
-import {GetCategory} from '@routers/router-category/types'
+import {DtoCategoryCreation, DtoCategoryGetAll} from "./types"
+import {ParamsGetAllCategories} from '@routers/router-category/types'
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans"
 
 class DtoCategory {
 
-    createCategoryDto(category: CategoryAttributes): CreateCategoryDto {
+    getDtoCategoryCreation(category: CategoryAttributes): DtoCategoryCreation {
 
         return {
             id: category.id,
@@ -12,10 +13,10 @@ class DtoCategory {
         }
     }
 
-    getDtoGetAllCategory(query: GetCategory): DtoCategoryGetAll {
+    getDtoGetAllCategory(query: ParamsGetAllCategories): DtoCategoryGetAll {
         return {
-            limit: query.limit || 5, 
-            offset: query.offset || 0
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT, 
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET
         }
     }
 }

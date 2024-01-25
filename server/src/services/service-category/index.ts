@@ -1,6 +1,6 @@
 import { NextFunction } from "express";
 import Category from "@models/category"
-import {CreateCategoryDto, DtoCategoryGetAll} from '@dtos/dto-category/types'
+import { DtoCategoryCreation, DtoCategoryGetAll} from '@dtos/dto-category/types'
 import ApiError from "@api-error/index";
 import {mapperCreateCategory} from './service-mappers/mapper-create-category'
 import {mapperGetAllCategories} from './service-mappers/mapper-get-all-categories'
@@ -8,9 +8,8 @@ import { errorStrings } from "@common/error-strings";
 
 
 class ServiceCategory {
-    async createCategory(dtoCategoryCreate: CreateCategoryDto, next: NextFunction) {
+    async createCategory(dtoCategoryCreate: DtoCategoryCreation, next: NextFunction) {
         try {
-
             const candidate = await Category.findOne({where: {name: dtoCategoryCreate.name}})
             if(candidate) {
                 return next(ApiError.bedRequest(errorStrings.categoryAlreadyExist(dtoCategoryCreate.name)))

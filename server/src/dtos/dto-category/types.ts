@@ -1,4 +1,4 @@
-export interface CreateCategoryDto {
+export interface DtoCategoryCreation {
     id: number,
     name: string
 }
