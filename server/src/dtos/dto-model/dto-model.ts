@@ -1,7 +1,7 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
 import {DtoModelCreation, DtoModelGetAll, DtoModelGetById} from './types'
 import {ModelAttributes} from '@models/model/types'
-import {ParamsGetAllModels, ParamsGetOneModel} from '@routers/router-model/types'
+import {ParamsGetAllModels, ParamsGetOneModel} from '@controllerscontroller-model/types'
 
 class DtoModels {
     getDtoModelCreation(model: ModelAttributes): DtoModelCreation {

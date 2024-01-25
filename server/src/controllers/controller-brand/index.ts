@@ -1,6 +1,6 @@
 import {NextFunction, Response} from 'express'
 import { BrandAttributes } from '@models/brand/types'
-import { ParamsGetAllBrands, ParamsGetOneBrand} from '@routers/router-brand/types'
+import { ParamsGetAllBrands, ParamsGetOneBrand} from './types'
 import serviceBrand from '@services/service-brand'
 import ApiError from '@api-error/index'
 import dtoBrand from '@dtos/dto-brand/dto-brand'

@@ -4,7 +4,7 @@ import ApiError from '@api-error/index'
 import dtoModel from '@dtos/dto-model/dto-model'
 import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
 import { ModelAttributes } from '@models/model/types'
-import { ParamsGetAllModels, ParamsGetOneModel } from '@routers/router-model/types'
+import { ParamsGetAllModels, ParamsGetOneModel } from './types'
 
 
 class ControllerModel {
