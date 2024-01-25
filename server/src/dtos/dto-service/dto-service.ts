@@ -1,6 +1,6 @@
 import { ServiceAttributes } from "@models/service/types";
 import {DtoServiceCreation, DtoServiceGetAll} from './types'
-import {GetServices} from '@routers/router-service/types'
+import {ParamsGetAllServices} from '@controllerscontroller-service/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 
 class DtoService {
@@ -17,7 +17,7 @@ class DtoService {
     }
 
 
-    getDtoServiceGetAll(query:GetServices ): DtoServiceGetAll {
+    getDtoServiceGetAll(query:ParamsGetAllServices ): DtoServiceGetAll {
 
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,

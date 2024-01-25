@@ -1,11 +1,14 @@
 import { NextFunction, Response } from "express";
 import ApiError from "@api-error/index";
-import {CreateServiceRequest, GetServicesRequest} from '@routers/router-service/types'
 import serviceService from "@services/service-service";
 import dtoService from '@dtos/dto-service/dto-service'
+import { RequestCreation, RequestGetAll } from "@common/types";
+import {ParamsGetAllServices} from './types'
+import { ServiceAttributes } from "@models/service/types";
+
 
 class ControllerService {
-    async createService(req: CreateServiceRequest, res: Response, next: NextFunction) {
+    async createService(req: RequestCreation<ServiceAttributes>, res: Response, next: NextFunction) {
         try {
             const dtoServiceCreation = dtoService.getDtoServiceCreation(req.body)
             const service = await serviceService.createService(dtoServiceCreation, next)
@@ -18,7 +21,7 @@ class ControllerService {
         }
     }
 
-    async getAllServices(req: GetServicesRequest, res: Response, next: NextFunction) {
+    async getAllServices(req: RequestGetAll<ParamsGetAllServices>, res: Response, next: NextFunction) {
         try {
             
             const dtoServicesGetAll = dtoService.getDtoServiceGetAll(req.query)
