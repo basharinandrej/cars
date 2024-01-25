@@ -1,6 +1,6 @@
 import { CarAttributes } from "@models/car/types";
 import {DtoCarCreation, DtoCarGetAll, DtoCarGetByVinCode} from './types'
-import {GetCars, GetByVINCodeCar} from '@routers/router-car/types'
+import {ParamsGetAllCars, ParamsGetOneCar} from '@controllers/controller-car/types'
 
 
 class DtoCar {
@@ -15,14 +15,14 @@ class DtoCar {
         }
     }
 
-    getDtoCars(query: GetCars): DtoCarGetAll {
+    getDtoGetAllCars(query: ParamsGetAllCars): DtoCarGetAll {
         return {
             limit: query.limit,
             offset: query.offset
         }
     }
 
-    getDtoCarByVinCode(query: GetByVINCodeCar):DtoCarGetByVinCode  {
+    getDtoCarByVinCode(query: ParamsGetOneCar):DtoCarGetByVinCode  {
         return {
             vinCode: query.vinCode
         }

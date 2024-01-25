@@ -1,11 +1,13 @@
 import { NextFunction, Response } from "express";
 import serviceCar from '@services/service-car'
-import {CreateCarRequest, GetByVINCodeCarRequest, GetCarsRequest} from '@routers/router-car/types'
+import { CarAttributes } from "@models/car/types";
+import {ParamsGetAllCars, ParamsGetOneCar} from './types'
 import dtoCar from "@dtos/dto-car/dto-car";
+import { RequestCreation, RequestGetAll, RequestGetOne } from "@common/types";
 
 
 class Car {
-    async createCar(req: CreateCarRequest, res: Response, next: NextFunction) {
+    async createCar(req: RequestCreation<CarAttributes>, res: Response, next: NextFunction) {
 
         try {
             const dtoCarCreation = dtoCar.getDtoCarCreation(req.body)
@@ -17,9 +19,9 @@ class Car {
         }
     }
 
-    async getAllCars(req: GetCarsRequest, res: Response, next: NextFunction) {
+    async getAllCars(req: RequestGetAll<ParamsGetAllCars>, res: Response, next: NextFunction) {
         try {
-            const dtoCarGetAll = dtoCar.getDtoCars(req.query)
+            const dtoCarGetAll = dtoCar.getDtoGetAllCars(req.query)
             const cars = await serviceCar.getAllCars(dtoCarGetAll, next)
 
             res.send(cars)
@@ -28,7 +30,7 @@ class Car {
         }
     }
 
-    async getByVINCodeCar(req: GetByVINCodeCarRequest, res: Response, next: NextFunction) {
+    async getByVINCodeCar(req: RequestGetOne<ParamsGetOneCar>, res: Response, next: NextFunction) {
         try {
             const dtoCarGetByVinCode = dtoCar.getDtoCarByVinCode(req.query)
             const car = await serviceCar.getByVINCodeCar(dtoCarGetByVinCode, next)
