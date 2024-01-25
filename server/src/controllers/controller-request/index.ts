@@ -3,6 +3,7 @@ import { NextFunction, Response } from 'express'
 import {CreateRequestRequest, GetRequestsRequest, GetByIdRequestRequest} from '@routers/router-request/types'
 import ApiError from '@api-error/index'
 import dtoRequest from '@dtos/dto-request/dto-request'
+import { emitter } from '@controllers/controller-notification'
 
 
 class ControllerRequest {
@@ -11,6 +12,7 @@ class ControllerRequest {
             const dtoRequestCreation = dtoRequest.getDtoRequestCreation(req.body)
             const request = await serviceRequest.createRequest(dtoRequestCreation, next)
 
+            emitter.emit('new-request', request)
             res.send(request)
         } catch (error) {
             if(error instanceof Error) {
