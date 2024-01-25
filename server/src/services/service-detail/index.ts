@@ -8,21 +8,21 @@ import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
 
 
 class ServiceDetail {
-    async createDetail(createDetailDto: DtoDetailCreation, next: NextFunction) {
+    async createDetail(dtoDetailCreation: DtoDetailCreation, next: NextFunction) {
 
        try {
             const detail = await Detail.create({
-                name: createDetailDto.name.toLocaleLowerCase(),
-                vendorCode: createDetailDto.vendorCode,
-                wear: createDetailDto.wear,
-                year: createDetailDto.year,
-                description: createDetailDto.description,
-                price: createDetailDto.price,
-                photos: createDetailDto.photos,
-                state: createDetailDto.state,
-                modelId: createDetailDto.modelId,
-                categoryId: createDetailDto.categoryId,
-                wearId: createDetailDto.wearId
+                name: dtoDetailCreation.name.toLocaleLowerCase(),
+                vendorCode: dtoDetailCreation.vendorCode,
+                wear: dtoDetailCreation.wear,
+                year: dtoDetailCreation.year,
+                description: dtoDetailCreation.description,
+                price: dtoDetailCreation.price,
+                photos: dtoDetailCreation.photos,
+                state: dtoDetailCreation.state,
+                modelId: dtoDetailCreation.modelId,
+                categoryId: dtoDetailCreation.categoryId,
+                wearId: dtoDetailCreation.wearId
             })
         
             return createDetailMapper(detail)

@@ -1,6 +1,6 @@
 import { DetailAttributes } from "@models/detail/types"
 import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetAll} from "./types"
-import {DetailSearch, GetDetails} from "@routers/router-detail/types"
+import {ParamsGetAllDetails, ParamsSearchDetails} from "@controllers/controller-detail/types"
 import {
     PAGINATION_DEFAULT_LIMIT,
     PAGINATION_DEFAULT_OFFSET
@@ -24,7 +24,7 @@ class DtoDetail {
         }
     }
 
-    getDtoDetailsGetAll(query: GetDetails): DtoDetailGetAll {
+    getDtoDetailsGetAll(query: ParamsGetAllDetails): DtoDetailGetAll {
 
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
@@ -34,7 +34,7 @@ class DtoDetail {
         }
     }
 
-    getDtoDetailSearch(query: DetailSearch): DtoDetailSearch {
+    getDtoDetailSearch(query: ParamsSearchDetails): DtoDetailSearch {
         return {
             keyword: query.keyword,
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
