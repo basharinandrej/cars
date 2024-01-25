@@ -9,7 +9,7 @@ interface Users {
 export const getAllUserMapper = (users: Users) => {
 
     return {
-        length: users.count,
+        total: users.count,
         items: users.rows.map((user) => {
             return {
                 id: user.dataValues.id,

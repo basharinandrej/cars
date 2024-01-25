@@ -5,7 +5,7 @@ export interface RequestAttributes {
     senderId: number
     recipientId: number
     description: string
-    // serviceId: number
+    serviceId?: number
 }
 
 export interface CreationRequest extends Optional<RequestAttributes, 'id'> {}

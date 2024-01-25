@@ -1,3 +1,4 @@
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
 import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from './types'
 import {UserAttributes} from '@models/user/types'
 import { GetUsersRequest} from '@routers/router-user/types'
@@ -33,8 +34,8 @@ class Dto {
     getAllUsersDto(req: GetUsersRequest): GetAllUserDto {
 
         return {
-            limit: req.query.limit,
-            offset: req.query.offset,
+            limit: req.query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: req.query.offset || PAGINATION_DEFAULT_OFFSET,
             role: req.query.role
         }
     }

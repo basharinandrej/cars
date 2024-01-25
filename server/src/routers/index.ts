@@ -9,6 +9,7 @@ import {routerWear} from './router-wear'
 import {routerCar} from './router-car'
 import {routerServiceCategory} from './router-service-category'
 import {routerService} from './router-service'
+import {routerRequest} from './router-request'
 
 
 const routers = Router()
@@ -22,6 +23,7 @@ routers.use('/wear', routerWear)
 routers.use('/car', routerCar)
 routers.use('/service-category', routerServiceCategory)
 routers.use('/service', routerService)
+routers.use('/request', routerRequest)
 
 //For QA
 routers.use('/data-base', routerDataBase)

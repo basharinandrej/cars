@@ -6,6 +6,7 @@ import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/con
 class DtoService {
     getDtoServiceCreation(service: ServiceAttributes): DtoServiceCreation {
 
+        //userId - нужно брать из токена
         return {
             userId: service.userId,
             name: service.name,

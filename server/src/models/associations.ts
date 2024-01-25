@@ -6,6 +6,7 @@ import Wear from './wear'
 import User from './user'
 import Service from './service'
 import ServiceCategory from './service-category'
+import Request from './request'
 
 
 Brand.hasMany(Model, {foreignKey: 'brandId'})
@@ -28,3 +29,11 @@ Service.belongsTo(User, {foreignKey: 'userId'})
 
 ServiceCategory.hasMany(Service, {foreignKey: 'serviceCategoryId'})
 Service.belongsTo(ServiceCategory, {foreignKey: 'serviceCategoryId'})
+
+
+User.hasMany(Request, {foreignKey: 'userId'})
+Request.belongsTo(User, {foreignKey: 'userId'})
+
+
+Service.hasMany(Request, {foreignKey: 'requestId'})
+Request.belongsTo(Service, {foreignKey: 'requestId'})

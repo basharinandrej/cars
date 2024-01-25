@@ -97,7 +97,7 @@ class ServiceUser {
                 return getAllUserMapper(users)
             }
             
-            if(limit && offset) {
+            if(limit && (offset || offset === 0)) {
                 const users = await User.findAndCountAll({
                     limit,
                     offset,

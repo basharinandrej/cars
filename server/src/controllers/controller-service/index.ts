@@ -7,7 +7,6 @@ import dtoService from '@dtos/dto-service/dto-service'
 class ControllerService {
     async createService(req: CreateServiceRequest, res: Response, next: NextFunction) {
         try {
-            
             const dtoServiceCreation = dtoService.getDtoServiceCreation(req.body)
             const service = await serviceService.createService(dtoServiceCreation, next)
 

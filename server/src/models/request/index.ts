@@ -28,3 +28,5 @@ Request.init({
     tableName: 'requests',
     updatedAt: false
 })
+
+export default Request
