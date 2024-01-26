@@ -7,8 +7,8 @@ const routers = Router()
 
 
 routers.post('',
-    middlewareValidation,
     validationServiceCreation.createChain(),
+    middlewareValidation,
     controllerService.createService
 )
 

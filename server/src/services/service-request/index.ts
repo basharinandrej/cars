@@ -51,23 +51,8 @@ class ServiceRequest {
 
     }
 
-    async getByIdRequest(modelId: number, next: NextFunction) {
+    async getByIdRequest() {
 
-        //pagination, filters, sorts
-        // try {
-        //     const model = await Model.findOne({
-        //         where: {
-        //             id: modelId
-                    
-        //         },
-        //         include: Detail
-        //     })
-        //     return mapperModelGetById(model)
-        // } catch (error) {
-        //     if(error instanceof Error) {
-        //         next(ApiError.internal(error.message))
-        //     }
-        // }
     }
 }
 

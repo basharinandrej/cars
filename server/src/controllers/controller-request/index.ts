@@ -1,13 +1,15 @@
 import serviceRequest from '@services/service-request'
 import { NextFunction, Response } from 'express'
-import {CreateRequestRequest, GetRequestsRequest, GetByIdRequestRequest} from '@routers/router-request/types'
+import {ParamsRequestGetAll, ParamsRequestGetById} from '@routers/router-request/types'
 import ApiError from '@api-error/index'
 import dtoRequest from '@dtos/dto-request/dto-request'
 import { emitter } from '@controllers/controller-notification'
+import { RequestCreation, RequestGetAll, RequestGetOne } from '@commontypes'
+import { RequestAttributes } from '@models/request/types'
 
 
 class ControllerRequest {
-    async createRequest(req: CreateRequestRequest, res: Response, next: NextFunction) {
+    async createRequest(req: RequestCreation<RequestAttributes>, res: Response, next: NextFunction) {
         try {
             const dtoRequestCreation = dtoRequest.getDtoRequestCreation(req.body)
             const request = await serviceRequest.createRequest(dtoRequestCreation, next)
@@ -21,7 +23,7 @@ class ControllerRequest {
         }
     }
 
-    async getAllRequest(req: GetRequestsRequest, res: Response, next: NextFunction) {
+    async getAllRequest(req: RequestGetAll<ParamsRequestGetAll>, res: Response, next: NextFunction) {
         try {
             const dtoRequestGetAll = dtoRequest.getDtoRequestGetAll(req.query)
             const requests = await serviceRequest.getAllRequests(dtoRequestGetAll, next)
@@ -34,7 +36,7 @@ class ControllerRequest {
         }
     }
 
-    async getByIdRequest(req: GetByIdRequestRequest, res: Response, next: NextFunction) {
+    async getByIdRequest(req: RequestGetOne<ParamsRequestGetById>, res: Response, next: NextFunction) {
         try {
             
         } catch (error) {

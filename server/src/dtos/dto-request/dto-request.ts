@@ -1,5 +1,5 @@
 import { RequestAttributes } from '@models/request/types';
-import {GetRequests} from '@routers/router-request/types'
+import {ParamsRequestGetAll} from '@routers/router-request/types'
 import {DtoRequestCreation, DtoRequestsGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 
@@ -14,7 +14,7 @@ class DtoRequest {
         }
     }
 
-    getDtoRequestGetAll(query: GetRequests): DtoRequestsGetAll {
+    getDtoRequestGetAll(query: ParamsRequestGetAll): DtoRequestsGetAll {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET
