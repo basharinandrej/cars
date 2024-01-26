@@ -1,5 +1,5 @@
 import {Optional} from "sequelize/types";
-import {UserRoles, Bans, DetailWears} from '@common/enums'
+import {UserRoles, Bans} from '@common/enums'
 
 export interface UserAttributes {
     id: number
@@ -10,7 +10,6 @@ export interface UserAttributes {
     phoneNumber: number
     password: string
     ban: Bans
-    wear: DetailWears
 
     avatarId?: number
 }

@@ -1,6 +1,7 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import { DetailAttributes, CreationDetail } from './types'
+import {DetailWears} from '@common/enums'
 
 class Detail extends Model<DetailAttributes, CreationDetail> {}
 
@@ -28,6 +29,10 @@ Detail.init({
     },
     price: {
         type: DataTypes.SMALLINT,
+        allowNull: false
+    },
+    wear: {
+        type: DataTypes.ENUM(DetailWears.CanBeUsed, DetailWears.NeedFix, DetailWears.New),
         allowNull: false
     }
 }, { 

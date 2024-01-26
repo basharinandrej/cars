@@ -1,7 +1,7 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import {UserAttributes, UserCreation} from './types'
-import {UserRoles, DetailWears, Bans} from '@common/enums'
+import {UserRoles, Bans} from '@common/enums'
 
 class User extends ModelSequelize<UserAttributes, UserCreation> {}
 
@@ -42,10 +42,6 @@ User.init({
     },
     ban: {
         type: DataTypes.ENUM(Bans.Constant, Bans.Null, Bans.Temporary, Bans.Warning),
-        allowNull: false
-    },
-    wear: {
-        type: DataTypes.ENUM(DetailWears.CanBeUsed, DetailWears.NeedFix, DetailWears.New),
         allowNull: false
     }
 }, { 
