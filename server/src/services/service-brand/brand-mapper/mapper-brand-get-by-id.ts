@@ -12,7 +12,6 @@ export const mappperBrandGetById = (brand: Brand) => {
                 id: model.dataValues.id,
                 name: model.dataValues.name,
                 brandId: model.dataValues.brandId,
-                typeCardId: model.dataValues.typeCarId
             }            
         })
     }

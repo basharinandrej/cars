@@ -1,7 +1,7 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans"
 import { BrandAttributes } from "@models/brand/types"
 import { ParamsGetAllBrands, ParamsGetOneBrand} from '@controllerscontroller-brand/types'
-import {DtoBrandCreation, DtoBrandGetById, DtoBrandGetAll} from "./types"
+import {DtoBrandCreation, DtoBrandGetById, DtoBrandsGetAll} from "./types"
 
 
 class DtoDetail {
@@ -11,12 +11,12 @@ class DtoDetail {
         }
     }
 
-    getDtoBrandsGetAll(query: ParamsGetAllBrands): DtoBrandGetAll {
+    getDtoBrandsGetAll(query: ParamsGetAllBrands): DtoBrandsGetAll {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
-            order: query.order,
-            sort: query.sort
+            orderBy: query.orderBy,
+            sortBy: query.sortBy
         }
     }
 

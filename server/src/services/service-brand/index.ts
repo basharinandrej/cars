@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {DtoBrandCreation, DtoBrandGetAll, DtoBrandGetById} from '@dtos/dto-brand/types'
+import {DtoBrandCreation, DtoBrandsGetAll, DtoBrandGetById} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
@@ -26,15 +26,15 @@ class ServiceBrand {
     }
 
 
-    async getAllBrands({order, sort, limit, offset}: DtoBrandGetAll, next: NextFunction) {
+    async getAllBrands({orderBy, sortBy, limit, offset}: DtoBrandsGetAll, next: NextFunction) {
 
         try {
-            if(order && sort) {
+            if(orderBy && sortBy) {
                 const brands = await Brand?.findAndCountAll({
                     limit,
                     offset,
                     order: [
-                        [sort, order],
+                        [orderBy, sortBy],
                     ]
                 })
                 return mapperBrandGetAll(brands)

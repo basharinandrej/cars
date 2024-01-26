@@ -3,8 +3,8 @@ import {Pagination} from '@common/types'
 
 
 export interface ParamsGetAllBrands extends Pagination {
-    order?: SortOrderBy
-    sort?: string
+    orderBy?: SortOrderBy
+    sortBy?: string
 }
 
 export interface ParamsGetOneBrand {

@@ -35,7 +35,7 @@ export const validationCreateBrand = {
 export const validationGetAllBrands = {
     createChain() {
         return [
-            query('sort')
+            query('sortBy')
                 .custom((value) => {
                     if(value === 'name') {
                         return Promise.resolve(true);
@@ -43,7 +43,7 @@ export const validationGetAllBrands = {
                         return Promise.reject(errorStrings.sort.brandSort('name', value));
                     }
                 }),
-            query('order').custom((value: SortOrderBy) => {
+            query('sortBy').custom((value: SortOrderBy) => {
                 if(isOrderByAsc(value) || isOrderByDesc(value)) {
                     return Promise.resolve(true);
                 } else {
