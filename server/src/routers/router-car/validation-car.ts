@@ -3,7 +3,7 @@ import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
-import { isAdministrator, isModerator, isPerson } from '@common/checks';
+import { isAdministrator, isModerator, isPerson } from '@commonguards';
 
 export const validationCarCreation = {
     createChain() {

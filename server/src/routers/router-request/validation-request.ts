@@ -3,7 +3,7 @@ import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
-import { isAdministrator, isModerator, isPerson } from '@common/checks';
+import { isAdministrator, isModerator, isPerson } from '@common/guards';
 
 
 export const validationCreateRequest = {
@@ -23,7 +23,7 @@ export const validationCreateRequest = {
                     if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
                         return Promise.resolve(true);
                     } else {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.notOrganization()));
+                        // return Promise.reject(ApiError.bedRequest(errorStrings.notOrganization()));
                     }
 
                 } catch (error) {

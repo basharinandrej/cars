@@ -1,9 +1,9 @@
-import { SortOrder } from "@common/enums";
+import { SortOrderBy } from "@common/enums";
 import {Pagination} from '@common/types'
 
 
 export interface ParamsGetAllBrands extends Pagination {
-    order?: SortOrder
+    order?: SortOrderBy
     sort?: string
 }
 

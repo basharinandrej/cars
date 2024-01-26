@@ -1,4 +1,4 @@
-import { SortOrder } from "@common/enums"
+import { SortOrderBy } from "@common/enums"
 
 export interface DtoBrandCreation {
     name: string
@@ -8,7 +8,7 @@ export interface DtoBrandGetAll {
     limit: number
     offset: number
     sort?: string
-    order?: SortOrder
+    order?: SortOrderBy
 }
 
 export interface DtoBrandGetById {

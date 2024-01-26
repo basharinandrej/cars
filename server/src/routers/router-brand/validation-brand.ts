@@ -2,9 +2,9 @@ import { body, query, header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
-import { SortOrder } from '@common/enums';
+import { SortOrderBy } from '@common/enums';
 import ApiError from '@api-error/index'
-import { isAdministrator } from '@commonchecks';
+import { isAdministrator, isOrderByAsc, isOrderByDesc } from '@common/guards';
 
 
 export const validationCreateBrand = {
@@ -43,8 +43,8 @@ export const validationGetAllBrands = {
                         return Promise.reject(errorStrings.sort.brandSort('name', value));
                     }
                 }),
-            query('order').custom((value: SortOrder) => {
-                if(value === SortOrder.Asc || value === SortOrder.Desc) {
+            query('order').custom((value: SortOrderBy) => {
+                if(isOrderByAsc(value) || isOrderByDesc(value)) {
                     return Promise.resolve(true);
                 } else {
                     return Promise.reject(errorStrings.sorderValue());

@@ -5,7 +5,7 @@ import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import { UserRoles } from '@common/enums';
 import {errorStrings} from '@common/error-strings'
-import { isAdministrator } from '@commonchecks';
+import { isAdministrator } from '@common/guards';
 
 export const validationUser = {
     getAllUsersChain() {

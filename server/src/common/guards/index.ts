@@ -1,5 +1,5 @@
 import { PayloadToken } from "@common/types";
-import { UserRoles } from "@commonenums";
+import { SortOrderBy, UserRoles } from "@common/enums";
 import { UserAttributes } from "@models/user/types";
 
 
@@ -13,4 +13,12 @@ export const isPerson= (data: PayloadToken | UserAttributes) => {
 
 export const isModerator = (data: PayloadToken | UserAttributes) => {
     return data.role === UserRoles.Moderator
+}
+
+export const isOrderByAsc = (orderBy: SortOrderBy) => {
+    return orderBy === SortOrderBy.Asc
+}
+
+export const isOrderByDesc = (orderBy: SortOrderBy) => {
+    return orderBy === SortOrderBy.Desc
 }

@@ -9,7 +9,7 @@ export const enum UserRoles {
     Moderator = 'Moderator'
 }
 
-export const enum SortOrder {
+export const enum SortOrderBy {
     Asc = 'asc',
     Desc = 'desc'
 }

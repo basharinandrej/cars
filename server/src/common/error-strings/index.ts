@@ -1,4 +1,4 @@
-import { SortOrder, UserRoles } from "@common/enums";
+import { SortOrderBy, UserRoles } from "@common/enums";
 
 export const errorStrings = {
 
@@ -27,7 +27,7 @@ export const errorStrings = {
     checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,
 
 
-    sorderValue: () => `Направление сортировки может быть только ${SortOrder.Asc}, ${SortOrder.Desc}`,
+    sorderValue: () => `Направление сортировки может быть только ${SortOrderBy.Asc}, ${SortOrderBy.Desc}`,
     //SORT
     sort: {
         brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`

@@ -3,7 +3,6 @@ import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
-import { isOrganization } from '@common/checks';
 
 
 export const validationServiceCreation = {
@@ -20,11 +19,11 @@ export const validationServiceCreation = {
                 try {
                     const result = serviceToken.validationToken(token)
 
-                    if(isOrganization(result)) {
-                        return Promise.resolve(true);
-                    } else {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.onlyForOrganiztion()));
-                    }
+                    // if(isOrganization(result)) {
+                    //     return Promise.resolve(true);
+                    // } else {
+                    //     // return Promise.reject(ApiError.bedRequest(errorStrings.onlyForOrganiztion()));
+                    // }
 
                 } catch (error) {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
