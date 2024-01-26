@@ -1,4 +1,4 @@
-import { CategoryAttributes } from "@models/category/types"
+import { CategoryAttributes } from "@modelsdetail/detail-category/types"
 import {DtoCategoryCreation, DtoCategoryGetAll} from "./types"
 import {ParamsGetAllCategories} from '@routers/router-category/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans"

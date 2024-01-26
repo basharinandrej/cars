@@ -4,7 +4,7 @@ import {ParamsGetAllCategories} from '@routers/router-category/types'
 import serviceCategory from "@services/service-category"
 import dtoCategory from '@dtos/dto-category/dto-category'
 import { RequestCreation, RequestGetAll } from "@common/types"
-import { CategoryAttributes } from '@models/category/types'
+import { CategoryAttributes } from '@modelsdetail/detail-category/types'
 
 
 class ControllerCategory {

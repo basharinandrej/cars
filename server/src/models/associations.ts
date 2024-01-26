@@ -1,11 +1,11 @@
 import Brand from './brand'
 import Model from './model'
 import Detail from './detail'
-import Category from './category'
-import Wear from './wear'
+import Category from './detail/detail-category'
+import Wear from './detail/detail-wear'
 import User from './user'
 import Service from './service'
-import ServiceCategory from './service-category'
+import ServiceCategory from './service/service-category'
 import Request from './request'
 
 

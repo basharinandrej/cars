@@ -5,10 +5,14 @@ import { DetailAttributes } from "@models/detail/types";
 export interface ModelAttributes {
     id: number
     name: string
-    brandId?: number,
+
+
     Brand?: BrandAttributes,
-    typeCarId?: number
     Details?: Array<DetailAttributes>
+
+    
+    brandId?: number,
+    typeCarId?: number
 }
   
 export interface ModelCreation extends Optional<ModelAttributes, 'id'> {}

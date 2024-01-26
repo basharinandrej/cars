@@ -5,7 +5,6 @@ export enum State {
 
 export const enum UserRoles {
     PERSON = 'PERSON',
-    ORGANIZATION = 'ORGANIZATION',
     ADMIN = 'ADMIN',
     MODERATOR = 'MODERATOR'
 }
@@ -13,4 +12,10 @@ export const enum UserRoles {
 export const enum SortOrder {
     ASC = 'ASC',
     DESC = 'DESC'
+}
+
+export const enum Bans {
+    TEMPORARY = 'Temporary',
+    CONSTANT = 'Constant',
+    WARNING = 'Warning'
 }

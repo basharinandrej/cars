@@ -1,4 +1,4 @@
-import Category from '@models/category'
+import Category from '@modelsdetail/detail-category'
 
 export const mapperCreateCategory = (category: Category) => {
     return {

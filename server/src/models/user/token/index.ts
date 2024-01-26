@@ -10,6 +10,10 @@ Token.init({
         primaryKey: true,
         autoIncrement: true
     },
+    fingerPrint: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     refreshToken: {
         type: DataTypes.STRING,
         allowNull: false

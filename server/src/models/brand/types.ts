@@ -4,6 +4,7 @@ import Model from '@models/model'
 export interface BrandAttributes {
     id: number
     name: string
+    
     Models?: Model[]
 }
   

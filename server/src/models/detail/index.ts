@@ -1,7 +1,7 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import { DetailAttributes, CreationDetail } from './types'
-
+import {State} from '@common/enums'
 
 class Detail extends Model<DetailAttributes, CreationDetail> {}
 
@@ -19,11 +19,6 @@ Detail.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    //delete
-    wear: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
     year: {
         type: DataTypes.SMALLINT,
         allowNull: false
@@ -36,12 +31,8 @@ Detail.init({
         type: DataTypes.SMALLINT,
         allowNull: false
     },
-    photos: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
     state: {
-        type: DataTypes.ENUM('NEW', 'SECOND_HAND'),
+        type: DataTypes.ENUM(State.NEW, State.SECOND_HAND),
         allowNull: false
     },
 }, { 

@@ -1,4 +1,4 @@
-import { ServiceCategoryAttributes } from "@models/service-category/types";
+import { ServiceCategoryAttributes } from "@modelsservice/service-category/types";
 import { GetServiceCategories } from '@routers/router-service-category/types'
 import {DtoServiceCategoryCreation, DtoServiceCategoryGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";

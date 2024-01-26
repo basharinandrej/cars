@@ -1,11 +1,10 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {UserAttributes, UserCreation} from './types'
-import {UserRoles} from '@common/enums'
+import {OrganizationAttributes, OrganizationCreation} from './types'
 
-class User extends ModelSequelize<UserAttributes, UserCreation> {}
+class Organization extends ModelSequelize<OrganizationAttributes, OrganizationCreation> {}
 
-User.init({
+Organization.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -15,10 +14,6 @@ User.init({
       type: DataTypes.STRING,
       allowNull: false
     },
-    surname: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     email: {
         type: DataTypes.STRING,
         unique: true,
@@ -27,10 +22,6 @@ User.init({
     avatarId: {
         type: DataTypes.INTEGER,
         allowNull: true
-    },
-    role: {
-        type: DataTypes.ENUM(UserRoles.ADMIN, UserRoles.MODERATOR, UserRoles.PERSON),
-        allowNull: false
     },
     phoneNumber: {
         type: DataTypes.STRING,
@@ -42,8 +33,8 @@ User.init({
     }
 }, { 
   sequelize, 
-  tableName: 'users',
+  tableName: 'organizations',
   updatedAt: false
 })
 
-export default User
+export default Organization

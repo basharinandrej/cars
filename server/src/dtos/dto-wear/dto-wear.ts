@@ -1,4 +1,4 @@
-import { WearAttributes } from "@models/wear/types";
+import { WearAttributes } from "@modelsdetail/detail-wear/types";
 import {ParamsGetAllWears, ParamsGetOneWear} from '@controllers/controller-wear/types'
 import {DtoWearCreation, DtoWearGetAll, DtoWearGetById} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";

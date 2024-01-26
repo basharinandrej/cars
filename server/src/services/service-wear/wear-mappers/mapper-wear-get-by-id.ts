@@ -1,4 +1,4 @@
-import Wear from "@models/wear";
+import Wear from "@modelsdetail/detail-wear";
 
 
 export const mapperWearGetById = (wear: Wear) => {

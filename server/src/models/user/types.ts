@@ -4,15 +4,14 @@ import {UserRoles} from '@common/enums'
 export interface UserAttributes {
     id: number
     name: string
+    surname: string
     email: string
     role: UserRoles
     phoneNumber: number
-    surname?: string // у role=ORGANIZATION нет surname 
-    addres?: number
     password: string
-    balance?: number
-    banType?: number
-    avatar?: string
+
+    avatarId?: number
+    banId?: number
 }
 
 export interface UserCreation extends Optional<UserAttributes, 'id'> {}

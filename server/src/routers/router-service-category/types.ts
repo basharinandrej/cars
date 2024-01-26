@@ -1,6 +1,6 @@
 import { Request } from "express";
 import {EmptyString} from '@common/types'
-import { ServiceCategoryAttributes } from "@models/service-category/types";
+import { ServiceCategoryAttributes } from "@modelsservice/service-category/types";
 
 export interface CreateServiceCategoryRequest extends Request<Record<string, unknown>, EmptyString, ServiceCategoryAttributes> {}
 

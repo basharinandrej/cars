@@ -5,16 +5,16 @@ export interface DetailAttributes {
     id: number
     name: string
     vendorCode: string
-    wear: number
     year: number
     description: string
     price: number
-    photos: number
     state: State
-    typeDetailId?: number
+
     modelId?: number
-    categoryId?: number
-    wearId?: number
+    userId?: number
+    detailCategoryId?: number
+    detailWearId?: number
+    detailAddressId?: number
 }
 
 

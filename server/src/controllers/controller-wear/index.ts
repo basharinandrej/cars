@@ -2,7 +2,7 @@ import serviceWear from '@services/service-wear'
 import { NextFunction, Response } from 'express'
 import dtoWear from '@dtos/dto-wear/dto-wear'
 import ApiError from "@api-error/index"
-import { WearAttributes } from '@models/wear/types'
+import { WearAttributes } from '@modelsdetail/detail-wear/types'
 import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import {ParamsGetOneWear, ParamsGetAllWears } from './types'
 

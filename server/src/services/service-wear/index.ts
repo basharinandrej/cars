@@ -1,6 +1,6 @@
 import ApiError from "@api-error/index"
 import { DtoWearCreation, DtoWearGetAll, DtoWearGetById } from "@dtos/dto-wear/types"
-import Wear from "@models/wear"
+import Wear from "@modelsdetail/detail-wear"
 import { NextFunction } from "express"
 import {mapperWearCreation} from './wear-mappers/mapper-wear-creation'
 import {mapperWearGerAll} from './wear-mappers/mapper-wear-get-all'

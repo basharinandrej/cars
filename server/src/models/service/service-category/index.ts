@@ -20,7 +20,7 @@ ServiceCategory.init({
     }
 }, { 
     sequelize,
-    tableName: 'service-category',
+    tableName: 'service-categoryies',
     updatedAt: false
 })
 

@@ -1,5 +1,5 @@
 import { NextFunction } from "express";
-import Category from "@models/category"
+import Category from "@modelsdetail/detail-category"
 import { DtoCategoryCreation, DtoCategoryGetAll} from '@dtos/dto-category/types'
 import ApiError from "@api-error/index";
 import {mapperCreateCategory} from './service-mappers/mapper-create-category'

@@ -1,24 +1,25 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {CategoryAttributes, CreationCategory} from './types'
+import { DetailPhotoAttributes, CreationDetailPhoto } from './types'
 
-class Category extends Model<CategoryAttributes, CreationCategory> {}
 
-Category.init({
+class DetailPhoto extends Model<DetailPhotoAttributes, CreationDetailPhoto> {}
+
+DetailPhoto.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    url: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    }
+        allowNull: false
+    },
 }, { 
     sequelize,
-    tableName: 'categories',
+    tableName: 'detail-photos',
     updatedAt: false
-})
+ })
 
-export default Category
+
+export default DetailPhoto

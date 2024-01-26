@@ -1,6 +1,6 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {RequestAttributes, CreationRequest} from './types'
+import {RequestAttributes, CreationRequest, StatusRequest} from './types'
 
 
 class Request extends Model<RequestAttributes, CreationRequest> {}
@@ -21,6 +21,10 @@ Request.init({
     },
     description: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+    status: {
+        type: DataTypes.ENUM(StatusRequest.APPROVED, StatusRequest.DECLINED, StatusRequest.IN_VIEWING),
         allowNull: false
     }
 }, { 
