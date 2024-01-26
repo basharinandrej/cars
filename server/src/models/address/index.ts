@@ -1,10 +1,10 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {DetailAddressAttributes, DetailAddressCreation} from './types'
+import {AddressAttributes, AddressCreation} from './types'
 
-class DetailAddress extends ModelSequelize<DetailAddressAttributes, DetailAddressCreation> {}
+class Address extends ModelSequelize<AddressAttributes, AddressCreation> {}
 
-DetailAddress.init({
+Address.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -24,8 +24,8 @@ DetailAddress.init({
   }
 }, { 
   sequelize, 
-  tableName: 'detail-addresses',
+  tableName: 'addresses',
   updatedAt: false
 })
 
-export default DetailAddress
+export default Address

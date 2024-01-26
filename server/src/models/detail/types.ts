@@ -13,7 +13,7 @@ export interface DetailAttributes {
     modelId?: number
     userId?: number
     detailCategoryId?: number
-    detailAddressId?: number
+    addressId?: number
 }
 
 

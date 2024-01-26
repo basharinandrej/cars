@@ -3,9 +3,9 @@ import Model from './model'
 
 import Detail from './detail'
 import DetailCategory from './detail/detail-category'
-import DetailAddress from './detail/detail-address'
 import DetailPhoto from './detail/detail-photo'
 
+import Address from './address'
 import Car from './car'
 import Token from './user/token'
 import User from './user'
@@ -28,8 +28,8 @@ DetailCategory.hasMany(Detail, {foreignKey: 'detailCategoryId'})
 Detail.belongsTo(DetailCategory, {foreignKey: 'detailCategoryId'})
 
 
-DetailAddress.hasMany(Detail, {foreignKey: 'detailAddressId'})
-Detail.belongsTo(DetailAddress, {foreignKey: 'detailAddressId'})
+Address.hasMany(Detail, {foreignKey: 'addressId'})
+Detail.belongsTo(Address, {foreignKey: 'addressId'})
 
 
 DetailPhoto.hasMany(Detail, {foreignKey: 'detailPhotoId'})
@@ -72,3 +72,5 @@ ServiceCategory.hasMany(Service, {foreignKey: 'serviceCategoryId'})
 Service.belongsTo(ServiceCategory, {foreignKey: 'serviceCategoryId'})
 
 
+Organization.hasMany(Address, {foreignKey: 'addressId'})
+Address.belongsTo(Organization, {foreignKey: 'addressId'})
