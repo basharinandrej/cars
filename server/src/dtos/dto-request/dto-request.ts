@@ -1,5 +1,5 @@
 import { RequestAttributes } from '@models/request/types';
-import {ParamsRequestGetAll} from '@routers/router-request/types'
+import {ParamsRequestGetAll} from '@controllerscontroller-request/types'
 import {DtoRequestCreation, DtoRequestsGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 

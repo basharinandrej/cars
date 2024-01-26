@@ -1,10 +1,10 @@
 import serviceRequest from '@services/service-request'
 import { NextFunction, Response } from 'express'
-import {ParamsRequestGetAll, ParamsRequestGetById} from '@routers/router-request/types'
+import {ParamsRequestGetAll, ParamsRequestGetById} from '@controllers/controller-request/types'
 import ApiError from '@api-error/index'
 import dtoRequest from '@dtos/dto-request/dto-request'
 import { emitter } from '@controllers/controller-notification'
-import { RequestCreation, RequestGetAll, RequestGetOne } from '@commontypes'
+import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import { RequestAttributes } from '@models/request/types'
 
 
