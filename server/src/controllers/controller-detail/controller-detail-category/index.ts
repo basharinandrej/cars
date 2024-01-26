@@ -2,7 +2,7 @@ import ApiError from "@api-error/index"
 import { NextFunction, Response } from "express"
 import {ParamsGetAllCategories} from '@routers/router-detail/router-detail-category/types'
 import serviceCategory from "@services/service-detail/service-detail-category"
-import dtoDetailCategory from '@dtosdto-detail/dto-detail-category/dto-detail-category'
+import dtoDetailCategory from '@dtos/dto-detail/dto-detail-category/dto-detail-category'
 import { RequestCreation, RequestGetAll } from "@common/types"
 import { DetailCategoryAttributes } from '@models/detail/detail-category/types'
 

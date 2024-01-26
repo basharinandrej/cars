@@ -1,4 +1,4 @@
-import Token from '@modelsuser/token'
+import Token from '@models/user/token'
 import { EMPTY_STRING } from '@common/constans';
 import jwt from 'jsonwebtoken'
 import {PayloadToken} from '@common/types'

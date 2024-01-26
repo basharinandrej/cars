@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import ApiError from '@api-error/index'
 import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
-import { OrganizationAttributes } from '@modelsorganization/types'
+import { OrganizationAttributes } from '@models/organization/types'
 
 
 class ControllerOrganization {
