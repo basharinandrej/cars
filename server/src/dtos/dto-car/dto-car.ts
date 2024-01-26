@@ -22,7 +22,7 @@ class DtoCar {
         }
     }
 
-    getDtoCarByVinCode(query: ParamsGetOneCar):DtoCarGetByVinCode  {
+    getDtoCarByVinCode(query: ParamsGetOneCar): DtoCarGetByVinCode  {
         return {
             vinCode: query.vinCode
         }

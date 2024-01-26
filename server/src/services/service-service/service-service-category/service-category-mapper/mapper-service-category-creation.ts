@@ -1,4 +1,4 @@
-import {DtoServiceCategoryCreation} from '@dtos/dto-service-category/types'
+import {DtoServiceCategoryCreation} from '@dtosdto-service/dto-service-category/types'
 import ServiceCategory from '@modelsservice/service-category'
 
 interface ReturnModelDto extends DtoServiceCategoryCreation {

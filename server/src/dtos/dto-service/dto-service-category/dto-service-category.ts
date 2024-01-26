@@ -1,5 +1,5 @@
 import { ServiceCategoryAttributes } from "@modelsservice/service-category/types";
-import { GetServiceCategories } from '@routers/router-service-category/types'
+import { ParamsGetServiceCategories } from '@controllerscontroller-service/controller-service-category/types'
 import {DtoServiceCategoryCreation, DtoServiceCategoryGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 
@@ -12,7 +12,7 @@ class DtoServiceCategory {
         }
     }
 
-    getDtoServiceCategoryGetAll(query: GetServiceCategories): DtoServiceCategoryGetAll  {
+    getDtoServiceCategoryGetAll(query: ParamsGetServiceCategories): DtoServiceCategoryGetAll  {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET

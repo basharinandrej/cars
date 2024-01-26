@@ -1,3 +1,5 @@
+import { Pagination } from "@common/types"
+
 export interface DtoCarCreation {
     vinCode: string,
     brand: string,
@@ -7,10 +9,7 @@ export interface DtoCarCreation {
 }
 
 
-export interface DtoCarGetAll {
-    limit: number,
-    offset: number
-}
+export interface DtoCarGetAll extends Pagination{}
 
 export interface DtoCarGetByVinCode {
     vinCode: string
