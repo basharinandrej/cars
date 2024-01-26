@@ -1,5 +1,5 @@
 import {Optional} from "sequelize/types";
-import {UserRoles} from '@common/enums'
+import {UserRoles, Bans, DetailWears} from '@common/enums'
 
 export interface UserAttributes {
     id: number
@@ -9,9 +9,10 @@ export interface UserAttributes {
     role: UserRoles
     phoneNumber: number
     password: string
+    ban: Bans
+    wear: DetailWears
 
     avatarId?: number
-    banId?: number
 }
 
 export interface UserCreation extends Optional<UserAttributes, 'id'> {}

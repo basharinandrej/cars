@@ -15,12 +15,13 @@ export const enum SortOrderBy {
 }
 
 export const enum Bans {
+    Null = 'Null',
     Temporary = 'Temporary',
     Constant = 'Constant',
     Warning = 'Warning'
 }
 
-export const enum Wears {
+export const enum DetailWears {
     New = 'New',
     CanBeUsed = 'CanBeUsed',
     NeedFix = 'NeedFix'
