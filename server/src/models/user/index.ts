@@ -29,7 +29,7 @@ User.init({
         allowNull: true
     },
     role: {
-        type: DataTypes.ENUM(UserRoles.ADMIN, UserRoles.MODERATOR, UserRoles.PERSON),
+        type: DataTypes.ENUM(UserRoles.Admin, UserRoles.Moderator, UserRoles.Person),
         allowNull: false
     },
     phoneNumber: {

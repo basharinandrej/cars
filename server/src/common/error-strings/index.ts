@@ -15,10 +15,10 @@ export const errorStrings = {
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
     errorPassword: () => `Неверный пароль`,
 
-    onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.ADMIN}`,
-    onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
+    onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
+    // onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
-    notOrganization: () => `НеДоступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
+    // notOrganization: () => `НеДоступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
@@ -27,7 +27,7 @@ export const errorStrings = {
     checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,
 
 
-    sorderValue: () => `Направление сортировки может быть только ${SortOrder.ASC}, ${SortOrder.DESC}`,
+    sorderValue: () => `Направление сортировки может быть только ${SortOrder.Asc}, ${SortOrder.Desc}`,
     //SORT
     sort: {
         brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`

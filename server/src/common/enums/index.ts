@@ -1,21 +1,21 @@
-export enum State {
-    NEW = 'NEW',
-    SECOND_HAND = 'SECOND_HAND'
+export enum StateDetail {
+    New = 'New',
+    SecondHand = 'SecondHand'
 }
 
 export const enum UserRoles {
-    PERSON = 'PERSON',
-    ADMIN = 'ADMIN',
-    MODERATOR = 'MODERATOR'
+    Person = 'Person',
+    Admin = 'Admin',
+    Moderator = 'Moderator'
 }
 
 export const enum SortOrder {
-    ASC = 'ASC',
-    DESC = 'DESC'
+    Asc = 'asc',
+    Desc = 'desc'
 }
 
 export const enum Bans {
-    TEMPORARY = 'Temporary',
-    CONSTANT = 'Constant',
-    WARNING = 'Warning'
+    Temporary = 'Temporary',
+    Constant = 'Constant',
+    Warning = 'Warning'
 }

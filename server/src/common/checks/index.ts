@@ -4,17 +4,13 @@ import { UserAttributes } from "@models/user/types";
 
 
 export const isAdministrator = (data: PayloadToken | UserAttributes) => {
-    return data.role === UserRoles.ADMIN
+    return data.role === UserRoles.Admin
 }
 
 export const isPerson= (data: PayloadToken | UserAttributes) => {
-    return data.role === UserRoles.PERSON
+    return data.role === UserRoles.Person
 }
 
 export const isModerator = (data: PayloadToken | UserAttributes) => {
-    return data.role === UserRoles.MODERATOR
-}
-
-export const isOrganization = (data: PayloadToken | UserAttributes) => {
-    return data.role === UserRoles.ORGANIZATION
+    return data.role === UserRoles.Moderator
 }

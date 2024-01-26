@@ -2,8 +2,9 @@ import { body, query, header } from 'express-validator';
 import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
-import { SortOrder, UserRoles } from '@common/enums';
+import { SortOrder } from '@common/enums';
 import ApiError from '@api-error/index'
+import { isAdministrator } from '@commonchecks';
 
 
 export const validationCreateBrand = {
@@ -17,7 +18,7 @@ export const validationCreateBrand = {
                 try {
                     const result = serviceToken.validationToken(token)
 
-                    if(result?.role === UserRoles.ADMIN) {
+                    if(isAdministrator(result)) {
                         return Promise.resolve(true);
                     } else {
                         return Promise.reject(ApiError.bedRequest(errorStrings.onlyForAdmin()));
@@ -43,7 +44,7 @@ export const validationGetAllBrands = {
                     }
                 }),
             query('order').custom((value: SortOrder) => {
-                if(value === SortOrder.ASC || value === SortOrder.DESC) {
+                if(value === SortOrder.Asc || value === SortOrder.Desc) {
                     return Promise.resolve(true);
                 } else {
                     return Promise.reject(errorStrings.sorderValue());

@@ -5,6 +5,7 @@ import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import { UserRoles } from '@common/enums';
 import {errorStrings} from '@common/error-strings'
+import { isAdministrator } from '@commonchecks';
 
 export const validationUser = {
     getAllUsersChain() {
@@ -15,7 +16,7 @@ export const validationUser = {
                 try {
                     const result = serviceToken.validationToken(token)
 
-                    if(result?.role === UserRoles.ADMIN) {
+                    if(isAdministrator(result)) {
                         return Promise.resolve(true);
                     } else {
                         return Promise.reject(ApiError.bedRequest(errorStrings.onlyForAdmin()));
@@ -44,15 +45,13 @@ export const validationUser = {
             body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
             
             body('role').isIn([
-                UserRoles.ADMIN, 
-                UserRoles.MODERATOR, 
-                UserRoles.ORGANIZATION, 
-                UserRoles.PERSON
+                UserRoles.Admin, 
+                UserRoles.Moderator,  
+                UserRoles.Person
             ]).withMessage(errorStrings.shouldHaveString('role',[
-                UserRoles.ADMIN, 
-                UserRoles.MODERATOR, 
-                UserRoles.ORGANIZATION, 
-                UserRoles.PERSON
+                UserRoles.Admin, 
+                UserRoles.Moderator, 
+                UserRoles.Person
             ])).trim(),
 
             body('phoneNumber')
