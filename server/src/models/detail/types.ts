@@ -1,4 +1,3 @@
-import {StateDetail} from '@common/enums'
 import {Optional} from "sequelize/types";
 
 export interface DetailAttributes {
@@ -8,7 +7,6 @@ export interface DetailAttributes {
     year: number
     description: string
     price: number
-    state: StateDetail
 
     modelId?: number
     userId?: number

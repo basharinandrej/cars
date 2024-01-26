@@ -1,4 +1,3 @@
-import { State } from "@common/enums"
 
 export interface DtoDetailCreation {
     name: string
@@ -8,7 +7,6 @@ export interface DtoDetailCreation {
     description: string
     price: number
     photos: number
-    state: State
     modelId: number
     categoryId: number
     wearId: number

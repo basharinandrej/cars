@@ -1,7 +1,6 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import { DetailAttributes, CreationDetail } from './types'
-import {StateDetail} from '@common/enums'
 
 class Detail extends Model<DetailAttributes, CreationDetail> {}
 
@@ -30,11 +29,7 @@ Detail.init({
     price: {
         type: DataTypes.SMALLINT,
         allowNull: false
-    },
-    state: {
-        type: DataTypes.ENUM(StateDetail.New, StateDetail.SecondHand),
-        allowNull: false
-    },
+    }
 }, { 
     sequelize,
     tableName: 'details',

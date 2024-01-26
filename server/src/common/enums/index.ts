@@ -1,7 +1,3 @@
-export enum StateDetail {
-    New = 'New',
-    SecondHand = 'SecondHand'
-}
 
 export const enum UserRoles {
     Person = 'Person',
