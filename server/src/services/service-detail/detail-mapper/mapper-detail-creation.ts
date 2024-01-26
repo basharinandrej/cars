@@ -1,6 +1,6 @@
 import Deteail from '@models/detail'
 
-export const createDetailMapper = (detail: Deteail) => {
+export const mapperDetailCreation = (detail: Deteail) => {
     return {
         id: detail.dataValues.id,
         vendorCode: detail.dataValues.vendorCode,
@@ -9,6 +9,5 @@ export const createDetailMapper = (detail: Deteail) => {
         year: detail.dataValues.year,
         description: detail.dataValues.description,
         price: detail.dataValues.price,
-        state: detail.dataValues.state,
     }
 }

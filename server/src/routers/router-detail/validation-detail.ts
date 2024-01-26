@@ -3,6 +3,7 @@ import {errorStrings} from '@common/error-strings'
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
+import {DetailWears} from '@common/enums'
 
 
 export const validationCreateDetail = {
@@ -16,15 +17,23 @@ export const validationCreateDetail = {
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('vendorCode')).trim()
                 .isLength({min: 2}).withMessage(errorStrings.minLength('vendorCode', 2)),
 
-            body('categoryId').isNumeric().withMessage(errorStrings.beNumber('categoryId')).trim(),
+            body('categoryDetailId').isNumeric().withMessage(errorStrings.beNumber('categoryDetailId')).trim(),
             body('modelId').isNumeric().withMessage(errorStrings.beNumber('modelId')).trim(),
-            body('wearId').isNumeric().withMessage(errorStrings.beNumber('wearId')).trim(),
+            body('wear').isIn([
+                DetailWears.CanBeUsed,
+                DetailWears.NeedFix,
+                DetailWears.New,
+            ]).withMessage(errorStrings.shouldHaveString('wear',[
+                DetailWears.CanBeUsed,
+                DetailWears.NeedFix,
+                DetailWears.New,
+            ])).trim(),            
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
 
             //todo валидация для photo
             body('year')
-                .isNumeric().withMessage(errorStrings.beNumber('year'))
-                .isLength({min: 4, max: 4}).withMessage(errorStrings.minLength('year', 4))
+                .isNumeric().withMessage(errorStrings.beNumber('year')).trim()
+                .isLength({min: 4, max: 4}).withMessage(errorStrings.minLength('year', 4)).trim()
                 .withMessage(errorStrings.maxLength('year', 4)).trim(),
 
 
@@ -53,6 +62,15 @@ export const validationSearchDetail = {
         return [
             query('keyword')
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('keyword'))
+        ]
+    }
+}
+
+export const validationGetByIdDetail = {
+    createChain() {
+        return [
+            query('id')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('id'))
         ]
     }
 }

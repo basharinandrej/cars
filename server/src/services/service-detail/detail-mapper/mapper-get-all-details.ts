@@ -17,11 +17,12 @@ export const mapperGetAllDetails = (details: DetailsData) => {
                 year: detail.dataValues.year,
                 description: detail.dataValues.description,
                 price: detail.dataValues.price,
-                photos: detail.dataValues.photos,
-                state: detail.dataValues.state,
+
+
                 modelId: detail.dataValues.modelId,
-                categoryId: detail.dataValues.categoryId,
-                wearId: detail.dataValues.wearId
+                detailCategoryId: detail.dataValues.detailCategoryId,
+                addressId: detail.dataValues.addressId,
+                userId: detail.dataValues.userId
             }
         })
     }

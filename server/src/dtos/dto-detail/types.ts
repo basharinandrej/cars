@@ -1,28 +1,28 @@
+import { DetailWears } from "@common/enums"
+import { Pagination } from "@common/types"
 
 export interface DtoDetailCreation {
     name: string
     vendorCode: string
-    wear: number
+    wear: DetailWears
     year: number
     description: string
     price: number
-    photos: number
     modelId: number
-    categoryId: number
-    wearId: number
+    detailCategoryId: number
 }
 
-export interface DtoDetailGetAll {
-    limit: number
-    offset: number
-    categoryId?: number
+export interface DtoDetailGetAll extends Pagination{
+    detailCategoryId?: number
     modelId?: number
 }
 
-export interface DtoDetailSearch {
+export interface DtoDetailSearch extends Pagination {
     keyword: string,
-    limit: number,
-    offset: number,
-    categoryId?: number
+    detailCategoryId?: number
     modelId?: number
+}
+
+export interface DtoDetailGetById {
+    id: number
 }

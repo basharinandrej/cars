@@ -1,6 +1,6 @@
 import { DetailAttributes } from "@models/detail/types"
-import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetAll} from "./types"
-import {ParamsGetAllDetails, ParamsSearchDetails} from "@controllers/controller-detail/types"
+import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetById, DtoDetailGetAll} from "./types"
+import {ParamsGetAllDetails, ParamsSearchDetails, ParamsGetOneDetail} from "@controllers/controller-detail/types"
 import {
     PAGINATION_DEFAULT_LIMIT,
     PAGINATION_DEFAULT_OFFSET
@@ -16,11 +16,8 @@ class DtoDetail {
             year: detail.year,
             description: detail.name,
             price: detail.price,
-            photos: detail.photos,
-            state: detail.state,
             modelId: detail.modelId,
-            categoryId: detail.categoryId,
-            wearId: detail.wearId
+            detailCategoryId: detail.detailCategoryId,
         }
     }
 
@@ -29,7 +26,7 @@ class DtoDetail {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
-            categoryId: query.categoryId,
+            detailCategoryId: query.detailCategoryId,
             modelId: query.modelId
         }
     }
@@ -39,8 +36,15 @@ class DtoDetail {
             keyword: query.keyword,
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
-            categoryId: query.categoryId,
+            detailCategoryId: query.detailCategoryId,
             modelId: query.modelId
+        }
+    }
+
+
+    getDtoDetailGetById(query: ParamsGetOneDetail): DtoDetailGetById {
+        return {
+            id: query.id
         }
     }
 }

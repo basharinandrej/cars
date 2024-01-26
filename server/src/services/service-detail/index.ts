@@ -1,10 +1,15 @@
 import { Op } from 'sequelize'
 import {NextFunction} from 'express'
-import {DtoDetailCreation, DtoDetailGetAll, DtoDetailSearch} from '@dtos/dto-detail/types'
+import {DtoDetailCreation, DtoDetailGetAll, DtoDetailGetById, DtoDetailSearch} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
-import {createDetailMapper} from './detail-mapper/create-detail-mappper'
+import {mapperDetailCreation} from './detail-mapper/mapper-detail-creation'
 import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
+import {mapperDetailGetById} from './detail-mapper/mapper-detail-get-by-id'
+import Model from '@models/model'
+import Address from '@models/address'
+import User from '@models/user'
+import DetailCategory from '@models/detail/detail-category'
 
 
 class ServiceDetail {
@@ -18,14 +23,11 @@ class ServiceDetail {
                 year: dtoDetailCreation.year,
                 description: dtoDetailCreation.description,
                 price: dtoDetailCreation.price,
-                photos: dtoDetailCreation.photos,
-                state: dtoDetailCreation.state,
                 modelId: dtoDetailCreation.modelId,
-                categoryId: dtoDetailCreation.categoryId,
-                wearId: dtoDetailCreation.wearId
+                detailCategoryId: dtoDetailCreation.detailCategoryId,
             })
         
-            return createDetailMapper(detail)
+            return mapperDetailCreation(detail)
        } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
@@ -34,14 +36,14 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails({limit, offset, modelId, categoryId}: DtoDetailGetAll, next: NextFunction) {
+    async getAllDetails({limit, offset, modelId, detailCategoryId}: DtoDetailGetAll, next: NextFunction) {
 
         try {
-            if(categoryId && modelId) {
+            if(detailCategoryId && modelId) {
                 const details = await Detail?.findAndCountAll({
                     limit,
                     offset,
-                    where: { modelId, categoryId }
+                    where: { modelId, detailCategoryId }
                 })
                 return mapperGetAllDetails(details)
             }
@@ -54,11 +56,11 @@ class ServiceDetail {
                 return mapperGetAllDetails(details)
             }
     
-            if(categoryId) {
+            if(detailCategoryId) {
                 const details = await Detail?.findAndCountAll({
                     limit,
                     offset,
-                    where: { categoryId }
+                    where: { detailCategoryId }
                 })
                 return mapperGetAllDetails(details)
             }
@@ -76,9 +78,9 @@ class ServiceDetail {
     }
 
 
-    async search(query: DtoDetailSearch, next: NextFunction) {
+    async search(dtoDetailSearch: DtoDetailSearch, next: NextFunction) {
         try {
-            const {keyword, limit, offset} = query
+            const {keyword, limit, offset} = dtoDetailSearch
 
             const details = await Detail.findAndCountAll({
                 offset, limit,
@@ -91,6 +93,23 @@ class ServiceDetail {
             })
             return mapperGetAllDetails(details)
             
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
+    }
+
+
+    async getByIdDetail(dtoDetailGetById: DtoDetailGetById, next: NextFunction) {
+        try {
+            
+            const detail = await Detail.findOne({
+                where: {id: dtoDetailGetById.id},
+                include: [Model, Address, User, DetailCategory]
+            })
+
+            return mapperDetailGetById(detail)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
