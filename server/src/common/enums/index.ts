@@ -19,3 +19,9 @@ export const enum Bans {
     Constant = 'Constant',
     Warning = 'Warning'
 }
+
+export const enum Wears {
+    New = 'New',
+    CanBeUsed = 'CanBeUsed',
+    NeedFix = 'NeedFix'
+}
