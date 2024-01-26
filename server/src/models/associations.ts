@@ -1,12 +1,19 @@
 import Brand from './brand'
 import Model from './model'
+
 import Detail from './detail'
-import Category from './detail/detail-category'
-import Wear from './detail/detail-wear'
+import DetailCategory from './detail/detail-category'
+import DetailAddress from './detail/detail-address'
+import DetailPhoto from './detail/detail-photo'
+
+import Car from './car'
+import Token from './user/token'
 import User from './user'
 import Service from './service'
 import ServiceCategory from './service/service-category'
 import Request from './request'
+import Organization from './organization'
+import Post from './organization/post'
 
 
 Brand.hasMany(Model, {foreignKey: 'brandId'})
@@ -17,23 +24,51 @@ Model.hasMany(Detail, {foreignKey: 'modelId'})
 Detail.belongsTo(Model, {foreignKey: 'modelId'})
 
 
-Category.hasMany(Detail, {foreignKey: 'categoryId'})
+DetailCategory.hasMany(Detail, {foreignKey: 'detailCategoryId'})
+Detail.belongsTo(DetailCategory, {foreignKey: 'detailCategoryId'})
 
 
-Wear.hasMany(Detail, {foreignKey: 'wearId'})
+DetailAddress.hasMany(Detail, {foreignKey: 'detailAddressId'})
+Detail.belongsTo(DetailAddress, {foreignKey: 'detailAddressId'})
 
 
-User.hasMany(Service, {foreignKey: 'userId'})
-Service.belongsTo(User, {foreignKey: 'userId'})
+DetailPhoto.hasMany(Detail, {foreignKey: 'detailPhotoId'})
+Detail.belongsTo(DetailPhoto, {foreignKey: 'detailPhotoId'})
+
+
+User.hasMany(Detail, {foreignKey: 'userId'})
+Detail.belongsTo(User, {foreignKey: 'userId'})
+
+
+User.hasOne(Token, {foreignKey: 'userId'})
+Token.belongsTo(User, {foreignKey: 'userId'})
+
+
+User.hasMany(Car, {foreignKey: 'userId'})
+Car.belongsTo(User, {foreignKey: 'userId'})
+
+
+User.hasMany(Request, {foreignKey: 'senderId'})
+Request.belongsTo(User, {foreignKey: 'senderId'})
+
+
+Service.hasMany(Request, {foreignKey: 'serviceId'})
+Request.belongsTo(Service, {foreignKey: 'serviceId'})
+
+
+Organization.hasMany(Request, {foreignKey: 'recipientId'})
+Request.belongsTo(Organization, {foreignKey: 'recipientId'})
+
+
+Organization.hasMany(Service, {foreignKey: 'organizationId'})
+Service.belongsTo(Organization, {foreignKey: 'organizationId'})
+
+
+Organization.hasMany(Post, {foreignKey: 'organizationId'})
+Post.belongsTo(Organization, {foreignKey: 'organizationId'})
 
 
 ServiceCategory.hasMany(Service, {foreignKey: 'serviceCategoryId'})
 Service.belongsTo(ServiceCategory, {foreignKey: 'serviceCategoryId'})
 
 
-User.hasMany(Request, {foreignKey: 'userId'})
-Request.belongsTo(User, {foreignKey: 'userId'})
-
-
-Service.hasMany(Request, {foreignKey: 'requestId'})
-Request.belongsTo(Service, {foreignKey: 'requestId'})
