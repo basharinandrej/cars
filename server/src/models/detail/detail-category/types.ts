@@ -5,4 +5,4 @@ export interface DetailCategoryAttributes {
     name: string
 }
 
-export interface CreationDetailCategory extends Optional<DetailCategoryAttributes, 'id'> {}
+export interface DetailCategoryCreation extends Optional<DetailCategoryAttributes, 'id'> {}

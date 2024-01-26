@@ -6,7 +6,7 @@ import ApiError from '@api-error/index'
 import { isAdministrator } from '@common/guards';
 
 
-export const validationCreateCategory = {
+export const validationCreateDetailCategory = {
     createChain() {
         return  [
             header('authorization').custom((value: string) => {

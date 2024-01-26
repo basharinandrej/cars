@@ -1,4 +1,4 @@
-import Category from "@modelsdetail/detail-category/index"
+import Category from "@models/detail/detail-category/index"
 
 interface CategoriesDate {
     rows: Category[]
