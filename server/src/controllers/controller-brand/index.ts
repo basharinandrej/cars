@@ -34,10 +34,10 @@ class ControllerBrand {
         }
     }
 
-    async getById(req: RequestGetOne<ParamsGetOneBrand>, res: Response, next: NextFunction) {
+    async getByIdBrand(req: RequestGetOne<ParamsGetOneBrand>, res: Response, next: NextFunction) {
         try {
             const dtoBrandGetById = dtoBrand.getDtoBrandGetById(req.query)
-            const brandOne = await serviceBrand.getById(dtoBrandGetById, next)
+            const brandOne = await serviceBrand.getByIdBrand(dtoBrandGetById, next)
 
             if(brandOne) {
                 res.send(brandOne)

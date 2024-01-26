@@ -20,7 +20,7 @@ routers.get('',
 
 
 routers.get('/getById',
-    controllerBrand.getById
+    controllerBrand.getByIdBrand
 )
 
 export const routerBrand = routers

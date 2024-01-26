@@ -10,6 +10,7 @@ export const validationCreateModel = {
     createChain() {
         return  [
             body('name').notEmpty().withMessage(errorStrings.notBeEmptyField('name')).trim(),
+            body('brandId').notEmpty().withMessage(errorStrings.notBeEmptyField('brandId')).trim(),
             header('authorization').custom((value: string) => {
                 const token = extractAccessToken(value)
 

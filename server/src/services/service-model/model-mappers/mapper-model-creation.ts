@@ -1,7 +1,7 @@
 import Model from '@models/model'
-import {CreateModelDto} from '@dtos/dto-model/types'
+import {DtoModelCreation} from '@dtos/dto-model/types'
 
-interface ReturnModelDto extends CreateModelDto {
+interface ReturnModelDto extends DtoModelCreation {
     id: number
 }
 

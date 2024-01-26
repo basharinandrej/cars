@@ -55,7 +55,7 @@ class ServiceBrand {
         }
     }
 
-    async getById(dtoBrandGetById: DtoBrandGetById, next: NextFunction) {
+    async getByIdBrand(dtoBrandGetById: DtoBrandGetById, next: NextFunction) {
         try {
             const brand = await Brand.findOne({
                 where: {id: dtoBrandGetById.id},

@@ -46,7 +46,6 @@ class ServiceModel {
 
     async getByIdModel(dtoModelGetById: DtoModelGetById, next: NextFunction) {
 
-        //pagination, filters, sorts
         try {
             const model = await Model.findOne({
                 where: {

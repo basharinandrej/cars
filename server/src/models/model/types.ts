@@ -12,7 +12,6 @@ export interface ModelAttributes {
 
     
     brandId?: number,
-    typeCarId?: number
 }
   
 export interface ModelCreation extends Optional<ModelAttributes, 'id'> {}
