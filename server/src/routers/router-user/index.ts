@@ -19,6 +19,6 @@ routers.get('',
     middlewareValidation, 
     controllerUser.getAllUsers
 )
-
+//todo добавить endpoint getUserById
 
 export const routerUser = routers

@@ -1,6 +1,7 @@
-import { UserRoles } from "@common/enums"
+import { UserRoles, Bans } from "@common/enums"
+import { Pagination } from "@common/types"
 
-export interface RegistrationUserDto {
+export interface DtoUserRegistration {
     id: number
     name: string
     surname: string
@@ -8,20 +9,16 @@ export interface RegistrationUserDto {
     role: UserRoles
     phoneNumber: number
     password: string
-    balance?: number
-    banType?: number
+    ban: Bans
     avatar?: string
-    addres?: number
 }
 
-export interface LoginUserDto {
+export interface DtoUserLogin {
     email: string
     password: string
 }
 
 
-export interface GetAllUserDto {
-    limit: number, 
-    offset: number,
+export interface DtoUserGetAll extends Pagination {
     role?: UserRoles
 }

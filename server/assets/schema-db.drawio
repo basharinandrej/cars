@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-26T14:45:10.650Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="csbRYOmLM9dcrChl3_rR" version="23.0.2" type="device" pages="2">
+<mxfile host="app.diagrams.net" modified="2024-01-26T15:28:16.154Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="SA_ttBq1PBhQNCcmn8pJ" version="23.0.2" type="device" pages="2">
   <diagram id="G80c-5UqLgdFp9z34efU" name="Страница 1">
     <mxGraphModel dx="1306" dy="699" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -156,7 +156,7 @@
         <mxCell id="lNOaAzDgbvizDWfTRkox-52" value="password" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="lNOaAzDgbvizDWfTRkox-43" vertex="1">
           <mxGeometry y="232" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lNOaAzDgbvizDWfTRkox-53" value="banId" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="lNOaAzDgbvizDWfTRkox-43" vertex="1">
+        <mxCell id="lNOaAzDgbvizDWfTRkox-53" value="ban" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="lNOaAzDgbvizDWfTRkox-43" vertex="1">
           <mxGeometry y="258" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lNOaAzDgbvizDWfTRkox-54" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;entryX=-0.027;entryY=-0.013;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.005;exitY=0.093;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="lNOaAzDgbvizDWfTRkox-44" target="lNOaAzDgbvizDWfTRkox-17" edge="1">

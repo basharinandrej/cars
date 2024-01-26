@@ -1,35 +1,35 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from '@dtos/dto-user/types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from './user-utils/get-hash-password'
 import {compareHashPassword} from './user-utils/compare-hash-password'
-import {loginUserMapper} from './user-mappers/login-user-mapper'
+import {mapperUserLogin} from './user-mappers/mapper-user-login'
 import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
 
 
 class ServiceUser {
-    async registration(createUserDto: RegistrationUserDto, next: NextFunction) {
+    async registration(dtoUserRegistration: DtoUserRegistration, next: NextFunction) {
         try {
-            const canditate = await User.findOne({where: {email: createUserDto.email}})
+            const canditate = await User.findOne({where: {email: dtoUserRegistration.email}})
 
             if(canditate) {
                 next(ApiError.bedRequest(errorStrings.userAlreadyExist(canditate.dataValues.email)))
             }
 
-            const hashPassword = await getHashPassword(createUserDto.password)
+            const hashPassword = await getHashPassword(dtoUserRegistration.password)
 
             const user = await User.create({
-                name: createUserDto.name,
-                surname: createUserDto.surname,
+                name: dtoUserRegistration.name,
+                surname: dtoUserRegistration.surname,
                 password: hashPassword,
-                email: createUserDto.email,
-                role: createUserDto.role,
-                phoneNumber: createUserDto.phoneNumber
+                email: dtoUserRegistration.email,
+                role: dtoUserRegistration.role,
+                phoneNumber: dtoUserRegistration.phoneNumber
             })
-            //добавить почту
+            //todo добавить почту
 
             const {accessToken, refreshToken} = serviceToken.generateTokens({
                 id: user.dataValues.id,
@@ -41,7 +41,8 @@ class ServiceUser {
 
             return {
                 refreshToken, 
-                user, 
+                //todo добавить mapper для реги
+                user: mapperUserLogin(user), 
                 accessToken
             }
         } catch (error) {
@@ -51,16 +52,16 @@ class ServiceUser {
         }
     }
 
-    async login(loginUserDto: LoginUserDto, next: NextFunction) {
+    async login(dtoUserLogin: DtoUserLogin, next: NextFunction) {
         try {
-            const canditate = await User.findOne({where: {email: loginUserDto.email}})
+            const canditate = await User.findOne({where: {email: dtoUserLogin.email}})
 
             if(!canditate) {
-                return next(ApiError.bedRequest(errorStrings.notFoundUser(loginUserDto.email)))
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserLogin.email)))
             } 
 
-            const hashPassword = await getHashPassword(loginUserDto.password)
-            const isMatchPasswords = await compareHashPassword(loginUserDto.password, hashPassword)
+            const hashPassword = await getHashPassword(dtoUserLogin.password)
+            const isMatchPasswords = await compareHashPassword(dtoUserLogin.password, hashPassword)
 
             if(isMatchPasswords) {
                 const {accessToken, refreshToken} = serviceToken.generateTokens({
@@ -72,7 +73,7 @@ class ServiceUser {
 
                 return {
                     refreshToken,
-                    user: loginUserMapper(canditate),
+                    user: mapperUserLogin(canditate),
                     accessToken
                 }
             } else {
@@ -85,7 +86,7 @@ class ServiceUser {
         }
     }
 
-    async getAllUsers({role, limit, offset}: GetAllUserDto, next: NextFunction) {
+    async getAllUsers({role, limit, offset}: DtoUserGetAll, next: NextFunction) {
 
         try {
             if(role) {

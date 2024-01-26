@@ -1,14 +1,17 @@
 import { NextFunction, Response } from "express"
 import ApiError from '@api-error/index'
-import {RegistrationUserRequest, LoginUserRequest, GetUsersRequest} from '@routers/router-user/types'
+import {ParamsUserGetAll} from '@routers/router-user/types'
 import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
+import { RequestCreation, RequestGetAll } from "@common/types"
+import {UserAttributes} from '@models/user/types'
+
 
 class ControllerUser {
-    async registration(req: RegistrationUserRequest, res: Response, next: NextFunction) {
+    async registration(req: RequestCreation<UserAttributes>, res: Response, next: NextFunction) {
         try {
-            const registrationUserDto = dtoUser.registrationUserDto(req.body)
-            const {refreshToken, user, accessToken} = await serviceUser.registration(registrationUserDto, next)
+            const dtoUserRegistration = dtoUser.registrationUserDto(req.body)
+            const {refreshToken, user, accessToken} = await serviceUser.registration(dtoUserRegistration, next)
 
             // отправка картинки на Яндекс диск
             res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
@@ -20,10 +23,10 @@ class ControllerUser {
             }
         }
     }
-    async login(req: LoginUserRequest, res: Response, next: NextFunction) {
+    async login(req: RequestCreation<UserAttributes>, res: Response, next: NextFunction) {
         try {
-            const loginUserDto = dtoUser.loginUserDto(req.body)
-            const result = await serviceUser.login(loginUserDto, next)
+            const dtoUserLogin = dtoUser.loginUserDto(req.body)
+            const result = await serviceUser.login(dtoUserLogin, next)
 
             if(result) {
                 const {refreshToken, user, accessToken} = result
@@ -38,10 +41,10 @@ class ControllerUser {
         }
     }
 
-    async getAllUsers(req: GetUsersRequest, res: Response, next: NextFunction) {
+    async getAllUsers(req: RequestGetAll<ParamsUserGetAll>, res: Response, next: NextFunction) {
 
-        const getAllUserDto = dtoUser.getAllUsersDto(req)
-        const users = await serviceUser.getAllUsers(getAllUserDto, next)
+        const dtoUserGetAll = dtoUser.getAllUsersDto(req.query)
+        const users = await serviceUser.getAllUsers(dtoUserGetAll, next)
 
         res.send(users)
     }

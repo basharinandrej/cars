@@ -5,9 +5,9 @@ import {UserAttributes} from  "@models/user/types"
 interface DataUser extends Omit<UserAttributes, 'password' | 'createdAt'> {}
 
 
-export const loginUserMapper = (canditate: User) => {
+export const mapperUserLogin = (canditate: User) => {
 
-    const {id, name, surname, email, role, phoneNumber, avatar, balance, addres, banType} = canditate.dataValues
+    const {id, name, surname, email, role, phoneNumber, ban} = canditate.dataValues
 
     const data: DataUser = {
         id,
@@ -16,13 +16,9 @@ export const loginUserMapper = (canditate: User) => {
         email,
         role,
         phoneNumber: Number(phoneNumber),
+        ban
     }
 
-    if(avatar) data.avatar = avatar
-    if(balance) data.balance = balance
-    if(addres) data.addres = addres
-    if(banType) data.banType = banType
-    
 
     return data
 }

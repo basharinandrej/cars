@@ -1,12 +1,13 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import {RegistrationUserDto, LoginUserDto, GetAllUserDto} from './types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from './types'
 import {UserAttributes} from '@models/user/types'
-import { GetUsersRequest} from '@routers/router-user/types'
+import { ParamsUserGetAll} from '@routers/router-user/types'
+import { Bans } from '@common/enums'
 
 
 class Dto {
 
-    registrationUserDto(user: UserAttributes): RegistrationUserDto {
+    registrationUserDto(user: UserAttributes): DtoUserRegistration {
 
         return {
             id: user.id,
@@ -15,15 +16,12 @@ class Dto {
             email: user.email,
             role: user.role,
             phoneNumber: user.phoneNumber,
-            addres: user.addres,
             password: user.password,
-            balance: user.balance,
-            banType: user.banType,
-            avatar: user.avatar,
+            ban: user.ban || Bans.Null,
         }
     }
 
-    loginUserDto(user: UserAttributes): LoginUserDto {
+    loginUserDto(user: UserAttributes): DtoUserLogin {
 
         return {
             email: user.email,
@@ -31,12 +29,12 @@ class Dto {
         }
     }
 
-    getAllUsersDto(req: GetUsersRequest): GetAllUserDto {
+    getAllUsersDto(query: ParamsUserGetAll): DtoUserGetAll {
 
         return {
-            limit: req.query.limit || PAGINATION_DEFAULT_LIMIT,
-            offset: req.query.offset || PAGINATION_DEFAULT_OFFSET,
-            role: req.query.role
+            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            role: query.role
         }
     }
 }

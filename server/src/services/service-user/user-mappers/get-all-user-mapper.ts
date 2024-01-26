@@ -18,10 +18,7 @@ export const getAllUserMapper = (users: Users) => {
                 email: user.dataValues.email,
                 role: user.dataValues.role,
 
-                balance: user.dataValues.balance,
-                addres: user.dataValues.addres,
-                banType: user.dataValues.banType,
-                avatar: user.dataValues.avatar,
+                ban: user.dataValues.ban,
             }
         })
     }
