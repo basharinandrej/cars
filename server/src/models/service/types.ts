@@ -1,5 +1,5 @@
-import { UserAttributes } from "@models/user/types";
-import { ServiceCategoryAttributes } from "@modelsservice/service-category/types";
+import { OrganizationAttributes } from "@models/organization/types";
+import { ServiceCategoryAttributes } from "@models/service/service-category/types";
 import {Optional} from "sequelize/types";
 
 export interface ServiceAttributes {
@@ -9,11 +9,11 @@ export interface ServiceAttributes {
     price: number
 
 
-    userId?: number
+    organizationId?: number
     serviceCategoryId?: number
 
     
-    User?: UserAttributes
+    Organization?: OrganizationAttributes
     ServiceCategory?: ServiceCategoryAttributes
 }
 

@@ -10,7 +10,8 @@ import { ServiceAttributes } from "@models/service/types";
 class ControllerService {
     async createService(req: RequestCreation<ServiceAttributes>, res: Response, next: NextFunction) {
         try {
-            const dtoServiceCreation = dtoService.getDtoServiceCreation(req.body)
+            const authorization = req.get('Authorization')
+            const dtoServiceCreation = dtoService.getDtoServiceCreation(req.body, authorization)
             const service = await serviceService.createService(dtoServiceCreation, next)
 
             res.send(service)

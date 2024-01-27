@@ -14,12 +14,10 @@ export const mapperServiceGetAll = (services: ServicesData) => {
                 name: service.dataValues.name,
                 price: service.dataValues.price,
                 description: service.dataValues.description,
-                userId: service.dataValues.userId,
-                serviceCategoryId: service.dataValues.serviceCategoryId,
-                user: {
-                    id: service.dataValues.User.id,
-                    name: service.dataValues.User.name,
-                    email: service.dataValues.User.email,
+                organization: {
+                    id: service.dataValues.Organization.id,
+                    name: service.dataValues.Organization.name,
+                    email: service.dataValues.Organization.email,
                 },
                 serviceCategory: {
                     id: service.dataValues.ServiceCategory.id,

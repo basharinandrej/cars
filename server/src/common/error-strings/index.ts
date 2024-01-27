@@ -20,7 +20,7 @@ export const errorStrings = {
 
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
 
-    // onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
+    onlyForOrganiztion: () => `Доступно только для организации`,
     // notOrganization: () => `НеДоступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
     unauthorized: () => `Неавторизон`,

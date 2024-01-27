@@ -3,7 +3,7 @@ export interface DtoServiceCreation {
     name: string,
     description: string
     price: number
-    userId: number
+    organizationId: number
     serviceCategoryId: number
 }
 

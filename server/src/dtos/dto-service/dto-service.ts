@@ -2,13 +2,16 @@ import { ServiceAttributes } from "@models/service/types";
 import {DtoServiceCreation, DtoServiceGetAll} from './types'
 import {ParamsGetAllServices} from '@controllerscontroller-service/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
+import {extractAccessToken} from '@common/utils/extract-tokens'
+import {serviceToken} from '@services/service-token'
 
 class DtoService {
-    getDtoServiceCreation(service: ServiceAttributes): DtoServiceCreation {
+    getDtoServiceCreation(service: ServiceAttributes, authorization: string): DtoServiceCreation {
+        const token = extractAccessToken(authorization)
+        const {id: organizationId} = serviceToken.validationToken(token)
 
-        //userId - нужно брать из токена
         return {
-            userId: service.userId,
+            organizationId,
             name: service.name,
             description: service.description,
             price: service.price,

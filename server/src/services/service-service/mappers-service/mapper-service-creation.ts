@@ -7,7 +7,7 @@ export const mapperServiceCreation = (service: Service) => {
         name: service.dataValues.name,
         price: service.dataValues.price,
         description: service.dataValues.description,
-        userId: service.dataValues.userId,
+        organizationId: service.dataValues.organizationId,
         serviceCategoryId: service.dataValues.serviceCategoryId
     }
 }
