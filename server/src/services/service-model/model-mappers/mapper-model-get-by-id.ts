@@ -6,7 +6,6 @@ export const mapperModelGetById = (model: Model) => {
     return {
         id: model.dataValues.id,
         name: model.dataValues.name,
-        brandId: model.dataValues.brandId,
         details: model.dataValues.Details.map((detail) => {
             return {
                 id: detail.id,
@@ -17,6 +16,10 @@ export const mapperModelGetById = (model: Model) => {
                 description: detail.description,
                 price: detail.price,
             }
-        })
+        }),
+        brand: {
+            id: model.dataValues.Brand.id,
+            name: model.dataValues.Brand.name
+        }
     }
 }

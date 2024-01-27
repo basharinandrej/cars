@@ -34,7 +34,7 @@ class ServiceBrand {
                     limit,
                     offset,
                     order: [
-                        [orderBy, sortBy],
+                        [sortBy, orderBy],
                     ]
                 })
                 return mapperBrandGetAll(brands)

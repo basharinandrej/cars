@@ -52,7 +52,7 @@ class ServiceModel {
                     id: dtoModelGetById.id
                     
                 },
-                include: Detail
+                include: [Detail, Brand]
             })
             return mapperModelGetById(model)
         } catch (error) {

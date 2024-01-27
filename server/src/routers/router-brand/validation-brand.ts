@@ -43,7 +43,7 @@ export const validationGetAllBrands = {
                         return Promise.reject(errorStrings.sort.brandSort('name', value));
                     }
                 }),
-            query('sortBy').custom((value: SortOrderBy) => {
+            query('orderBy').custom((value: SortOrderBy) => {
                 if(isOrderByAsc(value) || isOrderByDesc(value)) {
                     return Promise.resolve(true);
                 } else {
