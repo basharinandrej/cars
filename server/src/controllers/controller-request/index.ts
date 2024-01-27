@@ -14,7 +14,7 @@ class ControllerRequest {
             const dtoRequestCreation = dtoRequest.getDtoRequestCreation(req.body)
             const request = await serviceRequest.createRequest(dtoRequestCreation, next)
 
-            emitter.emit('new-request', request)
+            emitter.emit('new-request', request, dtoRequestCreation.recipienId)
             res.send(request)
         } catch (error) {
             if(error instanceof Error) {

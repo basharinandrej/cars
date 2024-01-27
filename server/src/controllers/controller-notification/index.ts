@@ -11,8 +11,12 @@ class ControllerNotification {
             'Cache-Control': 'no-cache'
         })
 
-        emitter.on('new-request', (request) => {
-            res.write(`data: ${JSON.stringify(request)} \n\n`)
+        emitter.on('new-request', (request, recipienId) => {
+            const id = req.query.id
+
+            if(recipienId === id) {
+                res.write(`data: ${JSON.stringify(request)} \n\n`)
+            }
         })
     }
 }
