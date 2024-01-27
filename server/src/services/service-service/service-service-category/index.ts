@@ -3,7 +3,7 @@ import { NextFunction } from 'express'
 import ApiError from '@api-error/index'
 import ServiceCategory from '@models/service/service-category'
 import {mapperServiceCategoryCreation} from './service-category-mapper/mapper-service-category-creation'
-
+import {mapperServiceCategoryGetAll} from './service-category-mapper/mapper-service-category-get-all'
 
 
 class ServiceServiceCategory {
@@ -28,8 +28,7 @@ class ServiceServiceCategory {
                 limit, offset
             })
 
-            // mapper
-            return categories
+            return mapperServiceCategoryGetAll(categories)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
