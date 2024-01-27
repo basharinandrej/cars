@@ -5,5 +5,6 @@ export interface CarAttributes {
     model: string
     color: string
     year: number
+    userId?: number
 }
 

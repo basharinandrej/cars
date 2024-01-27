@@ -10,5 +10,6 @@ export const mapperCarCreation = (car: Car) => {
         model: car.dataValues.model,
         color: car.dataValues.color,
         year: car.dataValues.year,
+        userId: car.dataValues.userId
     }
 }

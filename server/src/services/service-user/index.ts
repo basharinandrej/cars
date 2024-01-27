@@ -8,6 +8,7 @@ import {getHashPassword} from './user-utils/get-hash-password'
 import {compareHashPassword} from './user-utils/compare-hash-password'
 import {mapperUserLogin} from './user-mappers/mapper-user-login'
 import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
+import Car from "@models/car"
 
 
 class ServiceUser {

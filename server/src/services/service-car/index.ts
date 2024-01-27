@@ -5,6 +5,7 @@ import ApiError from "@api-error/index";
 import {mapperCarCreation} from './car-mappers/mapper-car-creation'
 import {mapperCarGetAll} from './car-mappers/mapper-car-get-all'
 import {mapperCarGetByVinCode} from './car-mappers/mapper-car-get-by-vin-code'
+import { errorStrings } from "@common/error-strings";
 
 
 class ServiceCar {
@@ -16,7 +17,8 @@ class ServiceCar {
                 color: dtoCarCreatio.color,
                 year: dtoCarCreatio.year,
                 brand: dtoCarCreatio.brand,
-                model: dtoCarCreatio.model
+                model: dtoCarCreatio.model,
+                userId: dtoCarCreatio.userId
             })
 
             return mapperCarCreation(car)
@@ -33,7 +35,7 @@ class ServiceCar {
 
             return mapperCarGetAll(cars)
         } catch (error) {
-            
+            next(ApiError.internal(error))
         }
     }
 
@@ -42,9 +44,12 @@ class ServiceCar {
             const car = await Car.findOne({
                 where: {vinCode}
             })
+            if(!car) {
+                return next(ApiError.bedRequest(errorStrings.notFoundCar(vinCode)))
+            }
             return mapperCarGetByVinCode(car)
         } catch (error) {
-            
+            next(ApiError.internal(error))
         }
     }
 }

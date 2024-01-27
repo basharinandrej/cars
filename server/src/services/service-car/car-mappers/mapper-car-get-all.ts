@@ -17,6 +17,7 @@ export const mapperCarGetAll = (car:CarData) => {
                 model: car.dataValues.model,
                 year: car.dataValues.year,
                 color: car.dataValues.color,
+                userId: car.dataValues.userId
             }
         })
     }

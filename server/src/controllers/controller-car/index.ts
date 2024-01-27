@@ -4,18 +4,21 @@ import { CarAttributes } from "@models/car/types";
 import {ParamsGetAllCars, ParamsGetOneCar} from './types'
 import dtoCar from "@dtos/dto-car/dto-car";
 import { RequestCreation, RequestGetAll, RequestGetOne } from "@common/types";
+import ApiError from "@api-error/index";
 
 
 class Car {
     async createCar(req: RequestCreation<CarAttributes>, res: Response, next: NextFunction) {
 
         try {
-            const dtoCarCreation = dtoCar.getDtoCarCreation(req.body)
+            const authorization = req.get('Authorization')
+            const dtoCarCreation = dtoCar.getDtoCarCreation(req.body, authorization)
             const car = await serviceCar.createCar(dtoCarCreation, next)
 
             res.send(car)
         } catch (error) {
-            
+            next(ApiError.internal(error))
+
         }
     }
 
@@ -26,7 +29,8 @@ class Car {
 
             res.send(cars)
         } catch (error) {
-            
+            next(ApiError.internal(error))
+
         }
     }
 
@@ -34,9 +38,13 @@ class Car {
         try {
             const dtoCarGetByVinCode = dtoCar.getDtoCarByVinCode(req.query)
             const car = await serviceCar.getByVINCodeCar(dtoCarGetByVinCode, next)
-            res.send(car)
+
+            if(car) {
+                res.send(car)
+            }
         } catch (error) {
-            
+            next(ApiError.internal(error))
+
         }
     }
 }

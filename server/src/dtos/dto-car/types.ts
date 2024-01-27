@@ -6,6 +6,7 @@ export interface DtoCarCreation {
     model: string,
     year: number,
     color: string
+    userId: number
 }
 
 

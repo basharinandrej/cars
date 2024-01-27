@@ -14,6 +14,7 @@ export const errorStrings = {
     notFound: (candidate) => `Не найден ${candidate}`,
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
+    notFoundCar: (vinCode: string) => `Car с таким vinCode - ${vinCode} не найден`,
     errorPassword: () => `Неверный пароль`,
 
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
