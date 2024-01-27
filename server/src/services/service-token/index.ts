@@ -32,7 +32,14 @@ class ServiceToken {
             fingerPrint
         })
     }
-
+    
+    public async saveTokenOrganization(token: string, organizationId: number, fingerPrint: string) {
+        return await Token?.create({
+            refreshToken: token, 
+            organizationId,
+            fingerPrint
+        })
+    }
     // public async dropToken(refreshToken: string) {
     //     return await Token?.destroy(
     //         {where: {refreshToken}

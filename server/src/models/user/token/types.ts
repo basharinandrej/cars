@@ -5,6 +5,7 @@ export interface TokenAttributes {
     refreshToken: string
     fingerPrint: string
     userId?: number
+    organizationId?: number
 }
   
 export interface TokenCreation extends Optional<TokenAttributes, 'id'> {}

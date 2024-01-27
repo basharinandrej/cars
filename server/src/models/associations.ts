@@ -43,6 +43,8 @@ Detail.belongsTo(User, {foreignKey: 'userId'})
 User.hasOne(Token, {foreignKey: 'userId'})
 Token.belongsTo(User, {foreignKey: 'userId'})
 
+Organization.hasOne(Token, {foreignKey: 'organizationId'})
+Token.belongsTo(Organization, {foreignKey: 'organizationId'})
 
 User.hasMany(Car, {foreignKey: 'userId'})
 Car.belongsTo(User, {foreignKey: 'userId'})

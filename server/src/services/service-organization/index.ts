@@ -5,6 +5,7 @@ import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import Organization from "@models/organization"
+import {mapperOrganizationCreation} from './mappers-organization/mapper-organization-creation'
 
 
 class ServiceOrganization {
@@ -33,11 +34,11 @@ class ServiceOrganization {
                 isOrganization: true
             })
 
-            await serviceToken.saveToken(refreshToken, organization.dataValues.id, dtoOrganizationRegistration.fingerPrint)
+            await serviceToken.saveTokenOrganization(refreshToken, organization.dataValues.id, dtoOrganizationRegistration.fingerPrint)
 
             return {
                 refreshToken, 
-                organization, 
+                organization: mapperOrganizationCreation(organization), 
                 accessToken
             }
         } catch (error) {
