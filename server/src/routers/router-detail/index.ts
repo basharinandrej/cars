@@ -19,7 +19,7 @@ routers.get('/search',
     controllerDetail.search
 )
 
-routers.get('getById', 
+routers.get('/getById', 
     validationGetByIdDetail.createChain(),
     middlewareValidation,
     controllerDetail.getByIdDetail

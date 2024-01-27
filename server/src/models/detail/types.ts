@@ -1,5 +1,9 @@
 import { DetailWears } from "@common/enums";
+import Model from "@models/model";
 import {Optional} from "sequelize/types";
+import DetailCategory from "./detail-category";
+import User from "@models/user";
+
 
 export interface DetailAttributes {
     id: number
@@ -10,6 +14,10 @@ export interface DetailAttributes {
     price: number
     wear: DetailWears
 
+    Model?: Model
+    DetailCategory?: DetailCategory
+    User?: User 
+    
     modelId?: number
     userId?: number
     detailCategoryId?: number
