@@ -25,10 +25,11 @@ class ServiceToken {
         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
     }
     
-    public async saveToken(token: string, userId: number) {
+    public async saveToken(token: string, userId: number, fingerPrint: string) {
         return await Token?.create({
             refreshToken: token, 
-            userId
+            userId,
+            fingerPrint
         })
     }
 

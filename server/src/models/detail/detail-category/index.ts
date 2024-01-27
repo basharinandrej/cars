@@ -1,8 +1,8 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import {DetailCategoryAttributes, CreationDetailCategory} from './types'
+import {DetailCategoryAttributes, DetailCategoryCreation} from './types'
 
-class DetailCategory extends Model<DetailCategoryAttributes, CreationDetailCategory> {}
+class DetailCategory extends Model<DetailCategoryAttributes, DetailCategoryCreation> {}
 
 DetailCategory.init({
     id: {

@@ -1,13 +1,13 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
 import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from './types'
-import {UserAttributes} from '@models/user/types'
-import { ParamsUserGetAll} from '@routers/router-user/types'
+import { ParamsUserGetAll} from '@controllers/controller-user/types'
 import { Bans } from '@common/enums'
+import {UserRequestParams} from '@common/interfaces'
 
 
-class Dto {
+class DtoUser {
 
-    registrationUserDto(user: UserAttributes): DtoUserRegistration {
+    registrationUserDto(user: UserRequestParams): DtoUserRegistration {
 
         return {
             id: user.id,
@@ -18,14 +18,16 @@ class Dto {
             phoneNumber: user.phoneNumber,
             password: user.password,
             ban: user.ban || Bans.Null,
+            fingerPrint: user.fingerPrint
         }
     }
 
-    loginUserDto(user: UserAttributes): DtoUserLogin {
+    loginUserDto(user: UserRequestParams): DtoUserLogin {
 
         return {
             email: user.email,
-            password: user.password
+            password: user.password,
+            fingerPrint: user.fingerPrint
         }
     }
 
@@ -39,4 +41,4 @@ class Dto {
     }
 }
 
-export default new Dto()
+export default new DtoUser()

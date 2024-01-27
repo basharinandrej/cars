@@ -56,7 +56,10 @@ export const validationUser = {
 
             body('phoneNumber')
                 .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
-                .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim()
+                .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim(),
+
+            body('fingerPrint')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('fingerPrint')).trim(),
         ]
     }
 }

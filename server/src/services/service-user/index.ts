@@ -27,7 +27,8 @@ class ServiceUser {
                 password: hashPassword,
                 email: dtoUserRegistration.email,
                 role: dtoUserRegistration.role,
-                phoneNumber: dtoUserRegistration.phoneNumber
+                phoneNumber: dtoUserRegistration.phoneNumber,
+                ban: dtoUserRegistration.ban
             })
             //todo добавить почту
 
@@ -37,7 +38,7 @@ class ServiceUser {
                 role: user.dataValues.role
             })
 
-            await serviceToken.saveToken(refreshToken, user.dataValues.id)
+            await serviceToken.saveToken(refreshToken, user.dataValues.id, dtoUserRegistration.fingerPrint)
 
             return {
                 refreshToken, 
@@ -69,7 +70,7 @@ class ServiceUser {
                     name: canditate.dataValues.name,
                     role: canditate.dataValues.role
                 })
-                await serviceToken.saveToken(refreshToken, canditate.dataValues.id)
+                await serviceToken.saveToken(refreshToken, canditate.dataValues.id, dtoUserLogin.fingerPrint)
 
                 return {
                     refreshToken,

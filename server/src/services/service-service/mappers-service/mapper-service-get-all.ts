@@ -20,7 +20,6 @@ export const mapperServiceGetAll = (services: ServicesData) => {
                     id: service.dataValues.User.id,
                     name: service.dataValues.User.name,
                     email: service.dataValues.User.email,
-                    addres: service.dataValues.User.addres
                 },
                 serviceCategory: {
                     id: service.dataValues.ServiceCategory.id,

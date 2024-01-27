@@ -1,14 +1,14 @@
 import { NextFunction, Response } from "express"
 import ApiError from '@api-error/index'
-import {ParamsUserGetAll} from '@routers/router-user/types'
+import {ParamsUserGetAll} from '@controllers/controller-user/types'
 import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
 import { RequestCreation, RequestGetAll } from "@common/types"
-import {UserAttributes} from '@models/user/types'
+import {UserRequestParams} from '@common/interfaces'
 
 
 class ControllerUser {
-    async registration(req: RequestCreation<UserAttributes>, res: Response, next: NextFunction) {
+    async registration(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {
         try {
             const dtoUserRegistration = dtoUser.registrationUserDto(req.body)
             const {refreshToken, user, accessToken} = await serviceUser.registration(dtoUserRegistration, next)
@@ -23,7 +23,7 @@ class ControllerUser {
             }
         }
     }
-    async login(req: RequestCreation<UserAttributes>, res: Response, next: NextFunction) {
+    async login(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {
         try {
             const dtoUserLogin = dtoUser.loginUserDto(req.body)
             const result = await serviceUser.login(dtoUserLogin, next)
