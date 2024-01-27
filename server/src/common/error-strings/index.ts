@@ -19,14 +19,15 @@ export const errorStrings = {
     errorPassword: () => `Неверный пароль`,
 
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
-    // onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
+    // onlyForOrganiztion: () => `Доступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
     // notOrganization: () => `НеДоступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
     uncorrectEmail: () => `Некорректный email`,
     uncorrectRole: () => `Некорректная роль у пользователя`,
+    uncorrectAddress: (key: string) => `Некорректный адрес ${key}`,
     checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,
 
 

@@ -7,7 +7,7 @@ import { Bans } from '@common/enums'
 class DtoOrganization {
     getDtoOrganizationRegistration(organization: OrganizationRequestParams): DtoOrganizationRegistration {
         return {
-            name: organization.name,
+            name: organization.name.toLocaleLowerCase(),
             email: organization.email,
             phoneNumber: organization.phoneNumber,
             password: organization.password,

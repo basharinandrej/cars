@@ -12,10 +12,12 @@ class ControllerOrganization {
     async registrationOrganization(req: RequestCreation<OrganizationRequestParams>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body)
-            const organization = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
+            const {refreshToken, organization, accessToken} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
 
+            // отправка картинки на Яндекс диск
+            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
             if(organization) {
-                res.send(organization)
+                res.send({organization, accessToken})
             }
         } catch (error) {
             if(error instanceof Error) {

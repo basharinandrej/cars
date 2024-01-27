@@ -6,7 +6,7 @@ import {validationOrganization} from './validation-organization'
 const routers = Router()
 
 
-routers.post('',
+routers.post('/registration',
     validationOrganization.registrationChain(),
     middlewareValidation,
     controllerOrganization.registrationOrganization
@@ -21,4 +21,4 @@ routers.get('/getById',
     controllerOrganization.getByIdOrganization
 )
 
-export const routerModel = routers
+export const routerOrganization = routers

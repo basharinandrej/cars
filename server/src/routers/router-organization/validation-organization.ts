@@ -5,6 +5,8 @@ import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import {errorStrings} from '@common/error-strings'
 import { isAdministrator } from '@common/guards';
+import {AddressAttributes} from '@models/address/types'
+
 
 export const validationOrganization = {
     getAllOrganizationChain() {
@@ -46,9 +48,23 @@ export const validationOrganization = {
             body('fingerPrint')
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('fingerPrint')).trim(),
 
-            body('address').custom((value: any) => {
+            body('address').custom((address: Omit<AddressAttributes, 'id'>) => {
                 try {
-                    console.log('>>> address', value)
+                    const totalKeysAddress = Object.entries(address)
+                        .map(([key, value]) => {
+                            if(!value) {
+                                return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress(`нет поля ${key}`)));
+                            }else{
+                                return Promise.resolve(true);
+                            }
+                        })
+                        .length
+
+                    if(totalKeysAddress < 3) {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress('нет - улицы, дома, города')));
+                    }else{
+                        return Promise.resolve(true);
+                    }
                 } catch (error) {
                 }
             })
