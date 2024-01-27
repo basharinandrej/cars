@@ -1,3 +1,6 @@
+import Service from "@models/service"
+import Organization from "@models/organization"
+import User from "@models/user"
 import { Optional } from "sequelize"
 
 export const enum StatusRequest {
@@ -14,6 +17,10 @@ export interface RequestAttributes {
     recipientId: number
     description: string
     serviceId?: number
+
+    Service?: Service
+    Organization?: Organization
+    User?: User
 }
 
 export interface CreationRequest extends Optional<RequestAttributes, 'id'> {}

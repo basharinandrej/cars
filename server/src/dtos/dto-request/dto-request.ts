@@ -1,8 +1,7 @@
-import { RequestAttributes } from '@models/request/types';
-import {ParamsRequestGetAll} from '@controllerscontroller-request/types'
-import {DtoRequestCreation, DtoRequestsGetAll} from './types'
+import { RequestAttributes, StatusRequest } from '@models/request/types';
+import {ParamsRequestGetAll, ParamsRequestGetById} from '@controllerscontroller-request/types'
+import {DtoRequestCreation, DtoRequestsGetAll, DtoRequestGetOne} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
-
 
 class DtoRequest {
     getDtoRequestCreation(request: RequestAttributes): DtoRequestCreation {
@@ -10,7 +9,8 @@ class DtoRequest {
             description: request.description,
             recipienId: request.recipientId,
             serviceId: request.serviceId,
-            senderId: request.senderId
+            senderId: request.senderId,
+            status: StatusRequest.IN_VIEWING
         }
     }
 
@@ -18,6 +18,12 @@ class DtoRequest {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET
+        }
+    }
+
+    getDtoRequestGetOne(query: ParamsRequestGetById): DtoRequestGetOne {
+        return {
+            id: query.id
         }
     }
 }

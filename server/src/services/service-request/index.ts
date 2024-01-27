@@ -1,8 +1,12 @@
 import {NextFunction} from 'express'
-import {DtoRequestCreation, DtoRequestsGetAll} from '@dtos/dto-request/types'
+import {DtoRequestCreation, DtoRequestsGetAll, DtoRequestGetOne} from '@dtos/dto-request/types'
 import Request from '@models/request'
 import ApiError from '@api-error/index'
 import User from '@models/user'
+import Service from '@models/service'
+import Organization from '@models/organization'
+import {mapperRequestGetById} from './mappers-request/mapper-request-get-by-id'
+
 
 
 class ServiceRequest {
@@ -13,7 +17,8 @@ class ServiceRequest {
                 description: dtoRequestCreation.description,
                 senderId: dtoRequestCreation.senderId,
                 recipientId: dtoRequestCreation.recipienId,
-                serviceId: dtoRequestCreation.serviceId
+                serviceId: dtoRequestCreation.serviceId,
+                status: dtoRequestCreation.status
             })
 
             return request
@@ -51,8 +56,20 @@ class ServiceRequest {
 
     }
 
-    async getByIdRequest() {
+    async getByIdRequest(dtoRequestGetOne: DtoRequestGetOne, next: NextFunction) {
 
+        try {
+            const request = await Request.findOne({
+                where: {id: dtoRequestGetOne.id},
+                include: [Service, Organization, User]
+            })
+
+            return mapperRequestGetById(request)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
     }
 }
 

@@ -38,7 +38,10 @@ class ControllerRequest {
 
     async getByIdRequest(req: RequestGetOne<ParamsRequestGetById>, res: Response, next: NextFunction) {
         try {
-            
+            const dtoRequestGetOne = dtoRequest.getDtoRequestGetOne(req.query)
+            const request = await serviceRequest.getByIdRequest(dtoRequestGetOne, next)
+
+            res.send(request)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

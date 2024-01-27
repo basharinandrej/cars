@@ -1,3 +1,5 @@
+import { Pagination } from '@common/types';
+import { StatusRequest } from '@models/request/types';
 
 
 export interface DtoRequestCreation {
@@ -5,9 +7,10 @@ export interface DtoRequestCreation {
     senderId: number
     recipienId: number
     serviceId: number
+    status: StatusRequest
 }
 
-export interface DtoRequestsGetAll {
-    limit: number
-    offset: number
+export interface DtoRequestsGetAll extends Pagination {}
+export interface DtoRequestGetOne {
+    id: number
 }

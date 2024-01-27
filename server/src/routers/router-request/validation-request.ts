@@ -23,7 +23,7 @@ export const validationCreateRequest = {
                     if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
                         return Promise.resolve(true);
                     } else {
-                        // return Promise.reject(ApiError.bedRequest(errorStrings.notOrganization()));
+                        return Promise.reject(new Error('ошибка создания заявки'));
                     }
 
                 } catch (error) {
