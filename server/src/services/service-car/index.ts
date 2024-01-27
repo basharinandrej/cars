@@ -1,6 +1,7 @@
 import { NextFunction } from "express";
 import { DtoCarCreation, DtoCarGetAll, DtoCarGetByVinCode } from "@dtos/dto-car/types";
 import Car from "@models/car";
+import User from "@models/user";
 import ApiError from "@api-error/index";
 import {mapperCarCreation} from './car-mappers/mapper-car-creation'
 import {mapperCarGetAll} from './car-mappers/mapper-car-get-all'
@@ -42,7 +43,8 @@ class ServiceCar {
     async getByVINCodeCar({vinCode}: DtoCarGetByVinCode,  next: NextFunction) {
         try {
             const car = await Car.findOne({
-                where: {vinCode}
+                where: {vinCode},
+                include: User
             })
             if(!car) {
                 return next(ApiError.bedRequest(errorStrings.notFoundCar(vinCode)))

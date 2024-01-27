@@ -1,3 +1,4 @@
+import User from "@models/user"
 
 export interface CarAttributes {
     vinCode: string
@@ -6,5 +7,7 @@ export interface CarAttributes {
     color: string
     year: number
     userId?: number
+
+    User?: User
 }
 
