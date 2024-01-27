@@ -10,6 +10,7 @@ export interface DtoDetailCreation {
     price: number
     modelId: number
     detailCategoryId: number
+    userId: number
 }
 
 export interface DtoDetailGetAll extends Pagination{

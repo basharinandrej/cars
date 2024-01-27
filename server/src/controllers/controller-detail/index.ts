@@ -10,10 +10,13 @@ import {DetailAttributes} from '@models/detail/types'
 class ControllerDetail {
     async createDetail(req: RequestCreation<DetailAttributes>, res: Response, next: NextFunction) {
         try {
-            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body)
+            const authorization = req.get('Authorization')
+            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, authorization)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 
-            res.send(detail)
+            if(detail) {
+                res.send(detail)
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

@@ -10,12 +10,24 @@ import Model from '@models/model'
 import Address from '@models/address'
 import User from '@models/user'
 import DetailCategory from '@models/detail/detail-category'
+import { errorStrings } from '@common/error-strings'
 
 
 class ServiceDetail {
     async createDetail(dtoDetailCreation: DtoDetailCreation, next: NextFunction) {
 
        try {
+            const candidates = {
+                'modelId': await Model.findOne({where: {id: dtoDetailCreation.modelId}}),
+                'detailCategoryId':  await DetailCategory.findOne({where: {id: dtoDetailCreation.detailCategoryId}}),
+                'userId':await User.findOne({where: {id: dtoDetailCreation.userId}})
+            }
+
+            Object.entries(candidates).forEach(([key, value]) => {
+                if(!value) return next(ApiError.bedRequest(errorStrings.notFound(key)))
+            })
+
+
             const detail = await Detail.create({
                 name: dtoDetailCreation.name.toLocaleLowerCase(),
                 vendorCode: dtoDetailCreation.vendorCode,
@@ -23,8 +35,10 @@ class ServiceDetail {
                 year: dtoDetailCreation.year,
                 description: dtoDetailCreation.description,
                 price: dtoDetailCreation.price,
+
                 modelId: dtoDetailCreation.modelId,
                 detailCategoryId: dtoDetailCreation.detailCategoryId,
+                userId: dtoDetailCreation.userId
             })
         
             return mapperDetailCreation(detail)

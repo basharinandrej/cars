@@ -5,9 +5,13 @@ import {
     PAGINATION_DEFAULT_LIMIT,
     PAGINATION_DEFAULT_OFFSET
 } from '@common/constans/index'
+import {extractAccessToken} from '@common/utils/extract-tokens'
+import {serviceToken} from '@services/service-token'
 
 class DtoDetail {
-    getDtoDetailCreation(detail: DetailAttributes): DtoDetailCreation {
+    getDtoDetailCreation(detail: DetailAttributes, authorization: string): DtoDetailCreation {
+        const token = extractAccessToken(authorization)
+        const {id: userId} = serviceToken.validationToken(token)
 
         return {
             name: detail.name,
@@ -18,6 +22,7 @@ class DtoDetail {
             price: detail.price,
             modelId: detail.modelId,
             detailCategoryId: detail.detailCategoryId,
+            userId
         }
     }
 
