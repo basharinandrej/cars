@@ -34,20 +34,11 @@ class ServiceRequest {
 
         try {
             const requests = await Request.findAndCountAll({
-                limit, offset, include: [User]
+                limit, offset, include: [Service, Organization, User]
             })
 
-            const oneRequest = requests.rows[0]
-
-            const sender = await User.findOne({
-                where: {id: oneRequest.dataValues.senderId}
-            })
-
-            const recipient = await User.findOne({
-                where: {id: oneRequest.dataValues.recipientId}
-            })
-
-            return {oneRequest, sender, recipient}
+        
+            return requests
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

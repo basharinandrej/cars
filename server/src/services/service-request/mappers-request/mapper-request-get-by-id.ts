@@ -26,8 +26,8 @@ export const mapperRequestGetById = (request: Request) => {
             name: request.dataValues.User.dataValues.name,
             email: request.dataValues.User.dataValues.email,
             ban: request.dataValues.User.dataValues.ban,
-            phoneNumber: request.dataValues.User.dataValues.id,
-            role: request.dataValues.User.dataValues.id,
+            phoneNumber: request.dataValues.User.dataValues.phoneNumber,
+            role: request.dataValues.User.dataValues.role,
         }
     }
 }
