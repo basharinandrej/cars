@@ -10,7 +10,8 @@ export const errorStrings = {
     
     userAlreadyExist: (email: string) => `Пользователь с таким email - ${email} уже существует`,
     categoryAlreadyExist: (value: string) => `Категория - ${value} уже есть. Категория должна быть уникальной`,
-    
+    organizationAlreadyExist: (email: string) => `Организация с таким email - ${email} уже существует`,
+
     notFound: (candidate) => `Не найден ${candidate}`,
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,

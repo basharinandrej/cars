@@ -4,11 +4,10 @@ import User from '@models/user'
 import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
-import {getHashPassword} from './user-utils/get-hash-password'
-import {compareHashPassword} from './user-utils/compare-hash-password'
+import {getHashPassword} from '@common/utils/get-hash-password'
+import {compareHashPassword} from '@common/utils/compare-hash-password'
 import {mapperUserLogin} from './user-mappers/mapper-user-login'
 import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
-import Car from "@models/car"
 
 
 class ServiceUser {

@@ -1,6 +1,7 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import {OrganizationAttributes, OrganizationCreation} from './types'
+import { Bans } from '@common/enums'
 
 class Organization extends ModelSequelize<OrganizationAttributes, OrganizationCreation> {}
 
@@ -30,6 +31,10 @@ Organization.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    ban: {
+      type: DataTypes.ENUM(Bans.Constant, Bans.Null, Bans.Temporary, Bans.Warning),
+      allowNull: false
     }
 }, { 
   sequelize, 

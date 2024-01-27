@@ -6,7 +6,8 @@ export type EmptyString = ''
 export interface PayloadToken {
     id: number,
     name: string,
-    role: UserRoles
+    role?: UserRoles
+    isOrganization?: boolean
 }
 
 export interface RequestCreation<T> extends Request<Record<string, unknown>, EmptyString, T> {}

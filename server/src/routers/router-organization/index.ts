@@ -1,18 +1,23 @@
 import {Router} from 'express'
 import controllerOrganization from '@controllers/controller-organization'
+import middlewareValidation from '../middlewares/middleware-validation'
+import {validationOrganization} from './validation-organization'
 
 const routers = Router()
 
 
 routers.post('',
-    controllerOrganization.createOrganization
+    validationOrganization.registrationChain(),
+    middlewareValidation,
+    controllerOrganization.registrationOrganization
 )
 
 routers.get('',
+    middlewareValidation,
     controllerOrganization.getAllOrganization
 )
 
-routers.get('',
+routers.get('/getById',
     controllerOrganization.getByIdOrganization
 )
 
