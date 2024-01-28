@@ -1,0 +1,37 @@
+.button
+    padding: 6px 16px
+    border-radius: 4px
+    border: none
+    font-size: 19px
+    font-family: 'Aria', sans-serif
+    cursor: pointer
+    letter-spacing: 1px
+
+    &.primary
+        color: var(--color-primary-text-100)
+        background: var(--color-primary-background-500)
+        
+        &:hover
+            background: var(--color-primary-background-600)
+            transition: .3s
+
+        &:disabled
+            color: var(--color-gray-text-400)
+            background: var(--color-gray-background-300)
+            border: 1px solid var(--color-primary-border-100)
+            cursor: auto
+
+    &.secondary
+        color: var(--color-primary-text-600)
+        background: var(--color-primary-background-200)
+        border: 1px solid var(--color-primary-border-200)
+        
+        &:hover
+            border: 1px solid var(--color-primary-border-700)
+            transition: .3s
+        
+        &:disabled
+            color: var(--color-gray-text-400)
+            background: var(--color-gray-background-300)
+            border: 1px solid var(--color-primary-border-100)
+            cursor: auto
