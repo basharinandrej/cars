@@ -7,10 +7,10 @@ import {getClassNameTypeLoader} from './utils/get-class-name-type-loader/get-cla
 import styles from './loader.module.sass'
 
 export const Loader: FC<Props> = ({
-    size, type
+    size, type, className
 }) => {
     return <div className={classNames(
-        styles.loader,
+        styles.loader,className,
         getClassNameSizeLoader(size),
         getClassNameTypeLoader(type),
     )}>
@@ -21,6 +21,7 @@ export const Loader: FC<Props> = ({
     </div>
 }
 interface Props {
+    className: string
     size: LoaderSize
     type: LoaderType
 }
