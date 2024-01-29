@@ -3,6 +3,7 @@ import Card from '../card'
 import {StateTag} from '../../tag/enums/enums'
 import {controls} from './controls'
 import { TypeCard } from '../enums/enums';
+import {getMapWithTextTagForWearDetail, getMapWithTextTagForStatusWork} from './get-map-with-tag-text'
 
 const meta: Meta<typeof Card> = {
     title: 'Shared/Card',
@@ -13,10 +14,19 @@ const meta: Meta<typeof Card> = {
 type Story = StoryObj<typeof Card>;
 
 
-export const Primary: Story = {
+export const Grid: Story = {
     args: {
-        stateTag: StateTag.Danger,
-        typeCard: TypeCard.Grid
+        typeCard: TypeCard.Grid,
+        buttonText: 'Подробнее',
+        mapWithTagText: getMapWithTextTagForWearDetail()
+    }
+};
+
+export const Row: Story = {
+    args: {
+        typeCard: TypeCard.Row,
+        buttonText: 'Записаться',
+        mapWithTagText: getMapWithTextTagForStatusWork()
     }
 };
 

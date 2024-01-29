@@ -1,9 +1,8 @@
-import {StateTag} from '../../tag/enums/enums'
-import { TypeCard } from '../enums/enums'
+import { TypeCard, StateCard } from '../enums/enums'
 
 export const controls = {
-    stateTag: {
-        options: [StateTag.Danger, StateTag.Primary, StateTag.Success, StateTag.Warning],
+    stateCard: {
+        options: [StateCard.Danger, StateCard.Primary, StateCard.Success, StateCard.Warning],
         control: {type: 'select'}
     },
     typeCard: {
