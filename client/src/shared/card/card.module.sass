@@ -2,17 +2,25 @@
 .card
     border-radius: 8px
     border: 1px solid var(--color-gray-border-100)
-    width: 370px
     background: var(--color-primary-background-110)
+    display: flex
 
+    &.grid
+        width: 370px
+        flex-direction: column
+        .header
+            height: 200px
+
+    &.row
+        flex-direction: row
+        .header
+            width: 240px
 
 .header
     border: 1px solid var(--color-gray-border-100)
     background: var(--color-gray-background-100)
     position: relative
     
-    height: 200px
-
     border-radius: 8px
     padding: 12px
     margin: -1px

@@ -5,15 +5,19 @@ import Tag from '../tag/tag'
 import { SizeTag } from '../tag/enums/enums'
 import {StateTagWear} from './types/types'
 import {mapTextTag} from './utils/get-map-text-tag'
+import {TypeCard} from './enums/enums'
+import {getClassNameTypeCard} from './utils/get-class-name-type-card'
+import classNames from 'classnames'
 
 import styles from './card.module.sass'
 
 
 const Card: FC<Props> = ({
-    stateTag
+    stateTag,
+    typeCard
 }) => {
 
-    return <div className={styles.card}>
+    return <div className={classNames(styles.card, getClassNameTypeCard(typeCard))}>
         <div className={styles.header}>
             <img className={styles.img} src="https://www.autoopt.ru/upload/iblock/881/podveska.jpg" alt="detail" />
             <Tag 
@@ -41,6 +45,7 @@ const Card: FC<Props> = ({
 
 interface Props {
     stateTag: StateTagWear
+    typeCard: TypeCard
 }
 
 export default Card
