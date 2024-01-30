@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Card from '../card'
-import {StateTag} from '../../tag/enums/enums'
 import {controls} from './controls'
 import { StateCard, TypeCard } from '../enums/enums';
 import {getMapWithTextTagForWearDetail, getMapWithTextTagForStatusWork} from './get-map-with-tag-text'

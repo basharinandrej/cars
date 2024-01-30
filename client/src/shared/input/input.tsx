@@ -1,21 +1,21 @@
 import {ChangeEventHandler, HTMLInputTypeAttribute, InputHTMLAttributes, useEffect, useState, FC} from 'react'
+import classNames from 'classnames'
 
 import cls from './input.module.sass'
-import classNames from 'classnames'
 
 export const Input: FC<InputProps> = ({
     externalValue = '',
-    placeholder,
+    placeholder = 'Введи название пипелаца',
     externalErr,
     onChange,
     className,
     type = 'text',
 }) => {
     const [value, setValue] = useState(externalValue)
-    const [errors, setErrors] = useState([])
+    const [error, setError] = useState<string>()
 
     useEffect(() => setValue(externalValue), [externalValue])
-    // useEffect(() => setErrors(externalErr), [externalErr])
+    useEffect(() => setError(externalErr), [externalErr])
 
     const isShowPlaceholder = (!value && placeholder)
 
@@ -26,7 +26,7 @@ export const Input: FC<InputProps> = ({
     }
 
     const mods: Record<string, boolean> = {
-        [cls.errInput]: !!errors?.length,
+        [cls.errInput]: !!error,
     }
 
     return <div className={classNames(cls.inputBox, mods, className)}>
@@ -34,9 +34,7 @@ export const Input: FC<InputProps> = ({
 
         <input className={cls.input} type={type} value={value} onChange={handleChange} />
 
-        {Array.isArray(errors) && errors.map((err, idx) => {
-            return <span key={idx} className={cls.errNotice}>{err}</span>
-        })}
+        {error && <span className={cls.errNotice}>{error}</span>}
     </div>
 }
 
@@ -46,7 +44,7 @@ type HTMLInput = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value
 interface InputProps extends HTMLInput {
     onChange: (value: string) => void
     className?: string
-    externalErr?: Array<string>
+    externalErr?: string
     externalValue?: string | number
     placeholder?: string
     type?: HTMLInputTypeAttribute
