@@ -1,0 +1,36 @@
+
+.inputBox
+    display: flex
+    flex-direction: column
+    position: relative
+
+
+.placeholder
+    pointer-events: none
+    color: var(--color-primitive-200)
+    line-height: 100%
+
+    position: absolute
+    top: 0
+    left: 16px
+    transform: translateY(50%)
+
+
+.input 
+    padding: 8px 16px
+    border-radius: 4px
+    
+    border: 1px solid var(--color-main-border)
+
+.errInput .input
+    color: var(--color-danger)
+    border: 1px solid var(--color-danger)
+
+.errNotice
+    color: var(--color-danger)
+    padding-bottom: 4px
+
+.ghostInput .input
+    background: transparent
+    color: var(--color-primitive-100)
+    border: 1px solid var(--color-primitive-100)

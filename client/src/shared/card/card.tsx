@@ -58,9 +58,12 @@ const Card: FC<Props> = ({
 
 
             <div className={styles.wrapper}>
-                <strong className={styles.price}>100 p</strong>
-
                 <Button type={TypeButton.Secondary} text={buttonText} />
+
+                <strong className={styles.price}>
+                    100 p
+                </strong>
+
             </div>
         </div>
     </div>
