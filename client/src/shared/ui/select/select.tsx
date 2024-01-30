@@ -18,7 +18,7 @@ const Select = function<T extends string>(props: SelectProps<T>) {
         onChange={onChangeHandler}
         className={classNames(styles.select, className)}
       >
-        <option value="" disabled selected hidden>Категория</option>
+        <option value="" disabled selected hidden><p>Категория</p></option>
         {options.map((option, idx) => <option key={idx} value={option.value}>{option.text}</option>)}
       </select>
   )
