@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import {instanceSequelize} from './db'
 import './models/associations'
 import middlewareError from './middlewares/middleware-error'
-
+import cors from 'cors'
 import routers from './routers'
 
 dotenv.config();
@@ -21,6 +21,8 @@ app.listen(PORT, async () => {
   }
 })
 
+
+app.use(cors())
 app.use(express.json())
 app.use('/api', routers)
 
