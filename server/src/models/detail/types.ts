@@ -22,6 +22,7 @@ export interface DetailAttributes {
     userId?: number
     detailCategoryId?: number
     addressId?: number
+    createdAt?: string
 }
 
 

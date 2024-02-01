@@ -18,7 +18,7 @@ class DtoDetail {
             vendorCode: detail.vendorCode,
             wear: detail.wear,
             year: detail.year,
-            description: detail.name,
+            description: detail.description,
             price: detail.price,
             modelId: detail.modelId,
             detailCategoryId: detail.detailCategoryId,
