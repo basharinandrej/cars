@@ -5,13 +5,24 @@ import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
 import ApiError from '@api-error/index'
 import dtoDetail from '@dtos/dto-detail/dto-detail'
 import {DetailAttributes} from '@models/detail/types'
+import uuid from 'uuid'
+import path from 'path'
 
 
 class ControllerDetail {
     async createDetail(req: RequestCreation<DetailAttributes>, res: Response, next: NextFunction) {
         try {
+            const {img} = req.files
+            const fileName = 'uuid.v4()' + '.jpg'
+            console.log('>>> fileName', fileName)
+            console.log('>>> img', img)
+            console.log('>>>> ', path.resolve(__dirname, '../../..', 'src/static', fileName))
+            if(!Array.isArray(img)) {
+                img.mv(path.resolve(__dirname, '../..', 'static', fileName))
+            }
+
             const authorization = req.get('Authorization')
-            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, authorization)
+            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, fileName, authorization)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 
             if(detail) {

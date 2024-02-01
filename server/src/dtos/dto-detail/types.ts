@@ -11,6 +11,7 @@ export interface DtoDetailCreation {
     modelId: number
     detailCategoryId: number
     userId: number
+    photo: string
 }
 
 export interface DtoDetailGetAll extends Pagination{

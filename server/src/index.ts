@@ -3,9 +3,11 @@ import express, {Express} from 'express'
 import dotenv from 'dotenv';
 import {instanceSequelize} from './db'
 import './models/associations'
+import fileUpload from 'express-fileupload'
 import middlewareError from './middlewares/middleware-error'
 import cors from 'cors'
 import routers from './routers'
+import path from 'path'
 
 dotenv.config();
 
@@ -21,9 +23,11 @@ app.listen(PORT, async () => {
   }
 })
 
-
+console.log("<<<<<<<<<<<<<<<", path.resolve(__dirname, 'static'))
 app.use(cors())
 app.use(express.json())
+app.use(express.static( path.resolve(__dirname, 'static')))
+app.use(fileUpload({}))
 app.use('/api', routers)
 
 // last middleware

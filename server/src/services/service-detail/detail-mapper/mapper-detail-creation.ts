@@ -9,6 +9,7 @@ export const mapperDetailCreation = (detail: Deteail) => {
         year: detail.dataValues.year,
         description: detail.dataValues.description,
         price: detail.dataValues.price,
-        userId: detail.dataValues.userId
+        userId: detail.dataValues.userId,
+        photo: detail.dataValues.photo
     }
 }

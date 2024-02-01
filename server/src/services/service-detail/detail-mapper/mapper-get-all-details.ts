@@ -18,6 +18,7 @@ export const mapperGetAllDetails = (details: DetailsData) => {
                 description: detail.dataValues.description,
                 price: detail.dataValues.price,
                 createdAt: detail.dataValues.createdAt,
+                photo: detail.dataValues.photo,
 
 
                 modelId: detail.dataValues.modelId,

@@ -13,6 +13,7 @@ export interface DetailAttributes {
     description: string
     price: number
     wear: DetailWears
+    photo: string
 
     Model?: Model
     DetailCategory?: DetailCategory

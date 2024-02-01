@@ -9,7 +9,7 @@ import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 
 class DtoDetail {
-    getDtoDetailCreation(detail: DetailAttributes, authorization: string): DtoDetailCreation {
+    getDtoDetailCreation(detail: DetailAttributes, fileName: string, authorization: string): DtoDetailCreation {
         const token = extractAccessToken(authorization)
         const {id: userId} = serviceToken.validationToken(token)
 
@@ -22,7 +22,8 @@ class DtoDetail {
             price: detail.price,
             modelId: detail.modelId,
             detailCategoryId: detail.detailCategoryId,
-            userId
+            userId,
+            photo: fileName
         }
     }
 

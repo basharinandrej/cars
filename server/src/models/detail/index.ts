@@ -34,6 +34,10 @@ Detail.init({
     wear: {
         type: DataTypes.ENUM(DetailWears.CanBeUsed, DetailWears.NeedFix, DetailWears.New),
         allowNull: false
+    },
+    photo: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, { 
     sequelize,

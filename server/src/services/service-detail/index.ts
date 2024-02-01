@@ -28,6 +28,7 @@ class ServiceDetail {
             })
 
 
+            console.log('>>>> dtoDetailCreation', dtoDetailCreation)
             const detail = await Detail.create({
                 name: dtoDetailCreation.name.toLocaleLowerCase(),
                 vendorCode: dtoDetailCreation.vendorCode,
@@ -38,7 +39,8 @@ class ServiceDetail {
 
                 modelId: dtoDetailCreation.modelId,
                 detailCategoryId: dtoDetailCreation.detailCategoryId,
-                userId: dtoDetailCreation.userId
+                userId: dtoDetailCreation.userId,
+                photo: dtoDetailCreation.photo
             })
         
             return mapperDetailCreation(detail)
