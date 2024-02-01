@@ -1,12 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.sass'
+import Container from './shared/ui/container/container';
+import {ListingDetails} from './features/index'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <React.StrictMode>
-    <h1>Hello world</h1>
-  </React.StrictMode>
+  <Container>
+    <ListingDetails />
+  </Container>
 );
