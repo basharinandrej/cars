@@ -4,15 +4,22 @@ import {ListingDetailsResponse} from '../../interfaces/interfaces'
 import {fetchListingDetails} from '../async-actions/fetch-listing-details'
 
 
-
 export interface ListingDetailsSchema extends ListingDetailsResponse {
   isLoading: boolean
+  limit: number
+  offset: number
+  catagoryId: number | null
+  modelId: number | null
 }
 
 const initialState: ListingDetailsSchema = {
   items: null,
   total: 0,
-  isLoading: false
+  isLoading: false,
+  limit: 3,
+  offset: 0,
+  catagoryId: null,
+  modelId: null
 }
 
 export const counterSlice = createSlice({

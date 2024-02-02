@@ -1,20 +1,37 @@
-import axios from 'axios'
+import {instanceAxios} from '../../../../shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ListingDetailsSchema} from '../slice/listing-details-slice'
+import {ThunkApiConfig} from '../../../../app/providers'
+import {
+    getLimitListingDetails,
+    getOffsetListingDetails, 
+    getCategoryIdListingDetails, 
+    getModelIdListingDetails
+} from '../selectors'
+import {ParamsFetchListingDetails} from '../interfaces'
 
-const instanceAxios = axios.create({
-    baseURL: process.env.CLIENT_APP_BASE_URL,
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-    }
-});
 
-export const fetchListingDetails = createAsyncThunk<ListingDetailsSchema, void, any>(
+export const fetchListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
     'listing-details/fetchDetails',
-    async () => {
-        
+    async (_, thunkAPI) => {
+        const {getState} = thunkAPI
+        const state = getState()
+
+        const limit = getLimitListingDetails(state)
+        const offset = getOffsetListingDetails(state)
+        const categoryId = getCategoryIdListingDetails(state)
+        const modelId = getModelIdListingDetails(state)
+
+        const params: ParamsFetchListingDetails = {
+            limit, offset
+        }
+        if(categoryId) params.categoryId = categoryId
+        if(modelId) params.modelId = modelId
+
         try {
-            const response = await instanceAxios.get('/api/detail')
+            const response = await instanceAxios.get('/api/detail', {
+                params
+            })
 
             return response.data
         } catch (error) {
