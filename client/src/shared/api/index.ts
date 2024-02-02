@@ -5,4 +5,4 @@ export const instanceAxios = axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
     }
-});
+})

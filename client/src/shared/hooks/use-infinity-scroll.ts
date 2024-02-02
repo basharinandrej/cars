@@ -1,4 +1,4 @@
-import {MutableRefObject, useEffect} from "react";
+import {MutableRefObject, useEffect} from "react"
 
 interface useObserverIntersectionScroll {
   callback: () => void
@@ -18,14 +18,14 @@ export function useInfinityScroll({
     const options = {
       root: refRootElement.current,
       rootMargin: "0px",
-      threshold: 1.0,
-    };
+      threshold: 1.0
+    }
 
     const observer = new IntersectionObserver(([entry]) => {
       if(entry.isIntersecting) {
         callback()
       }
-    }, options);
+    }, options)
     observer.observe(refTargetElement.current)
 
     return () => {

@@ -1,13 +1,18 @@
-import { useEffect, useRef, useCallback } from 'react';
-import { Card, Badge } from 'antd';
+import { useEffect, useRef, useCallback } from 'react'
+import { Card, Badge } from 'antd'
 import moment from 'moment'
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces/interfaces'
 import {PATTERN_DATA} from './constans'
 import {fetchListingDetails} from '../model/async-actions/fetch-listing-details'
-import { useDispatch } from 'react-redux';
+import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
+import { useDispatch } from 'react-redux'
 import {useSelector} from 'react-redux'
-import {getItemsListingDetails} from '../model/selectors'
+import {
+    getItemsListingDetails,
+    getTotalListingDetails,
+    getLengthItemsListingDetails
+} from '../model/selectors'
 import {AppDispatch} from '../../../app/providers'
 import {useInfinityScroll} from '../../../shared'
 import styles from './listing-details.module.sass'
@@ -19,32 +24,42 @@ export const ListingDetails = () => {
     const refRootElement = useRef<HTMLDivElement | null>(null)
     const refTargetElement = useRef<HTMLDivElement | null>(null)
 
+    const details = useSelector(getItemsListingDetails)
+    const total = useSelector(getTotalListingDetails)
+    const lengthItem = useSelector(getLengthItemsListingDetails)
+
     useEffect(() => {
         dispatch(fetchListingDetails())
     }, [])
 
     const onScrollEndHandler = useCallback(() => {
+        console.log('>>> onScrollEndHandler', total, lengthItem)
 
-        console.log('>>> onScrollEndHandler')
-    },[dispatch])
+        if(total <= lengthItem) return
+
+        dispatch(fetchListingDetailsNextPart())
+    },[dispatch, total, lengthItem])
 
     useInfinityScroll({
         callback: onScrollEndHandler,
         refRootElement,
         refTargetElement
-      })
+    })
 
-    const details = useSelector(getItemsListingDetails)
 
     return <div className={styles.listingDetails} ref={refRootElement} >
         {details?.map((detail: Detail) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
 
-            return <Badge.Ribbon text={textBadge} color={colorBadge}>
+            return <Badge.Ribbon
+                    text={textBadge}
+                    color={colorBadge}
+                    key={detail.id}
+                >
                 <Card
                     size={'small'}
-                    key={detail.id} 
+                    key={detail.id}
                     className={styles.card}
                     cover={
                         <img

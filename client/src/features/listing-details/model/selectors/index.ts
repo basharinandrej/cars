@@ -8,3 +8,5 @@ export const getLimitListingDetails = (state: RootState) => state.listingDetails
 export const getOffsetListingDetails = (state: RootState) => state.listingDetails.offset
 export const getCategoryIdListingDetails = (state: RootState) => state.listingDetails.catagoryId
 export const getModelIdListingDetails = (state: RootState) => state.listingDetails.modelId
+export const getTotalListingDetails = (state: RootState) => state.listingDetails.total
+export const getLengthItemsListingDetails = (state: RootState) => state.listingDetails.items.length

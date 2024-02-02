@@ -14,6 +14,6 @@ export interface Detail {
 }
 
 export interface ListingDetailsResponse {
-    items: Detail[] | null,
+    items: Detail[],
     total: number
 }

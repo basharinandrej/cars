@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {ListingDetailsResponse} from '../../interfaces/interfaces'
 import {fetchListingDetails} from '../async-actions/fetch-listing-details'
+import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
 
 
 export interface ListingDetailsSchema extends ListingDetailsResponse {
@@ -13,7 +14,7 @@ export interface ListingDetailsSchema extends ListingDetailsResponse {
 }
 
 const initialState: ListingDetailsSchema = {
-  items: null,
+  items: [],
   total: 0,
   isLoading: false,
   limit: 8,
@@ -22,10 +23,14 @@ const initialState: ListingDetailsSchema = {
   modelId: null
 }
 
-export const counterSlice = createSlice({
+export const listingDetailsSlice = createSlice({
   name: 'listing-details',
   initialState,
-  reducers: {},
+  reducers: {
+    setOffset: (state, action: PayloadAction<number>) => {
+      state.offset = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
         .addCase(fetchListingDetails.pending, (state) => {
@@ -38,8 +43,15 @@ export const counterSlice = createSlice({
             state.total = data.total
             state.items = data.items
         })
+        .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+          const data = action.payload
+
+          state.total = data.total
+          state.items = state.items.concat(data.items)
+      })
   }
 })
 
+export const {setOffset} = listingDetailsSlice.actions
 
-export const listingDetailsReducer = counterSlice.reducer
+export const listingDetailsReducer = listingDetailsSlice.reducer
