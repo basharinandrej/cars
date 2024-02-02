@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { Card, Badge } from 'antd';
 import moment from 'moment'
 import {mapBadge} from './maps/map-badge'
@@ -9,20 +9,34 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux'
 import {getItemsListingDetails} from '../model/selectors'
 import {AppDispatch} from '../../../app/providers'
+import {useInfinityScroll} from '../../../shared'
 import styles from './listing-details.module.sass'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export const ListingDetails = () => {
     const dispatch = useAppDispatch()
+    const refRootElement = useRef<HTMLDivElement | null>(null)
+    const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         dispatch(fetchListingDetails())
     }, [])
 
+    const onScrollEndHandler = useCallback(() => {
+
+        console.log('>>> onScrollEndHandler')
+    },[dispatch])
+
+    useInfinityScroll({
+        callback: onScrollEndHandler,
+        refRootElement,
+        refTargetElement
+      })
+
     const details = useSelector(getItemsListingDetails)
 
-    return <div className={styles.listingDetails}>
+    return <div className={styles.listingDetails} ref={refRootElement} >
         {details?.map((detail: Detail) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
@@ -47,6 +61,7 @@ export const ListingDetails = () => {
                 </Card>
             </Badge.Ribbon>
         })}
+        <div ref={refTargetElement}/>
     </div>
 }
 

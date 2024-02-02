@@ -16,7 +16,7 @@ const initialState: ListingDetailsSchema = {
   items: null,
   total: 0,
   isLoading: false,
-  limit: 3,
+  limit: 8,
   offset: 0,
   catagoryId: null,
   modelId: null
