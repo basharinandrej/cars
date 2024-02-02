@@ -1,19 +1,24 @@
-import 'module-alias/register'
-import ReactDOM from 'react-dom/client'
-import './styles/index.sass'
-import Container from './shared/ui/container/container'
-import {ListingDetails} from '../src/features'
-import {StoreProvider} from './app/providers'
+import React, {FC, ReactNode} from 'react'
+import { createRoot } from 'react-dom/client'
+import styles from './index.module.sass'
+import { Card } from '@features'
 
+interface PropsText {
+  text: string
+}
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-)
+const Text: FC<PropsText> = ({text}) => {
+  return <p className={styles.red}>{text}</p>
+}
 
-root.render(
-  <StoreProvider>
-    <Container>
-      <ListingDetails />
-    </Container>
-  </StoreProvider>
-)
+const Home = (): ReactNode => {
+  return <>
+    <Text text='hello world!!!'/>
+    <Card />
+  </>
+}
+
+const domNode = document.getElementById('root')
+const root = createRoot(domNode)
+
+root.render(<Home />)
