@@ -12,3 +12,8 @@ export interface Detail {
     photo: string
     createadAt: string
 }
+
+export interface ListingDetailsResponse {
+    items: Detail[] | null,
+    total: number
+}

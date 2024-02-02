@@ -1,0 +1,1 @@
+export const PATTERN_DATA = 'DD.MM.YYYY'
