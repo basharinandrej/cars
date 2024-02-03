@@ -12,21 +12,21 @@ import {
 import {ParamsFetchListingDetails} from '../interfaces'
 
 
-export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, undefined, ThunkApiConfig>(
+export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
     'listing-details/fetchDetailsNextPart',
     async (_, thunkAPI) => {
         const {getState} = thunkAPI
         const state = getState()
 
         const limit = getLimitListingDetails(state)
-        const currentOffset = getOffsetListingDetails(state)
+        const offset = getOffsetListingDetails(state)
         const categoryId = getCategoryIdListingDetails(state)
         const modelId = getModelIdListingDetails(state)
 
 
         const params: ParamsFetchListingDetails = {
             limit,
-            offset: currentOffset + limit
+            offset
         }
         if(categoryId) params.categoryId = categoryId
         if(modelId) params.modelId = modelId

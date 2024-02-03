@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { Card, Badge } from 'antd'
+import {useSelector} from 'react-redux'
 import moment from 'moment'
+
+import {useInfinityScroll, useAppDispatch} from '@shared'
+
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces/interfaces'
 import {PATTERN_DATA} from './constans'
 import {fetchListingDetails} from '../model/async-actions/fetch-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
-import {useSelector} from 'react-redux'
 import {
     getItemsListingDetails,
-    getTotalListingDetails,
+    getOffsetListingDetails,
     getLengthItemsListingDetails
 } from '../model/selectors'
-import {useInfinityScroll, useAppDispatch} from '@shared'
+
 import styles from './listing-details.module.sass'
 
 
@@ -22,20 +25,16 @@ export const ListingDetails = () => {
     const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     const details = useSelector(getItemsListingDetails)
-    const total = useSelector(getTotalListingDetails)
-    const lengthItem = useSelector(getLengthItemsListingDetails)
+    const lengthItems = useSelector(getLengthItemsListingDetails)
 
     useEffect(() => {
         dispatch(fetchListingDetails())
     }, [])
 
     const onScrollEndHandler = useCallback(() => {
-        console.log('>>> onScrollEndHandler', total, lengthItem)
 
-        if(total <= lengthItem) return
-
-        dispatch(fetchListingDetailsNextPart())
-    },[dispatch, total, lengthItem])
+        lengthItems && dispatch(fetchListingDetailsNextPart())
+    },[dispatch, lengthItems])
 
     useInfinityScroll({
         callback: onScrollEndHandler,
@@ -48,7 +47,6 @@ export const ListingDetails = () => {
         {details?.map((detail: Detail, idx) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
-
             return <Badge.Ribbon
                     text={textBadge}
                     color={colorBadge}
@@ -68,7 +66,7 @@ export const ListingDetails = () => {
                     <div className={styles.wrapper}>
                         <h3 className={styles.title}>{detail.name}</h3>
                         <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
-                        <p className={styles.date}>{moment(detail.createadAt).format(PATTERN_DATA)}</p>
+                        <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>
                     </div>
                 </Card>
             </Badge.Ribbon>

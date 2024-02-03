@@ -10,7 +10,7 @@ export interface Detail {
     price: number
     wear: DetailWears
     photo: string
-    createadAt: string
+    createdAt: string
 }
 
 export interface ListingDetailsResponse {
