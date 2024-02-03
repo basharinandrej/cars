@@ -1,4 +1,4 @@
-import React, {FC, ChangeEventHandler} from 'react'
+import React, {FC, ChangeEventHandler, useState, useEffect} from 'react'
 
 import { Input } from 'antd';
 import { SearchProps } from 'antd/es/input';
@@ -8,9 +8,9 @@ export const InputSearch: FC<Props>= ({
     placeholder = 'Артикул или название детали',
     isLoading = false,
     onChange,
-    onSearch
+    onSearch,
+    externalValue
 }) => {
-
 
     return <Search 
         placeholder={placeholder} 
@@ -20,6 +20,7 @@ export const InputSearch: FC<Props>= ({
         onChange={onChange}
         onSearch={onSearch}
         allowClear
+        value={externalValue}
     />
 
 }
@@ -27,5 +28,6 @@ export const InputSearch: FC<Props>= ({
 interface Props extends SearchProps {
     placeholder?: string
     isLoading?: boolean
+    externalValue?: string
     onChange: ChangeEventHandler<HTMLInputElement>
 }

@@ -1,23 +1,14 @@
-import {instanceAxios} from '@shared'
+import {instanceAxios, addQueryParams} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ListingDetailsSchema} from '@features'
 import {ThunkApiConfig} from '@app'
-import { getSearchFilterListingDetails } from '../selectors'
+import { 
+    getSearchFilterListingDetails,
+    getLimitListingDetails
+} from '../selectors'
 import {ParamsFetchSearchDetails} from '../interfaces'
 import {INITIAL_VALUE_OFFSET} from '../../constans'
 
-
-const addQueryParams = (params: Record<string, string>) => {
-    const searchParams = new URLSearchParams(window.location.search)
-    Object.entries(params).forEach(([key, value]) => {
-      if(value) {
-        searchParams.set(key, value)
-      } else {
-        searchParams.delete(key)
-      }
-    })
-    window.history.pushState(null, '',`?${searchParams.toString()}`)
-}
 
   
 export const fetchInitialSearchListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
@@ -27,6 +18,7 @@ export const fetchInitialSearchListingDetails = createAsyncThunk<ListingDetailsS
         const state = getState()
 
         const search =  getSearchFilterListingDetails(state)
+        const limit =  getLimitListingDetails(state)
         const offset = INITIAL_VALUE_OFFSET
 
         const params: ParamsFetchSearchDetails = {
@@ -39,7 +31,8 @@ export const fetchInitialSearchListingDetails = createAsyncThunk<ListingDetailsS
             const response = await instanceAxios.get('/api/detail/search', {
                 params: {
                     ...params,
-                    offset
+                    offset,
+                    limit
                 }              
             })
 

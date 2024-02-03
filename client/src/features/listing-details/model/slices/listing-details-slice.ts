@@ -45,7 +45,7 @@ export const listingDetailsSlice = createSlice({
             state.items = data.items
 
             state.total = data.total
-            state.offset = INITIAL_VALUE_OFFSET + data.items.length
+            state.offset = INITIAL_VALUE_OFFSET + data.items?.length
         })
 
 
@@ -61,7 +61,7 @@ export const listingDetailsSlice = createSlice({
           state.items = data.items
 
           state.total = data.total
-          state.offset = INITIAL_VALUE_OFFSET + data.items.length
+          state.offset = INITIAL_VALUE_OFFSET + data.items?.length
         })
 
 

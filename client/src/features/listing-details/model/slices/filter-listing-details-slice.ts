@@ -7,7 +7,7 @@ export interface FilterListingDetailsSchema {
 }
 
 const initialState: FilterListingDetailsSchema = {
-  search: ''
+  search: window.location.search.split('=')[1]
 }
 
 export const filterListingDetailsSlice = createSlice({

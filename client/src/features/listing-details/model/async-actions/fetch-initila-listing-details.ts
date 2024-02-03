@@ -11,6 +11,7 @@ import {ParamsFetchListingDetails} from '../interfaces'
 import {INITIAL_VALUE_OFFSET} from '../../constans'
 
 
+
 export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
     'listing-details/fetchInitialDetails',
     async (_, thunkAPI) => {

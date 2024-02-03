@@ -10,6 +10,8 @@ import {Detail} from '../interfaces/interfaces'
 import {fetchInitialListingDetails} from '../model/async-actions/fetch-initila-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 import {fetchSearchListingDetailsNextPart} from '../model/async-actions/fetch-search-listing-details-next-part'
+import {fetchInitialSearchListingDetails} from '../model/async-actions/fetch-initial-search-listing-details'
+
 import {
     getItemsListingDetails,
     getLengthItemsListingDetails,
@@ -28,20 +30,23 @@ export const ListingDetails = () => {
     const lengthItems = useSelector(getLengthItemsListingDetails)
     const search = useSelector(getSearchFilterListingDetails)
 
-    const isInitilaFetch = !lengthItems
+    const isInitilaFetch = !lengthItems && !search
+    const isInitilaFetchSearch = !lengthItems && search
     const isFetchNextPart = !search && lengthItems
     const isFetchSearchNextPart = search && lengthItems
 
     useEffect(() => {
         isInitilaFetch && dispatch(fetchInitialListingDetails())
-    }, [dispatch])
+        isInitilaFetchSearch && dispatch(fetchInitialSearchListingDetails())
+
+    }, [dispatch, isInitilaFetch, isInitilaFetchSearch])
 
     const onScrollEndHandler = useCallback(() => {
 
         isFetchNextPart && dispatch(fetchListingDetailsNextPart())
         isFetchSearchNextPart && dispatch(fetchSearchListingDetailsNextPart())
-        
-    },[dispatch, lengthItems, search])
+    },[dispatch, isFetchSearchNextPart, isFetchNextPart])
+
 
     useInfinityScroll({
         callback: onScrollEndHandler,
@@ -71,6 +76,7 @@ export const ListingDetails = () => {
                     }
                 >
                     <div className={styles.wrapper}>
+                        <strong>{detail.vendorCode}</strong>
                         <h3 className={styles.title}>{detail.name}</h3>
                         <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
                         <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>

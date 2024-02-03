@@ -5,3 +5,4 @@ export {useDebounce} from './hooks/use-debounce'
 
 export {Container} from './ui/container/container'
 export { InputSearch } from './ui/input-search/input-search';
+export {addQueryParams} from './libs/add-query-params'
