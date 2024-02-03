@@ -17,3 +17,13 @@ export interface ListingDetailsResponse {
     items: Detail[],
     total: number
 }
+
+export interface Brand {
+    label: string
+    value: string
+}
+
+export interface BrandResponse {
+    items: Brand[]
+    total: number
+}

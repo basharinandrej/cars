@@ -13,3 +13,4 @@ export const getLengthItemsListingDetails = (state: RootState) => state.listingD
 
 
 export const getSearchFilterListingDetails = (state: RootState) => state.filterListingDetails.search
+export const getFilterListingBrands = (state: RootState) => state.filterListingDetails.brand.items

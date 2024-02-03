@@ -7,7 +7,7 @@ import {useInfinityScroll, useAppDispatch} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces/interfaces'
-import {fetchInitialListingDetails} from '../model/async-actions/fetch-initila-listing-details'
+import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 import {fetchSearchListingDetailsNextPart} from '../model/async-actions/fetch-search-listing-details-next-part'
 import {fetchInitialSearchListingDetails} from '../model/async-actions/fetch-initial-search-listing-details'
@@ -39,13 +39,13 @@ export const ListingDetails = () => {
         isInitilaFetch && dispatch(fetchInitialListingDetails())
         isInitilaFetchSearch && dispatch(fetchInitialSearchListingDetails())
 
-    }, [dispatch, isInitilaFetch, isInitilaFetchSearch])
+    }, [dispatch, isInitilaFetch, isInitilaFetchSearch, fetchInitialListingDetails, fetchInitialSearchListingDetails])
 
     const onScrollEndHandler = useCallback(() => {
 
         isFetchNextPart && dispatch(fetchListingDetailsNextPart())
         isFetchSearchNextPart && dispatch(fetchSearchListingDetailsNextPart())
-    },[dispatch, isFetchSearchNextPart, isFetchNextPart])
+    },[dispatch, isFetchSearchNextPart, isFetchNextPart, fetchListingDetailsNextPart, fetchSearchListingDetailsNextPart])
 
 
     useInfinityScroll({

@@ -11,3 +11,9 @@ export interface ParamsFetchListingDetails {
 export interface ParamsFetchSearchDetails  extends Record<string, string>{
     keyword: string
 }
+
+export interface ParamsFetchListingBrand {
+    sortBy: 'name',
+    orderBy: 'asc' | 'desc'
+}
+

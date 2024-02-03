@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {ListingDetailsResponse} from '../../interfaces/interfaces'
 
-import {fetchInitialListingDetails} from '../async-actions/fetch-initila-listing-details'
+import {fetchInitialListingDetails} from '../async-actions/fetch-initial-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
 import { fetchSearchListingDetailsNextPart } from '../async-actions/fetch-search-listing-details-next-part'
 import {fetchInitialSearchListingDetails} from '../async-actions/fetch-initial-search-listing-details'
