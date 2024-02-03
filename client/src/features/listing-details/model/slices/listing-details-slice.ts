@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import {ListingDetailsResponse} from '../../interfaces/interfaces'
 import {fetchListingDetails} from '../async-actions/fetch-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
+import {fetchSearchDetails} from '../async-actions/fetch-search-details'
 import {DEFAUL_VALUE_LIMIT} from '../../constans'
 
 export interface ListingDetailsSchema extends ListingDetailsResponse {
@@ -52,7 +53,16 @@ export const listingDetailsSlice = createSlice({
           state.items = state.items.concat(data.items)
           state.offset = newOffset > state.total ? state.total : newOffset
           state.limit = newOffset > state.total ? state.total - state.items.length : DEFAUL_VALUE_LIMIT
-      })
+        })
+        .addCase(fetchSearchDetails.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(fetchSearchDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+          const data = action.payload
+
+          state.items = data.items
+          state.total = data.total
+        })
   }
 })
 

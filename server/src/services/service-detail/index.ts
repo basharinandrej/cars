@@ -28,7 +28,6 @@ class ServiceDetail {
             })
 
 
-            console.log('>>>> dtoDetailCreation', dtoDetailCreation)
             const detail = await Detail.create({
                 name: dtoDetailCreation.name.toLocaleLowerCase(),
                 vendorCode: dtoDetailCreation.vendorCode,
@@ -42,7 +41,7 @@ class ServiceDetail {
                 userId: dtoDetailCreation.userId,
                 photo: dtoDetailCreation.photo
             })
-        
+
             return mapperDetailCreation(detail)
        } catch (error) {
             if(error instanceof Error) {
@@ -71,7 +70,7 @@ class ServiceDetail {
                 })
                 return mapperGetAllDetails(details)
             }
-    
+
             if(detailCategoryId) {
                 const details = await Detail?.findAndCountAll({
                     limit,
@@ -80,7 +79,7 @@ class ServiceDetail {
                 })
                 return mapperGetAllDetails(details)
             }
-    
+
             const details = await Detail?.findAndCountAll({
                 limit,
                 offset,
@@ -108,7 +107,7 @@ class ServiceDetail {
                 }
             })
             return mapperGetAllDetails(details)
-            
+
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -119,7 +118,7 @@ class ServiceDetail {
 
     async getByIdDetail(dtoDetailGetById: DtoDetailGetById, next: NextFunction) {
         try {
-            
+
             const detail = await Detail.findOne({
                 where: {id: dtoDetailGetById.id},
                 include: [Model, Address, User, DetailCategory]

@@ -7,12 +7,10 @@ import {useInfinityScroll, useAppDispatch} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces/interfaces'
-import {PATTERN_DATA} from './constans'
 import {fetchListingDetails} from '../model/async-actions/fetch-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 import {
     getItemsListingDetails,
-    getOffsetListingDetails,
     getLengthItemsListingDetails
 } from '../model/selectors'
 

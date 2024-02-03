@@ -1,10 +1,11 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
-import {listingDetailsReducer} from '@features'
+import {listingDetailsReducer, filterListingDetailsReducer} from '@features'
 import {StateSchema} from '../interfaces'
 
 const getStore = () => {
     const rootReducer: ReducersMapObject<StateSchema> = {
-        listingDetails: listingDetailsReducer
+        listingDetails: listingDetailsReducer,
+        filterListingDetails: filterListingDetailsReducer
     }
 
     return configureStore({
