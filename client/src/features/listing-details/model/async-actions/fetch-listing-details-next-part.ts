@@ -1,4 +1,3 @@
-import {instanceAxios} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {ListingDetailsSchema} from '@features'
@@ -12,7 +11,7 @@ import {ParamsFetchListingDetails} from '../interfaces'
 export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
     'listing-details/fetchDetailsNextPart',
     async (_, thunkAPI) => {
-        const {getState} = thunkAPI
+        const {getState, extra} = thunkAPI
         const state = getState()
 
         const limit = getLimitListingDetails(state)
@@ -25,7 +24,7 @@ export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema
 
         try {
 
-            const response = await instanceAxios.get('/api/detail', {
+            const response = await extra.api.get('/api/detail', {
                 params
             })
 
