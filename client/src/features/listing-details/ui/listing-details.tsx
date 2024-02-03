@@ -11,7 +11,8 @@ import {fetchListingDetails} from '../model/async-actions/fetch-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 import {
     getItemsListingDetails,
-    getLengthItemsListingDetails
+    getLengthItemsListingDetails,
+    getSearchFilterListingDetails
 } from '../model/selectors'
 
 import styles from './listing-details.module.sass'
@@ -24,15 +25,16 @@ export const ListingDetails = () => {
 
     const details = useSelector(getItemsListingDetails)
     const lengthItems = useSelector(getLengthItemsListingDetails)
+    const search = useSelector(getSearchFilterListingDetails)
 
     useEffect(() => {
-        dispatch(fetchListingDetails())
+        !lengthItems && dispatch(fetchListingDetails())
     }, [])
 
     const onScrollEndHandler = useCallback(() => {
 
-        lengthItems && dispatch(fetchListingDetailsNextPart())
-    },[dispatch, lengthItems])
+        !search && lengthItems && dispatch(fetchListingDetailsNextPart())
+    },[dispatch, lengthItems, search])
 
     useInfinityScroll({
         callback: onScrollEndHandler,

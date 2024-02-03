@@ -1,6 +1,7 @@
 import React, {FC, ChangeEventHandler} from 'react'
 
 import { Input } from 'antd';
+import { SearchProps } from 'antd/es/input';
 const { Search } = Input;
 
 export const InputSearch: FC<Props>= ({
@@ -23,9 +24,8 @@ export const InputSearch: FC<Props>= ({
 
 }
 
-interface Props {
+interface Props extends SearchProps {
     placeholder?: string
     isLoading?: boolean
     onChange: ChangeEventHandler<HTMLInputElement>
-    onSearch: () => void
 }

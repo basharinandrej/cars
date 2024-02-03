@@ -5,4 +5,9 @@ export interface ParamsFetchListingDetails {
     offset: number
     categoryId?: number
     modelId?: number
+    keyword?: string
+}
+
+export interface ParamsFetchSearchDetails  extends Record<string, string>{
+    keyword: string
 }

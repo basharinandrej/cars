@@ -1,7 +1,9 @@
 import React, {FC, ChangeEventHandler, useCallback} from 'react'
 import {InputSearch, useDebounce, useAppDispatch} from '@shared'
 import {setSearch} from '../model/slices/filter-listing-details-slice'
-import {fetchSearchDetails} from '../../listing-details/model/async-actions/fetch-search-details'
+import {fetchSearchDetails} from '../model/async-actions/fetch-search-details'
+import {fetchListingDetails} from '../model/async-actions/fetch-listing-details'
+import { SearchProps } from 'antd/es/input';
 
 
 export const FilterListingDetails: FC<Props> = () => {
@@ -13,8 +15,9 @@ export const FilterListingDetails: FC<Props> = () => {
 
     const debounceHandlerOnChange = useDebounce(onChangeHandler)
 
-    const onSeacrhHandler = useCallback(() => {
-        dispatch(fetchSearchDetails())
+    const onSeacrhHandler: SearchProps['onSearch'] = useCallback((_, __, {source}) => {
+        if(source === 'input') dispatch(fetchSearchDetails())
+        if(source === 'clear') dispatch(fetchListingDetails())
     }, []) 
 
     return <InputSearch 

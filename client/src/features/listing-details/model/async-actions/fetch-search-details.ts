@@ -2,9 +2,9 @@ import {instanceAxios} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ListingDetailsSchema} from '@features'
 import {ThunkApiConfig} from '@app'
-import {
-    getSearchFilterListingDetails
-} from '../../../filter-listing-details/model/selectors'
+import { getSearchFilterListingDetails } from '../selectors'
+import {ParamsFetchSearchDetails} from '../interfaces'
+import {INITIAL_VALUE_OFFSET} from '../../constans'
 
 
 const addQueryParams = (params: Record<string, string>) => {
@@ -17,7 +17,7 @@ const addQueryParams = (params: Record<string, string>) => {
       }
     })
     window.history.pushState(null, '',`?${searchParams.toString()}`)
-  }
+}
 
   
 export const fetchSearchDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
@@ -26,16 +26,21 @@ export const fetchSearchDetails = createAsyncThunk<ListingDetailsSchema, void, T
         const {getState} = thunkAPI
         const state = getState()
 
-        const search = getSearchFilterListingDetails(state)
+        const search =  getSearchFilterListingDetails(state)
+        const offset = INITIAL_VALUE_OFFSET
 
-        addQueryParams({
+        const params: ParamsFetchSearchDetails = {
             keyword: search
-        })
+        }
+
+        addQueryParams(params)
+
         try {
             const response = await instanceAxios.get('/api/detail/search', {
                 params: {
-                    keyword: search
-                }                
+                    ...params,
+                    offset
+                }              
             })
 
             return response.data

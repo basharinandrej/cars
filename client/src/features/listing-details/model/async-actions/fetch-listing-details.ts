@@ -4,11 +4,11 @@ import {ListingDetailsSchema} from '@features'
 import {ThunkApiConfig} from '@app'
 import {
     getLimitListingDetails,
-    getOffsetListingDetails,
     getCategoryIdListingDetails,
-    getModelIdListingDetails
+    getModelIdListingDetails,
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
+import {INITIAL_VALUE_OFFSET} from '../../constans'
 
 
 export const fetchListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
@@ -18,7 +18,7 @@ export const fetchListingDetails = createAsyncThunk<ListingDetailsSchema, void, 
         const state = getState()
 
         const limit = getLimitListingDetails(state)
-        const offset = getOffsetListingDetails(state)
+        const offset = INITIAL_VALUE_OFFSET
         const categoryId = getCategoryIdListingDetails(state)
         const modelId = getModelIdListingDetails(state)
 

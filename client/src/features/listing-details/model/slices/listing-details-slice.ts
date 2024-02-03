@@ -4,7 +4,7 @@ import {ListingDetailsResponse} from '../../interfaces/interfaces'
 import {fetchListingDetails} from '../async-actions/fetch-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
 import {fetchSearchDetails} from '../async-actions/fetch-search-details'
-import {DEFAUL_VALUE_LIMIT} from '../../constans'
+import {DEFAULT_VALUE_LIMIT, INITIAL_VALUE_OFFSET} from '../../constans'
 
 export interface ListingDetailsSchema extends ListingDetailsResponse {
   isLoading: boolean
@@ -18,8 +18,8 @@ const initialState: ListingDetailsSchema = {
   items: [],
   total: 0,
   isLoading: false,
-  limit: DEFAUL_VALUE_LIMIT,
-  offset: 0,
+  limit: DEFAULT_VALUE_LIMIT,
+  offset: INITIAL_VALUE_OFFSET,
   catagoryId: null,
   modelId: null
 }
@@ -28,9 +28,6 @@ export const listingDetailsSlice = createSlice({
   name: 'listing-details',
   initialState,
   reducers: {
-    setOffset: (state, action: PayloadAction<number>) => {
-      state.offset = action.payload
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -40,11 +37,14 @@ export const listingDetailsSlice = createSlice({
         .addCase(fetchListingDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
             const data = action.payload
 
+
             state.isLoading = false
-            state.offset = state.offset + state.limit
-            state.total = data.total
             state.items = data.items
+
+            state.total = data.total
+            state.offset = INITIAL_VALUE_OFFSET + data.items.length
         })
+
         .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
           const data = action.payload
           const newOffset = state.offset + state.limit
@@ -52,20 +52,23 @@ export const listingDetailsSlice = createSlice({
           state.total = data.total
           state.items = state.items.concat(data.items)
           state.offset = newOffset > state.total ? state.total : newOffset
-          state.limit = newOffset > state.total ? state.total - state.items.length : DEFAUL_VALUE_LIMIT
         })
+
         .addCase(fetchSearchDetails.pending, (state) => {
           state.isLoading = true
         })
         .addCase(fetchSearchDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
           const data = action.payload
 
+
+          state.isLoading = false
           state.items = data.items
+
           state.total = data.total
+          state.offset = INITIAL_VALUE_OFFSET + data.items.length
         })
   }
 })
 
-export const {setOffset} = listingDetailsSlice.actions
 
 export const listingDetailsReducer = listingDetailsSlice.reducer

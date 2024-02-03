@@ -9,4 +9,7 @@ export const getOffsetListingDetails = (state: RootState) => state.listingDetail
 export const getCategoryIdListingDetails = (state: RootState) => state.listingDetails.catagoryId
 export const getModelIdListingDetails = (state: RootState) => state.listingDetails.modelId
 export const getTotalListingDetails = (state: RootState) => state.listingDetails.total
-export const getLengthItemsListingDetails = (state: RootState) => state.listingDetails.items.length
+export const getLengthItemsListingDetails = (state: RootState) => state.listingDetails.items?.length
+
+
+export const getSearchFilterListingDetails = (state: RootState) => state.filterListingDetails.search

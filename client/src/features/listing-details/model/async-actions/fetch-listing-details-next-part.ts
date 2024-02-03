@@ -6,8 +6,7 @@ import {
     getLimitListingDetails,
     getOffsetListingDetails,
     getCategoryIdListingDetails,
-    getModelIdListingDetails,
-
+    getModelIdListingDetails
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
 
@@ -23,10 +22,9 @@ export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema
         const categoryId = getCategoryIdListingDetails(state)
         const modelId = getModelIdListingDetails(state)
 
-
         const params: ParamsFetchListingDetails = {
             limit,
-            offset
+            offset,
         }
         if(categoryId) params.categoryId = categoryId
         if(modelId) params.modelId = modelId
