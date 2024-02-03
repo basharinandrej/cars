@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {ListingDetailsResponse} from '../../interfaces/interfaces'
-import {fetchListingDetails} from '../async-actions/fetch-listing-details'
+
+import {fetchInitialListingDetails} from '../async-actions/fetch-initila-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
-import {fetchSearchDetails} from '../async-actions/fetch-search-details'
+import { fetchSearchListingDetailsNextPart } from '../async-actions/fetch-search-listing-details-next-part'
+import {fetchInitialSearchListingDetails} from '../async-actions/fetch-initial-search-listing-details'
+
 import {DEFAULT_VALUE_LIMIT, INITIAL_VALUE_OFFSET} from '../../constans'
 
 export interface ListingDetailsSchema extends ListingDetailsResponse {
@@ -31,10 +34,10 @@ export const listingDetailsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-        .addCase(fetchListingDetails.pending, (state) => {
+        .addCase(fetchInitialListingDetails.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(fetchListingDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+        .addCase(fetchInitialListingDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
             const data = action.payload
 
 
@@ -45,19 +48,12 @@ export const listingDetailsSlice = createSlice({
             state.offset = INITIAL_VALUE_OFFSET + data.items.length
         })
 
-        .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
-          const data = action.payload
-          const newOffset = state.offset + state.limit
 
-          state.total = data.total
-          state.items = state.items.concat(data.items)
-          state.offset = newOffset > state.total ? state.total : newOffset
-        })
 
-        .addCase(fetchSearchDetails.pending, (state) => {
+        .addCase(fetchInitialSearchListingDetails.pending, (state) => {
           state.isLoading = true
         })
-        .addCase(fetchSearchDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+        .addCase(fetchInitialSearchListingDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
           const data = action.payload
 
 
@@ -67,6 +63,34 @@ export const listingDetailsSlice = createSlice({
           state.total = data.total
           state.offset = INITIAL_VALUE_OFFSET + data.items.length
         })
+
+
+        .addCase(fetchSearchListingDetailsNextPart.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(fetchSearchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+          const data = action.payload
+          const newOffset = state.offset + state.limit
+
+          state.total = data.total
+          state.items = state.items.concat(data.items)
+          state.offset = newOffset > state.total ? state.total : newOffset
+        })
+
+
+
+        .addCase(fetchListingDetailsNextPart.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+          const data = action.payload
+          const newOffset = state.offset + state.limit
+
+          state.total = data.total
+          state.items = state.items.concat(data.items)
+          state.offset = newOffset > state.total ? state.total : newOffset
+        })
+
   }
 })
 

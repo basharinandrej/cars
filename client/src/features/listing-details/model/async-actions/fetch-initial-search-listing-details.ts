@@ -20,8 +20,8 @@ const addQueryParams = (params: Record<string, string>) => {
 }
 
   
-export const fetchSearchDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
-    'listing-details/fetchSearchDetails',
+export const fetchInitialSearchListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
+    'listing-details/fetchSearchInitialDetails',
     async (_, thunkAPI) => {
         const {getState} = thunkAPI
         const state = getState()

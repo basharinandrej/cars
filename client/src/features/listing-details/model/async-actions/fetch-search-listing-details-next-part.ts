@@ -1,35 +1,40 @@
 import {instanceAxios} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {ListingDetailsSchema} from '@features'
 import {ThunkApiConfig} from '@app'
+import {ListingDetailsSchema} from '@features'
 import {
     getLimitListingDetails,
+    getOffsetListingDetails,
     getCategoryIdListingDetails,
     getModelIdListingDetails,
+    getSearchFilterListingDetails
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
-import {INITIAL_VALUE_OFFSET} from '../../constans'
 
 
-export const fetchListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
-    'listing-details/fetchDetails',
+export const fetchSearchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
+    'listing-details/fetchSearchDetailsNextPart',
     async (_, thunkAPI) => {
         const {getState} = thunkAPI
         const state = getState()
 
         const limit = getLimitListingDetails(state)
-        const offset = INITIAL_VALUE_OFFSET
+        const offset = getOffsetListingDetails(state)
         const categoryId = getCategoryIdListingDetails(state)
         const modelId = getModelIdListingDetails(state)
+        const search = getSearchFilterListingDetails(state)
 
         const params: ParamsFetchListingDetails = {
-            limit, offset
+            limit,
+            offset,
         }
         if(categoryId) params.categoryId = categoryId
         if(modelId) params.modelId = modelId
+        if(search) params.keyword = search
 
         try {
-            const response = await instanceAxios.get('/api/detail', {
+
+            const response = await instanceAxios.get('/api/detail/search', {
                 params
             })
 
