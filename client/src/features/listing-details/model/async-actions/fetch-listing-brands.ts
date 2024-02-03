@@ -1,6 +1,6 @@
 import {instanceAxios} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {BrandResponse, Brand} from '../../interfaces/interfaces'
+import {BrandResponse, Brand} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
 import {ParamsFetchListingBrand} from '../../model/interfaces'
 

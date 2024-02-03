@@ -6,7 +6,7 @@ import moment from 'moment'
 import {useInfinityScroll, useAppDispatch} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
-import {Detail} from '../interfaces/interfaces'
+import {Detail} from '../interfaces'
 import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 import {fetchSearchListingDetailsNextPart} from '../model/async-actions/fetch-search-listing-details-next-part'

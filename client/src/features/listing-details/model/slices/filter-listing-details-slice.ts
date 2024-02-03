@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {BrandResponse} from '../../interfaces/interfaces'
+import {BrandResponse} from '../../interfaces'
 import {fetchListingBrands} from '../async-actions/fetch-listing-brands'
-
+import { EMPTY_STRING, dropQuerySearch, getQuerySearchFromUrl } from '@shared'
 
 
 export interface FilterListingDetailsSchema {
@@ -11,7 +11,7 @@ export interface FilterListingDetailsSchema {
 }
 
 const initialState: FilterListingDetailsSchema = {
-  search: window.location.search.split('=')[1],
+  search: getQuerySearchFromUrl(),
   brand: {
     items: [
       {
@@ -23,7 +23,7 @@ const initialState: FilterListingDetailsSchema = {
         label: 'Kia',
       }
   ],
-    total: 0
+    total: 2
   }
 }
 
@@ -32,7 +32,11 @@ export const filterListingDetailsSlice = createSlice({
   initialState,
   reducers: {
     setSearch: (state, action: PayloadAction<string>) => {
-        state.search = action.payload
+      state.search = action.payload
+    },
+    dropSearch: (state) => {
+      dropQuerySearch()
+      state.search = EMPTY_STRING
     }
   },
   extraReducers: (builder) => {
@@ -49,6 +53,6 @@ export const filterListingDetailsSlice = createSlice({
   }
 })
 
-export const {setSearch} = filterListingDetailsSlice.actions
+export const {setSearch, dropSearch} = filterListingDetailsSlice.actions
 
 export const filterListingDetailsReducer = filterListingDetailsSlice.reducer
