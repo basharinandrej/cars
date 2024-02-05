@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import {NextFunction} from 'express'
 import {DtoBrandCreation, DtoBrandsGetAll, DtoBrandGetById} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
@@ -14,7 +15,7 @@ class ServiceBrand {
 
         try {
             const brand = await Brand.create({
-                name: dtoBrandCreation.name
+                name: dtoBrandCreation.name.toLocaleLowerCase()
             })
 
             return mapperBrandCreation(brand)
@@ -26,7 +27,7 @@ class ServiceBrand {
     }
 
 
-    async getAllBrands({orderBy, sortBy, limit, offset}: DtoBrandsGetAll, next: NextFunction) {
+    async getAllBrands({orderBy, sortBy, limit, offset, keyword}: DtoBrandsGetAll, next: NextFunction) {
 
         try {
             if(orderBy && sortBy) {
@@ -39,6 +40,17 @@ class ServiceBrand {
                 })
                 return mapperBrandGetAll(brands)
 
+            }  else if(orderBy && sortBy && keyword){
+                const brands = await Brand.findAndCountAll({
+                    offset, limit,
+                    where: {
+                        [Op.or]: [
+                            {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
+                        ]
+                    }
+                })
+                return mapperBrandGetAll(brands)
+
             } else {
                 const brands = await Brand?.findAndCountAll({
                     limit,
@@ -47,7 +59,6 @@ class ServiceBrand {
         
                 return mapperBrandGetAll(brands)
             }
-
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))

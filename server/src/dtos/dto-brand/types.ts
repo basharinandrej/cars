@@ -8,6 +8,7 @@ export interface DtoBrandCreation {
 export interface DtoBrandsGetAll extends Pagination {
     sortBy?: string
     orderBy?: SortOrderBy
+    keyword?: string
 }
 
 export interface DtoBrandGetById {

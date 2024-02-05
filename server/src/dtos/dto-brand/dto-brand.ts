@@ -15,6 +15,7 @@ class DtoDetail {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            keyword: query.keyword,
             orderBy: query.orderBy,
             sortBy: query.sortBy
         }
