@@ -3,7 +3,13 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import {BrandResponse, ModelResponse} from '../../interfaces'
 import {fetchListingBrands} from '../async-actions/fetch-listing-brands'
 import {fetchListingModels} from '../async-actions/fetch-listing-models'
-import { EMPTY_STRING, dropQuerySearch, getQuerySearchFromUrl, addQueryParams } from '@shared'
+import { 
+  EMPTY_STRING, 
+  dropQuerySearch, 
+  getQuerySearchFromUrl, 
+  addQueryParams, 
+  dropQueryModelId
+} from '@shared'
 
 interface Brand extends BrandResponse {
   selected: number
@@ -57,6 +63,7 @@ export const filterListingDetailsSlice = createSlice({
       state.model.selected = action.payload
     },
     dropSelectedModel: (state) => {
+      dropQueryModelId()
       state.model.selected = null
     }
   },

@@ -13,3 +13,4 @@ export const getSearchFilterListingDetails = (state: RootState) => state.filterL
 export const getFilterListingBrands = (state: RootState) => state.filterListingDetails.brand.items
 export const getFilterListingModels = (state: RootState) => state.filterListingDetails.model.items
 export const getFilterSelectedBrandId = (state: RootState) => state.filterListingDetails.brand.selected
+export const getFilterSelectedModelId = (state: RootState) => state.filterListingDetails.model.selected
