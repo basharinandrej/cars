@@ -29,7 +29,6 @@ class ServiceBrand {
 
     async getAllBrands({orderBy, sortBy, limit, offset, keyword}: DtoBrandsGetAll, next: NextFunction) {
 
-        console.log('>>> keyword', keyword)
         try {
             if(orderBy && sortBy && !keyword) {
                 const brands = await Brand?.findAndCountAll({

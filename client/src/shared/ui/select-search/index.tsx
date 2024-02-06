@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import { Select } from 'antd';
 import { SelectProps } from 'antd/es/select';
 
+import styles from './index.module.sass'
 
 
 const filterOption = (input: string, option?: { label: string; value: string }) =>
@@ -10,16 +11,24 @@ const filterOption = (input: string, option?: { label: string; value: string }) 
 export const SelectSearch: FC<SelectProps> = ({
     onChange,
     onSearch,
-    options
+    onFocus,
+    onClear,
+    options,
+    placeholder,
+    allowClear = true
 }) => (
   <Select
     showSearch
-    placeholder="Выберете брнд"
+    placeholder={placeholder}
     optionFilterProp="children"
     onChange={onChange}
     onSearch={onSearch}
+    onFocus={onFocus}
+    onClear={onClear}
     filterOption={filterOption}
     options={options}
+    className={styles.selectSearch}
+    allowClear={allowClear}
   />
 );
 

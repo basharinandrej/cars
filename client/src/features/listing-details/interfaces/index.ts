@@ -11,6 +11,7 @@ export interface Detail {
     wear: DetailWears
     photo: string
     createdAt: string
+    modelId: number
 }
 
 export interface ListingDetailsResponse {
@@ -25,5 +26,15 @@ export interface Brand {
 
 export interface BrandResponse {
     items: Brand[]
+    total: number
+}
+
+export interface Model {
+    label: string
+    value: string
+}
+
+export interface ModelResponse {
+    items: Model[]
     total: number
 }

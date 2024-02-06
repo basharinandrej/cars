@@ -1,19 +1,20 @@
-import {instanceAxios} from '@shared'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {BrandResponse, Brand} from '../../interfaces'
+import {BrandResponse} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
 import {ParamsFetchListingBrand} from '../../model/interfaces'
 
 
-export const fetchListingBrands = createAsyncThunk<BrandResponse, void, ThunkApiConfig>(
-    'listing-details/fetchListingBrands',
-    async () => {
+export const fetchListingBrands = createAsyncThunk<BrandResponse, string, ThunkApiConfig>(
+    'listing-brands/fetchListingBrands',
+    async (value, thunkAPI) => {
         try {
+            const { extra} = thunkAPI
             const params:ParamsFetchListingBrand = {
                 sortBy: 'name',
-                orderBy: 'asc'
+                orderBy: 'asc',
+                keyword: value
             }
-            const response = await instanceAxios.get('/api/brand', {
+            const response = await extra.api.get('/api/brand', {
                 params
             })
 

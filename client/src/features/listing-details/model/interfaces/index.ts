@@ -15,5 +15,11 @@ export interface ParamsFetchSearchDetails  extends Record<string, string>{
 export interface ParamsFetchListingBrand {
     sortBy: 'name',
     orderBy: 'asc' | 'desc'
+    keyword?: string
+}
+
+
+export interface ParamsFetchListingModel {
+    brandId: number
 }
 
