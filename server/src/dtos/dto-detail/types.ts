@@ -17,6 +17,7 @@ export interface DtoDetailCreation {
 export interface DtoDetailGetAll extends Pagination{
     detailCategoryId?: number
     modelId?: number
+    keyword?: string
 }
 
 export interface DtoDetailSearch extends Pagination {

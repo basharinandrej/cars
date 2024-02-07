@@ -1,6 +1,6 @@
 import { Op } from 'sequelize'
 import {NextFunction} from 'express'
-import {DtoDetailCreation, DtoDetailGetAll, DtoDetailGetById, DtoDetailSearch} from '@dtos/dto-detail/types'
+import {DtoDetailCreation, DtoDetailGetAll, DtoDetailGetById} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import {mapperDetailCreation} from './detail-mapper/mapper-detail-creation'
@@ -11,6 +11,7 @@ import Address from '@models/address'
 import User from '@models/user'
 import DetailCategory from '@models/detail/detail-category'
 import { errorStrings } from '@common/error-strings'
+import { DetailAttributes } from '@models/detail/types'
 
 
 class ServiceDetail {
@@ -51,66 +52,28 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails({limit, offset, modelId, detailCategoryId}: DtoDetailGetAll, next: NextFunction) {
+    async getAllDetails({limit, offset, modelId, detailCategoryId, keyword}: DtoDetailGetAll, next: NextFunction) {
 
         try {
-            if(detailCategoryId && modelId) {
-                const details = await Detail?.findAndCountAll({
-                    limit,
-                    offset,
-                    where: { modelId, detailCategoryId }
-                })
-                return mapperGetAllDetails(details)
-            }
-            if(modelId) {
-                const details = await Detail?.findAndCountAll({
-                    limit,
-                    offset,
-                    where: { modelId }
-                })
-                return mapperGetAllDetails(details)
-            }
+            const params: Partial<DetailAttributes> = {}
 
-            if(detailCategoryId) {
-                const details = await Detail?.findAndCountAll({
-                    limit,
-                    offset,
-                    where: { detailCategoryId }
-                })
-                return mapperGetAllDetails(details)
-            }
+            if(modelId) params.modelId = modelId
+            if(detailCategoryId) params.detailCategoryId = detailCategoryId
+            if(keyword) params[Op.or] = [
+                {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
+                {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}
+            ]
 
             const details = await Detail?.findAndCountAll({
                 limit,
                 offset,
+                where: params
             })
             return mapperGetAllDetails(details)
+            
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
-            }
-        }
-    }
-
-
-    async search(dtoDetailSearch: DtoDetailSearch, next: NextFunction) {
-        try {
-            const {keyword, limit, offset} = dtoDetailSearch
-
-            const details = await Detail.findAndCountAll({
-                offset, limit,
-                where: {
-                    [Op.or]: [
-                        {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
-                        {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}
-                    ]
-                }
-            })
-            return mapperGetAllDetails(details)
-
-        } catch (error) {
-            if(error instanceof Error) {
-                next(ApiError.internal(error.message))
             }
         }
     }

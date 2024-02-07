@@ -33,7 +33,8 @@ class DtoDetail {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
             detailCategoryId: query.detailCategoryId,
-            modelId: query.modelId
+            modelId: query.modelId,
+            keyword: query.keyword,
         }
     }
 

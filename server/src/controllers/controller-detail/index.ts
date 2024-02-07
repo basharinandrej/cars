@@ -1,6 +1,6 @@
 import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
-import {ParamsGetAllDetails, ParamsSearchDetails, ParamsGetOneDetail} from './types'
+import {ParamsGetAllDetails, ParamsGetOneDetail} from './types'
 import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
 import ApiError from '@api-error/index'
 import dtoDetail from '@dtos/dto-detail/dto-detail'
@@ -37,19 +37,6 @@ class ControllerDetail {
             const dtoDetailGetById = dtoDetail.getDtoDetailsGetAll(req.query)
             const details = await serviceDetail.getAllDetails(dtoDetailGetById, next)
 
-            res.send(details)
-        } catch (error) {
-            if(error instanceof Error) {
-                next(ApiError.internal(error.message))
-            }
-        }
-    }
-
-    async search(req: RequestGetAll<ParamsSearchDetails>, res: Response, next: NextFunction) {
-        try {
-            const dtoDetailSearch = dtoDetail.getDtoDetailSearch(req.query)
-            const details = await serviceDetail.search(dtoDetailSearch, next)
-            
             res.send(details)
         } catch (error) {
             if(error instanceof Error) {

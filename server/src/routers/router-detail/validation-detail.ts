@@ -57,15 +57,6 @@ export const validationCreateDetail = {
     }
 }
 
-export const validationSearchDetail = {
-    createChain() {
-        return [
-            query('keyword')
-                .notEmpty().withMessage(errorStrings.notBeEmptyField('keyword'))
-        ]
-    }
-}
-
 export const validationGetByIdDetail = {
     createChain() {
         return [
