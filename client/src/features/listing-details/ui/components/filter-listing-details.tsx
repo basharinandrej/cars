@@ -65,8 +65,12 @@ export const FilterListingDetails: FC<Props> = () => {
 
     // const debounceHandlerOnChange = useDebounce(onChangeHandler)
 
-    const onSearchInputSearchHandler: SearchProps['onSearch'] = useCallback(() => {
-        dispatch(fetchInitialListingDetails())
+    const onSearchInputSearchHandler: SearchProps['onSearch'] = useCallback((_,__,{source}) => {
+        if(source === 'input') dispatch(fetchInitialListingDetails())
+        if(source === 'clear') {
+            dispatch(dropSearchGlobal())
+            dispatch(fetchInitialListingDetails())
+        }
     }, []) 
 
 
@@ -88,11 +92,14 @@ export const FilterListingDetails: FC<Props> = () => {
         dispatch(fetchListingModels())
     };
     const onChangeSelectModelHandler = (value: string) => {
-        value && dispatch(setSelectedModel(Number(value)))
-        dispatch(fetchInitialListingDetails())
+        if(value) {
+            dispatch(setSelectedModel(Number(value)))
+            dispatch(fetchInitialListingDetails())
+        }
     };
     const onClearSelectModelHandler = () => {
         dispatch(dropSelectedModel())
+        dispatch(fetchInitialListingDetails())
     }
 
     return <div className={styles.filterWrapper}>

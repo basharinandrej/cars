@@ -14,7 +14,7 @@ export const InputSearch: FC<Props>= ({
 
     return <Search 
         placeholder={placeholder} 
-        enterButton="Search" 
+        enterButton="Поиск" 
         size="large"
         loading={isLoading}
         onChange={onChange}

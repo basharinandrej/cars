@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import queryString from 'query-string'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {BrandResponse, ModelResponse, BrandByIdResponse} from '../../interfaces'
 import {fetchListingBrands} from '../async-actions/fetch-listing-brands'
@@ -10,7 +11,6 @@ import {
   deleteOneQueryParam,
   addQueryParams, 
 } from '@shared'
-import queryString from 'query-string';
 
 interface BrandState extends BrandResponse {
   selected: {
