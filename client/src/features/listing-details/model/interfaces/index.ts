@@ -1,6 +1,6 @@
 
 
-export interface ParamsFetchListingDetails {
+export interface ParamsFetchListingDetails extends Record<string, string|number>{
     limit: number
     offset: number
     categoryId?: number
@@ -8,8 +8,9 @@ export interface ParamsFetchListingDetails {
     keyword?: string
 }
 
-export interface ParamsFetchSearchDetails  extends Record<string, string>{
+export interface ParamsFetchSearchDetails  extends Record<string, string|number>{
     keyword: string
+    modelId?: number
 }
 
 export interface ParamsFetchListingBrand {

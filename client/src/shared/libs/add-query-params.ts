@@ -1,14 +1,12 @@
+import queryString from 'query-string';
+import {ParsedUrl} from '../interfaces/parsed-url'
 
+export const addQueryParams = (key: keyof ParsedUrl, value: string|number) => {
+  if(!value) return
+  const parsedUrl: ParsedUrl = queryString.parse(location.search);
+  parsedUrl[key] = value.toString()
 
-export const addQueryParams = (params: Record<string, string>) => {
-    const searchParams = new URLSearchParams(window.location.search)
-    Object.entries(params).forEach(([key, value]) => {
-      if(value) {
-        searchParams.set(key, value)
-      } else {
-        searchParams.delete(key)
-      }
-    })
+  const stringifuedUrl = queryString.stringify(parsedUrl)
 
-    window.history.pushState(null, '',`?${searchParams.toString()}`)
+  window.history.pushState(null, '', `?${stringifuedUrl}`)
 }

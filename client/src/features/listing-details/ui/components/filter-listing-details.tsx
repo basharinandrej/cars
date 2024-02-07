@@ -1,8 +1,9 @@
-import React, {FC, ChangeEventHandler, useCallback} from 'react'
+import React, {FC, ChangeEventHandler, useCallback, useEffect} from 'react'
 import { SearchProps } from 'antd/es/input';
 import { useSelector } from 'react-redux';
 import {InputSearch, useAppDispatch, SelectSearch} from '@shared'
 import {
+    initFilters,
     setSearchGlobal, 
     dropSearchGlobal, 
     setSelectedBrand,
@@ -11,15 +12,19 @@ import {
     dropSelectedBrand
 } from '../../model/slices/filter-listing-details-slice'
 
-import {fetchInitialSearchListingDetails} from '../../model/async-actions/fetch-initial-search-listing-details'
-import {fetchInitialListingDetails} from '../../model/async-actions/fetch-initial-listing-details'
 import {fetchListingBrands} from '../../model/async-actions/fetch-listing-brands'
 import {fetchListingModels} from '../../model/async-actions/fetch-listing-models'
+import {fetchInitialListingDetails} from '../../model/async-actions/fetch-initial-listing-details'
+import {fetchByIdBrand} from '../../model/async-actions/fetch-by-id-brand'
 
 import {
-    getSearchFilterListingDetails, 
+    getSearchGlobalFilterListingDetails, 
     getFilterListingModels,
-    getFilterListingBrands
+    getFilterListingBrands,
+    getFilterSelectedModelLabel,
+    getFilterSelectedModelValue,
+    getFilterSelectedBrandValue,
+    getFilterSelectedBrandLabel
 } from '../../model/selectors'
 
 import styles from './filter-listing-details.module.sass'
@@ -30,9 +35,26 @@ import styles from './filter-listing-details.module.sass'
 export const FilterListingDetails: FC<Props> = () => {
     const dispatch = useAppDispatch()
 
-    const search = useSelector(getSearchFilterListingDetails)
+    useEffect(() => {
+        dispatch(initFilters())
+    }, [])
+
+
+    const searchGlobal = useSelector(getSearchGlobalFilterListingDetails)
     const brands = useSelector(getFilterListingBrands)
     const models = useSelector(getFilterListingModels)
+    
+    const modelLabel = useSelector(getFilterSelectedModelLabel)
+    const modelValue = useSelector(getFilterSelectedModelValue)
+
+    const brandLabel = useSelector(getFilterSelectedBrandLabel)
+    const brandValue = useSelector(getFilterSelectedBrandValue)
+
+    useEffect(() => {
+        if(brandValue && !brandLabel) {
+            dispatch(fetchByIdBrand(brandValue))
+        }
+    }, [modelValue, brandValue])
 
     const onChangeInputSearchHandler: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
         const value = e.target.value        
@@ -43,20 +65,22 @@ export const FilterListingDetails: FC<Props> = () => {
 
     // const debounceHandlerOnChange = useDebounce(onChangeHandler)
 
-    const onSeacrhInputSearchHandler: SearchProps['onSearch'] = useCallback((_, __, {source}) => {
-        if(source === 'input') dispatch(fetchInitialSearchListingDetails())
-        if(source === 'clear') dispatch(fetchInitialListingDetails())
+    const onSearchInputSearchHandler: SearchProps['onSearch'] = useCallback(() => {
+        dispatch(fetchInitialListingDetails())
     }, []) 
 
 
-    const onChangeSelectBrandHandler = (value: string) => {
-        value && dispatch(setSelectedBrand(Number(value)))
-    };
     const onSearchSelectBrandHandler = (value: string) => {
         dispatch(fetchListingBrands(value))
     };
-    const onClearSelectSearchBrand = () => {
+    const onChangeSelectBrandHandler = (value: string) => {
+        value && dispatch(setSelectedBrand(Number(value)))
+        dispatch(dropSelectedModel())
+    };
+    const onClearSelectBrandHandler = () => {
         dispatch(dropSelectedBrand())
+        dispatch(dropSelectedModel())
+        dispatch(fetchInitialListingDetails())
     }
 
 
@@ -65,17 +89,18 @@ export const FilterListingDetails: FC<Props> = () => {
     };
     const onChangeSelectModelHandler = (value: string) => {
         value && dispatch(setSelectedModel(Number(value)))
+        dispatch(fetchInitialListingDetails())
     };
-    const onClearSelectSearchModel = () => {
+    const onClearSelectModelHandler = () => {
         dispatch(dropSelectedModel())
     }
 
     return <div className={styles.filterWrapper}>
         <div className={styles.inputSearch}>
             <InputSearch 
-                onSearch={onSeacrhInputSearchHandler} 
+                onSearch={onSearchInputSearchHandler} 
                 onChange={onChangeInputSearchHandler}
-                externalValue={search}
+                externalValue={searchGlobal}
             />
         </div>
 
@@ -85,8 +110,9 @@ export const FilterListingDetails: FC<Props> = () => {
                     placeholder={'Выбирите бренд'}
                     onSearch={onSearchSelectBrandHandler}
                     onChange={onChangeSelectBrandHandler}
-                    onClear={onClearSelectSearchBrand}
+                    onClear={onClearSelectBrandHandler}
                     options={brands}
+                    value={brandLabel}
                 />
             </div>
 
@@ -95,8 +121,9 @@ export const FilterListingDetails: FC<Props> = () => {
                     placeholder={'Выбирите модель'}
                     onFocus={onFocusModelHandler}
                     onChange={onChangeSelectModelHandler}
-                    onClear={onClearSelectSearchModel}
+                    onClear={onClearSelectModelHandler}
                     options={models}
+                    value={modelLabel}
                 />
             </div>
         </div>

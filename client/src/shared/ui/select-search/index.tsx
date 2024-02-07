@@ -15,7 +15,8 @@ export const SelectSearch: FC<SelectProps> = ({
     onClear,
     options,
     placeholder,
-    allowClear = true
+    allowClear = true,
+    value
 }) => (
   <Select
     showSearch
@@ -29,6 +30,7 @@ export const SelectSearch: FC<SelectProps> = ({
     options={options}
     className={styles.selectSearch}
     allowClear={allowClear}
+    value={value}
   />
 );
 

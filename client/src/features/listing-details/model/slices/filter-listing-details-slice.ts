@@ -1,30 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {BrandResponse, ModelResponse} from '../../interfaces'
+import {BrandResponse, ModelResponse, BrandByIdResponse} from '../../interfaces'
 import {fetchListingBrands} from '../async-actions/fetch-listing-brands'
 import {fetchListingModels} from '../async-actions/fetch-listing-models'
+import {fetchByIdBrand} from '../async-actions/fetch-by-id-brand'
 import { 
   EMPTY_STRING, 
-  dropQuerySearch, 
-  getQuerySearchFromUrl, 
+  ParsedUrl,
+  deleteOneQueryParam,
   addQueryParams, 
-  dropQueryModelId
 } from '@shared'
+import queryString from 'query-string';
 
-interface Brand extends BrandResponse {
-  selected: number
+interface BrandState extends BrandResponse {
+  selected: {
+    label?: string,
+    value: number
+  }
 }
-interface Model extends ModelResponse {
-  selected: number
+
+interface ModelState extends ModelResponse {
+  selected: {
+    label?: string,
+    value: number
+  }
 }
+
 export interface FilterListingDetailsSchema {
-    search: string
-    brand: Brand
-    model: Model
+  searchGlobal: string
+  brand: BrandState
+  model: ModelState
 }
 
 const initialState: FilterListingDetailsSchema = {
-  search: getQuerySearchFromUrl(),
+  searchGlobal: '',
   model: {
     selected: null,
     items:[],
@@ -41,31 +50,42 @@ export const filterListingDetailsSlice = createSlice({
   name: 'filter-listing-details',
   initialState,
   reducers: {
+    initFilters: (state) => {
+      const parsedUrl: ParsedUrl = queryString.parse(location.search);
+
+      state.searchGlobal = parsedUrl.keyword
+      state.model.selected = {
+        value: Number(parsedUrl.modelId)
+      }
+      state.brand.selected = {
+        value: Number(parsedUrl.brandId)
+      }
+    },
     setSearchGlobal: (state, action: PayloadAction<string>) => {
-      state.search = action.payload
+      state.searchGlobal = action.payload
     },
     dropSearchGlobal: (state) => {
-      dropQuerySearch()
-      state.search = EMPTY_STRING
+      deleteOneQueryParam('keyword')
+      state.searchGlobal = EMPTY_STRING
     },
 
     setSelectedBrand: (state, action: PayloadAction<number>) => {
-      state.brand.selected = action.payload
+      addQueryParams('brandId', action.payload)
+      state.brand.selected = state.brand.items.find((brandItem) => brandItem.value === action.payload)
     },
     dropSelectedBrand: (state) => {
+      deleteOneQueryParam('brandId')
       state.brand.selected = null
     },
 
     setSelectedModel: (state, action: PayloadAction<number>) => {
-      addQueryParams({
-        modelId: action.payload.toString()
-      })
-      state.model.selected = action.payload
+      addQueryParams('modelId', action.payload)
+      state.model.selected = state.model.items.find((modelItem) => modelItem.value === action.payload)
     },
     dropSelectedModel: (state) => {
-      dropQueryModelId()
+      deleteOneQueryParam('modelId')
       state.model.selected = null
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,8 +94,8 @@ export const filterListingDetailsSlice = createSlice({
       .addCase(fetchListingBrands.fulfilled, (state, action: PayloadAction<BrandResponse>) => {
         const data = action.payload
 
-        state.brand.items = data.items
-        state.brand.total = data.total
+        state.brand.items = data?.items
+        state.brand.total = data?.total
       })
 
 
@@ -84,13 +104,29 @@ export const filterListingDetailsSlice = createSlice({
       .addCase(fetchListingModels.fulfilled, (state, action: PayloadAction<ModelResponse>) => {
         const data = action.payload
 
-        state.model.items = data.items
-        state.model.total = data.total
+        state.model.items = data?.items
+        state.model.total = data?.total
+      })
+
+
+      .addCase(fetchByIdBrand.pending, () => {})
+      .addCase(fetchByIdBrand.fulfilled, (state, action: PayloadAction<BrandByIdResponse>) => {
+        const modelId = state.model.selected?.value
+        const selectedModel = action.payload.models.find((model) => model.id === modelId)
+
+        state.brand.selected = {
+          value: state.brand.selected?.value,
+          label: action.payload.name
+        }
+        state.model.selected.label = selectedModel?.name
+        state.model.selected.value = selectedModel?.id
       })
   }
 })
 
 export const {
+  initFilters,
+
   setSearchGlobal, 
   dropSearchGlobal,
 
@@ -98,7 +134,7 @@ export const {
   dropSelectedBrand,
   
   setSelectedModel,
-  dropSelectedModel
+  dropSelectedModel,
 } = filterListingDetailsSlice.actions
 
 export const filterListingDetailsReducer = filterListingDetailsSlice.reducer

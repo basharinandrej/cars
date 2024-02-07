@@ -4,6 +4,7 @@ import {ListingDetailsSchema} from '@features'
 import {
     getLimitListingDetails,
     getOffsetListingDetails,
+    getFilterSelectedModelValue
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
 
@@ -16,10 +17,15 @@ export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema
 
         const limit = getLimitListingDetails(state)
         const offset = getOffsetListingDetails(state)
+        const valueSelectedModel = getFilterSelectedModelValue(state)
 
         const params: ParamsFetchListingDetails = {
             limit,
             offset,
+        }
+
+        if(valueSelectedModel) {
+            params.modelId = valueSelectedModel
         }
 
         try {

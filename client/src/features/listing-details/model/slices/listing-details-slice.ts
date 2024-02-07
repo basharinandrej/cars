@@ -5,7 +5,6 @@ import {ListingDetailsResponse} from '../../interfaces'
 import {fetchInitialListingDetails} from '../async-actions/fetch-initial-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
 import { fetchSearchListingDetailsNextPart } from '../async-actions/fetch-search-listing-details-next-part'
-import {fetchInitialSearchListingDetails} from '../async-actions/fetch-initial-search-listing-details'
 
 import {DEFAULT_VALUE_LIMIT, INITIAL_VALUE_OFFSET} from '../../constans'
 import {calcOffset} from '../utils/calc-offset'
@@ -43,19 +42,6 @@ export const listingDetailsSlice = createSlice({
             state.total = data.total
             state.offset = INITIAL_VALUE_OFFSET + data.items?.length
         })
-
-        .addCase(fetchInitialSearchListingDetails.pending, (state) => {
-          state.isLoading = true
-        })
-        .addCase(fetchInitialSearchListingDetails.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
-          const data = action.payload
-
-          state.isLoading = false
-          state.items = data.items
-          state.total = data.total
-          state.offset = INITIAL_VALUE_OFFSET + data.items?.length
-        })
-
 
 
         //Next Parts

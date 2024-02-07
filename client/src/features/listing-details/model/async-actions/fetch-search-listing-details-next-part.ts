@@ -4,7 +4,8 @@ import {ListingDetailsSchema} from '@features'
 import {
     getLimitListingDetails,
     getOffsetListingDetails,
-    getSearchFilterListingDetails
+    getFilterSelectedModelValue,
+    getSearchGlobalFilterListingDetails
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
 
@@ -17,13 +18,15 @@ export const fetchSearchListingDetailsNextPart = createAsyncThunk<ListingDetails
 
         const limit = getLimitListingDetails(state)
         const offset = getOffsetListingDetails(state)
-        const search = getSearchFilterListingDetails(state)
+        const searchGlobal = getSearchGlobalFilterListingDetails(state)
+        const valueSelectedModel = getFilterSelectedModelValue(state)
 
         const params: ParamsFetchListingDetails = {
             limit,
             offset,
         }
-        if(search) params.keyword = search
+        if(searchGlobal) params.keyword = searchGlobal
+        if(valueSelectedModel) params.modelId = valueSelectedModel
 
         try {
 

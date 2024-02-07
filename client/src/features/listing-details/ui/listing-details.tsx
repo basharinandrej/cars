@@ -7,16 +7,10 @@ import {useInfinityScroll, useAppDispatch} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
-import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
-import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
-import {fetchSearchListingDetailsNextPart} from '../model/async-actions/fetch-search-listing-details-next-part'
-import {fetchInitialSearchListingDetails} from '../model/async-actions/fetch-initial-search-listing-details'
-
 import {
-    getItemsListingDetails,
-    getLengthItemsListingDetails,
-    getSearchFilterListingDetails
+    getItemsListingDetails, 
 } from '../model/selectors'
+import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
 
 import styles from './listing-details.module.sass'
 
@@ -27,25 +21,15 @@ export const ListingDetails = () => {
     const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     const details = useSelector(getItemsListingDetails)
-    const lengthItems = useSelector(getLengthItemsListingDetails)
-    const search = useSelector(getSearchFilterListingDetails)
 
-    const isInitilaFetch = !lengthItems && !search
-    const isInitilaFetchSearch = !lengthItems && search
-    const isFetchNextPart = !search && lengthItems
-    const isFetchSearchNextPart = search && lengthItems
 
     useEffect(() => {
-        isInitilaFetch && dispatch(fetchInitialListingDetails())
-        isInitilaFetchSearch && dispatch(fetchInitialSearchListingDetails())
-
-    }, [dispatch, isInitilaFetch, isInitilaFetchSearch, fetchInitialListingDetails, fetchInitialSearchListingDetails])
+        dispatch(fetchInitialListingDetails())
+    }, [])
 
     const onScrollEndHandler = useCallback(() => {
-
-        isFetchNextPart && dispatch(fetchListingDetailsNextPart())
-        isFetchSearchNextPart && dispatch(fetchSearchListingDetailsNextPart())
-    },[dispatch, isFetchSearchNextPart, isFetchNextPart, fetchListingDetailsNextPart, fetchSearchListingDetailsNextPart])
+        // dispatch(fetchListingDetails(searchGlobal, hasLengthItems)())
+    },[])
 
 
     useInfinityScroll({

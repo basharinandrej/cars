@@ -21,7 +21,7 @@ export interface ListingDetailsResponse {
 
 export interface Brand {
     label: string
-    value: string
+    value: number
 }
 
 export interface BrandResponse {
@@ -31,10 +31,20 @@ export interface BrandResponse {
 
 export interface Model {
     label: string
-    value: string
+    value: number
 }
 
 export interface ModelResponse {
     items: Model[]
     total: number
+}
+
+export interface BrandByIdResponse {
+    id: number,
+    name: string,
+    models: Array<{
+        id: number,
+        name: string,
+        brandId?: number
+    }>
 }

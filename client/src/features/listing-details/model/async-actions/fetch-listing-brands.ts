@@ -23,7 +23,7 @@ export const fetchListingBrands = createAsyncThunk<BrandResponse, string, ThunkA
                 total: response.data.total,
                 items: response.data.items.map((brand:any) => {
                     return {
-                        value: brand.id.toString(),
+                        value: brand.id,
                         label: brand.name
                     }
                 })

@@ -9,9 +9,9 @@ export { SelectSearch } from './ui/select-search';
 
 
 export {addQueryParams} from './libs/add-query-params'
-export {getQuerySearchFromUrl} from './libs/get-query-search-from-url'
-export {dropQuerySearch} from './libs/drop-query'
-export {dropQueryModelId} from './libs/drop-query'
-
+export {deleteOneQueryParam} from './libs/delete-one-query-param'
 
 export {EMPTY_STRING} from './constans'
+
+
+export {ParsedUrl} from './interfaces/parsed-url'
