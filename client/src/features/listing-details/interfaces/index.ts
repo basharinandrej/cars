@@ -12,6 +12,7 @@ export interface Detail {
     photo: string
     createdAt: string
     modelId: number
+    detailCategoryId?: number
 }
 
 export interface ListingDetailsResponse {
@@ -37,6 +38,16 @@ export interface Model {
 export interface ModelResponse {
     items: Model[]
     total: number
+}
+
+export interface Category {
+    label: string,
+    value: number
+}
+
+export interface CategoryResponse {
+    total: number,
+    items: Category[]
 }
 
 export interface BrandByIdResponse {

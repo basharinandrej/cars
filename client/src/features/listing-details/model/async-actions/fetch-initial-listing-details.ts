@@ -4,7 +4,8 @@ import {ThunkApiConfig} from '@app'
 import {
     getLimitListingDetails,
     getFilterSelectedModelValue,
-    getSearchGlobalFilterListingDetails
+    getSearchGlobalFilterListingDetails,
+    getFilterSelectedCategoryValue
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
 import {INITIAL_VALUE_OFFSET} from '../../constans'
@@ -20,6 +21,7 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
         const searchGlobal =  getSearchGlobalFilterListingDetails(state)
         const limit = getLimitListingDetails(state)
         const valueSelectedModel = getFilterSelectedModelValue(state)
+        const detailCategoryId = getFilterSelectedCategoryValue(state)
         const offset = INITIAL_VALUE_OFFSET
         
         const params: ParamsFetchListingDetails = {
@@ -28,9 +30,11 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
 
         if(searchGlobal) params.keyword = searchGlobal
         if(valueSelectedModel) params.modelId = valueSelectedModel
+        if(detailCategoryId) params.detailCategoryId = detailCategoryId
 
         addQueryParams('keyword', params.keyword)
         addQueryParams('modelId', params.modelId)
+        addQueryParams('detailCategoryId', params.detailCategoryId)
 
         try {
             const response = await extra.api.get('/api/detail', {

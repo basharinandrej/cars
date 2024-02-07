@@ -27,6 +27,7 @@ import {
     getFilterSelectedBrandLabel
 } from '../../model/selectors'
 
+import {SelectSearchCategoryElement} from './select-search-category-element/select-search-category-element'
 import styles from './filter-listing-details.module.sass'
 
 
@@ -132,6 +133,10 @@ export const FilterListingDetails: FC<Props> = () => {
                     options={models}
                     value={modelLabel}
                 />
+            </div>
+
+            <div className={styles.selectSearchCategory}>
+                <SelectSearchCategoryElement />
             </div>
         </div>
     </div>

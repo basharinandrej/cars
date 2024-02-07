@@ -62,6 +62,7 @@ export const ListingDetails = () => {
                     <div className={styles.wrapper}>
                         <p>vendorCode - {detail.vendorCode}</p>
                         <p>modelId - {detail.modelId}</p>
+                        <p>detailCategoryId - {detail.detailCategoryId}</p>
                         <h3 className={styles.title}>{detail.name}</h3>
                         <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
                         <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>

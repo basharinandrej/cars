@@ -9,11 +9,16 @@ export const getLengthItemsListingDetails = (state: RootState) => state.listingD
 
 
 export const getSearchGlobalFilterListingDetails = (state: RootState) => state.filterListingDetails.searchGlobal
+
 export const getFilterListingBrands = (state: RootState) => state.filterListingDetails.brand.items
 export const getFilterListingModels = (state: RootState) => state.filterListingDetails.model.items
+export const getFilterListingCategories = (state: RootState) => state.filterListingDetails.category.items
 
 export const getFilterSelectedBrandValue = (state: RootState) => state.filterListingDetails.brand.selected?.value
 export const getFilterSelectedBrandLabel= (state: RootState) => state.filterListingDetails.brand.selected?.label
 
 export const getFilterSelectedModelValue = (state: RootState) => state.filterListingDetails.model.selected?.value
 export const getFilterSelectedModelLabel= (state: RootState) => state.filterListingDetails.model.selected?.label
+
+export const getFilterSelectedCategoryValue = (state: RootState) => state.filterListingDetails.category.selected?.value
+export const getFilterSelectedCategoryLabel= (state: RootState) => state.filterListingDetails.category.selected?.label
