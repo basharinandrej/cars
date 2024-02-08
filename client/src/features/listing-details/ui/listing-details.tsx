@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useCallback, UIEvent } from 'react'
+import React, { useEffect, useRef, useCallback, UIEvent, MouseEvent, UIEventHandler, MouseEventHandler } from 'react'
 import { Card, Badge } from 'antd'
 import {useSelector} from 'react-redux'
 import moment from 'moment'
-import {useLocation} from "react-router-dom";
 
-import {useInfinityScroll, useAppDispatch, AppLink} from '@shared'
+import {useInfinityScroll, useAppDispatch, AppLink, useDebounce, HTMLElementEvent} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
@@ -32,27 +31,27 @@ export const ListingDetails = () => {
     const scrollPosition = useSelector(getScrollPositionListingDetails)
         
     useEffect(() => {
-        if(scrollPosition && refRootElement.current) {
+        if(details.length && scrollPosition && refRootElement.current) {
             refRootElement.current.scrollTo({
                 top: scrollPosition,
-                behavior: 'smooth'
+                behavior: 'auto'
             })
         }
-    }, [refRootElement])
+    }, [refRootElement, details])
 
     useEffect(() => {
-        dispatch(fetchInitialListingDetails())
+        !scrollPosition && dispatch(fetchInitialListingDetails())
     }, [])
 
     const onScrollEndHandler = useCallback(() => {
         canPaginationMore && dispatch(fetchListingDetailsNextPart())
-    }, [canPaginationMore])
+    }, [canPaginationMore, dispatch, fetchListingDetailsNextPart])
 
-    const onScrollHandler = (e: UIEvent<HTMLElement>) => {
-        const value = e.currentTarget.scrollTop
+    const onScrollHandler  = useDebounce((e: HTMLElementEvent<HTMLDivElement>) => {
+        const value = e.target?.scrollTop
 
         dispatch(keepScrollPosition(value))
-    }
+    }, 300)
 
     useInfinityScroll({
         callback: onScrollEndHandler,

@@ -50,8 +50,6 @@ export const listingDetailsSlice = createSlice({
             state.canPaginationMore = data?.total > data.items?.length
         })
 
-
-        //Next Parts
         .addCase(fetchListingDetailsNextPart.pending, (state) => {
           state.isLoading = true
         })
