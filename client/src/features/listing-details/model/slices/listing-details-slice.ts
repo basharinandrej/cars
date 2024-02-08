@@ -14,6 +14,7 @@ export interface ListingDetailsSchema extends ListingDetailsResponse {
   limit: number
   offset: number
   canPaginationMore: boolean
+  scrollPostion: number
 }
 
 const initialState: ListingDetailsSchema = {
@@ -22,13 +23,17 @@ const initialState: ListingDetailsSchema = {
   isLoading: false,
   limit: DEFAULT_VALUE_LIMIT,
   offset: INITIAL_VALUE_OFFSET,
-  canPaginationMore: false
+  canPaginationMore: false,
+  scrollPostion: 0
 }
 
 export const listingDetailsSlice = createSlice({
   name: 'listing-details',
   initialState,
   reducers: {
+    keepScrollPosition: (state, action: PayloadAction<number>) => {
+      state.scrollPostion = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -62,5 +67,6 @@ export const listingDetailsSlice = createSlice({
   }
 })
 
+export const {keepScrollPosition} = listingDetailsSlice.actions
 
 export const listingDetailsReducer = listingDetailsSlice.reducer

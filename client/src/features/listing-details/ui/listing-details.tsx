@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback, UIEvent } from 'react'
 import { Card, Badge } from 'antd'
 import {useSelector} from 'react-redux'
 import moment from 'moment'
+import {useLocation} from "react-router-dom";
 
 import {useInfinityScroll, useAppDispatch, AppLink} from '@shared'
 
@@ -9,8 +10,11 @@ import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
 import {
     getItemsListingDetails,
-    getCanPaginationMoreListingDetails
+    getCanPaginationMoreListingDetails,
+    getScrollPositionListingDetails
 } from '../model/selectors'
+
+import {keepScrollPosition} from '../model/slices/listing-details-slice'
 
 import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
 import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
@@ -25,6 +29,16 @@ export const ListingDetails = () => {
 
     const details = useSelector(getItemsListingDetails)
     const canPaginationMore = useSelector(getCanPaginationMoreListingDetails)
+    const scrollPosition = useSelector(getScrollPositionListingDetails)
+        
+    useEffect(() => {
+        if(scrollPosition && refRootElement.current) {
+            refRootElement.current.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            })
+        }
+    }, [refRootElement])
 
     useEffect(() => {
         dispatch(fetchInitialListingDetails())
@@ -34,6 +48,11 @@ export const ListingDetails = () => {
         canPaginationMore && dispatch(fetchListingDetailsNextPart())
     }, [canPaginationMore])
 
+    const onScrollHandler = (e: UIEvent<HTMLElement>) => {
+        const value = e.currentTarget.scrollTop
+
+        dispatch(keepScrollPosition(value))
+    }
 
     useInfinityScroll({
         callback: onScrollEndHandler,
@@ -42,7 +61,11 @@ export const ListingDetails = () => {
     })
 
 
-    return <div className={styles.listingDetails} ref={refRootElement} >
+    return <div 
+        onScroll={onScrollHandler}
+        className={styles.listingDetails} 
+        ref={refRootElement} 
+        >
         {details?.map((detail: Detail) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color

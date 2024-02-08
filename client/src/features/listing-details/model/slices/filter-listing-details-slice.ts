@@ -74,12 +74,15 @@ export const filterListingDetailsSlice = createSlice({
 
       state.searchGlobal = parsedUrl.keyword
       state.model.selected = {
+        ...state.model.selected,
         value: Number(parsedUrl.modelId)
       }
       state.brand.selected = {
+        ...state.brand.selected,
         value: Number(parsedUrl.brandId)
       }
       state.category.selected = {
+        ...state.category.selected,
         value: Number(parsedUrl.detailCategoryId)
       }
     },
