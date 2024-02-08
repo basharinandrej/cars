@@ -1,1 +1,3 @@
 export const EMPTY_STRING = ''
+
+export const DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS = 40

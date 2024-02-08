@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {CategoryResponse} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
-
+import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
 
 export const fetchListingCategories = createAsyncThunk<CategoryResponse, void, ThunkApiConfig>(
     'listing-categories/fetchListingCategories',
@@ -9,7 +9,11 @@ export const fetchListingCategories = createAsyncThunk<CategoryResponse, void, T
         try {
             const { extra} = thunkAPI
       
-            const response = await extra.api.get('/api/detail-category')
+            const response = await extra.api.get('/api/detail-category', {
+                params: {
+                    limit: DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS
+                }
+            })
 
 
             return {

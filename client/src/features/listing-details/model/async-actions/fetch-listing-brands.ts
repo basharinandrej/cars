@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import {BrandResponse} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
 import {ParamsFetchListingBrand} from '../../model/interfaces'
-
+import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
 
 export const fetchListingBrands = createAsyncThunk<BrandResponse, string, ThunkApiConfig>(
     'listing-brands/fetchListingBrands',
@@ -12,7 +12,8 @@ export const fetchListingBrands = createAsyncThunk<BrandResponse, string, ThunkA
             const params:ParamsFetchListingBrand = {
                 sortBy: 'name',
                 orderBy: 'asc',
-                keyword: value
+                keyword: value,
+                limit: DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS
             }
             const response = await extra.api.get('/api/brand', {
                 params

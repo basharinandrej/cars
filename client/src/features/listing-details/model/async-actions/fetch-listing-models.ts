@@ -3,7 +3,7 @@ import {BrandResponse} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
 import {ParamsFetchListingModel} from '../../model/interfaces'
 import {getFilterSelectedBrandValue} from '../selectors'
-
+import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
 
 export const fetchListingModels = createAsyncThunk<BrandResponse, void, ThunkApiConfig>(
     'listing-models/fetchListingModels',
@@ -15,7 +15,8 @@ export const fetchListingModels = createAsyncThunk<BrandResponse, void, ThunkApi
             const valueSelectedBrand = getFilterSelectedBrandValue(state)
 
             const params:ParamsFetchListingModel = {
-                brandId: valueSelectedBrand
+                brandId: valueSelectedBrand,
+                limit: DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS
             }
             const response = await extra.api.get('/api/model', {
                 params

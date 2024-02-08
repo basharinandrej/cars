@@ -1,8 +1,10 @@
 import { SelectSearch} from '@shared'
 import { useSelector } from 'react-redux';
+
 import {
     getFilterSelectedCategoryLabel,
-    getFilterListingCategories
+    getFilterListingCategories,
+    getFilterSelectedCategoryValue
 } from '../../../model/selectors'
 
 import {fetchListingCategories} from '../../../model/async-actions/fetch-listing-categories'
@@ -14,13 +16,21 @@ import {
 } from '../../../model/slices/filter-listing-details-slice'
 
 import {useAppDispatch} from '@shared'
+import { useEffect } from 'react';
 
 
 export const SelectSearchCategoryElement = () => {
     const dispatch = useAppDispatch()
 
     const categoryLabel = useSelector(getFilterSelectedCategoryLabel)
+    const categoryValue = useSelector(getFilterSelectedCategoryValue)
     const categories = useSelector(getFilterListingCategories)
+
+    useEffect(() => {
+        if(categoryValue && !categoryLabel) {
+            dispatch(fetchListingCategories())
+        }
+    }, [categoryValue])
 
     const onFocusCategoryHandler = () => {
         dispatch(fetchListingCategories())

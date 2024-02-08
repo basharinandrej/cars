@@ -17,10 +17,12 @@ export interface ParamsFetchListingBrand {
     sortBy: 'name',
     orderBy: 'asc' | 'desc'
     keyword?: string
+    limit: number
 }
 
 
 export interface ParamsFetchListingModel {
     brandId: number
+    limit: number
 }
 

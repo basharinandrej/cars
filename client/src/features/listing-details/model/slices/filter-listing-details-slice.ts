@@ -78,6 +78,9 @@ export const filterListingDetailsSlice = createSlice({
       state.brand.selected = {
         value: Number(parsedUrl.brandId)
       }
+      state.category.selected = {
+        value: Number(parsedUrl.detailCategoryId)
+      }
     },
     setSearchGlobal: (state, action: PayloadAction<string>) => {
       state.searchGlobal = action.payload
@@ -154,6 +157,13 @@ export const filterListingDetailsSlice = createSlice({
 
         state.category.items = data?.items
         state.category.total = data?.total
+
+        if(state.category.selected.value && !state.category.selected.label) {
+          const selectedCategory = data.items.find((category) => category.value === state.category.selected.value)
+
+          state.category.selected.label = selectedCategory.label
+          state.category.selected.value = selectedCategory.value
+        }
       })
 
   }

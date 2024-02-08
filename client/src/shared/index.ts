@@ -11,7 +11,7 @@ export { SelectSearch } from './ui/select-search';
 export {addQueryParams} from './libs/add-query-params'
 export {deleteOneQueryParam} from './libs/delete-one-query-param'
 
-export {EMPTY_STRING} from './constans'
+export {EMPTY_STRING, DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from './constans'
 
 
 export {ParsedUrl} from './interfaces/parsed-url'
