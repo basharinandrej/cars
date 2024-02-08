@@ -5,7 +5,7 @@ export const getIsLoadingListingDetails = (state: RootState) => state.listingDet
 export const getItemsListingDetails = (state: RootState) => state.listingDetails.items
 export const getLimitListingDetails = (state: RootState) => state.listingDetails.limit
 export const getOffsetListingDetails = (state: RootState) => state.listingDetails.offset
-export const getcanPaginationMoreListingDetails = (state: RootState) => state.listingDetails.canPaginationMore
+export const getCanPaginationMoreListingDetails = (state: RootState) => state.listingDetails.canPaginationMore
 
 export const getSearchGlobalFilterListingDetails = (state: RootState) => state.filterListingDetails.searchGlobal
 

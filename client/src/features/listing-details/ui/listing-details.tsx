@@ -9,7 +9,7 @@ import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
 import {
     getItemsListingDetails,
-    getCanFetchMoreListingDetails
+    getCanPaginationMoreListingDetails
 } from '../model/selectors'
 
 import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
@@ -24,7 +24,7 @@ export const ListingDetails = () => {
     const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     const details = useSelector(getItemsListingDetails)
-    const canPaginationMore = useSelector(getCanFetchMoreListingDetails)
+    const canPaginationMore = useSelector(getCanPaginationMoreListingDetails)
 
     useEffect(() => {
         dispatch(fetchInitialListingDetails())
