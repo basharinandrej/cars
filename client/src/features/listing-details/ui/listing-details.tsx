@@ -3,7 +3,7 @@ import { Card, Badge } from 'antd'
 import {useSelector} from 'react-redux'
 import moment from 'moment'
 
-import {useInfinityScroll, useAppDispatch} from '@shared'
+import {useInfinityScroll, useAppDispatch, AppLink} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
@@ -43,7 +43,9 @@ export const ListingDetails = () => {
         {details?.map((detail: Detail, idx) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
-            return <Badge.Ribbon
+
+            return <AppLink to={`detail/${detail.vendorCode}`}>
+                <Badge.Ribbon
                     text={textBadge}
                     color={colorBadge}
                     key={detail.id + idx}
@@ -69,6 +71,7 @@ export const ListingDetails = () => {
                     </div>
                 </Card>
             </Badge.Ribbon>
+            </AppLink>
         })}
         <div ref={refTargetElement}/>
     </div>
