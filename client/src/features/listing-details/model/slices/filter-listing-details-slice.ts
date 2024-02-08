@@ -72,18 +72,29 @@ export const filterListingDetailsSlice = createSlice({
     initFilters: (state) => {
       const parsedUrl: ParsedUrl = queryString.parse(location.search);
 
-      state.searchGlobal = parsedUrl.keyword
-      state.model.selected = {
-        ...state.model.selected,
-        value: Number(parsedUrl.modelId)
+      if(Number(parsedUrl.keyword)) {
+        state.searchGlobal = parsedUrl.keyword
       }
-      state.brand.selected = {
-        ...state.brand.selected,
-        value: Number(parsedUrl.brandId)
+
+      if(Number(parsedUrl.modelId)) {
+        state.model.selected = {
+          ...state.model.selected,
+          value: Number(parsedUrl.modelId)
+        }
       }
-      state.category.selected = {
-        ...state.category.selected,
-        value: Number(parsedUrl.detailCategoryId)
+
+      if(Number(parsedUrl.brandId)) {
+        state.brand.selected = {
+          ...state.brand.selected,
+          value: Number(parsedUrl.brandId)
+        }
+      }
+
+      if(Number(parsedUrl.detailCategoryId)) {
+        state.category.selected = {
+          ...state.category.selected,
+          value: Number(parsedUrl.detailCategoryId)
+        }
       }
     },
     dropFilters: (state) => {
