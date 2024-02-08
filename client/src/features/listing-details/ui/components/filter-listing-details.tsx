@@ -7,13 +7,11 @@ import {
     setSearchGlobal, 
     dropSearchGlobal, 
     setSelectedBrand,
-    setSelectedModel,
     dropSelectedModel,
     dropSelectedBrand
 } from '../../model/slices/filter-listing-details-slice'
 
 import {fetchListingBrands} from '../../model/async-actions/fetch-listing-brands'
-import {fetchListingModels} from '../../model/async-actions/fetch-listing-models'
 import {fetchInitialListingDetails} from '../../model/async-actions/fetch-initial-listing-details'
 import {fetchByIdBrand} from '../../model/async-actions/fetch-by-id-brand'
 
@@ -27,8 +25,11 @@ import {
     getFilterSelectedBrandLabel
 } from '../../model/selectors'
 
+
 import {SelectSearchCategoryElement} from './select-search-category-element/select-search-category-element'
 import {ButtonResetFilter} from './button-reset-filter-element/button-reset-filter-element'
+import {SelectSearchModelElement} from './select-search-model-element/select-search-model-element'
+
 
 import styles from './filter-listing-details.module.sass'
 
@@ -45,9 +46,7 @@ export const FilterListingDetails: FC<Props> = () => {
 
     const searchGlobal = useSelector(getSearchGlobalFilterListingDetails)
     const brands = useSelector(getFilterListingBrands)
-    const models = useSelector(getFilterListingModels)
     
-    const modelLabel = useSelector(getFilterSelectedModelLabel)
     const modelValue = useSelector(getFilterSelectedModelValue)
 
     const brandLabel = useSelector(getFilterSelectedBrandLabel)
@@ -91,19 +90,6 @@ export const FilterListingDetails: FC<Props> = () => {
     }
 
 
-    const onFocusModelHandler = () => {
-        dispatch(fetchListingModels())
-    };
-    const onChangeSelectModelHandler = (value: string) => {
-        if(value) {
-            dispatch(setSelectedModel(Number(value)))
-            dispatch(fetchInitialListingDetails())
-        }
-    };
-    const onClearSelectModelHandler = () => {
-        dispatch(dropSelectedModel())
-        dispatch(fetchInitialListingDetails())
-    }
 
     return <div className={styles.filterWrapper}>
         <div className={styles.inputSearch}>
@@ -127,14 +113,7 @@ export const FilterListingDetails: FC<Props> = () => {
             </div>
 
             <div className={styles.selectSearchModel}>
-                <SelectSearch
-                    placeholder={'Выбирите модель'}
-                    onFocus={onFocusModelHandler}
-                    onChange={onChangeSelectModelHandler}
-                    onClear={onClearSelectModelHandler}
-                    options={models}
-                    value={modelLabel}
-                />
+                <SelectSearchModelElement />
             </div>
 
             <div className={styles.selectSearchCategory}>
