@@ -1,25 +1,15 @@
-import React, {FC, ChangeEventHandler, useCallback, useEffect} from 'react'
-import { SearchProps } from 'antd/es/input';
+import React, {FC, useEffect} from 'react'
 import { useSelector } from 'react-redux';
-import {InputSearch, useAppDispatch, SelectSearch} from '@shared'
+import {useAppDispatch} from '@shared'
 import {
-    initFilters,
-    setSearchGlobal, 
-    dropSearchGlobal, 
-    setSelectedBrand,
-    dropSelectedModel,
-    dropSelectedBrand
+    initFilters
 } from '../../model/slices/filter-listing-details-slice'
 
-import {fetchListingBrands} from '../../model/async-actions/fetch-listing-brands'
-import {fetchInitialListingDetails} from '../../model/async-actions/fetch-initial-listing-details'
+
 import {fetchByIdBrand} from '../../model/async-actions/fetch-by-id-brand'
 
+
 import {
-    getSearchGlobalFilterListingDetails, 
-    getFilterListingModels,
-    getFilterListingBrands,
-    getFilterSelectedModelLabel,
     getFilterSelectedModelValue,
     getFilterSelectedBrandValue,
     getFilterSelectedBrandLabel
@@ -29,10 +19,10 @@ import {
 import {SelectSearchCategoryElement} from './select-search-category-element/select-search-category-element'
 import {ButtonResetFilter} from './button-reset-filter-element/button-reset-filter-element'
 import {SelectSearchModelElement} from './select-search-model-element/select-search-model-element'
-
+import {SelectSearchBrandElement} from './select-search-brand-element/select-search-brand-element'
+import {InputSearchGlobalElement} from './input-search-global-element/input-search-global-element'
 
 import styles from './filter-listing-details.module.sass'
-
 
 
 
@@ -42,10 +32,6 @@ export const FilterListingDetails: FC<Props> = () => {
     useEffect(() => {
         dispatch(initFilters())
     }, [])
-
-
-    const searchGlobal = useSelector(getSearchGlobalFilterListingDetails)
-    const brands = useSelector(getFilterListingBrands)
     
     const modelValue = useSelector(getFilterSelectedModelValue)
 
@@ -58,58 +44,14 @@ export const FilterListingDetails: FC<Props> = () => {
         }
     }, [modelValue, brandValue])
 
-    const onChangeInputSearchHandler: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-        const value = e.target.value        
-        value 
-            ? dispatch(setSearchGlobal(value))
-            : dispatch(dropSearchGlobal())
-    }, [dispatch, setSearchGlobal])
-
-    // const debounceHandlerOnChange = useDebounce(onChangeHandler)
-
-    const onSearchInputSearchHandler: SearchProps['onSearch'] = useCallback((_,__,{source}) => {
-        if(source === 'input') dispatch(fetchInitialListingDetails())
-        if(source === 'clear') {
-            dispatch(dropSearchGlobal())
-            dispatch(fetchInitialListingDetails())
-        }
-    }, []) 
-
-
-    const onSearchSelectBrandHandler = (value: string) => {
-        dispatch(fetchListingBrands(value))
-    };
-    const onChangeSelectBrandHandler = (value: string) => {
-        value && dispatch(setSelectedBrand(Number(value)))
-        dispatch(dropSelectedModel())
-    };
-    const onClearSelectBrandHandler = () => {
-        dispatch(dropSelectedBrand())
-        dispatch(dropSelectedModel())
-        dispatch(fetchInitialListingDetails())
-    }
-
-
-
     return <div className={styles.filterWrapper}>
         <div className={styles.inputSearch}>
-            <InputSearch 
-                onSearch={onSearchInputSearchHandler} 
-                onChange={onChangeInputSearchHandler}
-                externalValue={searchGlobal}
-            />
+            <InputSearchGlobalElement />
         </div>
 
         <div className={styles.boxSelects}>
             <div className={styles.selectSearchBrand}>
-                <SelectSearch
-                    placeholder={'Выбирите бренд'}
-                    onSearch={onSearchSelectBrandHandler}
-                    onChange={onChangeSelectBrandHandler}
-                    onClear={onClearSelectBrandHandler}
-                    options={brands}
-                    value={brandLabel}
-                />
+                <SelectSearchBrandElement />
             </div>
 
             <div className={styles.selectSearchModel}>
