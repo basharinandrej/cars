@@ -8,9 +8,12 @@ import {useInfinityScroll, useAppDispatch, AppLink} from '@shared'
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
 import {
-    getItemsListingDetails, 
+    getItemsListingDetails,
+    getCanFetchMoreListingDetails
 } from '../model/selectors'
+
 import {fetchInitialListingDetails} from '../model/async-actions/fetch-initial-listing-details'
+import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-details-next-part'
 
 import styles from './listing-details.module.sass'
 
@@ -21,15 +24,15 @@ export const ListingDetails = () => {
     const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     const details = useSelector(getItemsListingDetails)
-
+    const canPaginationMore = useSelector(getCanFetchMoreListingDetails)
 
     useEffect(() => {
         dispatch(fetchInitialListingDetails())
     }, [])
 
     const onScrollEndHandler = useCallback(() => {
-        // dispatch(fetchListingDetails(searchGlobal, hasLengthItems)())
-    },[])
+        canPaginationMore && dispatch(fetchListingDetailsNextPart())
+    }, [canPaginationMore])
 
 
     useInfinityScroll({
@@ -40,11 +43,11 @@ export const ListingDetails = () => {
 
 
     return <div className={styles.listingDetails} ref={refRootElement} >
-        {details?.map((detail: Detail, idx) => {
+        {details?.map((detail: Detail) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
 
-            return <AppLink key={detail.id + idx} to={`detail/${detail.vendorCode}`}>
+            return <AppLink key={detail.id} to={`detail/${detail.vendorCode}`}>
                 <Badge.Ribbon
                     text={textBadge}
                     color={colorBadge}
@@ -61,9 +64,6 @@ export const ListingDetails = () => {
                     }
                 >
                     <div className={styles.wrapper}>
-                        <p>vendorCode - {detail.vendorCode}</p>
-                        <p>modelId - {detail.modelId}</p>
-                        <p>detailCategoryId - {detail.detailCategoryId}</p>
                         <h3 className={styles.title}>{detail.name}</h3>
                         <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
                         <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>

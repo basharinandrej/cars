@@ -4,7 +4,6 @@ import {ListingDetailsResponse} from '../../interfaces'
 
 import {fetchInitialListingDetails} from '../async-actions/fetch-initial-listing-details'
 import { fetchListingDetailsNextPart } from '../async-actions/fetch-listing-details-next-part'
-import { fetchSearchListingDetailsNextPart } from '../async-actions/fetch-search-listing-details-next-part'
 
 import {DEFAULT_VALUE_LIMIT, INITIAL_VALUE_OFFSET} from '../../constans'
 import {calcOffset} from '../utils/calc-offset'
@@ -14,6 +13,7 @@ export interface ListingDetailsSchema extends ListingDetailsResponse {
   isLoading: boolean
   limit: number
   offset: number
+  canPaginationMore: boolean
 }
 
 const initialState: ListingDetailsSchema = {
@@ -22,6 +22,7 @@ const initialState: ListingDetailsSchema = {
   isLoading: false,
   limit: DEFAULT_VALUE_LIMIT,
   offset: INITIAL_VALUE_OFFSET,
+  canPaginationMore: false
 }
 
 export const listingDetailsSlice = createSlice({
@@ -41,6 +42,7 @@ export const listingDetailsSlice = createSlice({
             state.items = data.items
             state.total = data.total
             state.offset = INITIAL_VALUE_OFFSET + data.items?.length
+            state.canPaginationMore = data?.total > data.items?.length
         })
 
 
@@ -55,18 +57,7 @@ export const listingDetailsSlice = createSlice({
           state.total = data.total
           state.items = state.items.concat(data.items)
           state.offset = calcOffset(state)
-        })
-
-        .addCase(fetchSearchListingDetailsNextPart.pending, (state) => {
-          state.isLoading = true
-        })
-        .addCase(fetchSearchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
-          const data = action.payload
-
-          state.isLoading = false
-          state.total = data.total
-          state.items = state.items.concat(data.items)
-          state.offset = calcOffset(state)
+          state.canPaginationMore = data.total > state.items?.length
         })
   }
 })

@@ -18,7 +18,7 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
         const {getState, extra} = thunkAPI
         const state = getState()
 
-        const searchGlobal =  getSearchGlobalFilterListingDetails(state)
+        const searchGlobal = getSearchGlobalFilterListingDetails(state)
         const limit = getLimitListingDetails(state)
         const valueSelectedModel = getFilterSelectedModelValue(state)
         const detailCategoryId = getFilterSelectedCategoryValue(state)

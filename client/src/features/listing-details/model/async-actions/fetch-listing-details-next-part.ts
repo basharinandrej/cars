@@ -4,9 +4,12 @@ import {ListingDetailsSchema} from '@features'
 import {
     getLimitListingDetails,
     getOffsetListingDetails,
-    getFilterSelectedModelValue
+    getFilterSelectedModelValue,
+    getFilterSelectedCategoryValue,
+    getSearchGlobalFilterListingDetails
 } from '../selectors'
 import {ParamsFetchListingDetails} from '../interfaces'
+import {addQueryParams} from '@shared'
 
 
 export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
@@ -15,18 +18,24 @@ export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema
         const {getState, extra} = thunkAPI
         const state = getState()
 
+        const searchGlobal = getSearchGlobalFilterListingDetails(state)
         const limit = getLimitListingDetails(state)
         const offset = getOffsetListingDetails(state)
         const valueSelectedModel = getFilterSelectedModelValue(state)
+        const detailCategoryId = getFilterSelectedCategoryValue(state)
 
         const params: ParamsFetchListingDetails = {
             limit,
             offset,
         }
 
-        if(valueSelectedModel) {
-            params.modelId = valueSelectedModel
-        }
+        if(searchGlobal) params.keyword = searchGlobal
+        if(valueSelectedModel) params.modelId = valueSelectedModel
+        if(detailCategoryId) params.detailCategoryId = detailCategoryId
+
+        addQueryParams('keyword', params.keyword)
+        addQueryParams('modelId', params.modelId)
+        addQueryParams('detailCategoryId', params.detailCategoryId)
 
         try {
 
