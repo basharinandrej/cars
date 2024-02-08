@@ -1,16 +1,16 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { StoreProvider, AppRoutes } from "@app"
-import {Container} from '@shared';
+import {MainLayout} from '@widgets';
 import './styles/index.sass'
 
 const App = () => {
     return (
         <StoreProvider>
             <BrowserRouter>
-                <Container>
+                <MainLayout>
                     <AppRoutes />
-                </Container>
+                </MainLayout>
             </BrowserRouter>
         </StoreProvider>
     )

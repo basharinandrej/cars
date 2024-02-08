@@ -44,11 +44,10 @@ export const ListingDetails = () => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
 
-            return <AppLink to={`detail/${detail.vendorCode}`}>
+            return <AppLink key={detail.id + idx} to={`detail/${detail.vendorCode}`}>
                 <Badge.Ribbon
                     text={textBadge}
                     color={colorBadge}
-                    key={detail.id + idx}
                 >
                 <Card
                     size={'small'}

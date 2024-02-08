@@ -2,6 +2,8 @@ import {RouteProps} from 'react-router-dom'
 import {Routes} from '../types'
 import {DetailPage, ListingDetailsPage} from '@pages'
 
+
+//todo вынести в shared
 export const RoutePaths:Record<Routes,string> = {
 
     [Routes.Home]: '/',

@@ -1,6 +1,6 @@
 import { DetailAttributes } from "@models/detail/types"
 import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetById, DtoDetailGetAll} from "./types"
-import {ParamsGetAllDetails, ParamsSearchDetails, ParamsGetOneDetail} from "@controllers/controller-detail/types"
+import {ParamsGetAllDetails, ParamsGetOneDetail} from "@controllers/controller-detail/types"
 import {
     PAGINATION_DEFAULT_LIMIT,
     PAGINATION_DEFAULT_OFFSET
@@ -37,17 +37,6 @@ class DtoDetail {
             keyword: query.keyword,
         }
     }
-
-    getDtoDetailSearch(query: ParamsSearchDetails): DtoDetailSearch {
-        return {
-            keyword: query.keyword,
-            limit: query.limit || PAGINATION_DEFAULT_LIMIT,
-            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
-            detailCategoryId: query.detailCategoryId,
-            modelId: query.modelId
-        }
-    }
-
 
     getDtoDetailGetById(query: ParamsGetOneDetail): DtoDetailGetById {
         return {
