@@ -1,6 +1,6 @@
 import {RouteProps} from 'react-router-dom'
 import {Routes} from '../types'
-import {DetailPage, ListingDetailsPage} from '@pages'
+import {DetailPage, ListingDetailsPage, Page404} from '@pages'
 
 
 //todo вынести в shared
@@ -25,7 +25,6 @@ export const mapRoutes: Record<Routes, RouteProps> = {
     /*not found page - всегда последний в мапе*/
     [Routes.NotFoundPage]: {
         path: RoutePaths.NotFoundPage,
-        // element: <Page404 />,
-        // onlyAuth: false
+        element: <Page404 />
     }
 }
