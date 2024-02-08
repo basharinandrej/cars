@@ -11,8 +11,9 @@ export const ButtonResetFilter = () => {
 
 
     const onClickHandler = useCallback(() => {
-        dispatch(dropFilters())
-        dispatch(fetchInitialListingDetails())
+        throw new Error('My error')
+        // dispatch(dropFilters())
+        // dispatch(fetchInitialListingDetails())
     }, [dropFilters, dispatch])
 
     return <Button 
