@@ -16,7 +16,7 @@ import {
 } from '../../../model/slices/filter-listing-details-slice'
 
 import {useAppDispatch} from '@shared'
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 
 export const SelectSearchCategoryElement = () => {
@@ -32,21 +32,21 @@ export const SelectSearchCategoryElement = () => {
         }
     }, [categoryValue])
 
-    const onFocusCategoryHandler = () => {
+    const onFocusCategoryHandler = useCallback(() => {
         dispatch(fetchListingCategories())
-    }
+    }, [dispatch, fetchListingCategories])
 
-    const onChangeSelectCategoryHandler = (value: string) => {
+    const onChangeSelectCategoryHandler = useCallback((value: string) => {
         if(value) {
             dispatch(setSelectedCategory(Number(value)))
             dispatch(fetchInitialListingDetails())
         }
-    }
+    }, [dispatch, fetchInitialListingDetails, setSelectedCategory])
 
-    const onClearSelectCategoryHandler = () => {
+    const onClearSelectCategoryHandler = useCallback(() => {
         dispatch(dropSelectedCategory())
         dispatch(fetchInitialListingDetails())
-    }
+    }, [dispatch, dropSelectedCategory, fetchInitialListingDetails])
 
     return (
         <SelectSearch

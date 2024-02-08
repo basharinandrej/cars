@@ -28,6 +28,8 @@ import {
 } from '../../model/selectors'
 
 import {SelectSearchCategoryElement} from './select-search-category-element/select-search-category-element'
+import {ButtonResetFilter} from './button-reset-filter-element/button-reset-filter-element'
+
 import styles from './filter-listing-details.module.sass'
 
 
@@ -138,6 +140,9 @@ export const FilterListingDetails: FC<Props> = () => {
             <div className={styles.selectSearchCategory}>
                 <SelectSearchCategoryElement />
             </div>
+        </div>
+        <div className={styles.buttonResetFilter}>
+            <ButtonResetFilter />
         </div>
     </div>
 }

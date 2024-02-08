@@ -14,7 +14,8 @@ import {
   EMPTY_STRING, 
   ParsedUrl,
   deleteOneQueryParam,
-  addQueryParams, 
+  addQueryParams,
+  deleteAllQueryParams,
 } from '@shared'
 
 interface BrandState extends BrandResponse {
@@ -46,7 +47,7 @@ export interface FilterListingDetailsSchema {
 }
 
 const initialState: FilterListingDetailsSchema = {
-  searchGlobal: '',
+  searchGlobal: EMPTY_STRING,
   category: {
     selected: null,
     total: 0,
@@ -82,6 +83,27 @@ export const filterListingDetailsSlice = createSlice({
         value: Number(parsedUrl.detailCategoryId)
       }
     },
+    dropFilters: (state) => {
+      deleteAllQueryParams()
+      state.searchGlobal = EMPTY_STRING
+      state.category = {
+        selected: null,
+        total: 0,
+        items: []
+      }
+      state.model = {
+        selected: null,
+        items:[],
+        total: 0
+      }
+      state.brand =  {
+        selected: null,
+        items: [],
+        total: 0
+      }
+    },
+
+
     setSearchGlobal: (state, action: PayloadAction<string>) => {
       state.searchGlobal = action.payload
     },
@@ -158,7 +180,7 @@ export const filterListingDetailsSlice = createSlice({
         state.category.items = data?.items
         state.category.total = data?.total
 
-        if(state.category.selected.value && !state.category.selected.label) {
+        if(state.category.selected?.value && !state.category.selected?.label) {
           const selectedCategory = data.items.find((category) => category.value === state.category.selected.value)
 
           state.category.selected.label = selectedCategory.label
@@ -171,7 +193,8 @@ export const filterListingDetailsSlice = createSlice({
 
 export const {
   initFilters,
-
+  dropFilters,
+  
   setSearchGlobal, 
   dropSearchGlobal,
 
