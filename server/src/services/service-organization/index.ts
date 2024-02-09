@@ -6,6 +6,7 @@ import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import Organization from "@models/organization"
 import {mapperOrganizationCreation} from './mappers-organization/mapper-organization-creation'
+import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
 
 
 class ServiceOrganization {
@@ -57,7 +58,7 @@ class ServiceOrganization {
                     limit,
                     offset,
                 })
-                return organizations
+                return mapperOrganizationsGetAll(organizations)
             }
 
         } catch (error) {
