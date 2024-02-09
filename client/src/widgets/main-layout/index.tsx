@@ -16,10 +16,6 @@ export const MainLayout: FC<Props> = ({children}) => {
                 </div>
                 
                 <Menu />
-
-                <ul>
-                    <li>Вход</li>
-                </ul>
             </div>
 
             <main className={styles.main}>

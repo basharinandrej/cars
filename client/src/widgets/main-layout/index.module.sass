@@ -4,18 +4,33 @@
     flex-direction: column
 
 .header
+    grid-template-columns: 1fr 1fr
     background: var(--color-primary-background-110)
     box-shadow: -2px 5px 5px var(--color-gray-border-100)
-    padding: 12px 0 12px 0
+    padding: 12px 8px
 
     display: grid
-    grid-template-columns: calc((100vw - 1200px)/2) 1fr calc((100vw - 1200px)/2)
     align-items: center
+
+    @media(min-width: 600px)
+        padding: 16px 12px
+
+    @media(min-width: 960px)
+        grid-template-columns: 140px 1fr 60px
+
+    @media(min-width: 1720px)
+        grid-template-columns: calc((100vw - 1200px)/2) 1fr calc((100vw - 1200px)/2)
 
 .main
     height: calc(100vh - 42px)
-    padding-top: 32px
+    padding-top: 12px
+
+    @media(min-width: 1320px)
+        padding-top: 32px
 
 .logo
     display: flex
-    justify-content: center
+    justify-content: start
+
+    @media(min-width: 1320px)
+        justify-content: center
