@@ -1,10 +1,11 @@
-import {ListingDetailsSchema, FilterListingDetailsSchema} from '@features'
+import {ListingDetailsSchema, FilterListingDetailsSchema, DetailInformationSchema} from '@features'
 import {MenuSchema, LogoSchema} from '@entities'
 import { AxiosInstance } from 'axios'
 
 export interface StateSchema {
     listingDetails: ListingDetailsSchema
     filterListingDetails: FilterListingDetailsSchema
+    detailInformation: DetailInformationSchema
     menu: MenuSchema,
     logo: LogoSchema
 }

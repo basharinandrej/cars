@@ -7,5 +7,6 @@ export const getDevServer = (PORT: string): DevServerConfiguration => {
         open: true,
         static: './dist',
         hot: true,    
+        historyApiFallback: true
     }
 }

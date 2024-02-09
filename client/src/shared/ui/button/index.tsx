@@ -1,12 +1,19 @@
 import React, {FC} from 'react'
 import { Button as Btn, ButtonProps } from 'antd';
+import classNames from 'classnames'
 import styles from './index.module.sass'
 
-export const Button:FC<Props> = ({text, onClick}) => {
+export const Button:FC<Props> = ({
+    text, 
+    onClick, 
+    size = ''
+}) => {
 
     return (
         <Btn
-            className={styles.button}
+            className={classNames(styles.button, {
+                [styles.large]: size === 'large'
+            })}
             type="primary"
             onClick={onClick}
         >
@@ -15,6 +22,7 @@ export const Button:FC<Props> = ({text, onClick}) => {
     )
 }
 
-interface Props extends ButtonProps{
+interface Props extends Omit<ButtonProps, 'size'>{
     text: string
+    size?: 'large'
 }

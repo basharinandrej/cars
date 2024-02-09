@@ -9,6 +9,7 @@ export const mapperDetailGetById = (detail: Deteail) => {
         year: detail.dataValues.year,
         description: detail.dataValues.description,
         price: detail.dataValues.price,
+        photo: detail.dataValues.photo,
         model: {
             id: detail.dataValues.Model.dataValues.id,
             name: detail.dataValues.Model.dataValues.name,

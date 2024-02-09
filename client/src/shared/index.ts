@@ -29,3 +29,7 @@ export {ParsedUrl} from './interfaces/parsed-url'
 
 
 export {HTMLElementEvent} from './types/html-element-event'
+
+export {DetailWears} from './enums'
+
+export {mapBadge} from './dictionaries/map-badge'

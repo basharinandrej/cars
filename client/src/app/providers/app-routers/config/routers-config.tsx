@@ -18,7 +18,7 @@ export const mapRoutes: Record<Routes, RouteProps> = {
     },
 
     [Routes.DetailPage]: {
-        path: `${RoutePaths.DetailPage}:vendorCode`,
+        path: `${RoutePaths.DetailPage}:id`,
         element: <DetailPage/>
     },
 

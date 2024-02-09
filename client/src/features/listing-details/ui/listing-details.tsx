@@ -4,9 +4,8 @@ import { useInView } from 'react-intersection-observer';
 import {useSelector} from 'react-redux'
 import moment from 'moment'
 
-import { useAppDispatch, AppLink, useDebounce, useWindowPosition} from '@shared'
+import { useAppDispatch, AppLink, useDebounce, useWindowPosition, mapBadge} from '@shared'
 
-import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
 import {
     getItemsListingDetails,
@@ -65,7 +64,7 @@ export const ListingDetails = () => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
 
-            return <AppLink key={detail.id} to={`detail/${detail.vendorCode}`}>
+            return <AppLink key={detail.id} to={`detail/${detail.id}`}>
                 <Badge.Ribbon
                     placement='start'
                     text={textBadge}

@@ -3,3 +3,6 @@ export {listingDetailsReducer, ListingDetailsSchema} from './listing-details/mod
 
 export {FilterListingDetails} from './listing-details/ui/components/filter-listing-details'
 export {FilterListingDetailsSchema, filterListingDetailsReducer} from './listing-details/model/slices/filter-listing-details-slice'
+
+export {DetailInformation} from './detail-information/ui/detail-information'
+export {DetailInformationSchema, detailInformationReducer} from './detail-information/model/slices/detail-information-slice'

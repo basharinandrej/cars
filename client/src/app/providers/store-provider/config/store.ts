@@ -1,5 +1,9 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
-import {listingDetailsReducer, filterListingDetailsReducer} from '@features'
+import {
+    listingDetailsReducer, 
+    filterListingDetailsReducer,
+    detailInformationReducer
+} from '@features'
 import {menuSliceReducer, logoSliceReducer} from '@entities'
 import {instanceAxios} from '@shared'
 
@@ -9,6 +13,7 @@ const getStore = () => {
     const rootReducer: ReducersMapObject<StateSchema> = {
         listingDetails: listingDetailsReducer,
         filterListingDetails: filterListingDetailsReducer,
+        detailInformation: detailInformationReducer,
         menu: menuSliceReducer,
         logo: logoSliceReducer
     }
