@@ -21,12 +21,13 @@ class ServiceOrganization {
             const hashPassword = await getHashPassword(dtoOrganizationRegistration.password)
 
             const organization = await Organization.create({
-                name: dtoOrganizationRegistration.name,
+                name: dtoOrganizationRegistration.name.toLowerCase(),
                 password: hashPassword,
                 email: dtoOrganizationRegistration.email,
                 phoneNumber: dtoOrganizationRegistration.phoneNumber,
                 ban: dtoOrganizationRegistration.ban,
-                status: dtoOrganizationRegistration.status
+                status: dtoOrganizationRegistration.status,
+                avatar: dtoOrganizationRegistration.avatar
             })
             //todo добавить почту
 

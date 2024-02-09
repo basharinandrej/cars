@@ -5,7 +5,7 @@ import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/con
 import { Bans, StatusOrganization } from '@common/enums'
 
 class DtoOrganization {
-    getDtoOrganizationRegistration(organization: OrganizationRequestParams): DtoOrganizationRegistration {
+    getDtoOrganizationRegistration(organization: OrganizationRequestParams, fileName:string): DtoOrganizationRegistration {
         return {
             name: organization.name.toLocaleLowerCase(),
             email: organization.email,
@@ -13,7 +13,8 @@ class DtoOrganization {
             password: organization.password,
             ban: organization.ban || Bans.Null,
             fingerPrint: organization.fingerPrint,
-            status: StatusOrganization.Free
+            status: StatusOrganization.Free,
+            avatar: fileName
         }
     }
 

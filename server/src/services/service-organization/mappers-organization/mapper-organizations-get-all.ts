@@ -16,7 +16,7 @@ export const mapperOrganizationsGetAll = (organizations: Organizations) => {
                 phoneNumber: organization.dataValues.phoneNumber,
                 status: organization.dataValues.status,
                 ban: organization.dataValues.ban,
-                avatar: organization.dataValues.avatarId 
+                avatar: organization.dataValues.avatar 
             }
         })
     }

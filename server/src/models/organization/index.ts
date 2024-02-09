@@ -20,8 +20,8 @@ Organization.init({
         unique: true,
         allowNull: false
     },
-    avatarId: {
-        type: DataTypes.INTEGER,
+    avatar: {
+        type: DataTypes.STRING,
         allowNull: true
     },
     phoneNumber: {

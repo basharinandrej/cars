@@ -5,13 +5,20 @@ import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import dtoOrganization from '@dtos/dto-organization/dto-organization'
 import {OrganizationRequestParams} from '@common/interfaces'
 import serviceOrganization from '@services/service-organization'
-
+import {v4} from 'uuid'
+import path from 'path'
 
 
 class ControllerOrganization {
     async registrationOrganization(req: RequestCreation<OrganizationRequestParams>, res: Response, next: NextFunction) {
         try {
-            const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body)
+            const {avatar} = req.files
+            const fileName = v4() + '.jpg'
+            if(!Array.isArray(avatar)) {
+                avatar.mv(path.resolve(__dirname, '../..', 'static', fileName))
+            }
+
+            const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
             const {refreshToken, organization, accessToken} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
 
             // отправка картинки на Яндекс диск

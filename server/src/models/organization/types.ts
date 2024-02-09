@@ -8,9 +8,9 @@ export interface OrganizationAttributes {
     phoneNumber: number
     password: string
     ban: Bans
-    status: StatusOrganization
+    status: StatusOrganization 
+    avatar?: string
     
-    avatarId?: string
     addressId?: number
 }
 

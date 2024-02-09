@@ -48,26 +48,26 @@ export const validationOrganization = {
             body('fingerPrint')
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('fingerPrint')).trim(),
 
-            body('address').custom((address: Omit<AddressAttributes, 'id'>) => {
-                try {
-                    const totalKeysAddress = Object.entries(address)
-                        .map(([key, value]) => {
-                            if(!value) {
-                                return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress(`нет поля ${key}`)));
-                            }else{
-                                return Promise.resolve(true);
-                            }
-                        })
-                        .length
+            // body('address').custom((address: Omit<AddressAttributes, 'id'>) => {
+            //     try {
+            //         const totalKeysAddress = Object.entries(address)
+            //             .map(([key, value]) => {
+            //                 if(!value) {
+            //                     return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress(`нет поля ${key}`)));
+            //                 }else{
+            //                     return Promise.resolve(true);
+            //                 }
+            //             })
+            //             .length
 
-                    if(totalKeysAddress < 3) {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress('нет - улицы, дома, города')));
-                    }else{
-                        return Promise.resolve(true);
-                    }
-                } catch (error) {
-                }
-            })
+            //         if(totalKeysAddress < 3) {
+            //             return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress('нет - улицы, дома, города')));
+            //         }else{
+            //             return Promise.resolve(true);
+            //         }
+            //     } catch (error) {
+            //     }
+            // })
         ]
     }
 }

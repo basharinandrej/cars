@@ -17,14 +17,12 @@ export const ListingOrganization = () => {
     }, [])
 
 
-
-
     return (
         <div className={styles.listingOrganizations}>
             {organizations.map((organization) => {
                 const textBadge = mapBadgeOrganizationStatus[organization.status].value
                 const colorBadge = mapBadgeOrganizationStatus[organization.status].color
-                
+
                 return (
                     <AppLink key={organization.id} to={`/organization/${organization.id}`}>
                         <Badge.Ribbon
@@ -39,7 +37,7 @@ export const ListingOrganization = () => {
                             cover={
                                 <img
                                     className={styles.img}
-                                    src={`https://sun9-60.userapi.com/impg/Qc5BF-zrNFiJ7agGFSXrdy-lRIq5fyxDZivu4A/Jj-AzxLN_fU.jpg?size=800x485&quality=96&sign=70badc12e4b5a4a02dcde67bac2b2437&type=album`}
+                                    src={`http://localhost:3000/${organization.avatar}`}
                                 />
                             }
                         >

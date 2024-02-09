@@ -9,6 +9,7 @@ export const mapperOrganizationCreation = (organization: Organization) => {
         email: organization.dataValues.email,
         phoneNumber: organization.dataValues.phoneNumber,
         ban: organization.dataValues.ban,
-        status: organization.dataValues.status
+        status: organization.dataValues.status,
+        avatar: organization.dataValues.avatar
     }
 }

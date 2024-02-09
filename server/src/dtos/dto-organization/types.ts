@@ -11,6 +11,7 @@ export interface DtoOrganizationRegistration {
     ban: Bans
     fingerPrint: string
     status: StatusOrganization
+    avatar?: string
 }
 
 export interface DtoOrganizationGetAll extends Pagination {}
