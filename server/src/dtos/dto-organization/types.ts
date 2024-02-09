@@ -1,5 +1,5 @@
 import { Pagination } from "@common/types"
-import { Bans } from "@common/enums"
+import { Bans, StatusOrganization } from "@common/enums"
 
 
 
@@ -10,6 +10,7 @@ export interface DtoOrganizationRegistration {
     password: string
     ban: Bans
     fingerPrint: string
+    status: StatusOrganization
 }
 
 export interface DtoOrganizationGetAll extends Pagination {}

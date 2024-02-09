@@ -1,4 +1,4 @@
-import { Bans } from "@common/enums";
+import { Bans, StatusOrganization } from "@common/enums";
 import {Optional} from "sequelize/types";
 
 export interface OrganizationAttributes {
@@ -8,7 +8,7 @@ export interface OrganizationAttributes {
     phoneNumber: number
     password: string
     ban: Bans
-
+    status: StatusOrganization
     
     avatarId?: string
     addressId?: number

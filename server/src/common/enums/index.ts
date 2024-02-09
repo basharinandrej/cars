@@ -22,3 +22,9 @@ export const enum DetailWears {
     CanBeUsed = 'CanBeUsed',
     NeedFix = 'NeedFix'
 }
+
+export const enum StatusOrganization {
+    Busy = 'Busy',
+    Free = 'Free',
+    Waiting = 'Waiting'
+}

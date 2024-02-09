@@ -24,7 +24,8 @@ class ServiceOrganization {
                 password: hashPassword,
                 email: dtoOrganizationRegistration.email,
                 phoneNumber: dtoOrganizationRegistration.phoneNumber,
-                ban: dtoOrganizationRegistration.ban
+                ban: dtoOrganizationRegistration.ban,
+                status: dtoOrganizationRegistration.status
             })
             //todo добавить почту
 

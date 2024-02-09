@@ -1,7 +1,7 @@
 import {Model as ModelSequelize, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
 import {OrganizationAttributes, OrganizationCreation} from './types'
-import { Bans } from '@common/enums'
+import { Bans, StatusOrganization } from '@common/enums'
 
 class Organization extends ModelSequelize<OrganizationAttributes, OrganizationCreation> {}
 
@@ -34,6 +34,10 @@ Organization.init({
     },
     ban: {
       type: DataTypes.ENUM(Bans.Constant, Bans.Null, Bans.Temporary, Bans.Warning),
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.ENUM(StatusOrganization.Busy, StatusOrganization.Free, StatusOrganization.Waiting),
       allowNull: false
     }
 }, { 

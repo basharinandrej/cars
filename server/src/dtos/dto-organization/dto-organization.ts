@@ -2,7 +2,7 @@ import {OrganizationRequestParams} from '@common/interfaces'
 import {DtoOrganizationRegistration, DtoOrganizationGetAll, DtoOrganizationGetOne} from './types'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import { Bans } from '@common/enums'
+import { Bans, StatusOrganization } from '@common/enums'
 
 class DtoOrganization {
     getDtoOrganizationRegistration(organization: OrganizationRequestParams): DtoOrganizationRegistration {
@@ -12,7 +12,8 @@ class DtoOrganization {
             phoneNumber: organization.phoneNumber,
             password: organization.password,
             ban: organization.ban || Bans.Null,
-            fingerPrint: organization.fingerPrint
+            fingerPrint: organization.fingerPrint,
+            status: StatusOrganization.Free
         }
     }
 
