@@ -6,3 +6,6 @@ export {FilterListingDetailsSchema, filterListingDetailsReducer} from './listing
 
 export {DetailInformation} from './detail-information/ui/detail-information'
 export {DetailInformationSchema, detailInformationReducer} from './detail-information/model/slices/detail-information-slice'
+
+export {ListingOrganization} from './listing-organization/ui/listing-organizations'
+export {listingOrganizationReducer, ListingOrganizationSchema} from './listing-organization/model/slices/listing-organizations-slice'

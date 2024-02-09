@@ -74,6 +74,7 @@ export const ListingDetails = () => {
                     size={'small'}
                     key={detail.id}
                     className={styles.card}
+                    
                     cover={
                         <img
                             className={styles.img}

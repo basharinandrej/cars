@@ -1,4 +1,4 @@
-import {DetailWears} from '../../features/listing-details/enums/enums'
+import {DetailWears} from '../enums'
 
 
 export const mapBadge = {

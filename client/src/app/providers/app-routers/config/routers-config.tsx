@@ -1,12 +1,13 @@
 import {RouteProps} from 'react-router-dom'
 import {Routes} from '../types'
-import {DetailPage, ListingDetailsPage, Page404} from '@pages'
+import {DetailPage, ListingDetailsPage, Page404, ListingOrganizationPage} from '@pages'
 
 
 //todo вынести в shared
 export const RoutePaths:Record<Routes,string> = {
 
     [Routes.Home]: '/',
+    [Routes.Organization]: '/organization',
     [Routes.DetailPage]: '/detail/', // :vandorCode
     [Routes.NotFoundPage]: '*'
 }
@@ -20,6 +21,11 @@ export const mapRoutes: Record<Routes, RouteProps> = {
     [Routes.DetailPage]: {
         path: `${RoutePaths.DetailPage}:id`,
         element: <DetailPage/>
+    },
+
+    [Routes.Organization]: {
+        path: `${RoutePaths.Organization}`,
+        element: <ListingOrganizationPage/>
     },
 
     /*not found page - всегда последний в мапе*/

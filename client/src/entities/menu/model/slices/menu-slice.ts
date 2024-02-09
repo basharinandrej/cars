@@ -11,7 +11,7 @@ const initialState: MenuSchema = {
         text: 'Каталог деталей'
     },
     {
-        path: '/organiation',
+        path: '/organization',
         text: 'Каталог автосервисов'
     }
   ]

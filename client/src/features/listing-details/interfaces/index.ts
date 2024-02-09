@@ -1,4 +1,4 @@
-import {DetailWears} from '../enums/enums'
+import {DetailWears} from '@shared'
 
 
 export interface Detail {

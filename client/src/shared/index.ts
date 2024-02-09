@@ -30,6 +30,7 @@ export {ParsedUrl} from './interfaces/parsed-url'
 
 export {HTMLElementEvent} from './types/html-element-event'
 
-export {DetailWears} from './enums'
+export {DetailWears, StatusOrganization, Bans} from './enums'
 
 export {mapBadge} from './dictionaries/map-badge'
+export {mapBadgeOrganizationStatus} from './dictionaries/map-badge-status-organization'
