@@ -14,7 +14,15 @@ export const getLoaders = (isDev: boolean): RuleSetRule[] => {
         test: /\.s[ac]ss$/i,
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 
-            'css-loader', 
+            {
+                loader: "css-loader",
+                options: {
+                    modules: {
+                        localIdentName: isDev ? '[name]-[local]__[hash]' : '[hash:base64]',
+                        auto: (resPath: string) => Boolean(resPath.includes('.module.')),
+                    },
+                },
+            },
             "sass-loader"
         ],
     }

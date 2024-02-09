@@ -1,4 +1,4 @@
-import React, {FC, ChangeEventHandler, useState, useEffect} from 'react'
+import React, {FC, ChangeEventHandler} from 'react'
 
 import { Input } from 'antd';
 import { SearchProps } from 'antd/es/input';
@@ -9,7 +9,8 @@ export const InputSearch: FC<Props>= ({
     isLoading = false,
     onChange,
     onSearch,
-    externalValue
+    externalValue,
+    suffix
 }) => {
 
     return <Search 
@@ -21,6 +22,7 @@ export const InputSearch: FC<Props>= ({
         onSearch={onSearch}
         allowClear
         value={externalValue}
+        suffix={suffix}
     />
 
 }

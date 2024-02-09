@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useCallback} from 'react'
+import React, { useEffect} from 'react'
 import { Card, Badge } from 'antd'
+import { useInView } from 'react-intersection-observer';
 import {useSelector} from 'react-redux'
 import moment from 'moment'
 
-import {useInfinityScroll, useAppDispatch, AppLink, useDebounce, HTMLElementEvent} from '@shared'
+import { useAppDispatch, AppLink, useDebounce, useWindowPosition} from '@shared'
 
 import {mapBadge} from './maps/map-badge'
 import {Detail} from '../interfaces'
@@ -22,55 +23,51 @@ import styles from './listing-details.module.sass'
 
 
 export const ListingDetails = () => {
+    const scroll = useWindowPosition()
     const dispatch = useAppDispatch()
-    const refRootElement = useRef<HTMLDivElement | null>(null)
-    const refTargetElement = useRef<HTMLDivElement | null>(null)
 
     const details = useSelector(getItemsListingDetails)
     const canPaginationMore = useSelector(getCanPaginationMoreListingDetails)
     const scrollPosition = useSelector(getScrollPositionListingDetails)
-        
+    
+    const { ref, inView } = useInView({
+        threshold: 1.0,
+    });
+
     useEffect(() => {
-        if(details.length && scrollPosition && refRootElement.current) {
-            refRootElement.current.scrollTo({
+        if(details.length && scrollPosition) {
+            document.documentElement.scrollTo({
                 top: scrollPosition,
                 behavior: 'auto'
             })
         }
-    }, [refRootElement, details])
+    }, [details])
 
     useEffect(() => {
         !scrollPosition && dispatch(fetchInitialListingDetails())
     }, [])
 
-    const onScrollEndHandler = useCallback(() => {
-        canPaginationMore && dispatch(fetchListingDetailsNextPart())
-    }, [canPaginationMore, dispatch, fetchListingDetailsNextPart])
+    const debounceKeepSccrollPosition = useDebounce(() => dispatch(keepScrollPosition(scroll)), 300)
 
-    const onScrollHandler  = useDebounce((e: HTMLElementEvent<HTMLDivElement>) => {
-        const value = e.target?.scrollTop
+    useEffect(() => {
+        return () => debounceKeepSccrollPosition()
+    }, [scroll])
 
-        dispatch(keepScrollPosition(value))
-    }, 300)
-
-    useInfinityScroll({
-        callback: onScrollEndHandler,
-        refRootElement,
-        refTargetElement
-    })
+    useEffect(() => {
+        if(inView) {
+            canPaginationMore && dispatch(fetchListingDetailsNextPart())
+        }
+    }, [inView, canPaginationMore, dispatch])
 
 
-    return <div 
-        onScroll={onScrollHandler}
-        className={styles.listingDetails} 
-        ref={refRootElement} 
-        >
+    return <div className={styles.listingDetails}>
         {details?.map((detail: Detail) => {
             const textBadge = mapBadge[detail.wear].value
             const colorBadge = mapBadge[detail.wear].color
 
             return <AppLink key={detail.id} to={`detail/${detail.vendorCode}`}>
                 <Badge.Ribbon
+                    placement='start'
                     text={textBadge}
                     color={colorBadge}
                 >
@@ -94,7 +91,7 @@ export const ListingDetails = () => {
             </Badge.Ribbon>
             </AppLink>
         })}
-        <div ref={refTargetElement}/>
+        <div ref={ref}/>
     </div>
 }
 

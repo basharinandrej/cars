@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useCallback} from 'react'
+import React, {ChangeEventHandler, useCallback, FC, ReactNode} from 'react'
 import { useSelector } from 'react-redux';
 import { SearchProps } from 'antd/es/input';
 import {InputSearch, useAppDispatch} from '@shared'
@@ -12,7 +12,7 @@ import {fetchInitialListingDetails} from '../../../model/async-actions/fetch-ini
 import { getSearchGlobalFilterListingDetails } from '../../../model/selectors'
 
 
-export const InputSearchGlobalElement = () => {
+export const InputSearchGlobalElement: FC<Props> = ({suffix}) => {
     const dispatch = useAppDispatch()
 
     const searchGlobal = useSelector(getSearchGlobalFilterListingDetails)
@@ -40,6 +40,11 @@ export const InputSearchGlobalElement = () => {
             onSearch={onSearchInputSearchHandler} 
             onChange={onChangeInputSearchHandler}
             externalValue={searchGlobal}
+            suffix={suffix}
         />
     )
+}
+
+interface Props {
+    suffix?: ReactNode
 }
