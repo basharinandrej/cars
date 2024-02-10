@@ -3,7 +3,10 @@ import {ThunkApiConfig} from '@app'
 import {ListingOrganizationSchema} from '../slices/listing-organizations-slice'
 
 
-import {INITIAL_VALUE_OFFSET, DEFAULT_VALUE_LIMIT} from '../../constans'
+import {
+    INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION,
+    DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION
+} from '../../constans'
 
 
 export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganizationSchema, void, ThunkApiConfig>(
@@ -12,10 +15,10 @@ export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganiza
         const { extra} = thunkAPI
 
         try {
-            const response = await extra.api.get('/api/organization', {
+            const response = await extra.api.get('/api/organizations', {
                 params: {
-                    limit: DEFAULT_VALUE_LIMIT,
-                    offset: INITIAL_VALUE_OFFSET
+                    limit: DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION,
+                    offset: INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION
                 }
             })
             return response.data

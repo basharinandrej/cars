@@ -10,13 +10,11 @@ import {
   INITIAL_VALUE_OFFSET_LISTING_DETAILS
 } from '../../constans'
 
-import {calcOffset} from '../utils/calc-offset'
+import {calcOffset} from '@shared'
 
 
 export interface ListingDetailsSchema extends ListingDetailsResponse {
   isLoading: boolean
-  limit: number
-  offset: number
   canPaginationMore: boolean
   scrollPostion: number
 }

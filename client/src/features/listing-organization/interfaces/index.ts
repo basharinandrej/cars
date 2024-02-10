@@ -1,4 +1,4 @@
-import { StatusOrganization, Bans } from "@shared"
+import { StatusOrganization, Bans, CommonListing } from "@shared"
 
 export interface Organization {
     id: number,
@@ -9,7 +9,6 @@ export interface Organization {
     avatar: ''
 }
 
-export interface ListingOrganizationsResponse {
+export interface ListingOrganizationsResponse  extends CommonListing{
     items: Organization[],
-    total: number
 }

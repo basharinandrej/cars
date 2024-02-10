@@ -1,4 +1,4 @@
-import {DetailWears} from '@shared'
+import {DetailWears, CommonListing} from '@shared'
 
 
 export interface Detail {
@@ -14,41 +14,40 @@ export interface Detail {
     modelId: number
     detailCategoryId?: number
 }
-
-export interface ListingDetailsResponse {
+export interface ListingDetailsResponse extends CommonListing {
     items: Detail[],
-    total: number
 }
+
 
 export interface Brand {
     label: string
     value: number
 }
-
 export interface BrandResponse {
     items: Brand[]
     total: number
 }
 
+
 export interface Model {
     label: string
     value: number
 }
-
 export interface ModelResponse {
     items: Model[]
     total: number
 }
 
+
 export interface Category {
     label: string,
     value: number
 }
-
 export interface CategoryResponse {
     total: number,
     items: Category[]
 }
+
 
 export interface BrandByIdResponse {
     id: number,

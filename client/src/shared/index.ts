@@ -23,6 +23,7 @@ export {deleteAllQueryParams} from './libs/delete-all-query-params'
 export {getIsMobile} from './libs/get-is-mobile'
 export {getIsTablet} from './libs/get-is-tablet'
 export {setScrollToDocument} from './libs/set-scroll-to-document'
+export {calcOffset} from './libs/calc-offset'
 
 
 
@@ -34,6 +35,7 @@ export {
 
 
 export {ParsedUrl} from './interfaces/parsed-url'
+export {CommonListing} from './interfaces/common-listing'
 
 
 export {HTMLElementEvent} from './types/html-element-event'
