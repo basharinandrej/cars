@@ -18,6 +18,8 @@ import {
     getCanPaginationMoreListingOrganization
 } from '../model/selectors'
 
+import { Button, AppLink } from '@shared';
+
 import styles from './listing-organizations.module.sass'
 
 
@@ -57,7 +59,18 @@ export const ListingOrganization = () => {
                         src={organization.avatar}
                     >
                         <div className={styles.wrapper}>
-                            <h3 className={styles.title}>{organization.name}</h3>
+                            <div className={styles.information}>
+                                <h3 className={styles.title}>{organization.name}</h3>
+                            </div>
+
+
+                            <div className={styles.boxButton}>
+                                <AppLink to={`organizations/${organization.id}`}>
+                                    <Button text={'Подробнее'}/> 
+                                </AppLink>
+                                <Button text={'Оставить заявку'} type={'default'}/> 
+                            </div>
+
                         </div>
                     </Card>
                 )

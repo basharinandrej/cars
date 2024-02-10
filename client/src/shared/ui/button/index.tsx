@@ -6,7 +6,8 @@ import styles from './index.module.sass'
 export const Button:FC<Props> = ({
     text, 
     onClick, 
-    size = ''
+    size = '',
+    type = 'primary'
 }) => {
 
     return (
@@ -14,7 +15,7 @@ export const Button:FC<Props> = ({
             className={classNames(styles.button, {
                 [styles.large]: size === 'large'
             })}
-            type="primary"
+            type={type}
             onClick={onClick}
         >
                 {text}

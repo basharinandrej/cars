@@ -19,6 +19,8 @@ export const Card: FC<Props> = ({
     type = 'grid'
 }) => {
 
+    const bodyStyle = type === 'row' ? {width: '100%'} : {}
+    
     const contentCard = (
         <Badge.Ribbon
             placement={placement}
@@ -28,6 +30,7 @@ export const Card: FC<Props> = ({
             <CardFromAntD
                 loading={loading}
                 size={'small'}
+                bodyStyle={bodyStyle}
                 className={classNames(
                     styles.card,
                     {
