@@ -8,8 +8,11 @@ import {
     getFilterSelectedCategoryValue,
     getFilterSelectedBrandValue
 } from '../selectors'
+
 import {ParamsFetchListingDetails} from '../interfaces'
-import {INITIAL_VALUE_OFFSET} from '../../constans'
+
+import {INITIAL_VALUE_OFFSET_LISTING_DETAILS} from '../../constans'
+
 import {addQueryParams} from '@shared'
 
 
@@ -24,7 +27,7 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
         const valueSelectedModel = getFilterSelectedModelValue(state)
         const valueSelectedBrand = getFilterSelectedBrandValue(state)
         const detailCategoryId = getFilterSelectedCategoryValue(state)
-        const offset = INITIAL_VALUE_OFFSET
+        const offset = INITIAL_VALUE_OFFSET_LISTING_DETAILS
         
         const params: ParamsFetchListingDetails = {
             limit, offset
@@ -46,7 +49,7 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
             })
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            return error
         }
     }
 )

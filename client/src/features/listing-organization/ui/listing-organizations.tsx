@@ -28,6 +28,7 @@ export const ListingOrganization = () => {
 
                 return (
                     <Card
+                        loading={false}
                         type='row'
                         textBadge={textBadge}
                         colorBadge={colorBadge}

@@ -16,7 +16,8 @@ import {Detail} from '../interfaces'
 import {
     getItemsListingDetails,
     getCanPaginationMoreListingDetails,
-    getScrollPositionListingDetails
+    getScrollPositionListingDetails,
+    getIsLoadingListingDetails
 } from '../model/selectors'
 
 import {keepScrollPosition} from '../model/slices/listing-details-slice'
@@ -34,6 +35,7 @@ export const ListingDetails = () => {
     const details = useSelector(getItemsListingDetails)
     const canPaginationMore = useSelector(getCanPaginationMoreListingDetails)
     const scrollPositionFromStore = useSelector(getScrollPositionListingDetails)
+    const isLoading = useSelector(getIsLoadingListingDetails)
     
     const canAutoScroll = (details.length && scrollPositionFromStore)
 
@@ -61,6 +63,7 @@ export const ListingDetails = () => {
             const colorBadge = mapBadge[detail.wear].color
 
             return <Card
+                loading={isLoading}
                 key={detail.id}
                 textBadge={textBadge}
                 colorBadge={colorBadge}

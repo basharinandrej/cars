@@ -5,7 +5,7 @@ import {fetchInitialListingOrganizations} from '../async-actions/fetch-initial-l
 
 import {DEFAULT_VALUE_LIMIT, INITIAL_VALUE_OFFSET} from '../../constans'
 
-export interface ListingOrganizationSchema extends ListingOrganizationsResponse{
+export interface ListingOrganizationSchema extends ListingOrganizationsResponse {
   isLoading: boolean
   limit: number
   offset: number

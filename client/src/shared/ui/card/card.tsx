@@ -12,6 +12,7 @@ export const Card: FC<Props> = ({
     children,
     textBadge,
     colorBadge,
+    loading,
     placement = 'start',
     to,
     src,
@@ -25,6 +26,7 @@ export const Card: FC<Props> = ({
             color={colorBadge}
         >
             <CardFromAntD
+                loading={loading}
                 size={'small'}
                 className={classNames(
                     styles.card,
@@ -57,6 +59,7 @@ interface Props {
     colorBadge: string
     children: ReactNode
     src: string
+    loading: boolean
     type?: 'grid' | 'row'
     placement?: RibbonPlacement
     to?: string
