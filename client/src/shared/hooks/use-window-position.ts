@@ -1,15 +1,17 @@
 import React, { useLayoutEffect, useState } from 'react';
-
+import {useDebounce} from './use-debounce'
 
 export function useWindowPosition() {
-    const [scrollPosition, setPosition] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    const debouncedUpdatePosition = useDebounce(() => {
+      setScrollPosition(window.scrollY);
+    })
+
     useLayoutEffect(() => {
-      function updatePosition() {
-        setPosition(window.scrollY);
-      }
-      window.addEventListener('scroll', updatePosition);
-      updatePosition();
-      return () => window.removeEventListener('scroll', updatePosition);
+      window.addEventListener('scroll', debouncedUpdatePosition);
+
+      return () => window.removeEventListener('scroll', debouncedUpdatePosition);
     }, []);
     return scrollPosition;
   }

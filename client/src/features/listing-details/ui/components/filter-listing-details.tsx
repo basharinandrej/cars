@@ -1,9 +1,9 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useMemo, useState} from 'react'
 import { FilterTwoTone } from '@ant-design/icons'
 import { useSelector } from 'react-redux';
 import {useAppDispatch} from '@shared'
 import { Drawer } from 'antd';
-import {getIsMobile, getIsTablet} from '@shared';
+import {getIsMobile, getIsTablet, useMount} from '@shared';
 import {
     initFilters
 } from '../../model/slices/filter-listing-details-slice'
@@ -27,17 +27,14 @@ import {InputSearchGlobalElement} from './input-search-global-element/input-sear
 import styles from './filter-listing-details.module.sass'
 
 
-export const FilterListingDetails: FC<Props> = () => {
+export const FilterListingDetails: FC = () => {
     const dispatch = useAppDispatch()
-    const [open, setOpen] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const isMobile = getIsMobile()
     const isTablet = getIsTablet()
 
-
-    useEffect(() => {
-        dispatch(initFilters())
-    }, [])
+    useMount(() => dispatch(initFilters()))
     
     const modelValue = useSelector(getFilterSelectedModelValue)
     const brandLabel = useSelector(getFilterSelectedBrandLabel)
@@ -49,12 +46,12 @@ export const FilterListingDetails: FC<Props> = () => {
         }
     }, [modelValue, brandValue])
 
-    const onClickFilter = () => setOpen(true)
-    const closeDrawerHandler = () => setOpen(false)
+    const openFilters = () => setOpenDrawer(true)
+    const closeDrawerHandler = () => setOpenDrawer(false)
 
-    const suffixSearchInput = (isMobile || isTablet) && <FilterTwoTone onClick={onClickFilter} />
+    const suffixSearchInput = (isMobile || isTablet) && <FilterTwoTone onClick={openFilters} />
 
-    const renderFilterControls = () => (
+    const renderFilterControls = useMemo(() => (
         <>
             <div className={styles.boxSelects}>
                 <div className={styles.selectSearchBrand}>
@@ -73,21 +70,21 @@ export const FilterListingDetails: FC<Props> = () => {
                 <ButtonResetFilter />
             </div>
         </>
-    )
+    ), [])
 
     const renderFilterControlsForMobile = () => {
         return (
             <Drawer
                 title="Фильтр" 
                 onClose={closeDrawerHandler} 
-                open={open}
+                open={openDrawer}
             >
-                {renderFilterControls()}
+                {renderFilterControls}
             </Drawer>
         )
     }
 
-    const renderFilterControlsForDesktop = () => renderFilterControls()
+    const renderFilterControlsForDesktop = () => renderFilterControls
 
     return <div className={styles.filterWrapper}>
         <div className={styles.inputSearch}>
@@ -96,8 +93,4 @@ export const FilterListingDetails: FC<Props> = () => {
 
        {(isMobile || isTablet) ? renderFilterControlsForMobile() : renderFilterControlsForDesktop()}
     </div>
-}
-
-interface Props {
-
 }

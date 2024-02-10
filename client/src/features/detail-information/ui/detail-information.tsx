@@ -1,11 +1,11 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useMemo} from 'react'
 import { useSelector } from 'react-redux'
 import {
     getInformationDetail, 
     getInformationAboutAuthor
 } from '../model/selectors'
 import {fetchByIdDetail} from '../model/async-actions/fetch-by-id-detail'
-import { useAppDispatch, mapBadge, Button, getIsMobile, getIsTablet } from '@shared'
+import { useAppDispatch, mapBadge, Button, getIsMobile, getIsTablet, useMount } from '@shared'
 import { Badge } from 'antd'
 
 import styles from './detail-information.module.sass'
@@ -19,15 +19,13 @@ export const DetailInformation: FC<Props> = ({
     const isTablet = getIsTablet()
     const isDesktop = !isMobile && !isTablet
     
-    useEffect(() => {
-        id && dispatch(fetchByIdDetail(id))
-    }, [])
+    useMount(() => id && dispatch(fetchByIdDetail(id)))
 
     const detailInformation = useSelector(getInformationDetail)
     const informationAboutAuthor = useSelector(getInformationAboutAuthor)
 
-    const textBadge = mapBadge[detailInformation.wear]?.value
-    const colorBadge = mapBadge[detailInformation.wear]?.color
+    const textBadge = useMemo(() => mapBadge[detailInformation.wear]?.value, [])
+    const colorBadge = useMemo(() => mapBadge[detailInformation.wear]?.color, [])
 
     const renderSide = () => {
         return (
