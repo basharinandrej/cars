@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react'
-import { Card, Badge } from 'antd'
 import {useSelector} from 'react-redux'
 
-import { useAppDispatch, mapBadgeOrganizationStatus, AppLink, } from '@shared'
+import { 
+    useAppDispatch, 
+    mapBadgeOrganizationStatus,
+    Card
+} from '@shared'
 import {fetchInitialListingOrganizations} from '../model/async-actions/fetch-initial-listing-organizations'
 import {getItemsListingOrganizations} from '../model/selectors'
 
@@ -24,29 +27,16 @@ export const ListingOrganization = () => {
                 const colorBadge = mapBadgeOrganizationStatus[organization.status].color
 
                 return (
-                    <AppLink key={organization.id} to={`/organization/${organization.id}`}>
-                        <Badge.Ribbon
-                            placement='start'
-                            text={textBadge}
-                            color={colorBadge}
-                        >
-                        <Card
-                            size={'small'}
-                            className={styles.card}
-                            
-                            cover={
-                                <img
-                                    className={styles.img}
-                                    src={`http://localhost:3000/${organization.avatar}`}
-                                />
-                            }
-                        >
-                            <div className={styles.wrapper}>
-                                <h3 className={styles.title}>{organization.name}</h3>
-                            </div>
-                        </Card>
-                    </Badge.Ribbon>
-                </AppLink>
+                    <Card
+                        type='row'
+                        textBadge={textBadge}
+                        colorBadge={colorBadge}
+                        src={organization.avatar}
+                    >
+                        <div className={styles.wrapper}>
+                            <h3 className={styles.title}>{organization.name}</h3>
+                        </div>
+                    </Card>
                 )
             })}
         </div>

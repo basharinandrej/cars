@@ -62,7 +62,6 @@ export const ListingDetails = () => {
 
             return <Card
                 key={detail.id}
-                placement='start'
                 textBadge={textBadge}
                 colorBadge={colorBadge}
                 to={`detail/${detail.id}`}

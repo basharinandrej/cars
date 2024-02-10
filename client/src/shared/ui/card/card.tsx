@@ -1,5 +1,6 @@
 import React, { ReactNode, FC} from 'react'
 import { Card as CardFromAntD, Badge } from 'antd'
+import classNames from 'classnames'
 
 import { AppLink} from '../app-link'
 import {APP_CLIENT_URL} from '../../constans'
@@ -11,23 +12,31 @@ export const Card: FC<Props> = ({
     children,
     textBadge,
     colorBadge,
+    placement = 'start',
     to,
-    src
+    src,
+    type = 'grid'
 }) => {
 
     const contentCard = (
         <Badge.Ribbon
-            placement='start'
+            placement={placement}
             text={textBadge}
             color={colorBadge}
         >
             <CardFromAntD
                 size={'small'}
-                className={styles.card}
+                className={classNames(
+                    styles.card,
+                    {
+                        [styles.row]: type === 'row',
+                        [styles.grid]: type === 'grid'
+                    }
+                )}
                 
                 cover={
                     <img
-                        className={styles.img}
+                        className={classNames(styles.img)}
                         src={`${APP_CLIENT_URL}/${src}`}
                     />
                 }
@@ -44,10 +53,11 @@ export const Card: FC<Props> = ({
 type RibbonPlacement = 'start' | 'end';
 
 interface Props {
-    placement: RibbonPlacement
     textBadge: string
     colorBadge: string
     children: ReactNode
-    to: string
     src: string
+    type?: 'grid' | 'row'
+    placement?: RibbonPlacement
+    to?: string
 }

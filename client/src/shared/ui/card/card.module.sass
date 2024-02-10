@@ -1,11 +1,38 @@
 .card
     cursor: pointer
+    display: flex
+    flex-direction: column
+
+    &.row
+        flex-direction: column
+
+        @media(min-width: 375px)
+            flex-direction: row
+
 
     &:hover 
         box-shadow: 2px 2px 10px var(--color-gray-border-300)
         transition: .3s
 
+.grid
     .img
         height: 150px
         object-fit: cover
         border: 1px solid var(--color-gray-border-100) !important
+
+.row
+    .img
+        height: 110px
+        object-fit: cover
+        border: 1px solid var(--color-gray-border-100) !important
+
+        @media(min-width: 375px)
+            border-radius: 0 8px 8px 0 !important
+            width: 150px !important
+
+        @media(min-width: 600px)
+            width: 250px !important
+
+        @media(min-width: 960px)
+            height: 170px
+            width: 320px !important
