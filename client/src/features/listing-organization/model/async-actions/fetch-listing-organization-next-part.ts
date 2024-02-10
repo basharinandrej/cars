@@ -21,7 +21,7 @@ export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganiza
 
         try {
 
-            const response = await extra.api.get('/api/organizations', {
+            const response = await extra.api.get('/api/organization', {
                 params
             })
 

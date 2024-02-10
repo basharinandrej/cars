@@ -1,8 +1,10 @@
 import {ListingOrganization} from '@features'
 
 
-export const ListingOrganizationPage = () => {
+const ListingOrganizationPage = () => {
 
 
     return <ListingOrganization />
 }
+
+export default ListingOrganizationPage

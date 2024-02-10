@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import {DetailInformation} from '@features'
 
 
-export const DetailPage = () => {
+const PageDetail = () => {
     const {id} = useParams()
 
     return (
@@ -12,3 +12,5 @@ export const DetailPage = () => {
         </>
     )
 }
+
+export default PageDetail

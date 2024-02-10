@@ -1,4 +1,12 @@
 export { Page404 } from './page-404';
-export {DetailPage} from './detail-page'
-export {ListingDetailsPage} from './listing-details-page'
-export {ListingOrganizationPage} from './listing-organization-page'
+
+import {PageDetail} from './page-detail/page-detail.async'
+import {PageListingDetails} from './page-listing-details/page-listing-details.async'
+import {PageListingOrganizations} from './page-listing-organization/page-listing-organizations.async'
+
+
+export {
+    PageListingOrganizations,
+    PageDetail,
+    PageListingDetails
+}

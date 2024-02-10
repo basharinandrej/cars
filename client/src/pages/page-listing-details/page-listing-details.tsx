@@ -2,7 +2,7 @@ import { ListingDetails, FilterListingDetails } from '@features'
 
 
 
-export const ListingDetailsPage = () => {
+const PageListingDetails = () => {
     
 
     return (
@@ -12,3 +12,5 @@ export const ListingDetailsPage = () => {
         </>
     )
 }
+
+export default PageListingDetails

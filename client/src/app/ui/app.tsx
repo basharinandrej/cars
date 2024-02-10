@@ -8,11 +8,11 @@ export const AppRoutes = () => {
     const renderRoutes = useCallback(({element, path}: RouteProps, idx: number) => {
         if(!path) return
         return (
-            <Route
-                key={path + idx}
-                path={path}
-                element={element}
-            />
+                <Route
+                    key={path + idx}
+                    path={path}
+                    element={element}
+                />
         )
     }, [])
 

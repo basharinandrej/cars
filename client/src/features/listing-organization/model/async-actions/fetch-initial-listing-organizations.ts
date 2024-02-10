@@ -15,7 +15,7 @@ export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganiza
         const { extra} = thunkAPI
 
         try {
-            const response = await extra.api.get('/api/organizations', {
+            const response = await extra.api.get('/api/organization', {
                 params: {
                     limit: DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION,
                     offset: INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION

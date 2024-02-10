@@ -1,6 +1,11 @@
 import {RouteProps} from 'react-router-dom'
 import {Routes} from '../types'
-import {DetailPage, ListingDetailsPage, Page404, ListingOrganizationPage} from '@pages'
+import {
+    PageDetail, 
+    PageListingDetails, 
+    Page404,
+    PageListingOrganizations
+} from '@pages'
 
 
 //todo вынести в shared
@@ -15,17 +20,17 @@ export const RoutePaths:Record<Routes,string> = {
 export const mapRoutes: Record<Routes, RouteProps> = {
     [Routes.Home]: {
         path: RoutePaths.Home,
-        element: <ListingDetailsPage />,
+        element: <PageListingDetails />,
     },
 
     [Routes.DetailPage]: {
         path: `${RoutePaths.DetailPage}:id`,
-        element: <DetailPage/>
+        element: <PageDetail/>
     },
 
     [Routes.Organization]: {
         path: `${RoutePaths.Organization}`,
-        element: <ListingOrganizationPage/>
+        element: <PageListingOrganizations />
     },
 
     /*not found page - всегда последний в мапе*/

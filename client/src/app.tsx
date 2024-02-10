@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { StoreProvider, AppRoutes, ErrorBoundary } from "@app"
 import {MainLayout} from '@widgets';
@@ -9,9 +9,11 @@ const App = () => {
         <StoreProvider>
             <BrowserRouter>
                 <ErrorBoundary>
-                    <MainLayout>
-                        <AppRoutes />
-                    </MainLayout>
+                    <Suspense fallback={<h1>Suspense....</h1>}>
+                        <MainLayout>
+                            <AppRoutes />
+                        </MainLayout>
+                    </Suspense>
                 </ErrorBoundary>
             </BrowserRouter>
         </StoreProvider>
