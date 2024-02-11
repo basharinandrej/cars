@@ -1,4 +1,5 @@
 import Detail from "@models/detail"
+import {mapperForPhotoDetails} from '../utils'
 
 interface DetailsData {
     count: number,
@@ -23,7 +24,8 @@ export const mapperGetAllDetails = (details: DetailsData) => {
                 modelId: detail.dataValues.modelId,
                 detailCategoryId: detail.dataValues.detailCategoryId,
                 addressId: detail.dataValues.addressId,
-                userId: detail.dataValues.userId
+                userId: detail.dataValues.userId,
+                detailPhoto: mapperForPhotoDetails(detail.dataValues.DetailPhotos, true)
             }
         })
     }

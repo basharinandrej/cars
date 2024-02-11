@@ -1,6 +1,8 @@
 import Deteail from '@models/detail'
+import {mapperForPhotoDetails} from '../utils'
 
 export const mapperDetailGetById = (detail: Deteail) => {
+
     return {
         id: detail.dataValues.id,
         vendorCode: detail.dataValues.vendorCode,
@@ -9,6 +11,7 @@ export const mapperDetailGetById = (detail: Deteail) => {
         year: detail.dataValues.year,
         description: detail.dataValues.description,
         price: detail.dataValues.price,
+        detailPhoto: mapperForPhotoDetails(detail.dataValues.DetailPhotos),
         model: {
             id: detail.dataValues.Model.dataValues.id,
             name: detail.dataValues.Model.dataValues.name,

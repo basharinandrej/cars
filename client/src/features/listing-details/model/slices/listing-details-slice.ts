@@ -63,7 +63,7 @@ export const listingDetailsSlice = createSlice({
           state.total = data.total
           state.items = state.items.concat(data.items)
           state.offset = calcOffset(state)
-          state.canPaginationMore = data.total > state.items?.length
+          state.canPaginationMore = data.total > state.items?.length && !!action.payload.items.length
         })
   }
 })

@@ -1,6 +1,12 @@
 import {DetailWears, CommonListing} from '@shared'
 
 
+interface DetailPhoto {
+    id: number
+    url: string
+    detailId: Number
+}
+
 export interface Detail {
     id: number
     name: string
@@ -9,7 +15,7 @@ export interface Detail {
     description: string
     price: number
     wear: DetailWears
-    photo: string
+    detailPhoto: DetailPhoto
     createdAt: string
     modelId: number
     detailCategoryId?: number

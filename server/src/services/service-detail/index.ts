@@ -12,6 +12,7 @@ import User from '@models/user'
 import DetailCategory from '@models/detail/detail-category'
 import { errorStrings } from '@common/error-strings'
 import { DetailAttributes } from '@models/detail/types'
+import DetailPhoto from '@models/detail/detail-photo'
 
 
 class ServiceDetail {
@@ -66,7 +67,7 @@ class ServiceDetail {
             const details = await Detail?.findAndCountAll({
                 limit,
                 offset,
-                where: params
+                where: params, include: DetailPhoto
             })
             return mapperGetAllDetails(details)
             
@@ -83,7 +84,7 @@ class ServiceDetail {
 
             const detail = await Detail.findOne({
                 where: {id: dtoDetailGetById.id},
-                include: [Model, Address, User, DetailCategory]
+                include: [Model, Address, User, DetailCategory, DetailPhoto]
             })
 
             return mapperDetailGetById(detail)

@@ -68,7 +68,7 @@ export const ListingDetails = () => {
                 textBadge={textBadge}
                 colorBadge={colorBadge}
                 to={`detail/${detail.id}`}
-                src={detail.photo}
+                src={`details/${detail.detailPhoto?.url}`}
             >
                 <div className={styles.wrapper}>
                     <h3 className={styles.title}>{detail.name}</h3>

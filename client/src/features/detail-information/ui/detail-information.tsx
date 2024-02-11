@@ -1,11 +1,11 @@
-import React, {FC, useMemo} from 'react'
+import {FC, useMemo} from 'react'
 import { useSelector } from 'react-redux'
 import {
     getInformationDetail, 
     getInformationAboutAuthor
 } from '../model/selectors'
 import {fetchByIdDetail} from '../model/async-actions/fetch-by-id-detail'
-import { useAppDispatch, mapBadge, Button, getIsMobile, getIsTablet, useMount } from '@shared'
+import { useAppDispatch, mapBadge, Button, getIsMobile, getIsTablet, useMount, APP_CLIENT_URL } from '@shared'
 import { Badge } from 'antd'
 
 import styles from './detail-information.module.sass'
@@ -53,7 +53,7 @@ export const DetailInformation: FC<Props> = ({
                 /></span>
                 <img
                     className={styles.photo}
-                    src={`http://localhost:3000/${detailInformation.photo}`}
+                    src={`${APP_CLIENT_URL}/${detailInformation.photo}`}
                 />
 
                 {(isMobile || isTablet) && renderSide()}

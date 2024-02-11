@@ -3,6 +3,7 @@ import Model from "@models/model";
 import {Optional} from "sequelize/types";
 import DetailCategory from "./detail-category";
 import User from "@models/user";
+import DetailPhoto from '@models/detail/detail-photo';
 
 
 export interface DetailAttributes {
@@ -16,7 +17,8 @@ export interface DetailAttributes {
 
     Model?: Model
     DetailCategory?: DetailCategory
-    User?: User 
+    User?: User
+    DetailPhotos?: DetailPhoto[] | DetailPhoto
     
     modelId?: number
     userId?: number
