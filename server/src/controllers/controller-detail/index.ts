@@ -1,29 +1,40 @@
 import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
+import serviceDetailPhoto from '@services/service-detail/service-detail-photo'
 import {ParamsGetAllDetails, ParamsGetOneDetail} from './types'
 import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
 import ApiError from '@api-error/index'
 import dtoDetail from '@dtos/dto-detail/dto-detail'
+import dtoDetailPhoto from '@dtos/dto-detail/dto-detail-photo/dto-detail-photo'
 import {DetailAttributes} from '@models/detail/types'
-import {v4} from 'uuid'
-import path from 'path'
+import {moveDetailPhotosToStatic, moveDetailOnePhotoToStatic} from './utils'
 
 
 class ControllerDetail {
     async createDetail(req: RequestCreation<DetailAttributes>, res: Response, next: NextFunction) {
         try {
-            const {img} = req.files
-            const fileName = v4() + '.jpg'
-            if(!Array.isArray(img)) {
-                img.mv(path.resolve(__dirname, '../..', 'static', fileName))
-            }
+            const photos = req.files.photos
 
             const authorization = req.get('Authorization')
-            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, fileName, authorization)
+            const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, authorization)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 
-            if(detail) {
-                res.send(detail)
+            if(Array.isArray(photos)) {
+                const fileNames = moveDetailPhotosToStatic(photos)
+                const detailPhotosCreation = dtoDetailPhoto.getDtoDetailAllPhotosCreation(fileNames, detail.id);
+                const detailPhotos = await serviceDetailPhoto.createDetailPhotos(detailPhotosCreation, next)
+
+                if(detail && detailPhotos.length) {
+                    res.send({detail, detailPhotos})
+                }
+            } else {
+                const fileName = moveDetailOnePhotoToStatic(photos)
+                const oneDetailPhotoCreation = dtoDetailPhoto.getDtoDetailOnePhotoCreation(fileName, detail.id);
+                const detailPhotos = await serviceDetailPhoto.createOneDetailPhoto(oneDetailPhotoCreation, next)
+                
+                if(detail && detailPhotos.id) {
+                    res.send({detail, detailPhotos})
+                }
             }
         } catch (error) {
             if(error instanceof Error) {

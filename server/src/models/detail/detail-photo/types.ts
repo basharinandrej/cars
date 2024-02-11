@@ -6,6 +6,7 @@ export interface DetailPhotoAttributes {
 
 
     detailId?: number
+    createdAt?: string
 }
 
 

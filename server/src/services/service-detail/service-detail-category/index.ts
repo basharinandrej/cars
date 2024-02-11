@@ -7,7 +7,7 @@ import {mapperGetAllCategories} from './service-mappers/mapper-get-all-categorie
 import { errorStrings } from "@common/error-strings";
 
 
-class ServiceCategory {
+class ServiceDetailCategory {
     async createDetailCategory(dtoCategoryCreate: DtoDetailCategoryCreation, next: NextFunction) {
         try {
             const candidate = await Category.findOne({where: {name: dtoCategoryCreate.name}})
@@ -42,4 +42,4 @@ class ServiceCategory {
     }
 }
 
-export default new ServiceCategory()
+export default new ServiceDetailCategory()

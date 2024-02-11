@@ -4,6 +4,7 @@ import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import {DetailWears} from '@common/enums'
+import {MAX_TOTAL_PHOTOS_PER_DETAIL} from '@common/constans'
 
 
 export const validationCreateDetail = {
@@ -30,12 +31,29 @@ export const validationCreateDetail = {
             ])).trim(),            
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
 
-            //todo валидация для photo
             body('year')
                 .isNumeric().withMessage(errorStrings.beNumber('year')).trim()
                 .isLength({min: 4, max: 4}).withMessage(errorStrings.minLength('year', 4)).trim()
                 .withMessage(errorStrings.maxLength('year', 4)).trim(),
 
+            body('photos').custom((_, meta) => {
+                const photos = meta.req.files.photos
+
+                console.log('>>> photos', photos)
+                if(!Array.isArray(photos)) {
+                    if(photos.name && photos.size) {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto()));
+                    }
+                } else {
+                    if(photos.length <= MAX_TOTAL_PHOTOS_PER_DETAIL) {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.maxTotalPhotosDetail()));
+                    }
+                }
+            }),
 
             header('authorization').custom((value: string) => {
                 const token = extractAccessToken(value)

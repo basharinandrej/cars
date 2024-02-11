@@ -39,8 +39,7 @@ class ServiceDetail {
 
                 modelId: dtoDetailCreation.modelId,
                 detailCategoryId: dtoDetailCreation.detailCategoryId,
-                userId: dtoDetailCreation.userId,
-                photo: dtoDetailCreation.photo
+                userId: dtoDetailCreation.userId
             })
 
             return mapperDetailCreation(detail)

@@ -2,3 +2,5 @@ export const EMPTY_STRING = ''
 
 export const PAGINATION_DEFAULT_LIMIT = 10
 export const PAGINATION_DEFAULT_OFFSET = 0
+
+export const MAX_TOTAL_PHOTOS_PER_DETAIL = 5

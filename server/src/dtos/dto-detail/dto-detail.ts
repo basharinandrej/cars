@@ -1,5 +1,5 @@
 import { DetailAttributes } from "@models/detail/types"
-import {DtoDetailCreation, DtoDetailSearch, DtoDetailGetById, DtoDetailGetAll} from "./types"
+import {DtoDetailCreation, DtoDetailGetById, DtoDetailGetAll} from "./types"
 import {ParamsGetAllDetails, ParamsGetOneDetail} from "@controllers/controller-detail/types"
 import {
     PAGINATION_DEFAULT_LIMIT,
@@ -9,7 +9,7 @@ import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 
 class DtoDetail {
-    getDtoDetailCreation(detail: DetailAttributes, fileName: string, authorization: string): DtoDetailCreation {
+    getDtoDetailCreation(detail: DetailAttributes, authorization: string): DtoDetailCreation {
         const token = extractAccessToken(authorization)
         const {id: userId} = serviceToken.validationToken(token)
 
@@ -23,7 +23,6 @@ class DtoDetail {
             modelId: detail.modelId,
             detailCategoryId: detail.detailCategoryId,
             userId,
-            photo: fileName
         }
     }
 

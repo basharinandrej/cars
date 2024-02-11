@@ -13,7 +13,7 @@ export const RoutePaths:Record<Routes,string> = {
 
     [Routes.Home]: '/',
     [Routes.Organization]: '/organizations',
-    [Routes.DetailPage]: '/detail/', // :vandorCode
+    [Routes.DetailPage]: '/detail/', // :id
     [Routes.NotFoundPage]: '*'
 }
 

@@ -10,6 +10,5 @@ export const mapperDetailCreation = (detail: Deteail) => {
         description: detail.dataValues.description,
         price: detail.dataValues.price,
         userId: detail.dataValues.userId,
-        photo: detail.dataValues.photo
     }
 }

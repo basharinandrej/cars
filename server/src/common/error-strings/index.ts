@@ -1,4 +1,5 @@
 import { SortOrderBy, UserRoles } from "@common/enums";
+import {MAX_TOTAL_PHOTOS_PER_DETAIL} from '@common/constans'
 
 export const errorStrings = {
 
@@ -21,7 +22,6 @@ export const errorStrings = {
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
 
     onlyForOrganiztion: () => `Доступно только для организации`,
-    // notOrganization: () => `НеДоступно только для пользователя с ролью ${UserRoles.ORGANIZATION}`,
 
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
@@ -29,6 +29,10 @@ export const errorStrings = {
     uncorrectRole: () => `Некорректная роль у пользователя`,
     uncorrectAddress: (key: string) => `Некорректный адрес ${key}`,
     checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,
+    failedToAddPhoto: () => `Неудалось добавить фото`,
+    mustBeAtLeastOnePhoto: () => 'Должно быть хотя бы одно фото',
+    maxTotalPhotosDetail: () => `Максимальное количесвто фотографий для детали ${MAX_TOTAL_PHOTOS_PER_DETAIL}`,
+
 
 
     sorderValue: () => `Направление сортировки может быть только ${SortOrderBy.Asc}, ${SortOrderBy.Desc}`,

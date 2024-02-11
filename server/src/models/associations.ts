@@ -32,8 +32,8 @@ Address.hasMany(Detail, {foreignKey: 'addressId'})
 Detail.belongsTo(Address, {foreignKey: 'addressId'})
 
 
-DetailPhoto.hasMany(Detail, {foreignKey: 'detailPhotoId'})
-Detail.belongsTo(DetailPhoto, {foreignKey: 'detailPhotoId'})
+Detail.hasMany(DetailPhoto, {foreignKey: 'detailId'})
+DetailPhoto.belongsTo(Detail, {foreignKey: 'detailId'})
 
 
 User.hasMany(Detail, {foreignKey: 'userId'})
