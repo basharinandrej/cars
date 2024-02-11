@@ -1,6 +1,7 @@
-import React, { useEffect} from 'react'
+import { useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import { useInView } from 'react-intersection-observer'
+import { Empty } from 'antd';
 
 import { 
     useAppDispatch, 
@@ -31,6 +32,8 @@ export const ListingOrganization = () => {
     const isLoading = useSelector(getIsLoadingListingOrganizations)
     const canPaginationMore = useSelector(getCanPaginationMoreListingOrganization)
 
+    const hasOrganizations = Array.isArray(organizations) && organizations?.length
+
     useMount(() => dispatch(fetchInitialListingOrganizations()))
 
     const { ref, inView } = useInView({
@@ -44,38 +47,40 @@ export const ListingOrganization = () => {
     }, [inView, canPaginationMore, dispatch])
 
     return (
-        <div className={styles.listingOrganizations}>
-            {organizations.map((organization) => {
-                const textBadge = mapBadgeOrganizationStatus[organization.status]?.value
-                const colorBadge = mapBadgeOrganizationStatus[organization.status]?.color
+        hasOrganizations 
+            ? <div className={styles.listingOrganizations}>
+                {organizations.map((organization) => {
+                    const textBadge = mapBadgeOrganizationStatus[organization.status]?.value
+                    const colorBadge = mapBadgeOrganizationStatus[organization.status]?.color
 
-                return (
-                    <Card
-                        key={organization.id}
-                        loading={isLoading}
-                        type='row'
-                        textBadge={textBadge}
-                        colorBadge={colorBadge}
-                        src={organization.avatar}
-                    >
-                        <div className={styles.wrapper}>
-                            <div className={styles.information}>
-                                <h3 className={styles.title}>{organization.name}</h3>
+                    return (
+                        <Card
+                            key={organization.id}
+                            loading={isLoading}
+                            type='row'
+                            textBadge={textBadge}
+                            colorBadge={colorBadge}
+                            src={organization.avatar}
+                        >
+                            <div className={styles.wrapper}>
+                                <div className={styles.information}>
+                                    <h3 className={styles.title}>{organization.name}</h3>
+                                </div>
+
+
+                                <div className={styles.boxButton}>
+                                    <AppLink to={`organizations/${organization.id}`}>
+                                        <Button text={'Подробнее'}/> 
+                                    </AppLink>
+                                    <Button text={'Оставить заявку'} type={'default'}/> 
+                                </div>
+
                             </div>
-
-
-                            <div className={styles.boxButton}>
-                                <AppLink to={`organizations/${organization.id}`}>
-                                    <Button text={'Подробнее'}/> 
-                                </AppLink>
-                                <Button text={'Оставить заявку'} type={'default'}/> 
-                            </div>
-
-                        </div>
-                    </Card>
-                )
-            })}
-            <div ref={ref}/>
-        </div>
+                        </Card>
+                    )
+                })}
+                <div ref={ref}/>
+            </div>
+            : <Empty description={'Нет автосервисов'}  />
     )
 }

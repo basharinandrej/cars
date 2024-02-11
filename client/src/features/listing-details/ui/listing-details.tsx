@@ -2,6 +2,7 @@ import React, { useEffect} from 'react'
 import { useInView } from 'react-intersection-observer';
 import {useSelector} from 'react-redux'
 import moment from 'moment'
+import { Empty } from 'antd';
 
 import { 
     useAppDispatch, 
@@ -37,7 +38,8 @@ export const ListingDetails = () => {
     const scrollPositionFromStore = useSelector(getScrollPositionListingDetails)
     const isLoading = useSelector(getIsLoadingListingDetails)
     
-    const canAutoScroll = (details.length && scrollPositionFromStore)
+    const canAutoScroll = (details?.length && scrollPositionFromStore)
+    const hasDetails = Array.isArray(details) && details?.length
 
     const { ref, inView } = useInView({
         threshold: 1.0,
@@ -57,28 +59,30 @@ export const ListingDetails = () => {
     }, [inView, canPaginationMore, dispatch])
 
 
-    return <div className={styles.listingDetails}>
-        {details?.map((detail: Detail) => {
-            const textBadge = mapBadge[detail.wear].value
-            const colorBadge = mapBadge[detail.wear].color
+    return hasDetails 
+            ? <div className={styles.listingDetails}>
+                {details?.map((detail: Detail) => {
+                    const textBadge = mapBadge[detail.wear].value
+                    const colorBadge = mapBadge[detail.wear].color
 
-            return <Card
-                loading={isLoading}
-                key={detail.id}
-                textBadge={textBadge}
-                colorBadge={colorBadge}
-                to={`detail/${detail.id}`}
-                src={`details/${detail.detailPhoto?.url}`}
-            >
-                <div className={styles.wrapper}>
-                    <h3 className={styles.title}>{detail.name}</h3>
-                    <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
-                    <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>
-                </div>
-            </Card>
-        })}
-        <div ref={ref}/>
-    </div>
+                    return <Card
+                        loading={isLoading}
+                        key={detail.id}
+                        textBadge={textBadge}
+                        colorBadge={colorBadge}
+                        to={`detail/${detail.id}`}
+                        src={`details/${detail.detailPhoto?.url}`}
+                    >
+                        <div className={styles.wrapper}>
+                            <h3 className={styles.title}>{detail.name}</h3>
+                            <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
+                            <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>
+                        </div>
+                    </Card>
+                })}
+                <div ref={ref}/>
+            </div>
+            : <Empty description={'Нет деталей'} />
 }
 
 
