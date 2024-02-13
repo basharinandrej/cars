@@ -7,7 +7,6 @@ export const mapperForPhotoDetails = (detailPhoto: DetailPhoto | DetailPhoto[], 
             return {
                 id: photo.dataValues.id,
                 url: photo.dataValues.url,
-                detailId: photo.dataValues.detailId
             }
         })
         return onlyFirstPhoto ? result[0] : result
@@ -15,7 +14,6 @@ export const mapperForPhotoDetails = (detailPhoto: DetailPhoto | DetailPhoto[], 
         return {
             id: detailPhoto.dataValues.id,
             url: detailPhoto.dataValues.url,
-            detailId: detailPhoto.dataValues.detailId
         }
     }
 }

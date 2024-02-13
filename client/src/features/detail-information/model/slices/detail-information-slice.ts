@@ -15,7 +15,7 @@ const initialState: DetailInformationSchema = {
     year: null,
     description: EMPTY_STRING,
     price: null,
-    photo: EMPTY_STRING,
+    detailPhoto: [],
     user: {
         id: null,
         name: EMPTY_STRING,
@@ -42,7 +42,9 @@ export const detailInformationSlice = createSlice({
             state.description = action.payload.description
             state.price = action.payload.price
             state.user = action.payload.user
-            state.photo = action.payload.photo
+            state.detailPhoto = Array.isArray(action.payload.detailPhoto) 
+                ? action.payload.detailPhoto
+                : [action.payload.detailPhoto]
         })
   }
 })

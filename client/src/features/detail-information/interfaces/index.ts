@@ -9,6 +9,11 @@ export interface User {
     phoneNumber: string
 }
 
+interface DetailPhoto {
+    id: number
+    url: string
+}
+
 export interface DetailInformationResponse {
     id: number | null
     vendorCode: string | null
@@ -18,5 +23,5 @@ export interface DetailInformationResponse {
     description: string
     price: number | null
     user: User
-    photo: string
-  }
+    detailPhoto: DetailPhoto[]
+}

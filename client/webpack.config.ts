@@ -25,13 +25,13 @@ export default (env: Env) => {
             publicPath: '/',
         },
         devServer: getDevServer(PORT),
-        plugins: getPlugins(' Пипелац35', './public/index.html'),
+        plugins: getPlugins('Пипелац35', './public/index.html'),
 
         module: {
             rules: getLoaders(isDev)
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js'],
+            extensions: ['.tsx', '.ts', '.js', '.css'],
             alias: getAliases(pathSrc),
         },
     }

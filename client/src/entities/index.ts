@@ -1,5 +1,6 @@
 export {Menu} from './menu/ui'
 export {Logo} from './logo/ui'
+export {LightBox} from './light-box/ui/light-box'
 
 export {
     menuSliceReducer, 

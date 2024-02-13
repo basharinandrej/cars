@@ -27,14 +27,24 @@ export const getLoaders = (isDev: boolean): RuleSetRule[] => {
         ],
     }
 
+    const cssLoader = {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader", 
+        ],
+    }
+
     const babelLoader = {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
         loader: 'babel-loader',
     }
-      return [
+
+    return [
         styleLoader,
+        cssLoader,
         tsLoader,
         babelLoader
-      ]
+    ]
   }

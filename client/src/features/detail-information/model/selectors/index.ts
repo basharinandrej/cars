@@ -11,7 +11,7 @@ export const getInformationDetail = (state: RootState) => {
         vendorCode: state.detailInformation.vendorCode,
         wear: state.detailInformation.wear,
         year: state.detailInformation.year,
-        photo: state.detailInformation.photo
+        detailPhoto: state.detailInformation.detailPhoto
     }
 }
 

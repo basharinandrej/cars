@@ -1,19 +1,38 @@
 import {FC, useMemo} from 'react'
 import { useSelector } from 'react-redux'
+import { Badge } from 'antd'
+
 import {
     getInformationDetail, 
     getInformationAboutAuthor
 } from '../model/selectors'
+
 import {fetchByIdDetail} from '../model/async-actions/fetch-by-id-detail'
-import { useAppDispatch, mapBadge, Button, getIsMobile, getIsTablet, useMount, APP_CLIENT_URL } from '@shared'
-import { Badge } from 'antd'
+
+import { 
+    useAppDispatch, 
+    mapBadge, 
+    Button, 
+    getIsMobile, 
+    getIsTablet, 
+    useMount, 
+    APP_CLIENT_URL 
+} from '@shared'
+
+import {LightBox} from '@entities'
+
+//@ts-ignore
+import StringMask from 'string-mask'
+
 
 import styles from './detail-information.module.sass'
+
 
 export const DetailInformation: FC<Props> = ({
     id
 }) => {
     const dispatch = useAppDispatch()
+
 
     const isMobile = getIsMobile()
     const isTablet = getIsTablet()
@@ -27,6 +46,9 @@ export const DetailInformation: FC<Props> = ({
     const textBadge = useMemo(() => mapBadge[detailInformation.wear]?.value, [])
     const colorBadge = useMemo(() => mapBadge[detailInformation.wear]?.color, [])
 
+    const formatterPhoneNumber = new StringMask('0(000)000-00-00');
+    const phoneNumberFormatted = formatterPhoneNumber.apply(informationAboutAuthor.phoneNumber); 
+
     const renderSide = () => {
         return (
             <div className={styles.side}>
@@ -34,13 +56,18 @@ export const DetailInformation: FC<Props> = ({
 
                 <div className={styles.buttonNumber}>
                     <Button 
-                        text={informationAboutAuthor.phoneNumber}
+                        text={phoneNumberFormatted}
                         size={isDesktop ? 'large' : null}
                     />
                 </div>
             </div>
         )
     }
+
+    const slides = detailInformation.detailPhoto.map((photo) => {
+        return {src: `${APP_CLIENT_URL}/details/${photo.url}`} 
+    })
+
 
     return (
         <div className={styles.wrapper}>
@@ -51,11 +78,9 @@ export const DetailInformation: FC<Props> = ({
                     color={colorBadge}
                     count={textBadge}
                 /></span>
-                <img
-                    className={styles.photo}
-                    src={`${APP_CLIENT_URL}/${detailInformation.photo}`}
-                />
 
+                <LightBox slides={slides} />
+                
                 {(isMobile || isTablet) && renderSide()}
                 <p>{detailInformation.description}</p>
             </div>

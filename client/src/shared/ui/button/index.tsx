@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
 import { Button as Btn, ButtonProps } from 'antd';
 import classNames from 'classnames'
 import styles from './index.module.sass'
