@@ -52,6 +52,7 @@ export const ListingOrganization = () => {
                 {organizations.map((organization) => {
                     const textBadge = mapBadgeOrganizationStatus[organization.status]?.value
                     const colorBadge = mapBadgeOrganizationStatus[organization.status]?.color
+                    const firstAddressOrganization = organization.addresses[0]
 
                     return (
                         <Card
@@ -65,6 +66,7 @@ export const ListingOrganization = () => {
                             <div className={styles.wrapper}>
                                 <div className={styles.information}>
                                     <h3 className={styles.title}>{organization.name}</h3>
+                                    <p>{[firstAddressOrganization.city, firstAddressOrganization.street, firstAddressOrganization.house].join(', ')}</p>
                                 </div>
 
 
