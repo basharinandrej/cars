@@ -5,7 +5,6 @@ import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import {errorStrings} from '@common/error-strings'
 import { isAdministrator } from '@common/guards';
-import {AddressAttributes} from '@models/address/types'
 
 
 export const validationOrganization = {
@@ -44,9 +43,6 @@ export const validationOrganization = {
             body('phoneNumber')
                 .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
                 .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim(),
-
-            body('fingerPrint')
-                .notEmpty().withMessage(errorStrings.notBeEmptyField('fingerPrint')).trim(),
 
             // body('address').custom((address: Omit<AddressAttributes, 'id'>) => {
             //     try {

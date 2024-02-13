@@ -3,8 +3,11 @@ import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/
 import ApiError from '@api-error/index'
 import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import dtoOrganization from '@dtos/dto-organization/dto-organization'
+import dtoAddress from '@dtos/dto-address/dto-address'
 import {OrganizationRequestParams} from '@common/interfaces'
 import serviceOrganization from '@services/service-organization'
+import serviceAddress from '@services/service-address'
+import { errorStrings } from '@common/error-strings'
 import {v4} from 'uuid'
 import path from 'path'
 
@@ -12,20 +15,27 @@ import path from 'path'
 class ControllerOrganization {
     async registrationOrganization(req: RequestCreation<OrganizationRequestParams>, res: Response, next: NextFunction) {
         try {
-            const {avatar} = req.files
-            const fileName = v4() + '.jpg'
+            const avatar = req.files.avatar
+
             if(!Array.isArray(avatar)) {
+                const fileName = v4() + '.jpg'
                 avatar.mv(path.resolve(__dirname, '../..', 'static', fileName))
-            }
+                
+                const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
+                const {refreshToken, organization, accessToken} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
+    
+                const dtoAddressCreation = dtoAddress.getDtoAddressCreation(req.body, organization.id)
+                const address = await serviceAddress.createAddress(dtoAddressCreation, next)
 
-            const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
-            const {refreshToken, organization, accessToken} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
-
-            // отправка картинки на Яндекс диск
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-            if(organization) {
-                res.send({organization, accessToken})
+                // отправка картинки на Яндекс диск
+                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                if(organization) {
+                    res.send({organization, accessToken, address})
+                }
+            } else {
+                next(ApiError.bedRequest(errorStrings.onlyOnePhoto))
             }
+ 
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
@@ -51,7 +61,7 @@ class ControllerOrganization {
     async getByIdOrganization(req: RequestGetOne<ParamsOrganizationGetById>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationGetOne = dtoOrganization.getDtoOrganizationGetOne(req.query)
-            const organization = await serviceOrganization.getDtoOrganizationGetOne(dtoOrganizationGetOne, next)
+            const organization = await serviceOrganization.getOrganizationGetOne(dtoOrganizationGetOne, next)
        
             if(organization) {
                 res.send(organization)

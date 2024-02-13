@@ -25,19 +25,17 @@ class ServiceToken {
         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
     }
     
-    public async saveToken(token: string, userId: number, fingerPrint: string) {
+    public async saveToken(token: string, userId: number,) {
         return await Token?.create({
             refreshToken: token, 
             userId,
-            fingerPrint
         })
     }
     
-    public async saveTokenOrganization(token: string, organizationId: number, fingerPrint: string) {
+    public async saveTokenOrganization(token: string, organizationId: number) {
         return await Token?.create({
             refreshToken: token, 
             organizationId,
-            fingerPrint
         })
     }
     // public async dropToken(refreshToken: string) {

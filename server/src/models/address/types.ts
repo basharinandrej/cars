@@ -4,7 +4,7 @@ export interface AddressAttributes {
     id: number
     city: string
     street: string
-    house: string
+    house: number
 }
 
 export interface AddressCreation extends Optional<AddressAttributes, 'id'> {}

@@ -72,7 +72,10 @@ export const ListingOrganization = () => {
                                     <AppLink to={`organizations/${organization.id}`}>
                                         <Button text={'Подробнее'}/> 
                                     </AppLink>
-                                    <Button text={'Оставить заявку'} type={'default'}/> 
+
+                                    <div className={styles.btnWrapper}>
+                                        <Button text={'Оставить заявку'} type={'default'}/> 
+                                    </div>
                                 </div>
 
                             </div>

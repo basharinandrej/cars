@@ -12,7 +12,6 @@ class DtoOrganization {
             phoneNumber: organization.phoneNumber,
             password: organization.password,
             ban: organization.ban || Bans.Null,
-            fingerPrint: organization.fingerPrint,
             status: StatusOrganization.Free,
             avatar: fileName
         }

@@ -7,6 +7,8 @@ import {getHashPassword} from '@common/utils/get-hash-password'
 import Organization from "@models/organization"
 import {mapperOrganizationCreation} from './mappers-organization/mapper-organization-creation'
 import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
+import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
+import Address from "@models/address"
 
 
 class ServiceOrganization {
@@ -37,7 +39,7 @@ class ServiceOrganization {
                 isOrganization: true
             })
 
-            await serviceToken.saveTokenOrganization(refreshToken, organization.dataValues.id, dtoOrganizationRegistration.fingerPrint)
+            await serviceToken.saveTokenOrganization(refreshToken, organization.dataValues.id)
 
             return {
                 refreshToken, 
@@ -58,6 +60,7 @@ class ServiceOrganization {
                 const organizations = await Organization.findAndCountAll({
                     limit,
                     offset,
+                    include: Address
                 })
                 return mapperOrganizationsGetAll(organizations)
             }
@@ -69,13 +72,14 @@ class ServiceOrganization {
         }
     }
 
-    async getDtoOrganizationGetOne(dtoOrganizationGetOne: DtoOrganizationGetOne, next: NextFunction) {
+    async getOrganizationGetOne(dtoOrganizationGetOne: DtoOrganizationGetOne, next: NextFunction) {
         try {
             const organization = await Organization.findOne({
-                where: {id: dtoOrganizationGetOne.id}
+                where: {id: dtoOrganizationGetOne.id},
+                include: Address
             })
 
-            return organization
+            return mapperOrganizationGetOne(organization)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

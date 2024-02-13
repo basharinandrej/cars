@@ -1,5 +1,6 @@
 import { Bans, StatusOrganization } from "@common/enums";
 import {Optional} from "sequelize/types";
+import Address from '@models/address';
 
 export interface OrganizationAttributes {
     id: number
@@ -11,7 +12,7 @@ export interface OrganizationAttributes {
     status: StatusOrganization 
     avatar?: string
     
-    addressId?: number
+    Addresses?: Address[]
 }
 
 export interface OrganizationCreation extends Optional<OrganizationAttributes, 'id'> {}

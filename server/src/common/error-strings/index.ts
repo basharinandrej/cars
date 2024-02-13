@@ -32,7 +32,7 @@ export const errorStrings = {
     failedToAddPhoto: () => `Неудалось добавить фото`,
     mustBeAtLeastOnePhoto: () => 'Должно быть хотя бы одно фото',
     maxTotalPhotosDetail: () => `Максимальное количесвто фотографий для детали ${MAX_TOTAL_PHOTOS_PER_DETAIL}`,
-
+    onlyOnePhoto:`Можно добавить только одно фото`,
 
 
     sorderValue: () => `Направление сортировки может быть только ${SortOrderBy.Asc}, ${SortOrderBy.Desc}`,

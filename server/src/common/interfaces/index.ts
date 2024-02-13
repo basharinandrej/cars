@@ -1,9 +1,10 @@
 import { TokenAttributes } from '@models/user/token/types'
 import {UserAttributes} from '@models/user/types'
 import { OrganizationAttributes } from '@models/organization/types'
+import {AddressAttributes} from '@models/address/types'
 
-export interface UserRequestParams extends UserAttributes, Pick<TokenAttributes, 'fingerPrint'> {}
-export interface OrganizationRequestParams extends OrganizationAttributes, Pick<TokenAttributes, 'fingerPrint'> {}
+export interface UserRequestParams extends UserAttributes, TokenAttributes {}
+export interface OrganizationRequestParams extends OrganizationAttributes, TokenAttributes, AddressAttributes {}
 
 
 export interface Tokens {

@@ -9,7 +9,6 @@ export interface DtoOrganizationRegistration {
     phoneNumber: number
     password: string
     ban: Bans
-    fingerPrint: string
     status: StatusOrganization
     avatar?: string
 }
