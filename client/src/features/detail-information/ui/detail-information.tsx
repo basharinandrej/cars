@@ -43,8 +43,8 @@ export const DetailInformation: FC<Props> = ({
     const detailInformation = useSelector(getInformationDetail)
     const informationAboutAuthor = useSelector(getInformationAboutAuthor)
 
-    const textBadge = useMemo(() => mapBadge[detailInformation.wear]?.value, [])
-    const colorBadge = useMemo(() => mapBadge[detailInformation.wear]?.color, [])
+    const textBadge = useMemo(() => mapBadge[detailInformation.wear]?.value, [detailInformation])
+    const colorBadge = useMemo(() => mapBadge[detailInformation.wear]?.color, [detailInformation])
 
     const formatterPhoneNumber = new StringMask('0(000)000-00-00');
     const phoneNumberFormatted = formatterPhoneNumber.apply(informationAboutAuthor.phoneNumber); 
@@ -79,7 +79,7 @@ export const DetailInformation: FC<Props> = ({
                     count={textBadge}
                 /></span>
 
-                <LightBox slides={slides} />
+                <LightBox slides={slides} className={styles.carousel} />
                 
                 {(isMobile || isTablet) && renderSide()}
                 <p>{detailInformation.description}</p>

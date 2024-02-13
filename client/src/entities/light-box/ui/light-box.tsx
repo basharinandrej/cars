@@ -2,10 +2,12 @@ import {useState, FC} from 'react'
 import Lightbox, {SlideImage} from "yet-another-react-lightbox"
 import Inline from "yet-another-react-lightbox/plugins/inline"
 
+import styles from './light-box.module.sass'
 
 
 export const LightBox:FC<Props> = ({
-    slides
+    slides,
+    className
 }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [index, setIndex] = useState(0);
@@ -15,7 +17,7 @@ export const LightBox:FC<Props> = ({
     setIndex(current);
 
     return (
-        <>
+        <div className={className}>
             <Lightbox
                 index={index}
                 slides={slides}
@@ -29,14 +31,7 @@ export const LightBox:FC<Props> = ({
                     spacing: 0,
                     imageFit: "cover",
                 }}
-                inline={{
-                style: {
-                    width: "100%",
-                    maxWidth: "900px",
-                    aspectRatio: "3 / 2",
-                    margin: "0 auto",
-                },
-                }}
+                className={styles.lightBox}
             />
 
             <Lightbox
@@ -48,10 +43,11 @@ export const LightBox:FC<Props> = ({
                 animation={{ fade: 0 }}
                 controller={{ closeOnPullDown: true, closeOnBackdropClick: true }}
             />
-        </>
+        </div>
     )
 }
 
 interface Props {
     slides: SlideImage[]
+    className?: string
 }
