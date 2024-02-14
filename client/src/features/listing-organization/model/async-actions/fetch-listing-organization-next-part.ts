@@ -1,9 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {ListingOrganizationSchema} from '../slices/listing-organizations-slice'
-import {getOffsetListingOgranizations, getLimitListingOgranizations} from '../selectors'
+import {
+    getOffsetListingOgranizations,
+    getStatusFilterListingOrganization,
+    getLimitListingOgranizations
+} from '../selectors'
 import {ParamsFetchListingOrganization} from '../interfaces'
 
+import {addQueryParams} from '@shared'
 
 export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganizationSchema, void, ThunkApiConfig>(
     'listing-organization/fetchListingOrganizationNextPart',
@@ -13,11 +18,15 @@ export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganiza
 
         const limit = getLimitListingOgranizations(state)
         const offset = getOffsetListingOgranizations(state)
+        const status = getStatusFilterListingOrganization(state)
 
         const params: ParamsFetchListingOrganization = {
             limit,
-            offset
+            offset,
+            status
         }
+
+        addQueryParams('statusOrganization', params.status)
 
         try {
 

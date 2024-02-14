@@ -13,7 +13,7 @@ import {
 
 import {fetchInitialListingOrganizations} from '../../../model/async-actions/fetch-initial-listing-organizations'
 
-import styles from './filter-organization-listing.sass'
+import styles from './filter-organization-listing.module.sass'
 
 
 
@@ -32,7 +32,7 @@ export const FilterOrganizationListing = () => {
         dispatch(dropStatusOrganization())
     }
     return (
-        <div>
+        <div className={styles.filter}>
             <Select
                 onChange={onChangeHandler}
                 onClear={onClearHandler}
