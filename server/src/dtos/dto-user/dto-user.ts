@@ -18,7 +18,6 @@ class DtoUser {
             phoneNumber: user.phoneNumber,
             password: user.password,
             ban: user.ban || Bans.Null,
-            fingerPrint: user.fingerPrint
         }
     }
 
@@ -27,7 +26,6 @@ class DtoUser {
         return {
             email: user.email,
             password: user.password,
-            fingerPrint: user.fingerPrint
         }
     }
 

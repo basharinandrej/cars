@@ -38,7 +38,7 @@ class ServiceUser {
                 role: user.dataValues.role
             })
 
-            await serviceToken.saveToken(refreshToken, user.dataValues.id, dtoUserRegistration.fingerPrint)
+            await serviceToken.saveToken(refreshToken, user.dataValues.id)
 
             return {
                 refreshToken, 
@@ -70,7 +70,7 @@ class ServiceUser {
                     name: canditate.dataValues.name,
                     role: canditate.dataValues.role
                 })
-                await serviceToken.saveToken(refreshToken, canditate.dataValues.id, dtoUserLogin.fingerPrint)
+                await serviceToken.saveToken(refreshToken, canditate.dataValues.id)
 
                 return {
                     refreshToken,

@@ -1,6 +1,5 @@
 
 .listingOrganizations
-    overflow-y: scroll
     display: grid
     grid-template-columns: 1fr
     grid-row-gap: 12px
@@ -29,10 +28,41 @@
 .information
     flex-grow: 1
 
-.boxButton
+.address
+    margin-bottom: 12px
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    width: calc(100vw - 42px)
+
+    @media(min-width: 600px)
+        width: calc(100vw - 42px - 250px)
+
+    @media(min-width: 960px)
+        width: calc(100vw - 42px - 320px)
+
+    @media(min-width: 1200px)
+        width: calc(100vw - (100vw - 1200px) - 320px)   
+
+
+.boxButtons
     display: flex
-    justify-content: end
+    flex-direction: column
+
+    @media(min-width: 600px)
+        flex-direction: row
+        justify-content: end
 
 .btnWrapper
-    width: max-content
-    margin-left: 12px
+    width: 100%
+    margin-left: 0
+    margin-top: 8px
+
+    @media(min-width: 600px)
+        width: max-content
+        margin-top: 0px
+        margin-left: 12px
+
+
+.title
+    line-height: 18px

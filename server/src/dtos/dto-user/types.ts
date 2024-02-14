@@ -10,14 +10,12 @@ export interface DtoUserRegistration {
     phoneNumber: number
     password: string
     ban: Bans
-    fingerPrint: string
     avatar?: string
 }
 
 export interface DtoUserLogin {
     email: string
     password: string
-    fingerPrint: string
 }
 
 

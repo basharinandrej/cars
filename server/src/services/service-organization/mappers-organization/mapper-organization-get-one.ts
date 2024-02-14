@@ -12,8 +12,9 @@ export const mapperOrganizationGetOne = (organization: Organization) => {
         status: organization.dataValues.status,
         ban: organization.dataValues.ban,
         avatar: organization.dataValues.avatar,
-        house: organization.dataValues.Address.dataValues.house,
-        street: organization.dataValues.Address.dataValues.street,
-        city: organization.dataValues.Address.dataValues.city,
+        //тут нужно пройти по массиву
+        // house: organization.dataValues.Address.dataValues.house,
+        // street: organization.dataValues.Address.dataValues.street,
+        // city: organization.dataValues.Address.dataValues.city,
     }
 }

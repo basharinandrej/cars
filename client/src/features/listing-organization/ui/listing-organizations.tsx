@@ -66,12 +66,12 @@ export const ListingOrganization = () => {
                             <div className={styles.wrapper}>
                                 <div className={styles.information}>
                                     <h3 className={styles.title}>{organization.name}</h3>
-                                    <p>{[firstAddressOrganization.city, firstAddressOrganization.street, firstAddressOrganization.house].join(', ')}</p>
+                                    <p className={styles.address}>{[firstAddressOrganization.city, firstAddressOrganization.street, firstAddressOrganization.house].join(', ')}</p>
                                 </div>
 
 
-                                <div className={styles.boxButton}>
-                                    <AppLink to={`organizations/${organization.id}`}>
+                                <div className={styles.boxButtons}>
+                                    <AppLink to={`/organizations/${organization.id}`}>
                                         <Button text={'Подробнее'}/> 
                                     </AppLink>
 

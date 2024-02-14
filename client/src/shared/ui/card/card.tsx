@@ -1,4 +1,4 @@
-import React, { ReactNode, FC} from 'react'
+import { ReactNode, FC} from 'react'
 import { Card as CardFromAntD, Badge } from 'antd'
 import classNames from 'classnames'
 

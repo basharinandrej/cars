@@ -44,26 +44,8 @@ export const validationOrganization = {
                 .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
                 .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim(),
 
-            // body('address').custom((address: Omit<AddressAttributes, 'id'>) => {
-            //     try {
-            //         const totalKeysAddress = Object.entries(address)
-            //             .map(([key, value]) => {
-            //                 if(!value) {
-            //                     return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress(`нет поля ${key}`)));
-            //                 }else{
-            //                     return Promise.resolve(true);
-            //                 }
-            //             })
-            //             .length
-
-            //         if(totalKeysAddress < 3) {
-            //             return Promise.reject(ApiError.bedRequest(errorStrings.uncorrectAddress('нет - улицы, дома, города')));
-            //         }else{
-            //             return Promise.resolve(true);
-            //         }
-            //     } catch (error) {
-            //     }
-            // })
+            body('house').isNumeric().withMessage(errorStrings.beNumber('house')).trim(),
+            body('street').notEmpty().withMessage(errorStrings.notBeEmptyField('street')).trim(),
         ]
     }
 }
