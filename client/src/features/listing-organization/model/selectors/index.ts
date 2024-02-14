@@ -6,3 +6,6 @@ export const getIsLoadingListingOrganizations = (state: RootState) => state.list
 export const getLimitListingOgranizations = (state: RootState) => state.listingOrganization.limit
 export const getOffsetListingOgranizations = (state: RootState) => state.listingOrganization.offset
 export const getCanPaginationMoreListingOrganization = (state: RootState) => state.listingOrganization.canPaginationMore
+
+export const getStatusFilterListingOrganization = (state: RootState) => state.filterListingOrganization.status
+export const getOptionsFilterListingOrganization = (state: RootState) => state.filterListingOrganization.optionsStatusOrganization

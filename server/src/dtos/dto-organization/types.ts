@@ -13,7 +13,9 @@ export interface DtoOrganizationRegistration {
     avatar?: string
 }
 
-export interface DtoOrganizationGetAll extends Pagination {}
+export interface DtoOrganizationGetAll extends Pagination {
+    status: StatusOrganization
+}
 
 export interface DtoOrganizationGetOne {
     id: number

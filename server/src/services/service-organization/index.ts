@@ -53,17 +53,20 @@ class ServiceOrganization {
         }
     }
 
-    async getAllOrganizations({ limit, offset}: DtoOrganizationGetAll, next: NextFunction) {
+    async getAllOrganizations({ limit, offset, status}: DtoOrganizationGetAll, next: NextFunction) {
 
         try {
-            if(limit && (offset || offset === 0)) {
-                const organizations = await Organization.findAndCountAll({
-                    limit,
-                    offset,
-                    include: Address
-                })
-                return mapperOrganizationsGetAll(organizations)
-            }
+            const params: Partial<DtoOrganizationGetAll> = {}
+
+            if(status) params.status = status
+
+            const organizations = await Organization.findAndCountAll({
+                limit,
+                offset,
+                where: params,
+                include: Address
+            })
+            return mapperOrganizationsGetAll(organizations)
 
         } catch (error) {
             if(error instanceof Error) {

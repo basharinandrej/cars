@@ -1,10 +1,16 @@
-import {ListingOrganization} from '@features'
+import {
+    ListingOrganization, 
+    FilterOrganizationListing
+} from '@features'
 
 
 const ListingOrganizationPage = () => {
 
 
-    return <ListingOrganization />
+    return <>
+        <FilterOrganizationListing />
+        <ListingOrganization />
+    </>
 }
 
 export default ListingOrganizationPage

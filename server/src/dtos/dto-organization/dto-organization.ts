@@ -21,6 +21,7 @@ class DtoOrganization {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            status: query.status
         }
     }
 

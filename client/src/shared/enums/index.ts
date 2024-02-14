@@ -17,3 +17,5 @@ export const enum StatusOrganization {
     Free = 'Free',
     Waiting = 'Waiting'
 }
+
+type WeekdayType = `${StatusOrganization}`;

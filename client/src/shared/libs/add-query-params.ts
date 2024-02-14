@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import {ParsedUrl} from '../interfaces/parsed-url'
+import { StatusOrganization } from '../enums';
 
 export const addQueryParams = (key: keyof ParsedUrl, value: string|number) => {
   if(!value) return

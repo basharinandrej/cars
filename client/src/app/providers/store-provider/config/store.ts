@@ -2,6 +2,7 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import {
     listingDetailsReducer, 
     filterListingDetailsReducer,
+    filterListingOrganizationsReducer,
     detailInformationReducer,
     listingOrganizationReducer
 } from '@features'
@@ -13,8 +14,11 @@ import {StateSchema} from '../interfaces'
 const getStore = () => {
     const rootReducer: ReducersMapObject<StateSchema> = {
         listingDetails: listingDetailsReducer,
-        listingOrganization: listingOrganizationReducer,
         filterListingDetails: filterListingDetailsReducer,
+
+        listingOrganization: listingOrganizationReducer,
+        filterListingOrganization:filterListingOrganizationsReducer,
+
         detailInformation: detailInformationReducer,
         menu: menuSliceReducer,
         logo: logoSliceReducer

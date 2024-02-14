@@ -9,3 +9,6 @@ export {DetailInformationSchema, detailInformationReducer} from './detail-inform
 
 export {ListingOrganization} from './listing-organization/ui/listing-organizations'
 export {listingOrganizationReducer, ListingOrganizationSchema} from './listing-organization/model/slices/listing-organizations-slice'
+
+export {FilterOrganizationListing} from './listing-organization/ui/components/filter-organization-listing/filter-organization-listing'
+export {filterListingOrganizationsReducer, FilterListingOrganizationsSchema} from './listing-organization/model/slices/filter-listing-organization-slice'

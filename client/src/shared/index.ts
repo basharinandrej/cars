@@ -12,6 +12,7 @@ export {useMount} from './hooks/use-mount'
 export {Container} from './ui/container/container'
 export { InputSearch } from './ui/input-search/input-search';
 export { SelectSearch } from './ui/select-search';
+export {Select} from './ui/select/select'
 export {Button} from './ui/button/'
 export {AppLink} from './ui/app-link/'
 export {Card} from './ui/card/card'
