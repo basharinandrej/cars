@@ -12,9 +12,21 @@ export const mapperOrganizationGetOne = (organization: Organization) => {
         status: organization.dataValues.status,
         ban: organization.dataValues.ban,
         avatar: organization.dataValues.avatar,
-        //тут нужно пройти по массиву
-        // house: organization.dataValues.Address.dataValues.house,
-        // street: organization.dataValues.Address.dataValues.street,
-        // city: organization.dataValues.Address.dataValues.city,
+        addresses: organization.dataValues.Addresses.map((address) => {
+            return {
+                id: address.dataValues.id,
+                city: address.dataValues.city,
+                house: address.dataValues.house,
+                street: address.dataValues.street,
+            }
+        }),
+        services: organization.dataValues.Services.map((service) => {
+            return {
+                id: service.dataValues.id,
+                name: service.dataValues.name,
+                description: service.dataValues.description,
+                price: service.dataValues.price
+            }
+        })
     }
 }

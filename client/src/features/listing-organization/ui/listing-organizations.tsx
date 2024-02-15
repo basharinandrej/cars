@@ -71,7 +71,7 @@ export const ListingOrganization = () => {
 
 
                                 <div className={styles.boxButtons}>
-                                    <AppLink to={`/organizations/${organization.id}`}>
+                                    <AppLink to={`/organization/${organization.id}`}>
                                         <Button text={'Подробнее'}/> 
                                     </AppLink>
 

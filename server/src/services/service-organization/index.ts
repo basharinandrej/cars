@@ -16,6 +16,7 @@ import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizat
 import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
 import Address from "@models/address"
 import Service from "@models/service"
+import ServiceCategory from "@models/service/service-category"
 
 
 class ServiceOrganization {
@@ -122,9 +123,7 @@ class ServiceOrganization {
                 include: [Address, Service]
             })
 
-            return organization
-
-            // return mapperOrganizationGetOne(organization)
+            return mapperOrganizationGetOne(organization)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

@@ -48,7 +48,6 @@ class ControllerOrganization {
             const dtoOrganizationLogin = dtoOrganization.getDtoOrganizationLogin(req.body)
             const result = await serviceOrganization.login(dtoOrganizationLogin, next)
 
-            console.log('>>>> result', result)
             if(result) {
                 const {refreshToken, user, accessToken} = result
                 res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
