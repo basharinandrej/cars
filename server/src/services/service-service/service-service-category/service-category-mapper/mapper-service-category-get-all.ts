@@ -1,4 +1,4 @@
-import ServiceCategory from "@models/service/service-category"
+import ServiceCategory from "@models/service-category"
 
 interface ServiceCategoryData {
     count: number

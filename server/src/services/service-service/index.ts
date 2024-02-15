@@ -1,24 +1,25 @@
-import { DtoServiceCreation, DtoServiceGetAll} from '@dtos/dto-service/types'
+import { DtoOrganizationServiceCategoryCreation, DtoOrganizationServiceCategoryGetAll} from '@dtos/dto-service/types'
 import { NextFunction } from 'express'
 import ApiError from "@api-error/index";
-import Service from '@models/service';
-import ServiceCategory from '@models/service/service-category';
+import OrganizationServiceCategory from '@models/organization-service-category';
+import ServiceCategory from '@models/service-category';
+import Organization from '@models/organization';
 import {mapperServiceCreation} from './mappers-service/mapper-service-creation'
 import {mapperServiceGetAll} from './mappers-service/mapper-service-get-all'
-import Organization from '@models/organization';
 
 
 
-class ServiceService {
-    async createService(dtoServiceCreation: DtoServiceCreation, next: NextFunction) {
+class ServiceOrganizationServiceCategory {
+    async createServiceOrganizationServiceCategory(dtoServiceOrganizationServiceCategoryCreation: DtoOrganizationServiceCategoryCreation, next: NextFunction) {
         try {
-            const service = await Service.create({
-                name: dtoServiceCreation.name,
-                description: dtoServiceCreation.description,
-                price: dtoServiceCreation.price,
-                organizationId: dtoServiceCreation.organizationId,
-                serviceCategoryId: dtoServiceCreation.serviceCategoryId
+            const service = await OrganizationServiceCategory.create({
+                name: dtoServiceOrganizationServiceCategoryCreation.name,
+                description: dtoServiceOrganizationServiceCategoryCreation.description,
+                price: dtoServiceOrganizationServiceCategoryCreation.price,
+                organizationId: dtoServiceOrganizationServiceCategoryCreation.organizationId,
+                serviceCategoryId: dtoServiceOrganizationServiceCategoryCreation.serviceCategoryId
             })
+
 
             return mapperServiceCreation(service)
         } catch (error) {
@@ -28,9 +29,9 @@ class ServiceService {
         }
     }
 
-    async getAllServices({limit, offset, serviceCategoryId}: DtoServiceGetAll, next: NextFunction) {
+    async getAllServiceOrganizationServiceCategories({limit, offset, serviceCategoryId}: DtoOrganizationServiceCategoryGetAll, next: NextFunction) {
         try {
-            const services = await Service.findAndCountAll({
+            const organizationServiceCategories = await OrganizationServiceCategory.findAndCountAll({
                 limit, offset,
                 where: {
                     serviceCategoryId
@@ -39,7 +40,7 @@ class ServiceService {
             })
             
 
-            return mapperServiceGetAll(services)
+            return mapperServiceGetAll(organizationServiceCategories)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.bedRequest(error))
@@ -49,4 +50,4 @@ class ServiceService {
 }
 
 
-export default new ServiceService()
+export default new ServiceOrganizationServiceCategory()

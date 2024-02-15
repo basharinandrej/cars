@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import middlewareValidation from '../middlewares/middleware-validation'
-import controllerService from '@controllers/controller-service'
+import controllerOrganizationServiceCategory from '@controllers/controller-organization-service-category'
 import {validationServiceCreation} from './validation-service'
 
 const routers = Router()
@@ -9,13 +9,13 @@ const routers = Router()
 routers.post('',
     validationServiceCreation.createChain(),
     middlewareValidation,
-    controllerService.createService
+    controllerOrganizationServiceCategory.createOrganizationServiceCategory
 )
 
 routers.get('',
     middlewareValidation, 
-    controllerService.getAllServices
+    controllerOrganizationServiceCategory.getAllOrganizationServiceCategories
 )
 
 
-export const routerService = routers
+export const routerOrganizationServiceCategory = routers

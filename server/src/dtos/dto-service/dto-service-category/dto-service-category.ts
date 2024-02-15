@@ -1,5 +1,5 @@
-import { ServiceCategoryAttributes } from "@modelsservice/service-category/types";
-import { ParamsGetServiceCategories } from '@controllerscontroller-service/controller-service-category/types'
+import { ServiceCategoryAttributes } from "@models/service-category/types";
+import { ParamsGetServiceCategories } from '@controllers/controller-service-category/types'
 import {DtoServiceCategoryCreation, DtoServiceCategoryGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 

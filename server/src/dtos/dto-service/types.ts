@@ -1,5 +1,5 @@
 
-export interface DtoServiceCreation {
+export interface DtoOrganizationServiceCategoryCreation {
     name: string,
     description: string
     price: number
@@ -7,7 +7,7 @@ export interface DtoServiceCreation {
     serviceCategoryId: number
 }
 
-export interface DtoServiceGetAll {
+export interface DtoOrganizationServiceCategoryGetAll {
     limit: number
     offset: number
     serviceCategoryId: number

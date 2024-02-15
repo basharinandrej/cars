@@ -1,4 +1,4 @@
-import Service from "@models/service"
+import Service from "@models/organization-service-category"
 import Organization from "@models/organization"
 import User from "@models/user"
 import { Optional } from "sequelize"

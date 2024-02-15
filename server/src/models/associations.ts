@@ -9,8 +9,8 @@ import Address from './address'
 import Car from './car'
 import Token from './user/token'
 import User from './user'
-import Service from './service'
-import ServiceCategory from './service/service-category'
+import OrganizationServiceCategory from './organization-service-category'
+import ServiceCategory from './service-category'
 import Request from './request'
 import Organization from './organization'
 import Post from './organization/post'
@@ -43,8 +43,10 @@ Detail.belongsTo(User, {foreignKey: 'userId'})
 User.hasOne(Token, {foreignKey: 'userId'})
 Token.belongsTo(User, {foreignKey: 'userId'})
 
+
 Organization.hasOne(Token, {foreignKey: 'organizationId'})
 Token.belongsTo(Organization, {foreignKey: 'organizationId'})
+
 
 User.hasMany(Car, {foreignKey: 'userId'})
 Car.belongsTo(User, {foreignKey: 'userId'})
@@ -54,24 +56,20 @@ User.hasMany(Request, {foreignKey: 'senderId'})
 Request.belongsTo(User, {foreignKey: 'senderId'})
 
 
-Service.hasMany(Request, {foreignKey: 'serviceId'})
-Request.belongsTo(Service, {foreignKey: 'serviceId'})
+OrganizationServiceCategory.hasMany(Request, {foreignKey: 'serviceId'})
+Request.belongsTo(OrganizationServiceCategory, {foreignKey: 'serviceId'})
 
 
 Organization.hasMany(Request, {foreignKey: 'recipientId'})
 Request.belongsTo(Organization, {foreignKey: 'recipientId'})
 
 
-Organization.hasMany(Service, {foreignKey: 'organizationId'})
-Service.belongsTo(Organization, {foreignKey: 'organizationId'})
+Organization.belongsToMany(ServiceCategory, { through: OrganizationServiceCategory, as: 'serviceCategories', foreignKey: 'organizationId' });
+ServiceCategory.belongsToMany(Organization, { through: OrganizationServiceCategory, as: 'organizaitons', foreignKey: 'serviceCategoryId' });
 
 
 Organization.hasMany(Post, {foreignKey: 'organizationId'})
 Post.belongsTo(Organization, {foreignKey: 'organizationId'})
-
-
-ServiceCategory.hasMany(Service, {foreignKey: 'serviceCategoryId'})
-Service.belongsTo(ServiceCategory, {foreignKey: 'serviceCategoryId'})
 
 
 Organization.hasMany(Address, {foreignKey: 'organizationId'})

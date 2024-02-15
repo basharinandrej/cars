@@ -3,7 +3,7 @@ import {DtoRequestCreation, DtoRequestsGetAll, DtoRequestGetOne} from '@dtos/dto
 import Request from '@models/request'
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import Service from '@models/service'
+import Service from '@models/organization-service-category'
 import Organization from '@models/organization'
 import {mapperRequestGetById} from './mappers-request/mapper-request-get-by-id'
 

@@ -1,4 +1,4 @@
-import Service from "@models/service";
+import Service from "@models/organization-service-category";
 
 interface ServicesData {
     rows: Service[]

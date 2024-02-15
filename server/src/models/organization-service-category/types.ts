@@ -1,8 +1,8 @@
 import { OrganizationAttributes } from "@models/organization/types";
-import { ServiceCategoryAttributes } from "@models/service/service-category/types";
+import { ServiceCategoryAttributes } from "@models/service-category/types";
 import {Optional} from "sequelize/types";
 
-export interface ServiceAttributes {
+export interface OrganizationServiceCategoryAttributes {
     id: number
     name: string
     description: string
@@ -18,4 +18,4 @@ export interface ServiceAttributes {
 }
 
 
-export interface CreationService extends Optional<ServiceAttributes, 'id'> {}
+export interface CreationOrganizationServiceCategory extends Optional<OrganizationServiceCategoryAttributes, 'id'> {}

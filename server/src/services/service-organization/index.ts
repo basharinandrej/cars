@@ -15,9 +15,8 @@ import {mapperOrganizationCreation} from './mappers-organization/mapper-organiza
 import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
 import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
 import Address from "@models/address"
-import Service from "@models/service"
-import ServiceCategory from "@models/service/service-category"
-
+import Service from "@models/organization-service-category"
+import ServiceCategory from '@models/service-category'
 
 class ServiceOrganization {
     async registrationOrganization(dtoOrganizationRegistration: DtoOrganizationRegistration, next: NextFunction) {
@@ -94,19 +93,30 @@ class ServiceOrganization {
         }
     }
 
-    async getAllOrganizations({ limit, offset, status}: DtoOrganizationGetAll, next: NextFunction) {
+    async getAllOrganizations({ limit, offset, status, serviceCategoryId}: DtoOrganizationGetAll, next: NextFunction) {
 
         try {
             const params: Partial<DtoOrganizationGetAll> = {}
 
             if(status) params.status = status
 
+            const paramsServiceCategory: Partial<{id: number}> = {}
+            if(serviceCategoryId) paramsServiceCategory.id = serviceCategoryId
+
             const organizations = await Organization.findAndCountAll({
                 limit,
                 offset,
                 where: params,
-                include: Address
+                include: [
+                    {
+                        model: ServiceCategory,
+                        as: "serviceCategories",
+                        where: paramsServiceCategory
+                    }
+                ]
             })
+
+            return organizations
             return mapperOrganizationsGetAll(organizations)
 
         } catch (error) {

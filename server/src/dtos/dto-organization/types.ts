@@ -15,6 +15,7 @@ export interface DtoOrganizationRegistration {
 
 export interface DtoOrganizationGetAll extends Pagination {
     status: StatusOrganization
+    serviceCategoryId: number
 }
 
 export interface DtoOrganizationGetOne {

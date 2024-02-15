@@ -1,6 +1,6 @@
 import {Router} from 'express'
-import middlewareValidation from '../../middlewares/middleware-validation'
-import controllerServiceCategory from '@controllers/controller-service/controller-service-category'
+import middlewareValidation from '../middlewares/middleware-validation'
+import controllerServiceCategory from '@controllers/controller-service-category'
 import {validationCreateServiceCategory} from './validation-service-category'
 
 
@@ -13,7 +13,7 @@ routers.post(
     controllerServiceCategory.createServiceCategory
 )
 
-routers.get('', 
+routers.get('',
     middlewareValidation, 
     controllerServiceCategory.getAllServiceCategories
 )

@@ -1,10 +1,10 @@
 import {NextFunction, Response} from 'express'
-import {ParamsGetServiceCategories} from '@controllers/controller-service/controller-service-category/types'
+import {ParamsGetServiceCategories} from '@controllers/controller-service-category/types'
 import ApiError from '@api-error/index'
 import dtoServiceCategory from '@dtos/dto-service/dto-service-category/dto-service-category'
 import serviceServiceCategory from '@services/service-service/service-service-category'
 import { RequestCreation, RequestGetAll } from '@common/types'
-import { ServiceCategoryAttributes } from "@models/service/service-category/types";
+import { ServiceCategoryAttributes } from "@models/service-category/types";
 
 
 class ControllerServiceCategory {

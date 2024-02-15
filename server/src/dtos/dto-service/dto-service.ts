@@ -1,12 +1,12 @@
-import { ServiceAttributes } from "@models/service/types";
-import {DtoServiceCreation, DtoServiceGetAll} from './types'
-import {ParamsGetAllServices} from '@controllerscontroller-service/types'
+import { OrganizationServiceCategoryAttributes } from "@models/organization-service-category/types";
+import {DtoOrganizationServiceCategoryCreation, DtoOrganizationServiceCategoryGetAll} from './types'
+import {ParamsGetAllServices} from '@controllers/controller-organization-service-category/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 
 class DtoService {
-    getDtoServiceCreation(service: ServiceAttributes, authorization: string): DtoServiceCreation {
+    getDtoOrganizationServiceCategoryCreation(service: OrganizationServiceCategoryAttributes, authorization: string): DtoOrganizationServiceCategoryCreation {
         const token = extractAccessToken(authorization)
         const {id: organizationId} = serviceToken.validationToken(token)
 
@@ -20,7 +20,7 @@ class DtoService {
     }
 
 
-    getDtoServiceGetAll(query:ParamsGetAllServices ): DtoServiceGetAll {
+    getDtoOrganizationServiceCategoryGetAll(query:ParamsGetAllServices ): DtoOrganizationServiceCategoryGetAll {
 
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,

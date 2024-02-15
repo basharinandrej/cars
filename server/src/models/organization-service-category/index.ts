@@ -1,11 +1,11 @@
 import {Model, DataTypes} from 'sequelize'
 import {instanceSequelize as sequelize} from '@db/index'
-import { ServiceAttributes, CreationService } from './types'
+import { OrganizationServiceCategoryAttributes, CreationOrganizationServiceCategory } from './types'
 
 
-class Service extends Model<ServiceAttributes, CreationService> {}
+class OrganizationServiceCategory extends Model<OrganizationServiceCategoryAttributes, CreationOrganizationServiceCategory> {}
 
-Service.init({
+OrganizationServiceCategory.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,9 +25,9 @@ Service.init({
     }
 }, { 
     sequelize,
-    tableName: 'services',
+    tableName: 'organization_service-category',
     updatedAt: false
  })
 
 
-export default Service
+export default OrganizationServiceCategory
