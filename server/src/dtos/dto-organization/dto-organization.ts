@@ -1,5 +1,10 @@
 import {OrganizationRequestParams} from '@common/interfaces'
-import {DtoOrganizationRegistration, DtoOrganizationGetAll, DtoOrganizationGetOne} from './types'
+import {
+    DtoOrganizationRegistration, 
+    DtoOrganizationGetAll,
+    DtoOrganizationLogin,
+    DtoOrganizationGetOne
+} from './types'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
 import { Bans, StatusOrganization } from '@common/enums'
@@ -28,6 +33,14 @@ class DtoOrganization {
     getDtoOrganizationGetOne(query: ParamsOrganizationGetById): DtoOrganizationGetOne {
         return {
             id: query.id
+        }
+    }
+
+    getDtoOrganizationLogin(organization: OrganizationRequestParams): DtoOrganizationLogin {
+
+        return {
+            email: organization.email,
+            password: organization.password,
         }
     }
 }

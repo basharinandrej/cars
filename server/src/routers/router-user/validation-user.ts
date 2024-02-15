@@ -8,6 +8,15 @@ import {errorStrings} from '@common/error-strings'
 import { isAdministrator } from '@common/guards';
 
 export const validationUser = {
+    loginChain() {
+        return [
+            body('password')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+
+            body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
+        ]
+    },
     getAllUsersChain() {
         return [
             header('authorization').custom((value: string) => {

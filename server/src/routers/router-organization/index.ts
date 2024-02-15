@@ -12,6 +12,12 @@ routers.post('/registration',
     controllerOrganization.registrationOrganization
 )
 
+routers.post('/login',
+    validationOrganization.loginChain(),
+    middlewareValidation,
+    controllerOrganization.login
+)
+
 routers.get('',
     middlewareValidation,
     controllerOrganization.getAllOrganization

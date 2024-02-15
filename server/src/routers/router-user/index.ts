@@ -12,7 +12,11 @@ routers.post(
     middlewareValidation,
     controllerUser.registration
 )
-routers.post('/login', controllerUser.login)
+routers.post('/login',   
+    validationUser.loginChain(),
+    middlewareValidation,
+    controllerUser.login
+)
 
 routers.get('', 
     validationUser.getAllUsersChain(), 

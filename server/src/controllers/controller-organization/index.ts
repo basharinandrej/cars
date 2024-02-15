@@ -43,6 +43,24 @@ class ControllerOrganization {
         }
     }
 
+    async login(req: RequestCreation<OrganizationRequestParams>, res: Response, next: NextFunction) {
+        try {
+            const dtoOrganizationLogin = dtoOrganization.getDtoOrganizationLogin(req.body)
+            const result = await serviceOrganization.login(dtoOrganizationLogin, next)
+
+            console.log('>>>> result', result)
+            if(result) {
+                const {refreshToken, user, accessToken} = result
+                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.send({user, accessToken})
+            }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message))
+            }
+        }
+    }
+
     async getAllOrganization(req: RequestGetAll<ParamsOrganizationGetAll>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationGetAll = dtoOrganization.getDtoOrganizationGetAll(req.query)

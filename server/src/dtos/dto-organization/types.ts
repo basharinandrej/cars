@@ -20,3 +20,8 @@ export interface DtoOrganizationGetAll extends Pagination {
 export interface DtoOrganizationGetOne {
     id: number
 }
+
+export interface DtoOrganizationLogin {
+    email: string
+    password: string
+}

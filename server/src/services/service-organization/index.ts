@@ -1,14 +1,21 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
-import {DtoOrganizationGetAll,DtoOrganizationGetOne, DtoOrganizationRegistration} from '@dtos/dto-organization/types'
+import {
+    DtoOrganizationGetAll,
+    DtoOrganizationGetOne, 
+    DtoOrganizationRegistration,
+    DtoOrganizationLogin
+} from '@dtos/dto-organization/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import Organization from "@models/organization"
+import {compareHashPassword} from '@common/utils/compare-hash-password'
 import {mapperOrganizationCreation} from './mappers-organization/mapper-organization-creation'
 import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
 import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
 import Address from "@models/address"
+import Service from "@models/service"
 
 
 class ServiceOrganization {
@@ -53,6 +60,39 @@ class ServiceOrganization {
         }
     }
 
+    async login(dtoOrganizationLogin: DtoOrganizationLogin, next: NextFunction) {
+        try {
+            const canditate = await Organization.findOne({where: {email: dtoOrganizationLogin.email}})
+
+            if(!canditate) {
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoOrganizationLogin.email)))
+            } 
+
+            const hashPassword = await getHashPassword(dtoOrganizationLogin.password)
+            const isMatchPasswords = await compareHashPassword(dtoOrganizationLogin.password, hashPassword)
+
+            if(isMatchPasswords) {
+                const {accessToken, refreshToken} = serviceToken.generateTokens({
+                    id: canditate.dataValues.id,
+                    name: canditate.dataValues.name,
+                })
+                await serviceToken.saveTokenOrganization(refreshToken, canditate.dataValues.id)
+
+                return {
+                    refreshToken,
+                    user: canditate,
+                    accessToken
+                }
+            } else {
+                next(ApiError.bedRequest(errorStrings.errorPassword()))
+            }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
+    }
+
     async getAllOrganizations({ limit, offset, status}: DtoOrganizationGetAll, next: NextFunction) {
 
         try {
@@ -79,10 +119,12 @@ class ServiceOrganization {
         try {
             const organization = await Organization.findOne({
                 where: {id: dtoOrganizationGetOne.id},
-                include: Address
+                include: [Address, Service]
             })
 
-            return mapperOrganizationGetOne(organization)
+            return organization
+
+            // return mapperOrganizationGetOne(organization)
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
