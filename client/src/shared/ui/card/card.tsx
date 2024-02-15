@@ -3,7 +3,7 @@ import { Card as CardFromAntD, Badge } from 'antd'
 import classNames from 'classnames'
 
 import { AppLink} from '../app-link'
-import {APP_CLIENT_URL} from '../../constans'
+import {APP_SERVER_URL} from '../../constans'
 
 
 import styles from './card.module.sass'
@@ -42,7 +42,7 @@ export const Card: FC<Props> = ({
                 cover={
                     <img
                         className={classNames(styles.img)}
-                        src={`${APP_CLIENT_URL}/${src}`}
+                        src={`${APP_SERVER_URL}/${src}`}
                     />
                 }
             >

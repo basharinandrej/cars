@@ -1,12 +1,12 @@
 import {useParams} from 'react-router-dom'
-
+import {OrganizationInformation} from '@features'
 
 const PageOrganization = () => {
     const {id} = useParams()
 
     return (
         <>
-            <h1>zxczxc${id}</h1>
+            <OrganizationInformation id={Number(id)}/>
         </>
     )
 }

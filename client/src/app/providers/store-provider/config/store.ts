@@ -4,7 +4,8 @@ import {
     filterListingDetailsReducer,
     filterListingOrganizationsReducer,
     detailInformationReducer,
-    listingOrganizationReducer
+    listingOrganizationReducer,
+    organizationInformationReducer
 } from '@features'
 import {menuSliceReducer, logoSliceReducer} from '@entities'
 import {instanceAxios} from '@shared'
@@ -20,6 +21,8 @@ const getStore = () => {
         filterListingOrganization:filterListingOrganizationsReducer,
 
         detailInformation: detailInformationReducer,
+        organizationInformation: organizationInformationReducer,
+        
         menu: menuSliceReducer,
         logo: logoSliceReducer
     }

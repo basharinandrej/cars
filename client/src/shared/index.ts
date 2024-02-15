@@ -31,7 +31,7 @@ export {calcOffset} from './libs/calc-offset'
 export {
     EMPTY_STRING, 
     DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS,
-    APP_CLIENT_URL
+    APP_SERVER_URL
 } from './constans'
 
 

@@ -8,7 +8,10 @@ export {DetailInformation} from './detail-information/ui/detail-information'
 export {DetailInformationSchema, detailInformationReducer} from './detail-information/model/slices/detail-information-slice'
 
 export {ListingOrganization} from './listing-organization/ui/listing-organizations'
-export {listingOrganizationReducer, ListingOrganizationSchema} from './listing-organization/model/slices/listing-organizations-slice'
+export {ListingOrganizationSchema, listingOrganizationReducer} from './listing-organization/model/slices/listing-organizations-slice'
 
 export {FilterOrganizationListing} from './listing-organization/ui/components/filter-organization-listing/filter-organization-listing'
-export {filterListingOrganizationsReducer, FilterListingOrganizationsSchema} from './listing-organization/model/slices/filter-listing-organization-slice'
+export {FilterListingOrganizationsSchema, filterListingOrganizationsReducer} from './listing-organization/model/slices/filter-listing-organization-slice'
+
+export {OrganizationInformation} from './organization-information/ui/organization-information'
+export {OrganizationInformationSchema, organizationInformationReducer} from './organization-information/model/slices/organization-information-slice'

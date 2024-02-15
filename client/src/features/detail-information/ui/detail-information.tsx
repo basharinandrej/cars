@@ -16,7 +16,7 @@ import {
     getIsMobile, 
     getIsTablet, 
     useMount, 
-    APP_CLIENT_URL 
+    APP_SERVER_URL 
 } from '@shared'
 
 import {LightBox} from '@entities'
@@ -65,7 +65,7 @@ export const DetailInformation: FC<Props> = ({
     }
 
     const slides = detailInformation.detailPhoto.map((photo) => {
-        return {src: `${APP_CLIENT_URL}/details/${photo.url}`} 
+        return {src: `${APP_SERVER_URL}/details/${photo.url}`} 
     })
 
 
