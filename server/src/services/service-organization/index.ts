@@ -131,7 +131,18 @@ class ServiceOrganization {
         try {
             const organization = await Organization.findOne({
                 where: {id: dtoOrganizationGetOne.id},
-                include: [Address]
+                attributes: ['id', 'name', 'email', 'avatar', 'phoneNumber',  'ban',  'status'],
+                include: [
+                    {
+                        model: ServiceCategory,
+                        as: "serviceCategories",
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: Address,
+                        attributes: ['id', 'city', 'street', 'house'],
+                    }
+                ] 
             })
 
             return mapperOrganizationGetOne(organization)
