@@ -23,7 +23,7 @@ export const mapperOrganizationGetOne = (organization: Organization) => {
             return {
                 id: serviceCategory.dataValues.id,
                 name: serviceCategory.dataValues.name,
-                organizationServiceCategory: {
+                service: {
                     id: serviceCategory.dataValues.OrganizationServiceCategory.dataValues.id,
                     name: serviceCategory.dataValues.OrganizationServiceCategory.dataValues.name,
                     description: serviceCategory.dataValues.OrganizationServiceCategory.dataValues.description,

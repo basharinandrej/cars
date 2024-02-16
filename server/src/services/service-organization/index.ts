@@ -74,6 +74,7 @@ class ServiceOrganization {
                 const {accessToken, refreshToken} = serviceToken.generateTokens({
                     id: canditate.dataValues.id,
                     name: canditate.dataValues.name,
+                    isOrganization: true
                 })
                 await serviceToken.saveTokenOrganization(refreshToken, canditate.dataValues.id)
 

@@ -5,7 +5,9 @@ import {OrganizationInformationResponse} from '../../interfaces'
 import {fetchByIdOrganization} from '../async-actions/fetch-by-id-organization'
 
 
-export interface OrganizationInformationSchema extends OrganizationInformationResponse {}
+export interface OrganizationInformationSchema extends Omit<OrganizationInformationResponse, 'serviceCategories'> {
+  service: {}
+}
 
 const initialState: OrganizationInformationSchema = {
     id: null,
@@ -15,7 +17,7 @@ const initialState: OrganizationInformationSchema = {
     ban: Bans.Null,
     status: null,
     addresses: [],
-    services: []
+    service: []
 }
 
 export const organizationInformationSlice = createSlice({
@@ -36,7 +38,14 @@ export const organizationInformationSlice = createSlice({
             state.avatar = action.payload.avatar
 
             state.addresses = action.payload.addresses
-            state.services = action.payload.services
+            state.service = action.payload.serviceCategories.map((serviceCategory) => {
+              return {
+                id: serviceCategory.service.id,
+                name: serviceCategory.service.name,
+                price: serviceCategory.service.price,
+                description: serviceCategory.service.description
+              }
+            })
         })
   }
 })

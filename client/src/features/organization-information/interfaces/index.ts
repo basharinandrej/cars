@@ -8,6 +8,12 @@ interface Address {
     street: string
 }
 
+interface ServiceCategory {
+    id: number
+    name: string
+    service: Service
+}
+
 interface Service {
     id: number
     name: string
@@ -23,6 +29,6 @@ export interface OrganizationInformationResponse {
     ban: Bans
     avatar: string
     addresses: Address[]
-    services: Service[]
+    serviceCategories: ServiceCategory[]
 }
 
