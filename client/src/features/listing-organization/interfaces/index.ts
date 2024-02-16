@@ -20,3 +20,12 @@ export interface Organization {
 export interface ListingOrganizationsResponse  extends CommonListing{
     items: Organization[],
 }
+
+export interface ServiceCategory {
+    label: string,
+    value: number
+}
+export interface ServiceCategoryResponse {
+    total: number,
+    items: ServiceCategory[]
+}

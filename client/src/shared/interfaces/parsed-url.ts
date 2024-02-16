@@ -4,4 +4,5 @@ export interface ParsedUrl {
   brandId?: string
   detailCategoryId?: string
   statusOrganization?: string
+  serviceCategoryId?: string
 }

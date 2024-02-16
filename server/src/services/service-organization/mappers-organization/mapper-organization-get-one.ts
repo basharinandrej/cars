@@ -19,14 +19,6 @@ export const mapperOrganizationGetOne = (organization: Organization) => {
                 house: address.dataValues.house,
                 street: address.dataValues.street,
             }
-        }),
-        services: organization.dataValues.Services.map((service) => {
-            return {
-                id: service.dataValues.id,
-                name: service.dataValues.name,
-                description: service.dataValues.description,
-                price: service.dataValues.price
-            }
         })
     }
 }

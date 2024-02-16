@@ -15,7 +15,6 @@ import {mapperOrganizationCreation} from './mappers-organization/mapper-organiza
 import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
 import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
 import Address from "@models/address"
-import Service from "@models/organization-service-category"
 import ServiceCategory from '@models/service-category'
 
 class ServiceOrganization {
@@ -112,11 +111,13 @@ class ServiceOrganization {
                         model: ServiceCategory,
                         as: "serviceCategories",
                         where: paramsServiceCategory
+                    },
+                    {
+                        model: Address
                     }
                 ]
             })
 
-            return organizations
             return mapperOrganizationsGetAll(organizations)
 
         } catch (error) {
@@ -130,7 +131,7 @@ class ServiceOrganization {
         try {
             const organization = await Organization.findOne({
                 where: {id: dtoOrganizationGetOne.id},
-                include: [Address, Service]
+                include: [Address]
             })
 
             return mapperOrganizationGetOne(organization)
