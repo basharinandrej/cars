@@ -1,7 +1,9 @@
-import React, {Suspense} from 'react'
+import {Suspense} from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { StoreProvider, AppRoutes, ErrorBoundary } from "@app"
 import {MainLayout} from '@widgets';
+import { YMaps} from '@pbe/react-yandex-maps'
+
 import './styles/index.sass'
 
 const App = () => {
@@ -11,7 +13,9 @@ const App = () => {
                 <ErrorBoundary>
                     <Suspense fallback={<h1>Suspense....</h1>}>
                         <MainLayout>
-                            <AppRoutes />
+                            <YMaps>
+                                <AppRoutes />
+                            </YMaps>
                         </MainLayout>
                     </Suspense>
                 </ErrorBoundary>

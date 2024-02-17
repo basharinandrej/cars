@@ -16,6 +16,8 @@ import {
 } from '../model/selectors'
 
 import { Badge, List } from 'antd'
+import { Map, FullscreenControl } from '@pbe/react-yandex-maps'
+
 import styles from './organization-information.module.sass'
 
 
@@ -49,7 +51,7 @@ export const OrganizationInformation: FC<Props> = ({
             </div>
 
 
-            <span className={styles.wear}>Cостояние -&nbsp;<Badge
+            <span className={styles.wear}>Статус -&nbsp;<Badge
                 color={colorBadge}
                 count={textBadge}
                 />
@@ -71,6 +73,16 @@ export const OrganizationInformation: FC<Props> = ({
                     }
                 />
             </div>:null}
+
+            <Map
+                className={styles.map}
+                defaultState={{ center: [59.2239, 39.884], zoom: 11 }} 
+            >
+                <FullscreenControl />
+                {/* <GeoObject 
+                    geometry={{ type: "Point", coordinates: [59.2239, 39.884] }}
+                /> */}
+            </Map>
         </div>
     )
 }
