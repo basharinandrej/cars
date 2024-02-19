@@ -18,4 +18,8 @@ export const enum StatusOrganization {
     Waiting = 'Waiting'
 }
 
-type WeekdayType = `${StatusOrganization}`;
+export const enum UserRoles {
+    Person = 'Person',
+    Admin = 'Admin',
+    Moderator = 'Moderator'
+}

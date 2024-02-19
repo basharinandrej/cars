@@ -41,7 +41,7 @@ export {CommonListing} from './interfaces/common-listing'
 
 export {HTMLElementEvent} from './types/html-element-event'
 
-export {DetailWears, StatusOrganization, Bans} from './enums'
+export {DetailWears, StatusOrganization, Bans, UserRoles} from './enums'
 
 export {mapBadge} from './dictionaries/map-badge'
 export {mapBadgeOrganizationStatus} from './dictionaries/map-badge-status-organization'

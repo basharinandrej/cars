@@ -15,3 +15,6 @@ export {FilterListingOrganizationsSchema, filterListingOrganizationsReducer} fro
 
 export {OrganizationInformation} from './organization-information/ui/organization-information'
 export {OrganizationInformationSchema, organizationInformationReducer} from './organization-information/model/slices/organization-information-slice'
+
+export {LoginUser} from './login-user/ui/login-user'
+export {LoginUserSchema, loginUserReducer} from './login-user/model/slices/login-user-slice'

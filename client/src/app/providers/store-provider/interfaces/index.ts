@@ -4,7 +4,8 @@ import {
     DetailInformationSchema,
     ListingOrganizationSchema,
     FilterListingOrganizationsSchema,
-    OrganizationInformationSchema
+    OrganizationInformationSchema,
+    LoginUserSchema
 } from '@features'
 import {MenuSchema, LogoSchema} from '@entities'
 import { AxiosInstance } from 'axios'
@@ -19,6 +20,7 @@ export interface StateSchema {
     detailInformation: DetailInformationSchema
     organizationInformation: OrganizationInformationSchema
     
+    loginUser: LoginUserSchema,
     menu: MenuSchema,
     logo: LogoSchema
 }

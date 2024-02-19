@@ -5,7 +5,8 @@ import {
     PageListingDetails, 
     Page404,
     PageListingOrganizations,
-    PageOrganization
+    PageOrganization,
+    PageLogin
 } from '@pages'
 
 
@@ -16,6 +17,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.Organization]: '/organizations',
     [Routes.DetailPage]: '/detail/', // :id
     [Routes.OrganizationPage]: '/organization/', // :id
+    [Routes.LoginPage]: '/login/',
     [Routes.NotFoundPage]: '*'
 }
 
@@ -38,6 +40,11 @@ export const mapRoutes: Record<Routes, RouteProps> = {
     [Routes.OrganizationPage]: {
         path: `${RoutePaths.OrganizationPage}:id`,
         element: <PageOrganization />
+    },
+
+    [Routes.LoginPage]: {
+        path: RoutePaths.LoginPage,
+        element: <PageLogin />
     },
 
     /*not found page - всегда последний в мапе*/

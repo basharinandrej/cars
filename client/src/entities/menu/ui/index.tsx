@@ -38,7 +38,11 @@ export const Menu = () => {
             </nav>
             <nav className={styles.navigationCabinet}>
                 <ul>
-                    <li>Вход</li>
+                    <li>
+                        <AppLink to={'/login'}>
+                            Вход
+                        </AppLink>
+                    </li>
                 </ul>
             </nav>
         </>
