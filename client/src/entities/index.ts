@@ -12,3 +12,10 @@ export {
     logoSliceReducer, 
     LogoSchema
 } from './logo/model/slices/logo-slice'
+
+export {
+    profileReducer, 
+    setProfileInformation,
+    ProfileSchema,
+} from './profile/model/slices/progile-slice'
+export {ProfileResponse} from './profile/interfaces'
