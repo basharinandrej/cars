@@ -2,14 +2,25 @@ import { Button, Form, Input } from 'antd'
 import {useAppDispatch} from '@shared'
 import {FieldTypeLoginForm} from '../interfaces'
 import { setPassword, setEmail } from '../model/slices/login-user-slice'
-import {fetchLoginUser} from '../model/async-actions/login-user-by-email'
+import {fetchLoginUserByEmail} from '../model/async-actions/login-user-by-email'
+import { useNavigate } from "react-router-dom";
 
 import styles from './login-user.module.sass'
 
 
 export const LoginUser = () => {
     const dispatch = useAppDispatch()
-    const onFinish = () => dispatch(fetchLoginUser())
+    const navigate = useNavigate()
+
+    const onSuccessLogin = () => navigate('/')
+
+    const onFinishHandler = async () => {
+        const result = await dispatch(fetchLoginUserByEmail())
+
+        if(result.meta.requestStatus === 'fulfilled') {
+            onSuccessLogin()
+        }
+    }
 
     const onChange = (value: FieldTypeLoginForm) => {
         const {password, email} = value
@@ -20,7 +31,7 @@ export const LoginUser = () => {
     return <Form
             name="basic"
             labelCol={{ span: 8 }}
-            onFinish={onFinish}
+            onFinish={onFinishHandler}
             onValuesChange={onChange}
             className={styles.form}
             autoComplete="off"

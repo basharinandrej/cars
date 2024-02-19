@@ -3,7 +3,12 @@ import {useMemo, useState} from 'react'
 import { MenuOutlined } from '@ant-design/icons';
 import { Drawer } from 'antd';
 import {AppLink, getIsMobile, getIsTablet} from '@shared';
-import {getMenuItems} from '../model/selectors'
+import {
+    getMenuItems,
+    getNameUser,
+    getIdUser,
+    getSurnameUser
+} from '../model/selectors'
 
 import styles from './index.module.sass'
 
@@ -17,6 +22,9 @@ export const Menu = () => {
     const closeDrawerHandler = () => setOpen(false)
 
     const menuItems = useSelector(getMenuItems)
+    const userName = useSelector(getNameUser)
+    const userSurname = useSelector(getSurnameUser)
+    const userId = useSelector(getIdUser)
 
 
     const renderMenu = useMemo(() => (
@@ -38,15 +46,20 @@ export const Menu = () => {
             </nav>
             <nav className={styles.navigationCabinet}>
                 <ul>
-                    <li>
+                    {!userId && <li>
                         <AppLink to={'/login'}>
                             Вход
                         </AppLink>
-                    </li>
+                    </li>}
+                    {userId && <li>
+                        <AppLink to={'/cabinet'}>
+                            {userSurname} {userName[0]}.
+                        </AppLink>
+                    </li>}
                 </ul>
             </nav>
         </>
-    ), [menuItems])
+    ), [menuItems, userId])
     
 
     const menuForMobileAndTablet = (

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-
+import {fetchLoginUserByEmail} from '../async-actions/login-user-by-email'
 
 export interface LoginUserSchema {
   email: string | null
@@ -21,6 +21,16 @@ export const loginUserSchema = createSlice({
     setPassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchLoginUserByEmail.pending, (state) => {
+
+      })
+      .addCase(fetchLoginUserByEmail.fulfilled, (state) => {
+        state.email = ''
+        state.password = ''
+      })
   }
 })
 

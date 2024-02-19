@@ -3,8 +3,9 @@ import {ThunkApiConfig} from '@app'
 import {getPassword, getEmail} from '../selectors'
 import {setProfileInformation, ProfileResponse} from '@entities'
 
-export const fetchLoginUser = createAsyncThunk<void, void, ThunkApiConfig>(
-    'login-user/fetchLoginUser',
+
+export const fetchLoginUserByEmail = createAsyncThunk<void, void, ThunkApiConfig>(
+    'login-user-by-email/fetchLoginUserByEmail',
     async (_, thunkAPI) => {
         try {
             const {getState, dispatch, extra} = thunkAPI

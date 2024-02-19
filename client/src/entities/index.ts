@@ -3,7 +3,7 @@ export {Logo} from './logo/ui'
 export {LightBox} from './light-box/ui/light-box'
 
 export {
-    menuSliceReducer, 
+    menuSliceReducer,
     MenuSchema
 } from './menu/model/slices/menu-slice'
 
@@ -17,5 +17,5 @@ export {
     profileReducer, 
     setProfileInformation,
     ProfileSchema,
-} from './profile/model/slices/progile-slice'
+} from './profile/model/slices/profile-slice'
 export {ProfileResponse} from './profile/interfaces'

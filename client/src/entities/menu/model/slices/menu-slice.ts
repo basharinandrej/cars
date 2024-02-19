@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice } from '@reduxjs/toolkit'
 import {Menu} from '../../interfaces'
 
 
@@ -22,6 +22,5 @@ export const menuSlice = createSlice({
   initialState,
   reducers: {}
 })
-
 
 export const menuSliceReducer = menuSlice.reducer
