@@ -1,12 +1,11 @@
-import {useParams} from 'react-router-dom'
-
+import {Profile} from '@entities'
 
 const PageCabinet = () => {
-    const {id} = useParams()
+    // const {id} = useParams()
 
     return (
         <>
-            <h1>PageCabinet </h1>
+            <Profile />
         </>
     )
 }
