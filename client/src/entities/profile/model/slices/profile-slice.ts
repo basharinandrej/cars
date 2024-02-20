@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {ProfileResponse} from '../../interfaces'
 import { UserRoles, Bans } from '@shared'
+import {featchInitUser} from '../async-actions/fetch-init-user'
+
 
 export interface ProfileSchema extends ProfileResponse{
 }
@@ -30,6 +32,18 @@ export const profileSlice = createSlice({
         state.user.ban = action.payload.user.ban
         state.user.role = action.payload.user.role
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(featchInitUser.fulfilled, (state, action: PayloadAction<ProfileSchema>) => {
+        state.user.id = action.payload?.user.id
+        state.user.name = action.payload?.user.name
+        state.user.surname = action.payload?.user.surname
+        state.user.email = action.payload?.user.email
+        state.user.phoneNumber = action.payload?.user.phoneNumber
+        state.user.ban = action.payload?.user.ban
+        state.user.role = action.payload?.user.role
+    })
   }
 })
 

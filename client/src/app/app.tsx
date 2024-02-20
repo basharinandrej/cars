@@ -5,7 +5,7 @@ import {ErrorBoundary} from './providers/error-boundary'
 import {MainLayout} from '@widgets';
 import { YMaps} from '@pbe/react-yandex-maps'
 import { useMount, useAppDispatch } from '@shared';
-import {fetchLoginUserByEmail} from '@features'
+import {featchInitUser} from '@entities'
 
 import '../styles/index.sass'
 
@@ -13,7 +13,8 @@ export const App = () => {
     const dispatch = useAppDispatch()
 
     useMount(() => {
-        dispatch(fetchLoginUserByEmail())
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        userId && dispatch(featchInitUser())
     })
 
     return (

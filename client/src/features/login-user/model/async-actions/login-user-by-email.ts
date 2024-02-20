@@ -18,6 +18,7 @@ export const fetchLoginUserByEmail = createAsyncThunk<void, void, ThunkApiConfig
                 email, password
             })
 
+            localStorage.setItem('userId', JSON.stringify(response.data.user.id))
             dispatch(setProfileInformation(response.data))
         } catch (error) {
             console.log('>>> error', error)

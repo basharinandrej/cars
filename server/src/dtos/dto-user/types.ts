@@ -1,5 +1,5 @@
 import { UserRoles, Bans } from "@common/enums"
-import { Pagination } from "@common/types"
+import { Pagination, PayloadToken } from "@common/types"
 
 export interface DtoUserRegistration {
     id: number
@@ -22,3 +22,5 @@ export interface DtoUserLogin {
 export interface DtoUserGetAll extends Pagination {
     role?: UserRoles
 }
+
+export interface DtoInitUser extends PayloadToken {}

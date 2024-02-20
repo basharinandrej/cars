@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import {instanceSequelize} from './db'
 import './models/associations'
 import fileUpload from 'express-fileupload'
+import cookieParser from 'cookie-parser'
 import middlewareError from './middlewares/middleware-error'
 import cors from 'cors'
 import routers from './routers'
@@ -23,8 +24,12 @@ app.listen(PORT, async () => {
   }
 })
 
-app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3001'
+}))
 app.use(express.static( path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', routers)

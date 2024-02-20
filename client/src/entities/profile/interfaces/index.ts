@@ -11,3 +11,5 @@ export interface ProfileResponse {
         ban: Bans
     }
 }
+
+export interface InitUserResponse extends ProfileResponse {}

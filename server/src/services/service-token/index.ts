@@ -15,10 +15,9 @@ class ServiceToken {
     }
 
     public generateTokens(payloadToken: PayloadToken) {
-        const accessToken = this.createToken(payloadToken, '30m')
         const refreshToken = this.createToken(payloadToken, '30d')
     
-        return {accessToken, refreshToken}
+        return {refreshToken}
     }
 
     public validationToken(token: string): PayloadToken {

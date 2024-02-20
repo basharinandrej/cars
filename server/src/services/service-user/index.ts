@@ -1,7 +1,7 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from '@dtos/dto-user/types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
@@ -32,7 +32,7 @@ class ServiceUser {
             })
             //todo добавить почту
 
-            const {accessToken, refreshToken} = serviceToken.generateTokens({
+            const {refreshToken} = serviceToken.generateTokens({
                 id: user.dataValues.id,
                 name: user.dataValues.name,
                 role: user.dataValues.role
@@ -43,8 +43,7 @@ class ServiceUser {
             return {
                 refreshToken, 
                 //todo добавить mapper для реги
-                user: mapperUserLogin(user), 
-                accessToken
+                user: mapperUserLogin(user)
             }
         } catch (error) {
             if(error instanceof Error) {
@@ -65,7 +64,7 @@ class ServiceUser {
             const isMatchPasswords = await compareHashPassword(dtoUserLogin.password, hashPassword)
 
             if(isMatchPasswords) {
-                const {accessToken, refreshToken} = serviceToken.generateTokens({
+                const {refreshToken} = serviceToken.generateTokens({
                     id: canditate.dataValues.id,
                     name: canditate.dataValues.name,
                     role: canditate.dataValues.role
@@ -74,8 +73,7 @@ class ServiceUser {
 
                 return {
                     refreshToken,
-                    user: mapperUserLogin(canditate),
-                    accessToken
+                    user: mapperUserLogin(canditate)
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
@@ -107,6 +105,29 @@ class ServiceUser {
                 return getAllUserMapper(users)
             }
 
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
+    }
+
+    async initUser(dtoUserInit:DtoInitUser,next: NextFunction) {
+        try {
+            if(dtoUserInit.id) {
+                const user = await User.findOne({
+                    where: {id: dtoUserInit.id}
+                })
+                const {refreshToken} = serviceToken.generateTokens({
+                    id: user.dataValues.id,
+                    name: user.dataValues.name,
+                    role: user.dataValues.role
+                })
+                return {
+                    refreshToken,
+                    user: mapperUserLogin(user)
+                }
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

@@ -11,3 +11,7 @@ export interface Tokens {
     accessToken: string
     refreshToken: string
 }
+
+export interface Cookies {
+    refreshToken: string
+}

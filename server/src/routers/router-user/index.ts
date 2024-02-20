@@ -23,6 +23,8 @@ routers.get('',
     middlewareValidation, 
     controllerUser.getAllUsers
 )
+
+routers.get('/init', controllerUser.initUser)
 //todo добавить endpoint getUserById
 
 export const routerUser = routers

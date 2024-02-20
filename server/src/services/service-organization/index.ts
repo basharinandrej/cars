@@ -39,7 +39,7 @@ class ServiceOrganization {
             })
             //todo добавить почту
 
-            const {accessToken, refreshToken} = serviceToken.generateTokens({
+            const {refreshToken} = serviceToken.generateTokens({
                 id: organization.dataValues.id,
                 name: organization.dataValues.name,
                 isOrganization: true
@@ -49,8 +49,7 @@ class ServiceOrganization {
 
             return {
                 refreshToken, 
-                organization: mapperOrganizationCreation(organization), 
-                accessToken
+                organization: mapperOrganizationCreation(organization)
             }
         } catch (error) {
             if(error instanceof Error) {
@@ -71,7 +70,7 @@ class ServiceOrganization {
             const isMatchPasswords = await compareHashPassword(dtoOrganizationLogin.password, hashPassword)
 
             if(isMatchPasswords) {
-                const {accessToken, refreshToken} = serviceToken.generateTokens({
+                const {refreshToken} = serviceToken.generateTokens({
                     id: canditate.dataValues.id,
                     name: canditate.dataValues.name,
                     isOrganization: true
@@ -80,8 +79,7 @@ class ServiceOrganization {
 
                 return {
                     refreshToken,
-                    user: canditate,
-                    accessToken
+                    user: canditate
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))

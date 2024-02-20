@@ -19,3 +19,4 @@ export {
     ProfileSchema,
 } from './profile/model/slices/profile-slice'
 export {ProfileResponse} from './profile/interfaces'
+export {featchInitUser} from './profile/model/async-actions/fetch-init-user'

@@ -1,8 +1,9 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll} from './types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser} from './types'
 import { ParamsUserGetAll} from '@controllers/controller-user/types'
 import { Bans } from '@common/enums'
-import {UserRequestParams} from '@common/interfaces'
+import {UserRequestParams, Cookies} from '@common/interfaces'
+import {serviceToken} from '@services/service-token'
 
 
 class DtoUser {
@@ -36,6 +37,11 @@ class DtoUser {
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
             role: query.role
         }
+    }
+
+    getDtoInitUser(cookies: Cookies): DtoInitUser {
+        const token = cookies.refreshToken
+        return serviceToken.validationToken(token)
     }
 }
 

@@ -22,7 +22,7 @@ class ControllerOrganization {
                 avatar.mv(path.resolve(__dirname, '../..', 'static', fileName))
                 
                 const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
-                const {refreshToken, organization, accessToken} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
+                const {refreshToken, organization} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
     
                 const dtoAddressCreation = dtoAddress.getDtoAddressCreation(req.body, organization.id)
                 const address = await serviceAddress.createAddress(dtoAddressCreation, next)
@@ -30,7 +30,7 @@ class ControllerOrganization {
                 // отправка картинки на Яндекс диск
                 res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
                 if(organization) {
-                    res.send({organization, accessToken, address})
+                    res.send({organization, address})
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.onlyOnePhoto))
@@ -49,9 +49,9 @@ class ControllerOrganization {
             const result = await serviceOrganization.login(dtoOrganizationLogin, next)
 
             if(result) {
-                const {refreshToken, user, accessToken} = result
+                const {refreshToken, user} = result
                 res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-                res.send({user, accessToken})
+                res.send({user})
             }
         } catch (error) {
             if(error instanceof Error) {
