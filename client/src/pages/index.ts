@@ -5,11 +5,14 @@ import {PageListingDetails} from './page-listing-details/page-listing-details.as
 import {PageListingOrganizations} from './page-listing-organization/page-listing-organizations.async'
 import {PageOrganization} from './page-organization/page-organization.async'
 import {PageLogin} from './page-login/page-login.async'
+import {PageCabinet} from './page-cabinet/page-cabinet.async'
+
 
 export {
     PageListingOrganizations,
     PageDetail,
     PageListingDetails,
     PageOrganization,
-    PageLogin
+    PageLogin,
+    PageCabinet
 }

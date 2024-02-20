@@ -20,3 +20,4 @@ export {
 } from './profile/model/slices/profile-slice'
 export {ProfileResponse} from './profile/interfaces'
 export {featchInitUser} from './profile/model/async-actions/fetch-init-user'
+export {getIdUser} from './profile/model/selectors'

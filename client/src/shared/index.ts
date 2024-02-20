@@ -31,7 +31,8 @@ export {calcOffset} from './libs/calc-offset'
 export {
     EMPTY_STRING, 
     DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS,
-    APP_SERVER_URL
+    APP_SERVER_URL,
+    APP_CAR_KEY_LS_USER_ID
 } from './constans'
 
 

@@ -1,12 +1,12 @@
-import {RouteProps} from 'react-router-dom'
-import {Routes} from '../types'
+import {Routes, AppRouteProps} from '../types'
 import {
     PageDetail, 
     PageListingDetails, 
     Page404,
     PageListingOrganizations,
     PageOrganization,
-    PageLogin
+    PageLogin,
+    PageCabinet
 } from '@pages'
 
 
@@ -18,38 +18,52 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.DetailPage]: '/detail/', // :id
     [Routes.OrganizationPage]: '/organization/', // :id
     [Routes.LoginPage]: '/login/',
+    [Routes.CabinetPage]: '/cabinet/', // :id
+
     [Routes.NotFoundPage]: '*'
 }
 
-export const mapRoutes: Record<Routes, RouteProps> = {
+export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.Home]: {
         path: RoutePaths.Home,
         element: <PageListingDetails />,
+        onlyAuth: false
     },
 
     [Routes.DetailPage]: {
         path: `${RoutePaths.DetailPage}:id`,
-        element: <PageDetail/>
+        element: <PageDetail/>,
+        onlyAuth: false
     },
 
     [Routes.Organization]: {
         path: `${RoutePaths.Organization}`,
-        element: <PageListingOrganizations />
+        element: <PageListingOrganizations />,
+        onlyAuth: false
     },
 
     [Routes.OrganizationPage]: {
         path: `${RoutePaths.OrganizationPage}:id`,
-        element: <PageOrganization />
+        element: <PageOrganization />,
+        onlyAuth: false
     },
 
     [Routes.LoginPage]: {
         path: RoutePaths.LoginPage,
-        element: <PageLogin />
+        element: <PageLogin />,
+        onlyAuth: false
+    },
+
+    [Routes.CabinetPage]: {
+        path: `${RoutePaths.CabinetPage}:id`,
+        element: <PageCabinet />,
+        onlyAuth: true
     },
 
     /*not found page - всегда последний в мапе*/
     [Routes.NotFoundPage]: {
         path: RoutePaths.NotFoundPage,
-        element: <Page404 />
+        element: <Page404 />,
+        onlyAuth: false
     }
 }
