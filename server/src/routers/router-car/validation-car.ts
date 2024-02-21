@@ -15,22 +15,22 @@ export const validationCarCreation = {
             body('year').notEmpty().withMessage(errorStrings.notBeEmptyField("year")).trim(),
 
             body('vinCode').isLength({min: 17, max: 17}).withMessage(errorStrings.minLength("vinCode", 17)).trim(),
-            header('authorization').custom((value: string) => {
-                const token = extractAccessToken(value)
+            // header('authorization').custom((value: string) => {
+            //     const token = extractAccessToken(value)
 
-                try {
-                    const result = serviceToken.validationToken(token)
+            //     try {
+            //         const result = serviceToken.validationToken(token)
 
-                    if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
-                        return Promise.resolve(true);
-                    } else {
-                        return Promise.reject(ApiError.bedRequest(errorStrings.withoutOrganization()));
-                    }
+            //         if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
+            //             return Promise.resolve(true);
+            //         } else {
+            //             return Promise.reject(ApiError.bedRequest(errorStrings.withoutOrganization()));
+            //         }
 
-                } catch (error) {
-                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
-                }
-            })
+            //     } catch (error) {
+            //         return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+            //     }
+            // })
         ]
     }
 }

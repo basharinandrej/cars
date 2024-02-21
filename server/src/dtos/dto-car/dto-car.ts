@@ -1,14 +1,14 @@
 import { CarAttributes } from "@models/car/types";
 import {DtoCarCreation, DtoCarGetAll, DtoCarGetByVinCode} from './types'
 import {ParamsGetAllCars, ParamsGetOneCar} from '@controllers/controller-car/types'
-import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
+import {Cookies} from '@common/interfaces'
 
 
 class DtoCar {
 
-    getDtoCarCreation(car: CarAttributes, authorization: string): DtoCarCreation {
-        const token = extractAccessToken(authorization)
+    getDtoCarCreation(car: CarAttributes, cookies: Cookies): DtoCarCreation {
+        const token = cookies.refreshToken
         const {id: userId} = serviceToken.validationToken(token)
 
     

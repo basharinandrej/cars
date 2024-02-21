@@ -9,10 +9,8 @@ import ApiError from "@api-error/index";
 
 class Car {
     async createCar(req: RequestCreation<CarAttributes>, res: Response, next: NextFunction) {
-
         try {
-            const authorization = req.get('Authorization')
-            const dtoCarCreation = dtoCar.getDtoCarCreation(req.body, authorization)
+            const dtoCarCreation = dtoCar.getDtoCarCreation(req.body, req.cookies)
             const car = await serviceCar.createCar(dtoCarCreation, next)
 
             res.send(car)
