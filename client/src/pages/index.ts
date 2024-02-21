@@ -6,7 +6,7 @@ import {PageListingOrganizations} from './page-listing-organization/page-listing
 import {PageOrganization} from './page-organization/page-organization.async'
 import {PageLogin} from './page-login/page-login.async'
 import {PageCabinet} from './page-cabinet/page-cabinet.async'
-
+import { PageGarage } from './page-garage/page-garage.async';
 
 export {
     PageListingOrganizations,
@@ -14,5 +14,6 @@ export {
     PageListingDetails,
     PageOrganization,
     PageLogin,
-    PageCabinet
+    PageCabinet,
+    PageGarage
 }

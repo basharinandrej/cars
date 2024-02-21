@@ -6,7 +6,8 @@ export const enum Routes {
     DetailPage = 'DetailPage',
     OrganizationPage = 'OrganizationPage',
     LoginPage = 'LoginPage',
-    CabinetPage = 'CabinetPage',
+    ProfilePage = 'ProfilePage',
+    GaragePage = 'GaragePage',
 
     // last
     NotFoundPage = 'NotFoundPage',

@@ -6,7 +6,8 @@ import {
     PageListingOrganizations,
     PageOrganization,
     PageLogin,
-    PageCabinet
+    PageCabinet,
+    PageGarage
 } from '@pages'
 
 
@@ -18,7 +19,8 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.DetailPage]: '/detail/', // :id
     [Routes.OrganizationPage]: '/organization/', // :id
     [Routes.LoginPage]: '/login/',
-    [Routes.CabinetPage]: '/cabinet/', // :id
+    [Routes.ProfilePage]: '/cabinet/profile/', // :id
+    [Routes.GaragePage]: '/cabinet/garage/', // :id
 
     [Routes.NotFoundPage]: '*'
 }
@@ -54,9 +56,15 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
         onlyAuth: false
     },
 
-    [Routes.CabinetPage]: {
-        path: `${RoutePaths.CabinetPage}:id`,
+    [Routes.ProfilePage]: {
+        path: `${RoutePaths.ProfilePage}:id`,
         element: <PageCabinet />,
+        onlyAuth: true
+    },
+
+    [Routes.GaragePage]: {
+        path: `${RoutePaths.GaragePage}:id`,
+        element: <PageGarage />,
         onlyAuth: true
     },
 

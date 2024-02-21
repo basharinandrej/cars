@@ -26,3 +26,6 @@ export {Profile} from './profile/ui/profile'
 
 export {Sidebar} from './sidebar/ui/sidebar'
 export {sidebarSliceReducer, SidebarSchema} from './sidebar/model/slices/sidebar-slice'
+
+export {Garage} from './garage/ui/garage'
+export {carsReduces, CarSchema} from './garage/model/slices/car-slice'

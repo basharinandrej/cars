@@ -7,13 +7,13 @@ const initialState: SidebarSchema = {
   items: [
     {
         id:1,
-        path: `/cabinet/:id`,
+        path: `/cabinet/profile/:id`,
         text: 'Профиль',
         iconType: 'profile'
     },
     {
         id: 2,
-        path: '/cabinet/:id/garage',
+        path: '/cabinet/garage/:id',
         text: 'Гараж',
         iconType: 'car'
     },

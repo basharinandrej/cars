@@ -52,7 +52,7 @@ export const Menu = () => {
                         </AppLink>
                     </li>}
                     {userId && <li>
-                        <AppLink to={`cabinet/${userId}`}>
+                        <AppLink to={`cabinet/profile/${userId}`}>
                             {userSurname}&nbsp;{userName[0]}.
                         </AppLink>
                     </li>}

@@ -7,7 +7,13 @@ import {
     OrganizationInformationSchema,
     LoginUserSchema
 } from '@features'
-import {MenuSchema, LogoSchema, ProfileSchema, SidebarSchema} from '@entities'
+import {
+    MenuSchema, 
+    LogoSchema, 
+    ProfileSchema,
+    SidebarSchema,
+    CarSchema
+} from '@entities'
 import { AxiosInstance } from 'axios'
 
 export interface StateSchema {
@@ -26,6 +32,7 @@ export interface StateSchema {
     sidebar: SidebarSchema,
     menu: MenuSchema,
     logo: LogoSchema
+    cars: CarSchema
 }
 
 interface thunkMiddleware {

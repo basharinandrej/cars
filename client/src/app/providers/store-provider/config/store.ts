@@ -8,7 +8,13 @@ import {
     organizationInformationReducer,
     loginUserReducer
 } from '@features'
-import {menuSliceReducer, logoSliceReducer, profileReducer, sidebarSliceReducer} from '@entities'
+import {
+    menuSliceReducer,
+    logoSliceReducer, 
+    profileReducer,
+    sidebarSliceReducer, 
+    carsReduces
+} from '@entities'
 import {instanceAxios} from '@shared'
 
 import {StateSchema} from '../interfaces'
@@ -29,7 +35,8 @@ const getStore = () => {
 
         menu: menuSliceReducer,
         logo: logoSliceReducer,
-        sidebar: sidebarSliceReducer
+        sidebar: sidebarSliceReducer,
+        cars: carsReduces
     }
 
     return configureStore({
