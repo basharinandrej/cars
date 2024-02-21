@@ -24,3 +24,15 @@ export interface DtoUserGetAll extends Pagination {
 }
 
 export interface DtoInitUser extends PayloadToken {}
+
+export interface DtoUserUpdate {
+    id: number,
+    name?: string
+    surname?: string
+    email?: string
+    role?: UserRoles
+    phoneNumber?: number
+    password?: string
+    ban?: Bans
+    avatar?: string
+}

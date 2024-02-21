@@ -1,7 +1,7 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser} from '@dtos/dto-user/types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserUpdate} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
@@ -128,6 +128,20 @@ class ServiceUser {
                     user: mapperUserLogin(user)
                 }
             }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
+    }
+
+    async updateUser(dtoUpdateUser: DtoUserUpdate, next: NextFunction) {
+        try {
+            const user = await User.update(
+                dtoUpdateUser,
+                {where: {id: dtoUpdateUser.id}}
+            )
+            return user
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))

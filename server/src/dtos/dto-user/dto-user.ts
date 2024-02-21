@@ -1,5 +1,5 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser} from './types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserUpdate} from './types'
 import { ParamsUserGetAll} from '@controllers/controller-user/types'
 import { Bans } from '@common/enums'
 import {UserRequestParams, Cookies} from '@common/interfaces'
@@ -42,6 +42,20 @@ class DtoUser {
     getDtoInitUser(cookies: Cookies): DtoInitUser {
         const token = cookies.refreshToken
         return serviceToken.validationToken(token)
+    }
+
+    getDtoUpdateUser(user: UserRequestParams): DtoUserUpdate {
+
+        return {
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            role: user.role,
+            phoneNumber: user.phoneNumber,
+            password: user.password,
+            ban: user.ban
+        }
     }
 }
 

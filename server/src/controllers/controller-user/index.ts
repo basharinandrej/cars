@@ -66,6 +66,19 @@ class ControllerUser {
 
     }
 
+    async update(req:RequestCreation<UserRequestParams> , res: Response, next: NextFunction) {
+        try {
+            const dtoUserUpdate = dtoUser.getDtoUpdateUser(req.body)
+            const user = await serviceUser.updateUser(dtoUserUpdate, next)
+
+            res.send(user)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.bedRequest(error.message))
+            }
+        }
+    }
+
     // async logout() {}
 
     // async dropPassword

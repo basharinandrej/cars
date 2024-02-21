@@ -1,39 +1,32 @@
 import { useSelector } from 'react-redux'
-import {getDataUser} from '../model/selectors'
+import {getDataUser, getIsEditing} from '../model/selectors'
 import { Form, Input, Button } from 'antd';
-import {Select, UserRoles} from '@shared'
+import {Select, UserRoles, useAppDispatch} from '@shared'
+import {FieldType} from '../types/types'
+import {setIsEditing, setUserData} from '../model/slices/profile-slice'
+import {featchUpdateUser} from '../model/async-actions/fetch-update-user'
 
-type FieldType = {
-    name: string
-    surname: string
-    email: string
-    phoneNumber: number
-    role: UserRoles
-}
+import styles from './profile.module.sass'
+
 
 export const Profile = () => {
-    
+    const dispatch = useAppDispatch()
     const user = useSelector(getDataUser)
-    
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
+    const isEditing = useSelector(getIsEditing)
       
-    const onFinishFailed = (errorInfo: any) => {
+    const onFinishHandler = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
+        dispatch(featchUpdateUser())
     };
 
-    const onChange = (value: any) => {
-        console.log('value:', value);
+    const onChangeHandler = (value: FieldType) => {
+        dispatch(setIsEditing(true))
+        dispatch(setUserData(value))
     }
 
     return (
         <div>
-            <h2>Личная информация</h2>
-
-            <br />
-            <br />
-            <br />
+            <h2 className={styles.title}>Личная информация</h2>
 
             <Form
                 name="basic"
@@ -41,9 +34,8 @@ export const Profile = () => {
                 wrapperCol={{ span: 16 }}
                 style={{ maxWidth: 600 }}
                 initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onValuesChange={onChange}
-                onFinishFailed={onFinishFailed}
+                onValuesChange={onChangeHandler}
+                onFinish={onFinishHandler}
                 autoComplete="off"
             >
                 <Form.Item<FieldType>
@@ -67,7 +59,7 @@ export const Profile = () => {
                     name="email"
                     initialValue={user.email}
                 >
-                    <Input />
+                    <Input disabled />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -83,6 +75,7 @@ export const Profile = () => {
                     initialValue={user.role}
                 >
                     <Select
+                        disabled
                         options={[
                             {label: UserRoles.Admin, value: UserRoles.Admin},
                             {label: UserRoles.Moderator, value: UserRoles.Moderator},
@@ -91,8 +84,8 @@ export const Profile = () => {
                     />
                 </Form.Item>
 
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                <Form.Item className={styles.button}>
+                    <Button disabled={!isEditing} type="primary" htmlType="submit">
                         Отправить
                     </Button>
                 </Form.Item>

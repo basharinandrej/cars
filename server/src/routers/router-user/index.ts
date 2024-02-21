@@ -25,6 +25,9 @@ routers.get('',
 )
 
 routers.get('/init', controllerUser.initUser)
+
+routers.put('', controllerUser.update)
+
 //todo добавить endpoint getUserById
 
 export const routerUser = routers

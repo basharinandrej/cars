@@ -14,10 +14,12 @@ export const Select: FC<SelectProps> = ({
     options,
     placeholder,
     allowClear = true,
-    value
+    value,
+    disabled = false
 }) => (
   <SelectAntD
     showSearch
+    disabled={disabled}
     placeholder={placeholder}
     optionFilterProp="children"
     onChange={onChange}
