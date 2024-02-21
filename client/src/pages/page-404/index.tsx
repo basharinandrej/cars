@@ -21,6 +21,7 @@ export const Page404: FC<Props> = ({
         title="404"
         subTitle={error}
         extra={ButtonBackToHome}
+        rootClassName={styles.rootClassName}
     />
 }
 

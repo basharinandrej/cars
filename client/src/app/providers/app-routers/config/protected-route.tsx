@@ -6,6 +6,7 @@ import {getIdUser} from '@entities'
 export const ProtectedRoute = ({children}: ProtectedRouteProps): JSX.Element => {
     const userId = useSelector(getIdUser)
 
+    console.log(">>>> userId", userId)
     if(!userId) {
         return <Navigate to={RoutePaths.Home} replace />
     }

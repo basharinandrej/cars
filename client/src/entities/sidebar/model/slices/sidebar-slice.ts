@@ -1,7 +1,6 @@
 import {createSlice } from '@reduxjs/toolkit'
 import {Sidebar} from '../../interfaces'
 
-
 export interface SidebarSchema extends Sidebar {}
 
 const initialState: SidebarSchema = {
@@ -9,17 +8,20 @@ const initialState: SidebarSchema = {
     {
         id:1,
         path: `/cabinet/:id`,
-        text: 'Профиль'
+        text: 'Профиль',
+        iconType: 'profile'
     },
     {
         id: 2,
         path: '/cabinet/:id/garage',
-        text: 'Гараж'
+        text: 'Гараж',
+        iconType: 'car'
     },
     {
         id: 3,
         path: '/cabinet/:id/my-details',
-        text: 'Мои объявления'
+        text: 'Мои объявления',
+        iconType: 'list'
     }
   ]
 }

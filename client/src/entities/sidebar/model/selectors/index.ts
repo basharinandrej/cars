@@ -16,7 +16,8 @@ export const getSidebarItems = createSelector(
             return {
                 key: sidebarItem.id,
                 path: preparePath,
-                text: sidebarItem.text
+                text: sidebarItem.text,
+                iconType: sidebarItem.iconType
             }
         })
     }

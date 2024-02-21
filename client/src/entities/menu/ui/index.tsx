@@ -53,7 +53,7 @@ export const Menu = () => {
                     </li>}
                     {userId && <li>
                         <AppLink to={`cabinet/${userId}`}>
-                            {userSurname} {userName[0]}.
+                            {userSurname}&nbsp;{userName[0]}.
                         </AppLink>
                     </li>}
                 </ul>
