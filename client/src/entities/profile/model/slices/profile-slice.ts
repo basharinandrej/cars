@@ -3,7 +3,6 @@ import {ProfileResponse, User} from '../../interfaces'
 import { UserRoles, Bans } from '@shared'
 import {featchInitUser} from '../async-actions/fetch-init-user'
 import {featchUpdateUser} from '../async-actions/fetch-update-user'
-import {fetchCarUser} from '../../../garage/model/async-actions/fetch-cars-user'
 
 export interface ProfileSchema extends ProfileResponse{
   isEditing: boolean

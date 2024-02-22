@@ -7,7 +7,9 @@ export const Button:FC<Props> = ({
     text, 
     onClick, 
     size = '',
-    type = 'primary'
+    type = 'primary',
+    htmlType,
+    danger = false
 }) => {
 
     return (
@@ -17,8 +19,10 @@ export const Button:FC<Props> = ({
             })}
             type={type}
             onClick={onClick}
+            htmlType={htmlType}
+            danger={danger}
         >
-                {text}
+            {text}
         </Btn>
     )
 }

@@ -54,6 +54,18 @@ class ServiceCar {
             next(ApiError.internal(error))
         }
     }
+
+    async dropCar(vinCode, next: NextFunction) {
+        try {
+            const result = await Car.destroy({
+                where: {vinCode},
+            })
+            return result ? vinCode : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
 }
 
 export default new ServiceCar()

@@ -22,4 +22,6 @@ routers.get('/getByVINCode',
     conterollerCar.getByVINCodeCar
 )
 
+routers.delete('', conterollerCar.dropCar)
+
 export const routerCar = routers

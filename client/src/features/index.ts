@@ -19,3 +19,6 @@ export {OrganizationInformationSchema, organizationInformationReducer} from './o
 export {LoginUser} from './login-user/ui/login-user'
 export {LoginUserSchema, loginUserReducer} from './login-user/model/slices/login-user-slice'
 export {fetchLoginUserByEmail} from './login-user/model/async-actions/login-user-by-email'
+
+export {AddNewCarSchema, addNewCarReducer, setCar} from './add-new-car/model/slices/add-new-car-slice'
+export {AddNewCard} from './add-new-car/ui/add-new-car'

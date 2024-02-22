@@ -42,7 +42,15 @@ class Car {
             }
         } catch (error) {
             next(ApiError.internal(error))
+        }
+    }
 
+    async dropCar(req: any, res: Response, next: NextFunction) {
+        try {
+            const vinCode = await serviceCar.dropCar(req.query.vinCode, next)
+            res.send(vinCode)
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }

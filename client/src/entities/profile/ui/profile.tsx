@@ -15,7 +15,6 @@ export const Profile = () => {
     const isEditing = useSelector(getIsEditing)
       
     const onFinishHandler = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
         dispatch(featchUpdateUser())
     };
 

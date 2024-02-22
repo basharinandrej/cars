@@ -5,7 +5,8 @@ import {
     ListingOrganizationSchema,
     FilterListingOrganizationsSchema,
     OrganizationInformationSchema,
-    LoginUserSchema
+    LoginUserSchema,
+    AddNewCarSchema
 } from '@features'
 import {
     MenuSchema, 
@@ -32,7 +33,8 @@ export interface StateSchema {
     sidebar: SidebarSchema,
     menu: MenuSchema,
     logo: LogoSchema
-    cars: CarSchema
+    cars: CarSchema,
+    addNewCar: AddNewCarSchema
 }
 
 interface thunkMiddleware {
