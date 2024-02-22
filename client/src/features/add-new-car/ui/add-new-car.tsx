@@ -56,8 +56,8 @@ export const AddNewCard = () => {
                     <Form.Item
                         label="VIN-номер"
                         name="vinCode"
-                        validateStatus={car.vinCode.length < 17 ? 'error' : ''}
-                        help={car.vinCode.length < 17 ? 'Vin-номер должен состоять из 17 символов':''}
+                        validateStatus={car.vinCode.length < 17 || car.vinCode.length > 17 ? 'error' : ''}
+                        help={car.vinCode.length < 17 || car.vinCode.length > 17 ? 'Vin-номер должен состоять из 17 символов':''}
                     >
                         <Input />
                     </Form.Item>

@@ -28,12 +28,13 @@ class ServiceModel {
     async getAllModels(dtoModelsGetAll: DtoModelGetAll, next: NextFunction) {
 
         try {
+            const params: Partial<DtoModelGetAll> = {}
+            if(dtoModelsGetAll.brandId) params.brandId = dtoModelsGetAll.brandId
+
             const models = await Model?.findAndCountAll({
                 limit: dtoModelsGetAll.limit,
                 offset: dtoModelsGetAll.offset,
-                where: {
-                    brandId: dtoModelsGetAll.brandId
-                },
+                where: params,
                 include: [Brand]
             })
             return mapperModelGetAll(models)

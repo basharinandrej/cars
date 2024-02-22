@@ -1,7 +1,7 @@
 import { Menu } from 'antd'
 import { AppLink, getIsMobile, getIsTablet } from '@shared';
 import { useSelector } from 'react-redux';
-import {getSidebarItems} from '../model/selectors'
+import {getSidebarItems, getUserRole} from '../model/selectors'
 import {iconMap} from '../dictonaries/icon-map'
 
 import styles from './sidebar.module.sass'
@@ -9,9 +9,15 @@ import styles from './sidebar.module.sass'
 
 export const Sidebar = () => {
   const sidebarItems = useSelector(getSidebarItems)
+  const userRole = useSelector(getUserRole)
   const isCollapsed = getIsMobile() || getIsTablet()
 
   const items = sidebarItems.map((sidebarItem) => {
+    if(sidebarItem.userRole) {
+      if(sidebarItem.userRole !== userRole) {
+        return 
+      }
+    }
     return {
       key: sidebarItem.key,
       label: <AppLink to={sidebarItem.path}>{sidebarItem.text}</AppLink>,

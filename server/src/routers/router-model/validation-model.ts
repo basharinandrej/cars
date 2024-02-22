@@ -30,11 +30,3 @@ export const validationCreateModel = {
         ]
     }
 }
-
-export const validationGetAllModels = {
-    createChain() {
-        return [
-            query('brandId').notEmpty().withMessage(errorStrings.notBeEmptyField('brandId')).trim()
-        ]
-    }
-}

@@ -5,6 +5,7 @@ import {createSelector} from "@reduxjs/toolkit";
 
 export const getItems = (state: RootState) => state.sidebar.items
 export const getUserId = (state: RootState) => state.profile.user.id
+export const getUserRole = (state: RootState) => state.profile.user.role
 
 export const getSidebarItems = createSelector(
     getUserId,
@@ -17,7 +18,8 @@ export const getSidebarItems = createSelector(
                 key: sidebarItem.id,
                 path: preparePath,
                 text: sidebarItem.text,
-                iconType: sidebarItem.iconType
+                iconType: sidebarItem.iconType,
+                userRole: sidebarItem.userRole
             }
         })
     }

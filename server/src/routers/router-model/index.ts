@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import controllerModel from '@controllers/controller-model'
 import middlewareValidation from '../middlewares/middleware-validation'
-import { validationCreateModel, validationGetAllModels } from './validation-model'
+import { validationCreateModel } from './validation-model'
 
 const routers = Router()
 
@@ -13,8 +13,6 @@ routers.post('',
 )
 
 routers.get('',
-    validationGetAllModels.createChain(),
-    middlewareValidation, 
     controllerModel.getAllModels
 )
 

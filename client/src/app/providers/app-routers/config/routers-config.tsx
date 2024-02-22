@@ -1,4 +1,5 @@
 import {Routes, AppRouteProps} from '../types'
+import {UserRoles} from '@shared'
 import {
     PageDetail, 
     PageListingDetails, 
@@ -7,7 +8,8 @@ import {
     PageOrganization,
     PageLogin,
     PageCabinet,
-    PageGarage
+    PageGarage,
+    PageMyDetail
 } from '@pages'
 
 
@@ -21,6 +23,9 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.LoginPage]: '/login/',
     [Routes.ProfilePage]: '/cabinet/profile/', // :id
     [Routes.GaragePage]: '/cabinet/garage/', // :id
+    [Routes.UsersPage]: '/cabinet/users/',
+    [Routes.MyDetails]: '/cabinet/my-details/',
+    [Routes.CategoryDetailPage]: '/cabinet/category-details/',
 
     [Routes.NotFoundPage]: '*'
 }
@@ -66,6 +71,26 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
         path: `${RoutePaths.GaragePage}:id`,
         element: <PageGarage />,
         onlyAuth: true
+    },
+
+    [Routes.MyDetails]: {
+        path: `${RoutePaths.MyDetails}:id`,
+        element: <PageMyDetail />,
+        onlyAuth: true,
+    },
+
+    [Routes.UsersPage]: {
+        path: `${RoutePaths.UsersPage}`,
+        element: <PageGarage />,
+        onlyAuth: true,
+        userRole: UserRoles.Admin
+    },
+
+    [Routes.CategoryDetailPage]: {
+        path: `${RoutePaths.CategoryDetailPage}`,
+        element: <PageGarage />,
+        onlyAuth: true,
+        userRole: UserRoles.Admin
     },
 
     /*not found page - всегда последний в мапе*/

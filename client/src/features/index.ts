@@ -22,3 +22,6 @@ export {fetchLoginUserByEmail} from './login-user/model/async-actions/login-user
 
 export {AddNewCarSchema, addNewCarReducer, setCar} from './add-new-car/model/slices/add-new-car-slice'
 export {AddNewCard} from './add-new-car/ui/add-new-car'
+
+export {AddNewDetailSchema, addNewDetailReducer, setDetailData} from './add-new-detail/model/slices/add-new-detail-slice'
+export {AddNewDetail} from './add-new-detail/ui/add-new-detail'

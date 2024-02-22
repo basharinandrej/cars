@@ -1,12 +1,18 @@
 import {Navigate} from 'react-router-dom'
 import {RoutePaths} from './routers-config'
 import {useSelector} from 'react-redux'
-import {getIdUser} from '@entities'
+import {getIdUser, getUserRole} from '@entities'
+import { UserRoles } from '@shared'
 
-export const ProtectedRoute = ({children}: ProtectedRouteProps): JSX.Element => {
+export const ProtectedRoute = ({children, userRole}: ProtectedRouteProps): JSX.Element => {
     const userId = useSelector(getIdUser)
+    const role = useSelector(getUserRole)
 
-    console.log(">>>> userId", userId)
+    if(userRole) {
+        if(userRole !== role) {
+            return <Navigate to={RoutePaths.Home} replace />
+        }
+    }
     if(!userId) {
         return <Navigate to={RoutePaths.Home} replace />
     }
@@ -16,4 +22,5 @@ export const ProtectedRoute = ({children}: ProtectedRouteProps): JSX.Element => 
 
 interface ProtectedRouteProps {
     children: JSX.Element
+    userRole: UserRoles
 }
