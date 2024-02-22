@@ -1,6 +1,6 @@
 import {FC} from 'react'
-import { 
-    useMount, 
+import {
+    useMount,
     useAppDispatch,
     mapBadgeOrganizationStatus,
     APP_SERVER_URL
