@@ -1,7 +1,7 @@
 import {Button, Select, SelectSearch, useAppDispatch} from '@shared'
-import {useState} from 'react'
 import { useSelector } from 'react-redux'
-import {Form, Input, Modal } from 'antd'
+import {useState} from 'react'
+import {Form, Input, Modal  } from 'antd'
 import {fetchListingCategories} from '../model/async-actions/fetch-listing-categories'
 import {
     getItemsDetailCategories,
@@ -10,8 +10,7 @@ import {
 } from '../model/selectors'
 import {fetchListinModels} from '../model/async-actions/fetch-listing-models'
 import {setDetailData} from '../model/slices/add-new-detail-slice'
-
-
+import {fetchPostNewDetail} from '../model/async-actions/fetch-post-new-detail'
 
 import styles from './add-new-detail.module.sass'
 
@@ -19,23 +18,23 @@ import styles from './add-new-detail.module.sass'
 
 export const AddNewDetail = () => {
     const dispatch = useAppDispatch()
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [photos, setPhotos] = useState()
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => setIsModalOpen(true)
+    const handleCancel = () => setIsModalOpen(false)
 
     const detailCategories = useSelector(getItemsDetailCategories)
     const models = useSelector(getItemsModels)
     const optionsWear = useSelector(getOptionsWear)
 
-    const showModal = () => setIsModalOpen(true)
-    const handleOk = () => setIsModalOpen(false)
-    const handleCancel = () => setIsModalOpen(false)
-
     const onChangeHandler = (value: any) => {
-        dispatch(setDetailData(value))
+        dispatch(setDetailData({...value}))
     }
 
     const onOkHandler = () => {
-        handleOk()
+        dispatch(fetchPostNewDetail(photos))
+        setIsModalOpen(false)
     }
 
     const onSearchSelectCategoryHandler = () => {
@@ -44,6 +43,12 @@ export const AddNewDetail = () => {
 
     const onSearchSelectModelHandler = () => {
         dispatch(fetchListinModels())
+    }
+
+    function onChangePhotoHandler(e: any) {
+        const file =  e.target.files[0]
+        console.log('>>> file', file)
+        setPhotos(file)
     }
 
     return (
@@ -110,7 +115,13 @@ export const AddNewDetail = () => {
                         <SelectSearch options={detailCategories} onSearch={onSearchSelectCategoryHandler}/>
                     </Form.Item>
 
-                    {/* <Form.Item
+                    <input
+                        accept="image/*" 
+                        onChange={onChangePhotoHandler} 
+                        type="file"
+                        name="img"
+                    />                  
+                     {/* <Form.Item
                         label="Год"
                         name="year"
                     >

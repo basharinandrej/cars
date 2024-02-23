@@ -5,12 +5,12 @@ import {
     PAGINATION_DEFAULT_LIMIT,
     PAGINATION_DEFAULT_OFFSET
 } from '@common/constans/index'
-import {extractAccessToken} from '@common/utils/extract-tokens'
+import {Cookies} from '@common/interfaces'
 import {serviceToken} from '@services/service-token'
 
 class DtoDetail {
-    getDtoDetailCreation(detail: DetailAttributes, authorization: string): DtoDetailCreation {
-        const token = extractAccessToken(authorization)
+    getDtoDetailCreation(detail: DetailAttributes, cookies: Cookies): DtoDetailCreation {
+        const token = cookies.refreshToken
         const {id: userId} = serviceToken.validationToken(token)
 
         return {

@@ -69,9 +69,9 @@ export const addNewDetailSlice = createSlice({
   initialState,
   reducers: {
     setDetailData: (state, action: PayloadAction<AddNewDetailSchema>) => {
-        state.detail = {
-            ...state.detail, ...action.payload
-        }
+      state.detail = {
+        ...state.detail, ...action.payload
+      }
     }
   },
   extraReducers: (builder) => {
