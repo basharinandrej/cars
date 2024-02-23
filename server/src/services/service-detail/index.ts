@@ -52,13 +52,14 @@ class ServiceDetail {
     }
 
 
-    async getAllDetails({limit, offset, modelId, detailCategoryId, keyword}: DtoDetailGetAll, next: NextFunction) {
+    async getAllDetails({limit, offset, modelId, detailCategoryId, keyword, userId}: DtoDetailGetAll, next: NextFunction) {
 
         try {
             const params: Partial<DetailAttributes> = {}
 
             if(modelId) params.modelId = modelId
             if(detailCategoryId) params.detailCategoryId = detailCategoryId
+            if(userId) params.userId = userId
             if(keyword) params[Op.or] = [
                 {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
                 {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}

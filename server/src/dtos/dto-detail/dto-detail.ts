@@ -34,6 +34,7 @@ class DtoDetail {
             detailCategoryId: query.detailCategoryId,
             modelId: query.modelId,
             keyword: query.keyword,
+            userId: query.userId
         }
     }
 

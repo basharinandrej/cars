@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import {FC, useEffect} from 'react'
 import { useInView } from 'react-intersection-observer';
 import {useSelector} from 'react-redux'
 import moment from 'moment'
@@ -29,7 +29,7 @@ import {fetchListingDetailsNextPart} from '../model/async-actions/fetch-listing-
 import styles from './listing-details.module.sass'
 
 
-export const ListingDetails = () => {
+export const ListingDetails:FC<Props> = ({id}) => {
     const scrollPosition = useWindowPosition()
     const dispatch = useAppDispatch()
 
@@ -45,7 +45,7 @@ export const ListingDetails = () => {
         threshold: 1.0,
     });
 
-    useMount(() => !scrollPositionFromStore && dispatch(fetchInitialListingDetails()))
+    useMount(() => !scrollPositionFromStore && dispatch(fetchInitialListingDetails(id)))
     useMount(() => canAutoScroll && setScrollToDocument(scrollPositionFromStore))
 
     useEffect(() => {
@@ -70,7 +70,7 @@ export const ListingDetails = () => {
                         key={detail.id}
                         textBadge={textBadge}
                         colorBadge={colorBadge}
-                        to={`detail/${detail.id}`}
+                        to={`/detail/${detail.id}`}
                         src={`details/${detail.detailPhoto?.url}`}
                     >
                         <div className={styles.wrapper}>
@@ -87,3 +87,8 @@ export const ListingDetails = () => {
 
 
 export default ListingDetails
+
+
+interface Props{
+    id?: number
+}

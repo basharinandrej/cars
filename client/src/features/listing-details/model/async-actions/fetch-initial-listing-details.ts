@@ -16,9 +16,9 @@ import {INITIAL_VALUE_OFFSET_LISTING_DETAILS} from '../../constans'
 import {addQueryParams} from '@shared'
 
 
-export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
+export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema, number|void, ThunkApiConfig>(
     'listing-details/fetchInitialDetails',
-    async (_, thunkAPI) => {
+    async (userId, thunkAPI) => {
         const {getState, extra} = thunkAPI
         const state = getState()
 
@@ -37,6 +37,7 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema,
         if(valueSelectedModel) params.modelId = valueSelectedModel
         if(detailCategoryId) params.detailCategoryId = detailCategoryId
         if(valueSelectedBrand) params.brandId = valueSelectedBrand
+        if(userId) params.userId = userId
 
         addQueryParams('keyword', params.keyword)
         addQueryParams('modelId', params.modelId)
