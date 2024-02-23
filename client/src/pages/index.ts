@@ -5,7 +5,7 @@ import {PageListingDetails} from './page-listing-details/page-listing-details.as
 import {PageListingOrganizations} from './page-listing-organization/page-listing-organizations.async'
 import {PageOrganization} from './page-organization/page-organization.async'
 import {PageLogin} from './page-login/page-login.async'
-import {PageCabinet} from './page-cabinet/page-cabinet.async'
+import {PageProfile} from './page-profile/page-profile.async'
 import { PageGarage } from './page-garage/page-garage.async';
 import {PageMyDetail} from './page-my-detail/page-my-detail.async'
 
@@ -17,7 +17,7 @@ export {
     PageListingDetails,
     PageOrganization,
     PageLogin,
-    PageCabinet,
+    PageProfile,
     PageGarage,
     PageMyDetail
 }

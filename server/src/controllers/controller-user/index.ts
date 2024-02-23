@@ -79,7 +79,16 @@ class ControllerUser {
         }
     }
 
-    // async logout() {}
+    async logout(_: unknown, res: Response, next: NextFunction) {
+        try {
+            res.clearCookie('refreshToken')
+            res.send('logout')
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.bedRequest(error.message))
+            }
+        }
+    }
 
     // async dropPassword
 

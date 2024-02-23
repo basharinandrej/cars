@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
 import {getDataUser, getIsEditing} from '../model/selectors'
-import { Form, Input, Button } from 'antd';
-import {Select, UserRoles, useAppDispatch} from '@shared'
+import { Form, Input, Button as Btn} from 'antd';
+import {Select, UserRoles, useAppDispatch, Button} from '@shared'
 import {FieldType} from '../types/types'
 import {setIsEditing, setUserData} from '../model/slices/profile-slice'
 import {featchUpdateUser} from '../model/async-actions/fetch-update-user'
+import {logout} from '../model/async-actions/logout'
 
 import styles from './profile.module.sass'
 
@@ -23,6 +24,7 @@ export const Profile = () => {
         dispatch(setUserData(value))
     }
 
+    const logoutHandler = () => dispatch(logout())
     return (
         <div>
             <h2 className={styles.title}>Личная информация</h2>
@@ -84,11 +86,13 @@ export const Profile = () => {
                 </Form.Item>
 
                 <Form.Item className={styles.button}>
-                    <Button disabled={!isEditing} type="primary" htmlType="submit">
+                    <Btn disabled={!isEditing} type="primary" htmlType="submit">
                         Отправить
-                    </Button>
+                    </Btn>
                 </Form.Item>
             </Form>
+
+            <Button text='Выйти' onClick={logoutHandler}/>
         </div>
     )
 }

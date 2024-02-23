@@ -28,6 +28,8 @@ routers.get('/init', controllerUser.initUser)
 
 routers.put('', controllerUser.update)
 
+routers.get('/logout', controllerUser.logout)
+
 //todo добавить endpoint getUserById
 
 export const routerUser = routers

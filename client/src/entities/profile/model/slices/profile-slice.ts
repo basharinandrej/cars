@@ -3,6 +3,8 @@ import {ProfileResponse, User} from '../../interfaces'
 import { UserRoles, Bans } from '@shared'
 import {featchInitUser} from '../async-actions/fetch-init-user'
 import {featchUpdateUser} from '../async-actions/fetch-update-user'
+import {logout} from '../async-actions/logout'
+
 
 export interface ProfileSchema extends ProfileResponse{
   isEditing: boolean
@@ -56,6 +58,17 @@ export const profileSlice = createSlice({
       })
       .addCase(featchUpdateUser.fulfilled, (state) => {
         state.isEditing = false
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = {
+          id: null,
+          name: null,
+          surname: null,
+          email: null,
+          role: UserRoles.Person,
+          phoneNumber: null,
+          ban: Bans.Null
+        }
       })
   }
 })

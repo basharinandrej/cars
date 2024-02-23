@@ -7,7 +7,7 @@ import {
     PageListingOrganizations,
     PageOrganization,
     PageLogin,
-    PageCabinet,
+    PageProfile,
     PageGarage,
     PageMyDetail
 } from '@pages'
@@ -63,7 +63,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
 
     [Routes.ProfilePage]: {
         path: `${RoutePaths.ProfilePage}:id`,
-        element: <PageCabinet />,
+        element: <PageProfile />,
         onlyAuth: true
     },
 

@@ -3,7 +3,7 @@ import {ThunkApiConfig} from '@app'
 import {getDataUser} from '../selectors'
 
 export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
-    'update-user/featchUpdateUser',
+    'profile/featchUpdateUser',
     async (_, thunkAPI) => {
         try {
             const {getState, extra} = thunkAPI

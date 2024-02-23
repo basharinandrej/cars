@@ -3,7 +3,7 @@ import {ThunkApiConfig} from '@app'
 import {InitUserResponse} from '../../interfaces'
 
 export const featchInitUser = createAsyncThunk<InitUserResponse, void, ThunkApiConfig>(
-    'init-user/featchInitUser',
+    'profile/featchInitUser',
     async (_, thunkAPI) => {
         try {
             const { extra} = thunkAPI
