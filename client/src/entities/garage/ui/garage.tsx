@@ -34,7 +34,7 @@ export const Garage:FC<Props> = () => {
         </div>
     )
     return (
-        < >
+        <>
             <h2 className={styles.title}>Мои машины</h2>
 
             {cars.length 

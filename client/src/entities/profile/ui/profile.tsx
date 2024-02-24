@@ -70,6 +70,7 @@ export const Profile = () => {
                 >
                     <Input />
                 </Form.Item>
+                
                 <Form.Item<FieldType>
                     label="Роль"
                     name="role"
@@ -92,7 +93,9 @@ export const Profile = () => {
                 </Form.Item>
             </Form>
 
-            <Button text='Выйти' onClick={logoutHandler}/>
+            <div className={styles.logout}>
+                <Button text='Выйти' onClick={logoutHandler}/>
+            </div>
         </div>
     )
 }
