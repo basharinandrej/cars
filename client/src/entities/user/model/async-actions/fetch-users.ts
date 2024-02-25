@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {UsersResponse} from '../../interfaces/interfaces'
 
-export const featchUsers = createAsyncThunk<UsersResponse, void, ThunkApiConfig>(
-    'user/featchUsers',
+export const fetchUsers = createAsyncThunk<UsersResponse, void, ThunkApiConfig>(
+    'user/fetchUsers',
     async (_, thunkAPI) => {
         try {
             const { extra} = thunkAPI

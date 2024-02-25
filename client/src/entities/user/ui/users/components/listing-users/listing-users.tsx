@@ -1,9 +1,13 @@
 import { useSelector } from "react-redux"
-import { getUsers } from "../../../../model/selectors"
+import { useState } from "react";
+import { getUsers, getRoleCurrentUser } from "../../../../model/selectors"
 import { Button, useAppDispatch, useMount } from "@shared"
-import { featchUsers } from "../../../../model/async-actions/fetch-users"
+import { fetchUsers } from "../../../../model/async-actions/fetch-users"
 import { Empty, List } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {selectedUserForUpdate, setIsDisabledRoleSelect} from '../../../../model/slices/users-slice'
+import {FormUpdateUser} from '../form-update-user/form-update-user'
+
 
 import styles from './listing-users.module.sass'
 
@@ -21,16 +25,27 @@ const header = (
 
 export const ListingUsers = () => {
     const dispatch = useAppDispatch()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const users = useSelector(getUsers)
+    const role = useSelector(getRoleCurrentUser)
+
     useMount(() => {
-        dispatch(featchUsers())
+        dispatch(fetchUsers())
     })
 
-    console.log('>> users', users)
-
-    const onClickEditHandler = (id: number) => {}
+    const onClickEditHandler = (id: number) => {
+        setIsModalOpen(true)
+        dispatch(selectedUserForUpdate(id))
+        dispatch(setIsDisabledRoleSelect(role))
+    }
     const onClickDeleteHandler = (id: number) => {}
+
     return <>
+        <FormUpdateUser 
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+        />
         {users.length
             ? <div className={styles.scroll}>
                 <List

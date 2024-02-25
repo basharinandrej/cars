@@ -1,6 +1,6 @@
 import { FormCar } from "../form-car/form-car"
 import {FormAddNewCarValueTypes} from '../../../interfaces'
-import { Dispatch, FC, SetStateAction, useEffect } from "react"
+import { Dispatch, FC, SetStateAction } from "react"
 import { useSelector } from "react-redux"
 import {getSelectedCarForUpdate} from '../../../model/selectors'
 import {updateSelectedCar} from '../../../model/slices/car-slice'
@@ -30,15 +30,15 @@ export const FormUpdateCar:FC<Props> = ({
     }
 
     return <FormCar                
-                title="Редактировать машину"
-                isModalOpen={isModalOpen} 
-                handleCancel={handleCancel}
-                onChangeHandler={onChangeHandler}
-                onOkHandler={onOkHandler}
-                nameForm="Update"
-                initialValues={seletedCar}
-                okText='Редактировать'
-            />
+            title="Редактировать машину"
+            isModalOpen={isModalOpen} 
+            handleCancel={handleCancel}
+            onChangeHandler={onChangeHandler}
+            onOkHandler={onOkHandler}
+            nameForm="Update"
+            initialValues={seletedCar}
+            okText='Редактировать'
+        />
 }
 
 interface Props {
