@@ -33,7 +33,7 @@ export const errorStrings = {
     mustBeAtLeastOnePhoto: () => 'Должно быть хотя бы одно фото',
     maxTotalPhotosDetail: () => `Максимальное количесвто фотографий для детали ${MAX_TOTAL_PHOTOS_PER_DETAIL}`,
     onlyOnePhoto:`Можно добавить только одно фото`,
-
+    canNotDeleteAdmin: 'Нельзя удалить пользователя с ролью ADMIN',
 
     sorderValue: () => `Направление сортировки может быть только ${SortOrderBy.Asc}, ${SortOrderBy.Desc}`,
     //SORT

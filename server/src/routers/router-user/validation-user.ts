@@ -16,6 +16,27 @@ export const validationUser = {
             body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
         ]
     },
+    deleteChain() {
+        return [
+            body('id')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('id')).trim(),
+            cookie('refreshToken').custom((value: string) => {
+
+                    try {
+                        const result = serviceToken.validationToken(value)
+    
+                        if(isAdministrator(result)) {
+                            return Promise.resolve(true);
+                        } else {
+                            return Promise.reject(ApiError.bedRequest(errorStrings.onlyForAdmin()));
+                        }
+    
+                    } catch (error) {
+                        return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                    }
+            }),
+        ]
+    },
     getAllUsersChain() {
         return [
             cookie('refreshToken').custom((value: string) => {

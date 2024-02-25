@@ -37,6 +37,33 @@ const initialState: SidebarSchema = {
         text: 'Категории деталей',
         iconType: 'category-detail',
         userRole: UserRoles.Admin
+    },
+    {
+      id: 9,
+      path: '/cabinet/category-details',
+      text: 'Категории услуг',
+      iconType: 'category-detail',
+      userRole: UserRoles.Admin
+    },
+    {
+        id: 6,
+        path: '/cabinet/category-details',
+        text: 'Бренды',
+        iconType: 'category-detail',
+        userRole: UserRoles.Admin
+    },
+    {
+        id: 7,
+        path: '/cabinet/category-details',
+        text: 'Модели',
+        iconType: 'category-detail',
+        userRole: UserRoles.Admin
+    },
+    {
+        id: 8,
+        path: '/cabinet/category-details',
+        text: 'Мои заявки',
+        iconType: 'category-detail'
     }
   ]
 }

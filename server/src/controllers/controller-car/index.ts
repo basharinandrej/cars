@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
 import serviceCar from '@services/service-car'
 import { CarAttributes } from "@models/car/types";
-import {ParamsGetAllCars, ParamsGetOneCar} from './types'
+import {ParamsGetAllCars, ParamsDeleteCar, ParamsGetOneCar} from './types'
 import dtoCar from "@dtos/dto-car/dto-car";
-import { RequestCreation, RequestGetAll, RequestGetOne } from "@common/types";
+import { RequestCreation, RequestDelete, RequestGetAll, RequestGetOne } from "@common/types";
 import ApiError from "@api-error/index";
 
 
@@ -54,7 +54,7 @@ class Car {
         }
     }
 
-    async dropCar(req: any, res: Response, next: NextFunction) {
+    async dropCar(req: RequestDelete<ParamsDeleteCar>, res: Response, next: NextFunction) {
         try {
             const vinCode = await serviceCar.dropCar(req.query.vinCode, next)
             res.send(vinCode)

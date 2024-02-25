@@ -3,8 +3,8 @@ import ApiError from '@api-error/index'
 import {ParamsUserGetAll} from '@controllers/controller-user/types'
 import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
-import { RequestCreation, RequestGetAll, RequestGetOne } from "@common/types"
-import {UserRequestParams} from '@common/interfaces'
+import { RequestCreation, RequestGetAll, RequestGetOne, RequestDelete } from "@common/types"
+import {UserRequestParams, UserDeleteParams} from '@common/interfaces'
 
 class ControllerUser {
     async registration(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {
@@ -85,6 +85,17 @@ class ControllerUser {
             if(error instanceof Error) {
                 next(ApiError.bedRequest(error.message))
             }
+        }
+    }
+
+    async dropUser(req: RequestDelete<UserDeleteParams>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceUser.dropUser(req.query.id, next)
+            if(id) {
+                res.send(id)
+            }
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 

@@ -6,12 +6,17 @@ export const getErrorMessage = (error: any) => {
     const data = error.response.data
 
 
+    console.log('>>>> data', data)
     if(data.type === AppTypeError.InternalError) {
         return (data as DataValidationError).message.errors[0].message
     }
 
     if(data.type === AppTypeError.ValidationError) {
-        return (data as DataInternalError).message[0].msg
+        if(Array.isArray(data.maessage)) {
+            return (data as DataInternalError).message[0].msg
+        } else {
+            return data.message
+        }
     }
 }
 

@@ -8,6 +8,7 @@ import {getHashPassword} from '@common/utils/get-hash-password'
 import {compareHashPassword} from '@common/utils/compare-hash-password'
 import {mapperUserLogin} from './user-mappers/mapper-user-login'
 import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
+import { UserRoles } from "@common/enums"
 
 
 class ServiceUser {
@@ -146,6 +147,26 @@ class ServiceUser {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
             }
+        }
+    }
+
+    async dropUser(id: number, next: NextFunction) {
+        try {
+            const candidate = await User.findOne({
+                where: {id}
+            })
+            if(candidate.dataValues.role === UserRoles.Admin) {
+                return next(ApiError.bedRequest(errorStrings.canNotDeleteAdmin))
+            } else {
+                const result = await User.destroy({
+                    where: {id},
+                })
+                return result ? id : false
+            }
+            
+        } catch (error) {
+            next(ApiError.internal(error))
+
         }
     }
 }

@@ -16,6 +16,8 @@ export interface RequestGetAll<T> extends Request<Record<string, unknown>, Empty
 
 export interface RequestGetOne<T> extends Request<Record<string, unknown>, EmptyString, EmptyString, T> {}
 
+export interface RequestDelete<T> extends Request<Record<string, unknown>, EmptyString, EmptyString, T> {}
+
 
 export interface Pagination {
     limit?: number,

@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux"
 import { useState } from "react";
-import { getUsers, getRoleCurrentUser } from "../../../../model/selectors"
+import { getUsers } from "../../../../model/selectors"
 import { Button, useAppDispatch, useMount, mapUserRole } from "@shared"
 import { fetchUsers } from "../../../../model/async-actions/fetch-users"
 import { Empty, List } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {selectedUserForUpdate, setIsDisabledRoleSelect} from '../../../../model/slices/users-slice'
 import {FormUpdateUser} from '../form-update-user/form-update-user'
-
+import {deleteUser} from '../../../../model/async-actions/delete-user'
 
 import styles from './listing-users.module.sass'
 
@@ -28,7 +28,6 @@ export const ListingUsers = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const users = useSelector(getUsers)
-    const role = useSelector(getRoleCurrentUser)
 
     useMount(() => {
         dispatch(fetchUsers())
@@ -39,7 +38,9 @@ export const ListingUsers = () => {
         dispatch(selectedUserForUpdate(id))
         dispatch(setIsDisabledRoleSelect())
     }
-    const onClickDeleteHandler = (id: number) => {}
+    const onClickDeleteHandler = (id: number) => {
+        dispatch(deleteUser(id))
+    }
 
     return <>
         <FormUpdateUser 

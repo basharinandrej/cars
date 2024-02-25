@@ -46,7 +46,6 @@ export const validationCarUpdation = {
                 .isLength({min: MIN_LENGTH_VIN_CODE, max: MAX_LENGTH_VIN_CODE})
                 .withMessage(errorStrings.minLength("vinCode", LENGTH_VIN_CODE))
                 .trim(),
-            
         ]
     }
 }

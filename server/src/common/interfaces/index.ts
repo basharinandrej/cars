@@ -5,7 +5,9 @@ import {AddressAttributes} from '@models/address/types'
 
 export interface UserRequestParams extends UserAttributes, TokenAttributes {}
 export interface OrganizationRequestParams extends OrganizationAttributes, TokenAttributes, AddressAttributes {}
-
+export interface UserDeleteParams {
+    id: number
+}
 
 export interface Tokens {
     accessToken: string
