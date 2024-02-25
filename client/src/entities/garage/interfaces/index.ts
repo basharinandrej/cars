@@ -12,3 +12,11 @@ export interface CarResponse {
     total: number
     items: Car[]
 }
+
+export interface FormAddNewCarValueTypes {
+    vinCode: string
+    brand: string
+    model: string
+    color: string
+    year: string
+}

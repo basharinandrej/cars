@@ -1,30 +1,40 @@
 import {Button, useAppDispatch} from '@shared'
-import {useState} from 'react'
-import {Form, Input, Modal, DatePicker } from 'antd'
+import {useEffect, useState} from 'react'
+import { useSelector } from 'react-redux'
 import { setCar } from '../model/slices/add-new-car-slice'
 import {addNewCar} from '../model/async-actions/add-new-car'
-import {MAX_LENGTH_VIN_CODE, MIN_LENGTH_VIN_CODE} from '../constans'
-import {FormAddNewCarValueTypes} from '../interfaces'
+import {getIsLoading, getError} from '../model/selectors'
+import {FormAddNewCarValueTypes, FormCar} from '@entities'
+import moment from 'moment'
+
 
 import styles from './add-new-car.module.sass'
 
 
 export const AddNewCard = () => {
     const dispatch = useAppDispatch()
-
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => setIsModalOpen(true)
     const handleOk = () => setIsModalOpen(false)
     const handleCancel = () => setIsModalOpen(false)
 
+    const isLoading = useSelector(getIsLoading)
+    const error = useSelector(getError)
+
+    useEffect(() => {
+        !isLoading && !error && handleOk()
+    }, [isLoading, error])
+
     const onChangeHandler = (value: FormAddNewCarValueTypes) => {
-        dispatch(setCar(value))
+        dispatch(setCar({
+            ...value,
+            year: moment(value.year).format('YYYY'),
+        }))
     }
 
     const onOkHandler = () => {
         dispatch(addNewCar())
-        // handleOk()
     }
 
     return (
@@ -32,68 +42,15 @@ export const AddNewCard = () => {
             <div className={styles.carButton}>
                 <Button text='Добавить' onClick={showModal} />
             </div>
-            <Modal
-                title="Добавить машину" 
-                open={isModalOpen} 
-                onCancel={handleCancel}
-                cancelText={'Отмена'}
-                okText={'Отправить'}
-                onOk={onOkHandler}
-            >
-                <Form
-                    name="basic"
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 600 }}
-                    onValuesChange={onChangeHandler}
-                    autoComplete="off"
-                >
-                    <Form.Item<FormAddNewCarValueTypes>
-                        label="VIN-номер"
-                        rules={[{
-                            min: MIN_LENGTH_VIN_CODE,
-                            max: MAX_LENGTH_VIN_CODE,
-                            message: 'Vin-номер должен состоять из 17 символов'
-                        }]}
-                        name="vinCode"
-                        required
-                    >
-                        <Input />
-                    </Form.Item>
 
-                    <Form.Item<FormAddNewCarValueTypes>
-                        label="Бренд"
-                        name="brand"
-                        required
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item<FormAddNewCarValueTypes>
-                        label="Модель"
-                        name="model"
-                        required
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item<FormAddNewCarValueTypes>
-                        label="Цвет"
-                        name="color"
-                        required
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item<FormAddNewCarValueTypes>
-                        label="Год"
-                        name="year"
-                        required
-                    >
-                        <DatePicker placeholder='' picker="year" className={styles.yearSelect} />
-                    </Form.Item>
-                </Form>
-            </Modal>
+            <FormCar
+                handleCancel={handleCancel}
+                isModalOpen={isModalOpen}
+                onChangeHandler={onChangeHandler}
+                onOkHandler={onOkHandler}
+                title="Добавить машину"
+                nameForm="Create"
+            />
         </div>
     )
 }

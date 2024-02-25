@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import { useAppDispatch, useMount, Button} from '@shared'
 import { Empty, List } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -7,11 +7,23 @@ import {fetchCarUser} from '../model/async-actions/fetch-cars-user'
 import {deleteCarUser} from '../model/async-actions/delete-car-user'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
+import {FormUpdateCar} from './components/form-update-car/form-update-car'
+
 
 import styles from './garage.module.sass'
 
-
+const header = (
+    <div className={styles.header}>
+        <p>VIN-номер</p>
+        <p>Бранд</p>
+        <p>Модель</p>
+        <p>Цвет</p>
+        <p>Год</p>
+        <div className={styles.headButton} />
+    </div>
+)
 export const Garage:FC<Props> = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const dispatch = useAppDispatch()
     const cars = useSelector(getItems)
@@ -20,24 +32,19 @@ export const Garage:FC<Props> = () => {
         dispatch(fetchCarUser())
     })
 
-    const onClickHandler = (vinCode: string) => {
+    const onClickDeleteHandler = (vinCode: string) => {
         dispatch(deleteCarUser(vinCode))
     }
 
-    const header = (
-        <div className={styles.header}>
-            <p>VIN-номер</p>
-            <p>Бранд</p>
-            <p>Модель</p>
-            <p>Цвет</p>
-            <p>Год</p>
-            <div className={styles.headButton} />
-        </div>
-    )
+    const onClickEditHandler = (vinCode: string) => {
+        setIsModalOpen(true)
+    }
+
     return (
         <>
             <h2 className={styles.title}>Мои машины</h2>
-
+            <FormUpdateCar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+            
             {cars.length 
                 ? <div className={styles.scroll}>
                     <List
@@ -55,10 +62,10 @@ export const Garage:FC<Props> = () => {
                                 
                                 <div className={styles.boxButtons}>
                                     <div className={styles.buttonEdit}>
-                                        <Button icon={<EditOutlined />} onClick={()=>onClickHandler(car.vinCode)} />
+                                        <Button icon={<EditOutlined />} onClick={()=>onClickEditHandler(car.vinCode)} />
                                     </div>
                                     <div className={styles.buttonDelete}>
-                                        <Button icon={<DeleteOutlined />} onClick={()=>onClickHandler(car.vinCode)} danger />
+                                        <Button icon={<DeleteOutlined />} onClick={()=>onClickDeleteHandler(car.vinCode)} danger />
                                     </div>
                                 </div>
                             </List.Item>

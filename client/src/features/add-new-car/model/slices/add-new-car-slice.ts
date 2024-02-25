@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {CarResponse, FormAddNewCarValueTypes} from '../../interfaces'
+import {CarResponse} from '../../interfaces'
 import {addNewCar} from '../async-actions/add-new-car'
+import {FormAddNewCarValueTypes} from '@entities'
 
 export interface AddNewCarSchema {
   car: CarResponse
   error: string
+  isLoading: boolean
 }
 
 const initialState: AddNewCarSchema = {
@@ -15,7 +17,8 @@ const initialState: AddNewCarSchema = {
     year: '',
     color: ''
   },
-  error: ''
+  error: '',
+  isLoading: false
 }
 
 export const addNewCarSlice = createSlice({
@@ -30,8 +33,16 @@ export const addNewCarSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(addNewCar.pending, (state) => {
+        state.error = ''
+        state.isLoading = true
+      })
+      .addCase(addNewCar.fulfilled, (state) => {
+        state.isLoading = false
+      })
       .addCase(addNewCar.rejected, (state, payload) => {
         state.error = payload.error.message
+        state.isLoading = false
       })
   }
 })
