@@ -14,7 +14,7 @@ export const deleteCarUser = createAsyncThunk<string, string, ThunkApiConfig>(
             
             dispatch(fetchCarUser())
             extra.notificationApi.success({
-                message: `Автомобиль с vinCode - ${vinCode} удалён`
+                message: `Автомобиль с vin номером - ${vinCode} удалён`
             })
             return response.data
         } catch (error) {
