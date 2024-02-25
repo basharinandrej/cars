@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react";
 import { getUsers, getRoleCurrentUser } from "../../../../model/selectors"
-import { Button, useAppDispatch, useMount } from "@shared"
+import { Button, useAppDispatch, useMount, mapUserRole } from "@shared"
 import { fetchUsers } from "../../../../model/async-actions/fetch-users"
 import { Empty, List } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -37,7 +37,7 @@ export const ListingUsers = () => {
     const onClickEditHandler = (id: number) => {
         setIsModalOpen(true)
         dispatch(selectedUserForUpdate(id))
-        dispatch(setIsDisabledRoleSelect(role))
+        dispatch(setIsDisabledRoleSelect())
     }
     const onClickDeleteHandler = (id: number) => {}
 
@@ -59,7 +59,7 @@ export const ListingUsers = () => {
                             <p>{user.name}</p>
                             <p>{user.surname}</p>
                             <p>{user.email}</p>
-                            <p>{user.role}</p>
+                            <p>{mapUserRole[user.role]}</p>
                             <p>{user.ban}</p>
 
                             <div className={styles.boxButtons}>

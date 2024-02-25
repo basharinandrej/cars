@@ -49,3 +49,4 @@ export {DetailWears, StatusOrganization, Bans, UserRoles} from './enums'
 
 export {mapBadge} from './dictionaries/map-badge'
 export {mapBadgeOrganizationStatus} from './dictionaries/map-badge-status-organization'
+export {mapUserRole} from './dictionaries/map-user-roles'

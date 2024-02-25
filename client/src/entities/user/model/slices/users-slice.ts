@@ -40,7 +40,7 @@ export const usersSlice = createSlice({
           ...state.selectedUserForUpdate, ...action.payload
       }
     },
-    setIsDisabledRoleSelect: (state, action: PayloadAction<UserRoles>) => {
+    setIsDisabledRoleSelect: (state) => {
 
       state.isDisabledRoleSelect = state.selectedUserForUpdate.role ===  UserRoles.Admin
     }
