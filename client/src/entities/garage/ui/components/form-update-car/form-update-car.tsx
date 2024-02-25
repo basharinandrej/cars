@@ -3,21 +3,24 @@ import {FormAddNewCarValueTypes} from '../../../interfaces'
 import { Dispatch, FC, SetStateAction } from "react"
 import { useSelector } from "react-redux"
 import {getSelectedCarForUpdate} from '../../../model/selectors'
+import {updateSelectedCar} from '../../../model/slices/car-slice'
+import {useAppDispatch} from '@shared'
 
 export const FormUpdateCar:FC<Props> = ({
     isModalOpen,
     setIsModalOpen
 }) => {
+    const dispatch = useAppDispatch()
 
     const seletedCar = useSelector(getSelectedCarForUpdate)
     const handleCancel = () => {
         setIsModalOpen(false)
     }
     const onChangeHandler = (value: FormAddNewCarValueTypes) => {
-
+        dispatch(updateSelectedCar(value))
     }
     const onOkHandler = () => {
-
+        
     }
 
     return <FormCar                
@@ -28,6 +31,7 @@ export const FormUpdateCar:FC<Props> = ({
                 onOkHandler={onOkHandler}
                 nameForm="Update"
                 initialValues={seletedCar}
+                okText='Редактировать'
             />
 }
 

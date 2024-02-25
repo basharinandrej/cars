@@ -9,6 +9,14 @@ export interface DtoCarCreation {
     userId: number
 }
 
+export interface DtoCarUpdation {
+    vinCode: string,
+    brand: string,
+    model: string,
+    year: number,
+    color: string
+}
+
 
 export interface DtoCarGetAll extends Pagination{}
 

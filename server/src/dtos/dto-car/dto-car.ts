@@ -1,5 +1,5 @@
 import { CarAttributes } from "@models/car/types";
-import {DtoCarCreation, DtoCarGetAll, DtoCarGetByVinCode} from './types'
+import {DtoCarCreation, DtoCarUpdation, DtoCarGetAll, DtoCarGetByVinCode} from './types'
 import {ParamsGetAllCars, ParamsGetOneCar} from '@controllers/controller-car/types'
 import {serviceToken} from '@services/service-token'
 import {Cookies} from '@common/interfaces'
@@ -19,6 +19,16 @@ class DtoCar {
             year: car.year,
             color: car.color,
             userId
+        }
+    }
+
+    getDtoCarUpdation(car: CarAttributes): DtoCarUpdation {
+        return {
+            vinCode: car.vinCode,
+            brand: car.brand,
+            model: car.model,
+            year: car.year,
+            color: car.color
         }
     }
 

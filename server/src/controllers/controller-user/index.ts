@@ -5,8 +5,6 @@ import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
 import { RequestCreation, RequestGetAll, RequestGetOne } from "@common/types"
 import {UserRequestParams} from '@common/interfaces'
-import {serviceToken} from '@services/service-token'
-import User from "@models/user"
 
 class ControllerUser {
     async registration(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {

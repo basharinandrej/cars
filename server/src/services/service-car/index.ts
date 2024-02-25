@@ -1,5 +1,5 @@
 import { NextFunction } from "express";
-import { DtoCarCreation, DtoCarGetAll, DtoCarGetByVinCode } from "@dtos/dto-car/types";
+import { DtoCarCreation, DtoCarUpdation, DtoCarGetAll, DtoCarGetByVinCode } from "@dtos/dto-car/types";
 import Car from "@models/car";
 import User from "@models/user";
 import ApiError from "@api-error/index";
@@ -7,6 +7,7 @@ import {mapperCarCreation} from './car-mappers/mapper-car-creation'
 import {mapperCarGetAll} from './car-mappers/mapper-car-get-all'
 import {mapperCarGetByVinCode} from './car-mappers/mapper-car-get-by-vin-code'
 import { errorStrings } from "@common/error-strings";
+import { where } from "sequelize";
 
 
 class ServiceCar {
@@ -23,6 +24,23 @@ class ServiceCar {
             })
 
             return mapperCarCreation(car)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
+
+    async updateCar(dtoCarCreatio: DtoCarUpdation, next: NextFunction) {
+
+        try {
+            const result = await Car.update({
+                vinCode: dtoCarCreatio.vinCode.toLocaleLowerCase(),
+                color: dtoCarCreatio.color,
+                year: dtoCarCreatio.year,
+                brand: dtoCarCreatio.brand,
+                model: dtoCarCreatio.model,
+            }, {where: {vinCode: dtoCarCreatio.vinCode.toLocaleLowerCase()}})
+
+            return result ? 'updated' : false
         } catch (error) {
             next(ApiError.internal(error))
         }

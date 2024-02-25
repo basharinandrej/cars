@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import middlewareValidation from '../middlewares/middleware-validation'
 import conterollerCar from '@controllers/controller-car'
-import {validationCarCreation} from './validation-car'
+import {validationCarCreation, validationCarUpdation} from './validation-car'
 
 
 const routers = Router()
@@ -10,6 +10,12 @@ routers.post('',
     validationCarCreation.createChain(),
     middlewareValidation,
     conterollerCar.createCar
+)
+
+routers.put('', 
+    validationCarUpdation.createChain(),
+    middlewareValidation,
+    conterollerCar.updateCar
 )
 
 routers.get('',

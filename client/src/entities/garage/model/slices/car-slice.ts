@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {CarResponse, Car} from '../../interfaces'
 import {fetchCarUser} from '../async-actions/fetch-cars-user'
 import {deleteCarUser} from '../async-actions/delete-car-user'
-
+import {FormAddNewCarValueTypes} from '../../interfaces'
 
 export interface CarSchema extends CarResponse {
   selectedCarForUpdate: Car
@@ -20,6 +20,11 @@ export const carsSlice = createSlice({
   reducers: {
     selectedCarForUpdate: (state, action: PayloadAction<string>) => {
       state.selectedCarForUpdate = state.items.find((item) => item.vinCode === action.payload)
+    },
+    updateSelectedCar: (state, action: PayloadAction<Partial<FormAddNewCarValueTypes>>) => {
+      state.selectedCarForUpdate = {
+          ...state.selectedCarForUpdate, ...action.payload
+      }
     }
   },
   extraReducers(builder) {
@@ -35,5 +40,5 @@ export const carsSlice = createSlice({
   }
 })
 
-export const {selectedCarForUpdate} = carsSlice.actions
+export const {selectedCarForUpdate, updateSelectedCar} = carsSlice.actions
 export const carsReduces = carsSlice.reducer

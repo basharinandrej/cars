@@ -13,16 +13,18 @@ export const FormCar:FC<Props> = ({
     onChangeHandler,
     title,
     nameForm,
-    initialValues
+    initialValues,
+    okText = 'Отправить'
 }) => {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        form.setFieldsValue({
+        initialValues?.vinCode && form.setFieldsValue({
             vinCode: initialValues?.vinCode,
             brand: initialValues?.brand,
             color: initialValues?.color,
-            model: initialValues?.model     
+            model: initialValues?.model,
+            year: dayjs(initialValues?.year, 'YYYY')
         })
     }, [initialValues]);
 
@@ -32,7 +34,7 @@ export const FormCar:FC<Props> = ({
             open={isModalOpen}
             onCancel={handleCancel}
             cancelText={'Отмена'}
-            okText={'Отправить'}
+            okText={okText}
             onOk={onOkHandler}
         >
             <Form
@@ -79,7 +81,6 @@ export const FormCar:FC<Props> = ({
                     <DatePicker
                         placeholder=""
                         picker="year"
-                        defaultValue={dayjs(initialValues?.year, 'YYYY')}
                         className={styles.yearSelect}
                     />
                 </Form.Item>
@@ -96,5 +97,6 @@ interface Props {
     handleCancel: () => void
     title: string
     nameForm: string
+    okText?: string
     initialValues?: Car
 }

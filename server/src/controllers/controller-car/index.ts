@@ -19,6 +19,17 @@ class Car {
         }
     }
 
+    async updateCar(req: RequestCreation<CarAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoCarUpdation = dtoCar.getDtoCarUpdation(req.body)
+            const car = await serviceCar.updateCar(dtoCarUpdation, next)
+
+            res.status(200).send(car)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
+
     async getAllCars(req: RequestGetAll<ParamsGetAllCars>, res: Response, next: NextFunction) {
         try {
             const dtoCarGetAll = dtoCar.getDtoGetAllCars(req.query)
