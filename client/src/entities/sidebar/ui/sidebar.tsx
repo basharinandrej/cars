@@ -28,7 +28,7 @@ export const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <Menu
-        defaultSelectedKeys={['1']}
+        defaultSelectedKeys={['2']}
         inlineCollapsed={isCollapsed}
         mode={'inline'}
         items={items}

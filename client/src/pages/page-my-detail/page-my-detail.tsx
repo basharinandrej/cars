@@ -1,4 +1,4 @@
-import {AddNewDetail, ListingDetails} from '@features'
+import {ListingDetails} from '@features'
 import {useParams} from 'react-router-dom'
 
 const PageMyDetail = () => {
@@ -6,7 +6,6 @@ const PageMyDetail = () => {
 
 
     return <>
-        <AddNewDetail />
         <ListingDetails id={Number(id)} />
     </>
 }

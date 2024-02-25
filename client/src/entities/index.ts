@@ -40,4 +40,5 @@ export {FormCar} from './garage/ui/components/form-car/form-car'
 
 
 //Users
-export { ListingUsers } from './user/ui/users/users';
+export { Users } from './user/ui/users/users';
+export {usersReducers, UsersSchema} from './user/model/slices/users-slice'

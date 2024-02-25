@@ -1,6 +1,5 @@
 
-import { header, body } from 'express-validator';
-import {extractAccessToken} from '@common/utils/extract-tokens'
+import { cookie, body } from 'express-validator';
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import { UserRoles } from '@common/enums';
@@ -19,11 +18,10 @@ export const validationUser = {
     },
     getAllUsersChain() {
         return [
-            header('authorization').custom((value: string) => {
-                const token = extractAccessToken(value)
+            cookie('refreshToken').custom((value: string) => {
 
                 try {
-                    const result = serviceToken.validationToken(token)
+                    const result = serviceToken.validationToken(value)
 
                     if(isAdministrator(result)) {
                         return Promise.resolve(true);
@@ -34,7 +32,7 @@ export const validationUser = {
                 } catch (error) {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
-            })
+            }),
         ]
     },
     registrationChain() {

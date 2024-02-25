@@ -15,7 +15,8 @@ import {
     logoSliceReducer, 
     profileReducer,
     sidebarSliceReducer, 
-    carsReduces
+    carsReduces,
+    usersReducers
 } from '@entities'
 import {instanceAxios, getErrorMessage} from '@shared'
 import {notification} from 'antd'
@@ -42,7 +43,8 @@ const getStore = () => {
         cars: carsReduces,
         addNewCar: addNewCarReducer,
 
-        addNewDetail: addNewDetailReducer
+        addNewDetail: addNewDetailReducer,
+        users: usersReducers
     }
 
     return configureStore({

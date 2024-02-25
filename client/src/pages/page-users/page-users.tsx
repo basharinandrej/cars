@@ -1,7 +1,7 @@
-import {ListingUsers} from '@entities'
+import {Users} from '@entities'
 
 const PageUsers = () => {
-    return <ListingUsers />
+    return <Users />
 }
 
 export default PageUsers

@@ -17,10 +17,13 @@ export const fetchLoginUserByEmail = createAsyncThunk<void, void, ThunkApiConfig
             const response = await extra.api.post<ProfileResponse>('/api/user/login', {
                 email, password
             })
+            const userId = response.data.user.id
+            const roleId = response.data.user.role
 
-            localStorage.setItem(APP_CAR_KEY_LS_USER_ID, JSON.stringify(response.data.user.id))
-            localStorage.setItem(APP_CAR_KEY_LS_USER_ROLE, JSON.stringify(response.data.user.role))
+            localStorage.setItem(APP_CAR_KEY_LS_USER_ID, JSON.stringify(userId))
+            localStorage.setItem(APP_CAR_KEY_LS_USER_ROLE, JSON.stringify(roleId))
             dispatch(setProfileInformation(response.data))
+            
         } catch (error) {
             console.log('>>> error', error)
         }

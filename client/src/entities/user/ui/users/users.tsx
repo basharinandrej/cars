@@ -1,10 +1,13 @@
 import styles from './users.module.sass'
+import { ListingUsers } from './components/listing-users/listing-users'
 
-
-export const ListingUsers = () => {
+export const Users = () => {
 
 
     return (
-        <h2 className={styles.title}>Пользователи</h2>
+        <>
+            <h2 className={styles.title}>Пользователи</h2>
+            <ListingUsers />
+        </>
     )
 }
