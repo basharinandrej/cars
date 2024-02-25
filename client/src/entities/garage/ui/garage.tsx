@@ -8,7 +8,7 @@ import {deleteCarUser} from '../model/async-actions/delete-car-user'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import {FormUpdateCar} from './components/form-update-car/form-update-car'
-
+import {selectedCarForUpdate} from '../model/slices/car-slice'
 
 import styles from './garage.module.sass'
 
@@ -38,6 +38,7 @@ export const Garage:FC<Props> = () => {
 
     const onClickEditHandler = (vinCode: string) => {
         setIsModalOpen(true)
+        dispatch(selectedCarForUpdate(vinCode))
     }
 
     return (

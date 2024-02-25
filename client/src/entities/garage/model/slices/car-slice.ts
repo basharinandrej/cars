@@ -1,19 +1,27 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {CarResponse} from '../../interfaces'
+import {CarResponse, Car} from '../../interfaces'
 import {fetchCarUser} from '../async-actions/fetch-cars-user'
 import {deleteCarUser} from '../async-actions/delete-car-user'
-export interface CarSchema extends CarResponse{
+
+
+export interface CarSchema extends CarResponse {
+  selectedCarForUpdate: Car
 }
 
 const initialState: CarSchema = {
     total: null,
-    items: []
+    items: [],
+    selectedCarForUpdate: null
 }
 
 export const carsSlice = createSlice({
   name: 'cars',
   initialState,
-  reducers: {},
+  reducers: {
+    selectedCarForUpdate: (state, action: PayloadAction<string>) => {
+      state.selectedCarForUpdate = state.items.find((item) => item.vinCode === action.payload)
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchCarUser.fulfilled, (state, action: PayloadAction<CarResponse>) => {
@@ -27,5 +35,5 @@ export const carsSlice = createSlice({
   }
 })
 
-
+export const {selectedCarForUpdate} = carsSlice.actions
 export const carsReduces = carsSlice.reducer

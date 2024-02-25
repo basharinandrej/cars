@@ -1,6 +1,6 @@
 
 
-interface Car {
+export interface Car {
     vinCode: string
     brand: string
     model: string

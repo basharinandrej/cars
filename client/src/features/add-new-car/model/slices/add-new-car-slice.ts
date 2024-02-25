@@ -1,10 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {CarResponse} from '../../interfaces'
 import {addNewCar} from '../async-actions/add-new-car'
-import {FormAddNewCarValueTypes} from '@entities'
+import {FormAddNewCarValueTypes, Car} from '@entities'
 
 export interface AddNewCarSchema {
-  car: CarResponse
+  car: Omit<Car, 'userId'>
   error: string
   isLoading: boolean
 }

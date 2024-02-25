@@ -1,7 +1,8 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {Form, Input, Modal, DatePicker } from 'antd'
 import {MIN_LENGTH_VIN_CODE, MAX_LENGTH_VIN_CODE} from '@shared'
-import {FormAddNewCarValueTypes} from '../../../interfaces'
+import dayjs from 'dayjs';
+import {Car, FormAddNewCarValueTypes} from '../../../interfaces'
 
 import styles from './form-car.module.sass'
 
@@ -11,8 +12,20 @@ export const FormCar:FC<Props> = ({
     onOkHandler,
     onChangeHandler,
     title,
-    nameForm
+    nameForm,
+    initialValues
 }) => {
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        form.setFieldsValue({
+            vinCode: initialValues?.vinCode,
+            brand: initialValues?.brand,
+            color: initialValues?.color,
+            model: initialValues?.model     
+        })
+    }, [initialValues]);
+
     return (
         <Modal
             title={title}
@@ -23,6 +36,7 @@ export const FormCar:FC<Props> = ({
             onOk={onOkHandler}
         >
             <Form
+                form={form}
                 name={nameForm}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
@@ -65,6 +79,7 @@ export const FormCar:FC<Props> = ({
                     <DatePicker
                         placeholder=""
                         picker="year"
+                        defaultValue={dayjs(initialValues?.year, 'YYYY')}
                         className={styles.yearSelect}
                     />
                 </Form.Item>
@@ -81,4 +96,5 @@ interface Props {
     handleCancel: () => void
     title: string
     nameForm: string
+    initialValues?: Car
 }

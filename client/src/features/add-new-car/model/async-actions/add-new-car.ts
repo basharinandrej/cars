@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
-import {fetchCarUser} from '@entities'
-import { CarResponse } from '../../interfaces'
+import {fetchCarUser, Car} from '@entities'
 import {getCarData} from '../selectors'
 
-export const addNewCar = createAsyncThunk<CarResponse, void, ThunkApiConfig>(
+export const addNewCar = createAsyncThunk<Car, void, ThunkApiConfig>(
     'add-new-car/addNewCar',
     async (_, thunkAPI) => {
         try {
@@ -13,7 +12,7 @@ export const addNewCar = createAsyncThunk<CarResponse, void, ThunkApiConfig>(
             const car = getCarData(state)
 
 
-            const response = await extra.api.post<CarResponse>('/api/car', car)
+            const response = await extra.api.post<Car>('/api/car', car)
 
             dispatch(fetchCarUser())
             return response.data
