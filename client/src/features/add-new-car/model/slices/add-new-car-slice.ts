@@ -38,6 +38,13 @@ export const addNewCarSlice = createSlice({
       })
       .addCase(addNewCar.fulfilled, (state) => {
         state.isLoading = false
+        state.car = {
+          vinCode: '',
+          brand: '',
+          model: '',
+          year: '',
+          color: ''
+        }
       })
       .addCase(addNewCar.rejected, (state, payload) => {
         state.error = payload.error.message

@@ -6,9 +6,10 @@
         "module": "es6",
         "target": "es5",
         "jsx": "react-jsx",
-        "allowJs": false,
+        "allowJs": true,
         "moduleResolution": "node",
         "sourceMap": true,
+        "checkJs": true,
         "baseUrl": ".",
         "paths": {
           "@app": ["./src/app/index"],

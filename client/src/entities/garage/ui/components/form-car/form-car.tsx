@@ -19,12 +19,14 @@ export const FormCar:FC<Props> = ({
     const [form] = Form.useForm();
 
     useEffect(() => {
-        initialValues?.vinCode && form.setFieldsValue({
+        const initialYear = dayjs(initialValues?.year, 'YYYY').isValid() ? dayjs(initialValues?.year, 'YYYY') : undefined
+
+        form.setFieldsValue({
             vinCode: initialValues?.vinCode,
             brand: initialValues?.brand,
             color: initialValues?.color,
             model: initialValues?.model,
-            year: dayjs(initialValues?.year, 'YYYY')
+            year: initialYear
         })
     }, [initialValues]);
 
@@ -52,7 +54,7 @@ export const FormCar:FC<Props> = ({
                         {
                             min: MIN_LENGTH_VIN_CODE,
                             max: MAX_LENGTH_VIN_CODE,
-                            message: 'Vin-номер должен состоять из 17 символов',
+                            message: `Vin-номер должен состоять из 17 символов. Сейчас - ${initialValues?.vinCode?.length}`,
                         },
                     ]}
                     name="vinCode"
@@ -98,5 +100,5 @@ interface Props {
     title: string
     nameForm: string
     okText?: string
-    initialValues?: Car
+    initialValues?: Partial<Omit<Car,  'userId'>>
 }

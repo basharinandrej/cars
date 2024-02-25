@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import { setCar } from '../model/slices/add-new-car-slice'
 import {addNewCar} from '../model/async-actions/add-new-car'
-import {getIsLoading, getError} from '../model/selectors'
+import {getIsLoading, getError, getCarData} from '../model/selectors'
 import {FormAddNewCarValueTypes, FormCar} from '@entities'
 import moment from 'moment'
 
@@ -21,16 +21,14 @@ export const AddNewCard = () => {
 
     const isLoading = useSelector(getIsLoading)
     const error = useSelector(getError)
+    const car = useSelector(getCarData)
 
     useEffect(() => {
         !isLoading && !error && handleOk()
     }, [isLoading, error])
 
     const onChangeHandler = (value: FormAddNewCarValueTypes) => {
-        dispatch(setCar({
-            ...value,
-            year: moment(value.year).format('YYYY'),
-        }))
+        dispatch(setCar(value))
     }
 
     const onOkHandler = () => {
@@ -50,6 +48,7 @@ export const AddNewCard = () => {
                 onOkHandler={onOkHandler}
                 title="Добавить машину"
                 nameForm="Create"
+                initialValues={car}
             />
         </div>
     )
