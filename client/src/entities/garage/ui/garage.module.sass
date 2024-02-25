@@ -1,8 +1,8 @@
 
 .header
-    display: flex
-    justify-content: space-between
-
+    display: grid
+    grid-template-columns: 280px 160px 190px 180px 100px 180px
+    padding: 0 16px
 
 .title
     margin-bottom: 24px
@@ -11,11 +11,23 @@
 .scroll
     overflow-x: scroll
     
-.buttonDelete
+.buttonDelete,
+.buttonEdit
     max-width: max-content
+
+.buttonEdit
+    margin-right: 12px
     
 .list
     min-width: 420px
 
 .headButton
     width: 85px
+
+.boxButtons
+    display: flex
+    justify-content: flex-end
+
+.item
+    display: grid !important
+    grid-template-columns: 280px 160px 190px 180px 100px 180px

@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {CarResponse} from '../../interfaces'
-
+import {CarResponse, FormAddNewCarValueTypes} from '../../interfaces'
+import {addNewCar} from '../async-actions/add-new-car'
 
 export interface AddNewCarSchema {
   car: CarResponse
+  error: string
 }
 
 const initialState: AddNewCarSchema = {
@@ -13,19 +14,26 @@ const initialState: AddNewCarSchema = {
     model: '',
     year: '',
     color: ''
-  }
+  },
+  error: ''
 }
 
 export const addNewCarSlice = createSlice({
   name: 'add-new-car',
   initialState,
   reducers: {
-    setCar: (state, action: PayloadAction<Partial<CarResponse>>) => {
-        state.car = {
-            ...state.car, ...action.payload
-        }
+    setCar: (state, action: PayloadAction<Partial<FormAddNewCarValueTypes>>) => {
+      state.car = {
+          ...state.car, ...action.payload
+      }
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addNewCar.rejected, (state, payload) => {
+        state.error = payload.error.message
+      })
+  }
 })
 
 export const {setCar} = addNewCarSlice.actions

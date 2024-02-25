@@ -1,21 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
+import {fetchCarUser} from '@entities'
 import { CarResponse } from '../../interfaces'
 import {getCarData} from '../selectors'
 
 
-export const featchPostCar = createAsyncThunk<CarResponse, void, ThunkApiConfig>(
-    'add-new-car/featchPostCar',
+export const addNewCar = createAsyncThunk<CarResponse, void, ThunkApiConfig>(
+    'add-new-car/addNewCar',
     async (_, thunkAPI) => {
         try {
-            const {getState, extra} = thunkAPI
+            const {getState, extra, dispatch} = thunkAPI
             const state = getState()
 
             const car = getCarData(state)
             const response = await extra.api.post<CarResponse>('/api/car', car)
+            dispatch(fetchCarUser())
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            throw error.response.data.message[0].msg
         }
     }
 )

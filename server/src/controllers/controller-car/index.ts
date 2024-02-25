@@ -13,10 +13,9 @@ class Car {
             const dtoCarCreation = dtoCar.getDtoCarCreation(req.body, req.cookies)
             const car = await serviceCar.createCar(dtoCarCreation, next)
 
-            res.send(car)
+            res.status(200).send(car)
         } catch (error) {
             next(ApiError.internal(error))
-
         }
     }
 
@@ -25,10 +24,9 @@ class Car {
             const dtoCarGetAll = dtoCar.getDtoGetAllCars(req.query)
             const cars = await serviceCar.getAllCars(dtoCarGetAll, next)
 
-            res.send(cars)
+            res.status(200).send(cars)
         } catch (error) {
             next(ApiError.internal(error))
-
         }
     }
 
@@ -38,7 +36,7 @@ class Car {
             const car = await serviceCar.getByVINCodeCar(dtoCarGetByVinCode, next)
 
             if(car) {
-                res.send(car)
+                res.status(200).send(car)
             }
         } catch (error) {
             next(ApiError.internal(error))

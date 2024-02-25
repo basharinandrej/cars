@@ -13,12 +13,10 @@ routers.post('',
 )
 
 routers.get('',
-    middlewareValidation, 
     conterollerCar.getAllCars
 )
 
 routers.get('/getByVINCode', 
-    middlewareValidation,
     conterollerCar.getByVINCodeCar
 )
 

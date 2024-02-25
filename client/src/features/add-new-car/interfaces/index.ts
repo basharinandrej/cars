@@ -7,3 +7,11 @@ export interface CarResponse {
     year: string
     color: string
 }
+
+export interface FormAddNewCarValueTypes {
+    vinCode: string
+    brand: string
+    model: string
+    color: string
+    year: string
+}

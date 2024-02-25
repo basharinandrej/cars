@@ -9,7 +9,8 @@ export const Button:FC<Props> = ({
     size = '',
     type = 'primary',
     htmlType,
-    danger = false
+    danger = false,
+    icon
 }) => {
 
     return (
@@ -22,12 +23,12 @@ export const Button:FC<Props> = ({
             htmlType={htmlType}
             danger={danger}
         >
-            {text}
+            {text || icon}
         </Btn>
     )
 }
 
 interface Props extends Omit<ButtonProps, 'size'>{
-    text: string
+    text?: string
     size?: 'large'
 }

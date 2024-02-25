@@ -28,4 +28,5 @@ export {Sidebar} from './sidebar/ui/sidebar'
 export {sidebarSliceReducer, SidebarSchema} from './sidebar/model/slices/sidebar-slice'
 
 export {Garage} from './garage/ui/garage'
+export {fetchCarUser} from './garage/model/async-actions/fetch-cars-user'
 export {carsReduces, CarSchema} from './garage/model/slices/car-slice'
