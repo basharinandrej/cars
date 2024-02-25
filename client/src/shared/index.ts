@@ -25,7 +25,7 @@ export {getIsMobile} from './libs/get-is-mobile'
 export {getIsTablet} from './libs/get-is-tablet'
 export {setScrollToDocument} from './libs/set-scroll-to-document'
 export {calcOffset} from './libs/calc-offset'
-
+export {getErrorMessage} from './libs/get-error-message'
 
 
 export {

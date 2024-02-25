@@ -1,12 +1,14 @@
 class ApiError extends Error{
     status: number
     message: string
+    type: string
 
     constructor(status: number, message: string) {
         super()
 
         this.message = message
         this.status = status
+        this.type = status === 500 ? 'internalError' :  'validationError'
     }
 
     static bedRequest(message) {

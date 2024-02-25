@@ -17,6 +17,8 @@ import {
     CarSchema
 } from '@entities'
 import { AxiosInstance } from 'axios'
+import {NotificationInstance} from 'antd/es/notification/interface'
+
 
 export interface StateSchema {
     listingDetails: ListingDetailsSchema
@@ -42,6 +44,8 @@ export interface StateSchema {
 
 interface thunkMiddleware {
     api: AxiosInstance
+    notificationApi: NotificationInstance
+    getErrorMessage: (error: any) => string
 }
 
 export interface ThunkApiConfig {

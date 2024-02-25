@@ -23,3 +23,8 @@ export const enum UserRoles {
     Admin = 'Admin',
     Moderator = 'Moderator'
 }
+
+export const enum AppTypeError {
+    ValidationError = 'validationError',
+    InternalError = 'internalError'
+}

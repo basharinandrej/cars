@@ -17,7 +17,8 @@ import {
     sidebarSliceReducer, 
     carsReduces
 } from '@entities'
-import {instanceAxios} from '@shared'
+import {instanceAxios, getErrorMessage} from '@shared'
+import {notification} from 'antd'
 
 import {StateSchema} from '../interfaces'
 
@@ -49,7 +50,9 @@ const getStore = () => {
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({
             thunk: {
                 extraArgument: {
-                    api: instanceAxios
+                    api: instanceAxios,
+                    notificationApi: notification,
+                    getErrorMessage
                 }
             }
         })

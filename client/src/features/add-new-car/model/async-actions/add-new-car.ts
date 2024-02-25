@@ -16,8 +16,15 @@ export const addNewCar = createAsyncThunk<CarResponse, void, ThunkApiConfig>(
             const response = await extra.api.post<CarResponse>('/api/car', car)
             dispatch(fetchCarUser())
             return response.data
-        } catch (error) {
-            throw error.response.data.message[0].msg
+        } catch (error: unknown) {
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при добавлении нового автомобиля',
+                description: errorMessage
+            })
+            throw errorMessage
         }
     }
 )
