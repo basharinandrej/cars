@@ -9,7 +9,8 @@ import {
     PageLogin,
     PageProfile,
     PageGarage,
-    PageMyDetail
+    PageMyDetail,
+    PageUsers
 } from '@pages'
 
 
@@ -81,7 +82,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
 
     [Routes.UsersPage]: {
         path: `${RoutePaths.UsersPage}`,
-        element: <PageGarage />,
+        element: <PageUsers />,
         onlyAuth: true,
         userRole: UserRoles.Admin
     },

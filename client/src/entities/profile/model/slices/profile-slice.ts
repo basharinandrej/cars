@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {ProfileResponse, User} from '../../interfaces'
-import { UserRoles, Bans } from '@shared'
+import { UserRoles, Bans, APP_CAR_KEY_LS_USER_ID, APP_CAR_KEY_LS_USER_ROLE } from '@shared'
 import {featchInitUser} from '../async-actions/fetch-init-user'
 import {featchUpdateUser} from '../async-actions/fetch-update-user'
 import {logout} from '../async-actions/logout'
@@ -13,11 +13,11 @@ export interface ProfileSchema extends ProfileResponse{
 const initialState: ProfileSchema = {
   isEditing: false,
   user: {
-      id: null,
+      id: JSON.parse(localStorage.getItem(APP_CAR_KEY_LS_USER_ID)),
       name: null,
       surname: null,
       email: null,
-      role: UserRoles.Person,
+      role: JSON.parse(localStorage.getItem(APP_CAR_KEY_LS_USER_ROLE)),
       phoneNumber: null,
       ban: Bans.Null
   }

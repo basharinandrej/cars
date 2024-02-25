@@ -53,13 +53,13 @@ export const Menu = () => {
                     </li>}
                     {userId && <li>
                         <AppLink to={`cabinet/profile/${userId}`}>
-                            {userSurname}&nbsp;{userName[0]}.
+                            {userSurname}&nbsp;{userName?.slice(0,1)}.
                         </AppLink>
                     </li>}
                 </ul>
             </nav>
         </>
-    ), [menuItems, userId])
+    ), [menuItems, userId, userSurname, userName])
     
 
     const menuForMobileAndTablet = (
