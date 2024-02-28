@@ -5,7 +5,6 @@ import { setCar } from '../model/slices/add-new-car-slice'
 import {addNewCar} from '../model/async-actions/add-new-car'
 import {getIsLoading, getError, getCarData} from '../model/selectors'
 import {FormAddNewCarValueTypes, FormCar} from '@entities'
-import moment from 'moment'
 
 
 import styles from './add-new-car.module.sass'

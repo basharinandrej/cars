@@ -50,6 +50,7 @@ const getStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+            serializableCheck: false,
             thunk: {
                 extraArgument: {
                     api: instanceAxios,

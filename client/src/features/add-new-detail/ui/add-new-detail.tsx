@@ -1,7 +1,7 @@
-import {Button, Select, SelectSearch, useAppDispatch} from '@shared'
+import {Button, Select, SelectSearch, useMount, useAppDispatch} from '@shared'
 import { useSelector } from 'react-redux'
 import {useState} from 'react'
-import {Form, Input, Modal  } from 'antd'
+import {DatePicker, Form, Input, Modal, InputNumber  } from 'antd'
 import {fetchListingCategories} from '../model/async-actions/fetch-listing-categories'
 import {
     getItemsDetailCategories,
@@ -11,15 +11,17 @@ import {
 import {fetchListinModels} from '../model/async-actions/fetch-listing-models'
 import {setDetailData} from '../model/slices/add-new-detail-slice'
 import {fetchPostNewDetail} from '../model/async-actions/fetch-post-new-detail'
+import {FormAddNewDetailValueTypes} from '../interfaces'
+import {UploadPhotoDetail} from './components/upload-photo-detail/upload-photo-detail'
+
+
 
 import styles from './add-new-detail.module.sass'
 
 
-
 export const AddNewDetail = () => {
     const dispatch = useAppDispatch()
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [photos, setPhotos] = useState()
+    const [isModalOpen, setIsModalOpen] = useState(true)
 
     const showModal = () => setIsModalOpen(true)
     const handleCancel = () => setIsModalOpen(false)
@@ -28,27 +30,18 @@ export const AddNewDetail = () => {
     const models = useSelector(getItemsModels)
     const optionsWear = useSelector(getOptionsWear)
 
-    const onChangeHandler = (value: any) => {
-        dispatch(setDetailData({...value}))
+    useMount(() => {
+        dispatch(fetchListinModels())
+        dispatch(fetchListingCategories())
+    })
+    const onChangeHandler = (value: FormAddNewDetailValueTypes) => {
+        delete value.year
+        dispatch(setDetailData(value))
     }
 
     const onOkHandler = () => {
-        dispatch(fetchPostNewDetail(photos))
+        dispatch(fetchPostNewDetail())
         setIsModalOpen(false)
-    }
-
-    const onSearchSelectCategoryHandler = () => {
-        dispatch(fetchListingCategories())
-    };
-
-    const onSearchSelectModelHandler = () => {
-        dispatch(fetchListinModels())
-    }
-
-    function onChangePhotoHandler(e: any) {
-        const file =  e.target.files[0]
-        console.log('>>> file', file)
-        setPhotos(file)
     }
 
     return (
@@ -73,60 +66,75 @@ export const AddNewDetail = () => {
                     onValuesChange={onChangeHandler}
                     autoComplete="off"
                 >
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Название"
                         name="name"
+                        required
                     >
                         <Input />
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Артикул"
                         name="vendorCode"
+                        required
                     >
                         <Input />
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Износ"
                         name="wear"
+                        required
                     >
                         <Select options={optionsWear} />
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Цена"
                         name="price"
+                        required
+                        rules={[
+                            () => {
+                                return {
+                                    validator: (_:unknown, value: number) => {
+                                        if(typeof value === 'number' && value>0) {
+                                            return Promise.resolve()
+                                        }
+                                        return Promise.reject('Цена должна быть положительным числом');
+                                    },
+                                }
+                            }
+                        ]}
                     >
-                        <Input />
+                        <InputNumber className={styles.priceInput} />
                     </Form.Item>
                     
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Модель"
                         name="modelId"
+                        required
                     >
-                        <SelectSearch options={models} onSearch={onSearchSelectModelHandler} />
+                        <SelectSearch options={models} />
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item<FormAddNewDetailValueTypes>
                         label="Категория детали"
                         name="detailCategoryId"
+                        required
                     >
-                        <SelectSearch options={detailCategories} onSearch={onSearchSelectCategoryHandler}/>
+                        <SelectSearch options={detailCategories} />
                     </Form.Item>
-
-                    <input
-                        accept="image/*" 
-                        onChange={onChangePhotoHandler} 
-                        type="file"
-                        name="img"
-                    />                  
-                     {/* <Form.Item
+                
+                     <Form.Item<FormAddNewDetailValueTypes>
                         label="Год"
                         name="year"
+                        required
                     >
-                        <DatePicker picker="year" className={styles.yearSelect} />
-                    </Form.Item> */}
+                        <DatePicker picker="year" placeholder="" className={styles.yearSelect} />
+                    </Form.Item>
+
+                    <UploadPhotoDetail />
                 </Form>
             </Modal>
         </div>
