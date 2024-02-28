@@ -10,7 +10,7 @@ import {
 } from '../model/selectors'
 import {fetchListinModels} from '../model/async-actions/fetch-listing-models'
 import {setDetailData} from '../model/slices/add-new-detail-slice'
-import {fetchPostNewDetail} from '../model/async-actions/fetch-post-new-detail'
+import {fetchAddNewDetail} from '../model/async-actions/fetch-add-new-detail'
 import {FormAddNewDetailValueTypes} from '../interfaces'
 import {UploadPhotoDetail} from './components/upload-photo-detail/upload-photo-detail'
 
@@ -21,7 +21,7 @@ import styles from './add-new-detail.module.sass'
 
 export const AddNewDetail = () => {
     const dispatch = useAppDispatch()
-    const [isModalOpen, setIsModalOpen] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const showModal = () => setIsModalOpen(true)
     const handleCancel = () => setIsModalOpen(false)
@@ -40,7 +40,7 @@ export const AddNewDetail = () => {
     }
 
     const onOkHandler = () => {
-        dispatch(fetchPostNewDetail())
+        dispatch(fetchAddNewDetail())
         setIsModalOpen(false)
     }
 

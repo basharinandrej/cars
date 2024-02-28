@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './upload-photo-detail.module.sass'
 
-const toBase64 = async (file: File) => new Promise<string>((resolve, reject) => {
+const toBase64 = async (file: File) => new Promise<string>((resolve) => {
     const reader = new FileReader();
         reader.onload = () => resolve(reader.result as string);
         reader.readAsDataURL(file);
@@ -43,7 +43,7 @@ export const UploadPhotoDetail = () => {
         <div className={styles.uploadBox}>
             {photos?.length ? <div className={styles.previewBox}>
       
-                {photos.map((photo) => <div className={styles.previewItem}>
+                {photos.map((photo) => <div key={photo.id} className={styles.previewItem}>
                         <div className={styles.delete} onClick={()=>onClickDeleteHandler(photo.id)}>
                             <DeleteOutlined />
                         </div>

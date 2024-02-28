@@ -3,7 +3,7 @@ import {ThunkApiConfig} from '@app'
 import {getDataDetail} from '../selectors'
 
 
-export const fetchPostNewDetail = createAsyncThunk<void, void, ThunkApiConfig>(
+export const fetchAddNewDetail = createAsyncThunk<void, void, ThunkApiConfig>(
     'add-new-detail/fetchPostNewDetail',
     async (_, thunkAPI) => {
         try {
@@ -33,7 +33,14 @@ export const fetchPostNewDetail = createAsyncThunk<void, void, ThunkApiConfig>(
 
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при добавлении новой детали',
+                description: errorMessage
+            })
+            throw errorMessage
         }
     }
 )

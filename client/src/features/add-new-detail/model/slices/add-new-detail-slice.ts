@@ -49,8 +49,8 @@ const initialState: AddNewDetailSchema = {
     total: 0
   },
   detail: {
-    name: null,
-    vendorCode: null,
+    name: '',
+    vendorCode: '',
     wear: null,
     year: 2000,
     price: null,
