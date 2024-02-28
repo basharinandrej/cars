@@ -73,7 +73,7 @@ class ServiceCar {
         }
     }
 
-    async dropCar(vinCode, next: NextFunction) {
+    async dropCar(vinCode: string, next: NextFunction) {
         try {
             const result = await Car.destroy({
                 where: {vinCode},

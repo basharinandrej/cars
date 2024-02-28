@@ -19,5 +19,6 @@ routers.get('/getById',
     controllerDetail.getByIdDetail
 )
 
+routers.delete('', controllerDetail.dropDetail)
 
 export const routerDetail = routers

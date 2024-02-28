@@ -11,3 +11,7 @@ export interface ParamsGetAllDetails extends Pagination{
 export interface ParamsGetOneDetail{
     id: number
 }
+
+export interface ParamsDeleteDelete {
+    id: number
+}

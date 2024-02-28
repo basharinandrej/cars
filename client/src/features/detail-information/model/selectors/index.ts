@@ -1,4 +1,5 @@
 import {RootState} from '@app'
+import {createSelector} from "@reduxjs/toolkit";
 
 
 
@@ -15,6 +16,11 @@ export const getInformationDetail = (state: RootState) => {
     }
 }
 
+const getInformationProfile = (state: RootState) => {
+    return {
+        id: state.profile.user.id
+    }
+}
 
 
 export const getInformationAboutAuthor = (state: RootState) => {
@@ -25,3 +31,12 @@ export const getInformationAboutAuthor = (state: RootState) => {
         surname: state.detailInformation.user.surname,
     }
 }
+
+
+export const getIsMyDetail = createSelector(
+    getInformationProfile,
+    getInformationAboutAuthor,
+    (profileInformation, informationAboutAuthor) => {
+        return profileInformation.id === informationAboutAuthor.id
+    }
+)

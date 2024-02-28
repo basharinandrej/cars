@@ -1,13 +1,16 @@
 import {FC, useMemo} from 'react'
 import { useSelector } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import { Badge } from 'antd'
 
 import {
     getInformationDetail, 
-    getInformationAboutAuthor
+    getInformationAboutAuthor,
+    getIsMyDetail
 } from '../model/selectors'
 
 import {fetchByIdDetail} from '../model/async-actions/fetch-by-id-detail'
+import {deleteDetail} from '../model/async-actions/delete-by-id-detail'
 
 import { 
     useAppDispatch, 
@@ -32,6 +35,7 @@ export const DetailInformation: FC<Props> = ({
     id
 }) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
 
 
     const isMobile = getIsMobile()
@@ -42,6 +46,7 @@ export const DetailInformation: FC<Props> = ({
 
     const detailInformation = useSelector(getInformationDetail)
     const informationAboutAuthor = useSelector(getInformationAboutAuthor)
+    const isMyDetail = useSelector(getIsMyDetail)
 
     const textBadge = useMemo(() => mapBadge[detailInformation.wear]?.value, [detailInformation])
     const colorBadge = useMemo(() => mapBadge[detailInformation.wear]?.color, [detailInformation])
@@ -49,6 +54,10 @@ export const DetailInformation: FC<Props> = ({
     const formatterPhoneNumber = new StringMask('0(000)000-00-00');
     const phoneNumberFormatted = formatterPhoneNumber.apply(informationAboutAuthor.phoneNumber); 
 
+    const onClickDeleteHandler = () => {
+        dispatch(deleteDetail(id))
+        navigate(-1)
+    }
     const renderSide = () => {
         return (
             <div className={styles.side}>
@@ -60,6 +69,13 @@ export const DetailInformation: FC<Props> = ({
                         size={isDesktop ? 'large' : null}
                     />
                 </div>
+                {isMyDetail && <div>
+                    <Button 
+                        onClick={onClickDeleteHandler}
+                        text={'Удалить'}
+                        danger
+                    />
+                </div>}
             </div>
         )
     }

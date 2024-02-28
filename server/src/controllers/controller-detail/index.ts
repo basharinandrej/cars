@@ -1,8 +1,8 @@
 import {NextFunction, Response} from 'express'
 import serviceDetail from '@services/service-detail'
 import serviceDetailPhoto from '@services/service-detail/service-detail-photo'
-import {ParamsGetAllDetails, ParamsGetOneDetail} from './types'
-import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
+import {ParamsGetAllDetails, ParamsDeleteDelete, ParamsGetOneDetail} from './types'
+import {RequestCreation, RequestGetAll, RequestDelete, RequestGetOne} from '@common/types'
 import ApiError from '@api-error/index'
 import dtoDetail from '@dtos/dto-detail/dto-detail'
 import dtoDetailPhoto from '@dtos/dto-detail/dto-detail-photo/dto-detail-photo'
@@ -68,6 +68,15 @@ class ControllerDetail {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
             }
+        }
+    }
+
+    async dropDetail(req: RequestDelete<ParamsDeleteDelete>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceDetail.dropCar(req.query.id, next)
+            res.send(id)
+        } catch (error) {
+            next(ApiError.internal(error))   
         }
     }
 }

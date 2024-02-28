@@ -95,6 +95,19 @@ class ServiceDetail {
             }
         }
     }
+
+
+    async dropCar(id: number, next: NextFunction) {
+        try {
+            const result = await Detail.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
 }
 
 

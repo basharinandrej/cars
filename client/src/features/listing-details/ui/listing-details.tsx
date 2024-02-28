@@ -54,7 +54,7 @@ export const ListingDetails:FC<Props> = ({id}) => {
 
     useEffect(() => {
         if(inView) {
-            canPaginationMore && dispatch(fetchListingDetailsNextPart())
+            canPaginationMore && dispatch(fetchListingDetailsNextPart(id))
         }
     }, [inView, canPaginationMore, dispatch])
 

@@ -12,9 +12,9 @@ import {ParamsFetchListingDetails} from '../interfaces'
 import {addQueryParams} from '@shared'
 
 
-export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, void, ThunkApiConfig>(
+export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema, number|void, ThunkApiConfig>(
     'listing-details/fetchDetailsNextPart',
-    async (_, thunkAPI) => {
+    async (userId, thunkAPI) => {
         const {getState, extra} = thunkAPI
         const state = getState()
 
@@ -32,6 +32,7 @@ export const fetchListingDetailsNextPart = createAsyncThunk<ListingDetailsSchema
         if(searchGlobal) params.keyword = searchGlobal
         if(valueSelectedModel) params.modelId = valueSelectedModel
         if(detailCategoryId) params.detailCategoryId = detailCategoryId
+        if(userId) params.userId = userId
 
         addQueryParams('keyword', params.keyword)
         addQueryParams('modelId', params.modelId)
