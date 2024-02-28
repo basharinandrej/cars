@@ -29,29 +29,26 @@ export const validationCreateDetail = {
             ])).trim(),            
             body('price').isNumeric().withMessage(errorStrings.beNumber('price')).trim(),
 
-            body('year')
-                .isNumeric().withMessage(errorStrings.beNumber('year')).trim()
-                .isLength({min: 4, max: 4}).withMessage(errorStrings.minLength('year', 4)).trim()
-                .withMessage(errorStrings.maxLength('year', 4)).trim(),
+            body('year').notEmpty().withMessage(errorStrings.notBeEmptyField("year")).trim(),
 
-            // body('photos').custom((_, meta) => {
-            //     const photos = meta.req.files.photos
-            //     console.log('>>> photos', photos)
 
-            //     if(!Array.isArray(photos)) {
-            //         if(photos.name && photos.size) {
-            //             return Promise.resolve(true);
-            //         } else {
-            //             return Promise.reject(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto()));
-            //         }
-            //     } else {
-            //         if(photos.length <= MAX_TOTAL_PHOTOS_PER_DETAIL) {
-            //             return Promise.resolve(true);
-            //         } else {
-            //             return Promise.reject(ApiError.bedRequest(errorStrings.maxTotalPhotosDetail()));
-            //         }
-            //     }
-            // }),
+            body('photos').custom((_, meta) => {
+                const photos = meta.req.files.photos
+
+                if(!Array.isArray(photos)) {
+                    if(photos.name && photos.size) {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto()));
+                    }
+                } else {
+                    if(photos.length <= MAX_TOTAL_PHOTOS_PER_DETAIL) {
+                        return Promise.resolve(true);
+                    } else {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.maxTotalPhotosDetail()));
+                    }
+                }
+            }),
         ]
     }
 }

@@ -26,7 +26,7 @@ export interface AddNewDetailSchema {
     name: string | null
     vendorCode: string | null
     wear: DetailWears | null
-    year: number | null
+    year: string | null
     price: number | null
     modelId: number | null
     detailCategoryId: number | null
@@ -52,7 +52,7 @@ const initialState: AddNewDetailSchema = {
     name: '',
     vendorCode: '',
     wear: null,
-    year: 2000,
+    year: '',
     price: null,
     modelId: null,
     detailCategoryId: null,
@@ -67,6 +67,18 @@ export const addNewDetailSlice = createSlice({
     setDetailData: (state, action: PayloadAction<FormAddNewDetailValueTypes>) => {
       state.detail = {
         ...state.detail, ...action.payload
+      }
+    },
+    dropDetailData: (state) => {
+      state.detail = {
+        name: '',
+        vendorCode: '',
+        wear: null,
+        year: '',
+        price: null,
+        modelId: null,
+        detailCategoryId: null,
+        photos: []
       }
     },
     setPhotosDetail: (state, action: PayloadAction<Photo[]>) => {
@@ -94,6 +106,6 @@ export const addNewDetailSlice = createSlice({
   }
 })
 
-export const {setDetailData, setPhotosDetail, deletePhotoDetail} = addNewDetailSlice.actions
+export const {setDetailData, dropDetailData, setPhotosDetail, deletePhotoDetail} = addNewDetailSlice.actions
 
 export const addNewDetailReducer = addNewDetailSlice.reducer

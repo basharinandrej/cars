@@ -10,7 +10,7 @@ export interface DetailAttributes {
     id: number
     name: string
     vendorCode: string
-    year: number
+    year: string
     description: string
     price: number
     wear: DetailWears

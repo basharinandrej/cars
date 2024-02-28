@@ -5,7 +5,7 @@ export interface DtoDetailCreation {
     name: string
     vendorCode: string
     wear: DetailWears
-    year: number
+    year: string
     description: string
     price: number
     modelId: number

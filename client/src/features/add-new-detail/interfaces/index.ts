@@ -7,7 +7,7 @@ export interface FormAddNewDetailValueTypes {
     price: number
     modelId: number
     detailCategoryId: number
-    year: number
+    year: string
 }
 
 export interface DetailCategory {

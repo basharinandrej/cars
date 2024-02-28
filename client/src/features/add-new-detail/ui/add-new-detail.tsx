@@ -1,13 +1,15 @@
 import {Button, Select, SelectSearch, useMount, useAppDispatch} from '@shared'
 import { useSelector } from 'react-redux'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {DatePicker, Form, Input, Modal, InputNumber  } from 'antd'
 import {fetchListingCategories} from '../model/async-actions/fetch-listing-categories'
 import {
     getItemsDetailCategories,
     getItemsModels,
-    getOptionsWear
+    getOptionsWear,
+    getDataDetail
 } from '../model/selectors'
+import dayjs from 'dayjs'
 import {fetchListinModels} from '../model/async-actions/fetch-listing-models'
 import {setDetailData} from '../model/slices/add-new-detail-slice'
 import {fetchAddNewDetail} from '../model/async-actions/fetch-add-new-detail'
@@ -21,6 +23,8 @@ import styles from './add-new-detail.module.sass'
 
 export const AddNewDetail = () => {
     const dispatch = useAppDispatch()
+    const [form] = Form.useForm();
+
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const showModal = () => setIsModalOpen(true)
@@ -29,13 +33,28 @@ export const AddNewDetail = () => {
     const detailCategories = useSelector(getItemsDetailCategories)
     const models = useSelector(getItemsModels)
     const optionsWear = useSelector(getOptionsWear)
+    const detailData = useSelector(getDataDetail)
+
+    useEffect(() => {
+        const initialYear = dayjs(detailData?.year, 'YYYY').isValid() ? dayjs(detailData?.year, 'YYYY') : undefined
+
+        form.setFieldsValue({
+            name: detailData?.name,
+            detailCategoryId: detailData?.detailCategoryId,
+            modelId: detailData?.modelId,
+            photos: detailData?.photos,
+            price: detailData?.price,
+            vendorCode: detailData?.vendorCode,
+            wear: detailData?.wear,
+            year: initialYear
+        })
+    }, [detailData])
 
     useMount(() => {
         dispatch(fetchListinModels())
         dispatch(fetchListingCategories())
     })
     const onChangeHandler = (value: FormAddNewDetailValueTypes) => {
-        delete value.year
         dispatch(setDetailData(value))
     }
 
@@ -58,6 +77,7 @@ export const AddNewDetail = () => {
                 onOk={onOkHandler}
             >
                 <Form
+                    form={form}
                     name="basic"
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}

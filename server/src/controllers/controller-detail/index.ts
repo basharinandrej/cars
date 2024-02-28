@@ -13,9 +13,6 @@ import {moveDetailPhotosToStatic, moveDetailOnePhotoToStatic} from './utils'
 class ControllerDetail {
     async createDetail(req: RequestCreation<DetailAttributes>, res: Response, next: NextFunction) {
         try {
-            console.log('>>>> photos', req.files.photos)
-            console.log('>>>> photos', typeof req.files.photos)
-
             const photos = req.files.photos
 
             const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, req.cookies)

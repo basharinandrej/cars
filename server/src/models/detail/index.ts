@@ -20,7 +20,7 @@ Detail.init({
         allowNull: false,
     },
     year: {
-        type: DataTypes.SMALLINT,
+        type: DataTypes.DATE,
         allowNull: false
     },
     description: {

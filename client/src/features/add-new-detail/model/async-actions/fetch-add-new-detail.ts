@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {getDataDetail} from '../selectors'
+import {dropDetailData} from '../slices/add-new-detail-slice'
 
 
 export const fetchAddNewDetail = createAsyncThunk<void, void, ThunkApiConfig>(
@@ -41,6 +42,9 @@ export const fetchAddNewDetail = createAsyncThunk<void, void, ThunkApiConfig>(
                 description: errorMessage
             })
             throw errorMessage
+        }finally {
+            const {dispatch} = thunkAPI
+            dispatch(dropDetailData())
         }
     }
 )
