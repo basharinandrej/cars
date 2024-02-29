@@ -25,3 +25,5 @@ export {AddNewCard} from './add-new-car/ui/add-new-car'
 
 export {AddNewDetailSchema, addNewDetailReducer, setDetailData} from './add-new-detail/model/slices/add-new-detail-slice'
 export {AddNewDetail} from './add-new-detail/ui/add-new-detail'
+
+export { AddNewRequestSchema, addNewRequestReducer, setRequestData } from './add-new-request/model/slices/add-new-request-slice';

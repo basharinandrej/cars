@@ -1,4 +1,4 @@
-import { useEffect} from 'react'
+import { useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Empty } from 'antd';
@@ -19,6 +19,7 @@ import {
     getCanPaginationMoreListingOrganization
 } from '../model/selectors'
 
+import {AddNewRequest} from '../../add-new-request/ui/add-new-request'
 import { Button, AppLink } from '@shared';
 
 import styles from './listing-organizations.module.sass'
@@ -27,6 +28,7 @@ import styles from './listing-organizations.module.sass'
 
 export const ListingOrganization = () => {
     const dispatch = useAppDispatch()
+    const [idSelectedOrganization, setIdSelectedOrganization] = useState<number|false>(false);
 
     const organizations = useSelector(getItemsListingOrganizations)
     const isLoading = useSelector(getIsLoadingListingOrganizations)
@@ -46,9 +48,13 @@ export const ListingOrganization = () => {
         }
     }, [inView, canPaginationMore, dispatch])
 
+    const onClickHandler = (id: number) => {
+        setIdSelectedOrganization(id)
+    }
     return (
         hasOrganizations 
             ? <div className={styles.listingOrganizations}>
+                <AddNewRequest setIdSelectedOrganization={setIdSelectedOrganization} idSelectedOrganization={idSelectedOrganization} />
                 {organizations.map((organization) => {
                     const textBadge = mapBadgeOrganizationStatus[organization.status]?.value
                     const colorBadge = mapBadgeOrganizationStatus[organization.status]?.color
@@ -76,7 +82,7 @@ export const ListingOrganization = () => {
                                     </AppLink>
 
                                     <div className={styles.btnWrapper}>
-                                        <Button text={'Оставить заявку'} type={'default'}/> 
+                                        <Button onClick={() => onClickHandler(organization.id)} text={'Оставить заявку'} type={'default'}/> 
                                     </div>
                                 </div>
 

@@ -14,22 +14,22 @@ export const validationCreateRequest = {
 
             body('description').notEmpty().withMessage(errorStrings.notBeEmptyField('description')).trim(),
 
-            header('authorization').custom((value: string) => {
-                const token = extractAccessToken(value)
+            // header('authorization').custom((value: string) => {
+            //     const token = extractAccessToken(value)
 
-                try {
-                    const result = serviceToken.validationToken(token)
+            //     try {
+            //         const result = serviceToken.validationToken(token)
 
-                    if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
-                        return Promise.resolve(true);
-                    } else {
-                        return Promise.reject(new Error('ошибка создания заявки'));
-                    }
+            //         if(isAdministrator(result) || isPerson(result) || isModerator(result)) {
+            //             return Promise.resolve(true);
+            //         } else {
+            //             return Promise.reject(new Error('ошибка создания заявки'));
+            //         }
 
-                } catch (error) {
-                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
-                }
-            })
+            //     } catch (error) {
+            //         return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+            //     }
+            // })
         ]
     }
 }
