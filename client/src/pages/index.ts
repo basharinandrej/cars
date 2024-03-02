@@ -9,6 +9,7 @@ import {PageProfile} from './page-profile/page-profile.async'
 import { PageGarage } from './page-garage/page-garage.async';
 import {PageMyDetail} from './page-my-detail/page-my-detail.async'
 import { PageUsers } from './page-users/page-users.async';
+import {PageMyRequest} from './page-my-requests/page-my-requests.async'
 
 
 
@@ -21,5 +22,6 @@ export {
     PageProfile,
     PageGarage,
     PageMyDetail,
+    PageMyRequest,
     PageUsers
 }

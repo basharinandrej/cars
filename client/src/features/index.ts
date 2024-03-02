@@ -27,3 +27,4 @@ export {AddNewDetailSchema, addNewDetailReducer, setDetailData} from './add-new-
 export {AddNewDetail} from './add-new-detail/ui/add-new-detail'
 
 export { AddNewRequestSchema, addNewRequestReducer, setRequestData } from './add-new-request/model/slices/add-new-request-slice';
+export {RequestsLisintg} from './listing-requests/ui/listing-requests'

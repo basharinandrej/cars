@@ -42,3 +42,8 @@ export {FormCar} from './garage/ui/components/form-car/form-car'
 //Users
 export { Users } from './user/ui/users/users';
 export {usersReducers, UsersSchema} from './user/model/slices/users-slice'
+
+
+//Request
+export {IRequest, RequestsResponse} from './request/interfaces'
+export {requestReducer, RequestsSchema} from '../features/listing-requests/model/slices/request-slice'

@@ -10,7 +10,8 @@ import {
     PageProfile,
     PageGarage,
     PageMyDetail,
-    PageUsers
+    PageUsers,
+    PageMyRequest
 } from '@pages'
 
 
@@ -27,6 +28,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.UsersPage]: '/cabinet/users/',
     [Routes.MyDetails]: '/cabinet/my-details/',
     [Routes.CategoryDetailPage]: '/cabinet/category-details/',
+    [Routes.MyRequest]: '/cabinet/my-request/', // :id
 
     [Routes.NotFoundPage]: '*'
 }
@@ -77,6 +79,13 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.MyDetails]: {
         path: `${RoutePaths.MyDetails}:id`,
         element: <PageMyDetail />,
+        onlyAuth: true,
+    },
+
+
+    [Routes.MyRequest]: {
+        path: `${RoutePaths.MyRequest}:id`,
+        element: <PageMyRequest />,
         onlyAuth: true,
     },
 

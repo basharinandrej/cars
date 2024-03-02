@@ -1,4 +1,4 @@
-import {ProfileOutlined,CarOutlined, UnorderedListOutlined, UserSwitchOutlined, BuildOutlined} from '@ant-design/icons';
+import {ProfileOutlined,CarOutlined, UnorderedListOutlined, UserSwitchOutlined, SnippetsOutlined, BuildOutlined} from '@ant-design/icons';
 import { ReactNode } from 'react';
 
 export const iconMap: Record<string, ReactNode> = {
@@ -6,5 +6,6 @@ export const iconMap: Record<string, ReactNode> = {
     'car': <CarOutlined />,
     'list': <UnorderedListOutlined />,
     'users': <UserSwitchOutlined />,
-    'category-detail': <BuildOutlined />
+    'category-detail': <BuildOutlined />,
+    'my-request': <SnippetsOutlined />
   }

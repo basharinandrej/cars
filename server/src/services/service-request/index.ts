@@ -34,7 +34,22 @@ class ServiceRequest {
 
         try {
             const requests = await Request.findAndCountAll({
-                limit, offset, include: [Service, Organization, User]
+                limit, offset,
+                attributes: [
+                    'id', 'recipientId', 'senderId', 'description', 'status',  'serviceId'
+                ],
+                include: [
+                    {
+                        model: Organization,
+                        as: 'organizaiton',
+                        attributes: ['id', 'name', 'email']
+                    },
+                    {
+                        model: User,
+                        as: 'user',
+                        attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber']
+                    }
+                ],
             })
 
         

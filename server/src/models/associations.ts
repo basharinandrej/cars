@@ -53,7 +53,7 @@ Car.belongsTo(User, {foreignKey: 'userId'})
 
 
 User.hasMany(Request, {foreignKey: 'senderId'})
-Request.belongsTo(User, {foreignKey: 'senderId'})
+Request.belongsTo(User, {as:'user', foreignKey: 'senderId'})
 
 
 OrganizationServiceCategory.hasMany(Request, {foreignKey: 'serviceId'})
@@ -61,7 +61,7 @@ Request.belongsTo(OrganizationServiceCategory, {foreignKey: 'serviceId'})
 
 
 Organization.hasMany(Request, {foreignKey: 'recipientId'})
-Request.belongsTo(Organization, {foreignKey: 'recipientId'})
+Request.belongsTo(Organization, {as:'organizaiton', foreignKey: 'recipientId'})
 
 
 Organization.belongsToMany(ServiceCategory, { through: OrganizationServiceCategory, as: 'serviceCategories', foreignKey: 'organizationId' });

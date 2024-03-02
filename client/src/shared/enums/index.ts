@@ -5,6 +5,12 @@ export const enum DetailWears {
     NeedFix = 'NeedFix'
 }
 
+export const enum StatusRequest {
+    APPROVED = 'Approved',
+    DECLINED = 'Declined',
+    IN_VIEWING = 'In_Viewing'
+}
+
 export const enum Bans {
     Null = 'Null',
     Temporary = 'Temporary',
