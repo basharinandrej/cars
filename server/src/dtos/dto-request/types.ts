@@ -11,7 +11,8 @@ export interface DtoRequestCreation {
 }
 
 export interface DtoRequestsGetAll extends Pagination {
-    userId: number
+    senderId: number
+    recipientId: number
 }
 export interface DtoRequestGetOne {
     id: number

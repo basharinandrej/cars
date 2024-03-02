@@ -30,13 +30,13 @@ class ServiceRequest {
         }
     }
 
-
-    async getAllRequests({limit, offset, userId}: DtoRequestsGetAll, next: NextFunction) {
+    async getAllRequests({limit, offset, senderId, recipientId }: DtoRequestsGetAll, next: NextFunction) {
 
         try {
-            const params: Partial<RequestAttributes> = {
-                senderId: userId
-            }
+            const params: Partial<RequestAttributes> = {}
+
+            if(recipientId) params.recipientId=recipientId
+            if(senderId) params.senderId=senderId
 
             const requests = await Request.findAndCountAll({
                 limit, offset, where:params,

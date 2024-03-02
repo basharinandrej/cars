@@ -26,7 +26,7 @@ export const RequestsLisintg:FC<Props> = ({
     const isUser = Boolean(useSelector(getIsUser))
 
     useMount(() => {
-        dispatch(fetchRequests(id))
+        dispatch(fetchRequests({id, isUser}))
     })
 
     return (

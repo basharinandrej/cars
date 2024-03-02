@@ -89,6 +89,14 @@ export const profileSlice = createSlice({
           role: UserRoles.Person,
           phoneNumber: null,
           ban: Bans.Null
+        },
+        state.organization = {
+          id: null,
+          name: null,
+          email: null,
+          avatar: null,
+          phoneNumber: null,
+          status: StatusOrganization.Free,
         }
       })
   }

@@ -5,14 +5,17 @@ import {createSelector} from "@reduxjs/toolkit";
 
 export const getItems = (state: RootState) => state.sidebar.items
 export const getUserId = (state: RootState) => state.profile.user.id
+export const getOrganizationId = (state: RootState) => state.profile.organization.id
 export const getUserRole = (state: RootState) => state.profile.user.role
 
 export const getSidebarItems = createSelector(
     getUserId,
+    getOrganizationId,
     getItems,
-    (userId, sidebarItems) => {
+    (userId, organizationId, sidebarItems) => {
         return sidebarItems.map((sidebarItem) => {
-            const preparePath = sidebarItem.path.replace(':id', userId?.toString())
+            const id = userId || organizationId
+            const preparePath = sidebarItem.path.replace(':id', id?.toString())
 
             return {
                 key: sidebarItem.id,

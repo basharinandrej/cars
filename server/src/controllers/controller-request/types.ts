@@ -2,7 +2,8 @@ import {Pagination} from '@common/types'
 
 
 export interface ParamsRequestGetAll extends Pagination {
-    userId: number
+    senderId: number
+    recipientId: number
 }
 
 
