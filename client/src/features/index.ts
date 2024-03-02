@@ -1,3 +1,4 @@
+import { organizationInformationReducer } from './organization-information/model/slices/organization-information-slice';
 export {ListingDetails} from './listing-details/ui/listing-details'
 export {listingDetailsReducer, ListingDetailsSchema} from './listing-details/model/slices/listing-details-slice'
 
@@ -19,6 +20,9 @@ export {OrganizationInformationSchema, organizationInformationReducer} from './o
 export {LoginUser} from './login-user/ui/login-user'
 export {LoginUserSchema, loginUserReducer} from './login-user/model/slices/login-user-slice'
 export {fetchLoginUserByEmail} from './login-user/model/async-actions/login-user-by-email'
+
+export {LoginOrganization} from './login-organization/ui/login-organization'
+export {LoginOrganizationSchema, loginOrganizationReducer} from './login-organization/model/slices/login-organization-slice'
 
 export {AddNewCarSchema, addNewCarReducer, setCar} from './add-new-car/model/slices/add-new-car-slice'
 export {AddNewCard} from './add-new-car/ui/add-new-car'

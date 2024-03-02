@@ -6,6 +6,7 @@ import User from '@models/user'
 import Service from '@models/organization-service-category'
 import Organization from '@models/organization'
 import {mapperRequestGetById} from './mappers-request/mapper-request-get-by-id'
+import { RequestAttributes } from '@models/request/types'
 
 
 
@@ -30,11 +31,15 @@ class ServiceRequest {
     }
 
 
-    async getAllRequests({limit, offset}: DtoRequestsGetAll, next: NextFunction) {
+    async getAllRequests({limit, offset, userId}: DtoRequestsGetAll, next: NextFunction) {
 
         try {
+            const params: Partial<RequestAttributes> = {
+                senderId: userId
+            }
+
             const requests = await Request.findAndCountAll({
-                limit, offset,
+                limit, offset, where:params,
                 attributes: [
                     'id', 'recipientId', 'senderId', 'description', 'status',  'serviceId'
                 ],

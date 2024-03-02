@@ -17,7 +17,8 @@ class DtoRequest {
     getDtoRequestGetAll(query: ParamsRequestGetAll): DtoRequestsGetAll {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
-            offset: query.offset || PAGINATION_DEFAULT_OFFSET
+            offset: query.offset || PAGINATION_DEFAULT_OFFSET,
+            userId: query.userId
         }
     }
 

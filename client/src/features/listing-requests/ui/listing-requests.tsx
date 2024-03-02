@@ -4,6 +4,7 @@ import { Empty, List } from 'antd'
 import { useSelector } from 'react-redux'
 import { getRequestsItems, getIsUser } from '../model/selectors/selectors';
 import { fetchRequests } from '../model/async-actions/fetch-requests';
+import { statusMap } from '../dictonaries/status-map'
 
 import styles from './listing-requests.module.sass'
 
@@ -42,7 +43,7 @@ export const RequestsLisintg:FC<Props> = ({
                         renderItem={
                             (request) => <List.Item className={styles.item}>
                                 <p>{request.id}</p>
-                                <p>{request.status}</p>
+                                <p>{statusMap[request.status]}</p>
                                 <p>{request.organizaiton.name}</p>
                                 {isUser ? '' : <p>{request.user.name}</p>}
                             </List.Item>

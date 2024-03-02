@@ -79,7 +79,7 @@ class ServiceOrganization {
 
                 return {
                     refreshToken,
-                    user: canditate
+                    organization: canditate
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))

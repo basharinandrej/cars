@@ -18,11 +18,12 @@ export {
 export {
     profileReducer, 
     setProfileInformation,
+    setProfileOrganizationInformation,
     ProfileSchema,
 } from './profile/model/slices/profile-slice'
 export {ProfileResponse} from './profile/interfaces'
 export {featchInitUser} from './profile/model/async-actions/fetch-init-user'
-export {getUserRole, getUserId} from './profile/model/selectors'
+export {getUserRole, getUserId, getOrganizationId} from './profile/model/selectors'
 export {Profile} from './profile/ui/profile'
 
 

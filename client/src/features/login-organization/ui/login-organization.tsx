@@ -1,28 +1,28 @@
 import { Button, Form, Input } from 'antd'
 import {useAppDispatch, AppLink} from '@shared'
-import {FieldTypeLoginForm} from '../interfaces'
-import { setPassword, setEmail } from '../model/slices/login-user-slice'
-import {fetchLoginUserByEmail} from '../model/async-actions/login-user-by-email'
+import {FieldTypeLoginOrganizationForm} from '../interfaces'
+import { setPassword, setEmail } from '../model/slices/login-organization-slice'
+import {fetchLoginOrganizationByEmail} from '../model/async-actions/login-organization-by-email'
 import { useNavigate } from "react-router-dom";
 
-import styles from './login-user.module.sass'
+import styles from './login-organization.module.sass'
 
 
-export const LoginUser = () => {
+export const LoginOrganization = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     const onSuccessLogin = () => navigate('/')
 
     const onFinishHandler = async () => {
-        const result = await dispatch(fetchLoginUserByEmail())
+        const result = await dispatch(fetchLoginOrganizationByEmail())
 
         if(result.meta.requestStatus === 'fulfilled') {
             onSuccessLogin()
         }
     }
 
-    const onChange = (value: FieldTypeLoginForm) => {
+    const onChange = (value: FieldTypeLoginOrganizationForm) => {
         const {password, email} = value
 
         password && dispatch(setPassword(password))
@@ -37,7 +37,7 @@ export const LoginUser = () => {
             autoComplete="off"
             preserve={false}
         >
-        <Form.Item<FieldTypeLoginForm>
+        <Form.Item<FieldTypeLoginOrganizationForm>
             label="Email"
             name="email"
             className={styles.formItem}
@@ -46,7 +46,7 @@ export const LoginUser = () => {
             <Input id="email" />
         </Form.Item>
 
-        <Form.Item<FieldTypeLoginForm>
+        <Form.Item<FieldTypeLoginOrganizationForm>
             label="Пароль"
             name="password"
             className={styles.formItem}
@@ -61,6 +61,6 @@ export const LoginUser = () => {
             </Button>
         </Form.Item>
 
-        <AppLink to={'/login/organization'}>Войти как организация</AppLink>
+        <AppLink to={'/login/user'}>Войти как пользователь</AppLink>
     </Form>
 }

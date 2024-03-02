@@ -9,7 +9,8 @@ import {
     loginUserReducer,
     addNewCarReducer,
     addNewDetailReducer,
-    addNewRequestReducer
+    addNewRequestReducer,
+    loginOrganizationReducer
 } from '@features'
 import {
     menuSliceReducer,
@@ -37,6 +38,7 @@ const getStore = () => {
         organizationInformation: organizationInformationReducer,
         
         loginUser: loginUserReducer,
+        loginOrganization: loginOrganizationReducer,
         profile: profileReducer,
 
         menu: menuSliceReducer,

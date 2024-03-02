@@ -8,7 +8,8 @@ import {
     LoginUserSchema,
     AddNewCarSchema,
     AddNewDetailSchema,
-    AddNewRequestSchema
+    AddNewRequestSchema,
+    LoginOrganizationSchema
 } from '@features'
 import {
     MenuSchema, 
@@ -34,6 +35,7 @@ export interface StateSchema {
     organizationInformation: OrganizationInformationSchema
     
     loginUser: LoginUserSchema,
+    loginOrganization: LoginOrganizationSchema,
     profile: ProfileSchema,
 
     sidebar: SidebarSchema,

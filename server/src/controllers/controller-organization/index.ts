@@ -49,9 +49,9 @@ class ControllerOrganization {
             const result = await serviceOrganization.login(dtoOrganizationLogin, next)
 
             if(result) {
-                const {refreshToken, user} = result
+                const {refreshToken, organization} = result
                 res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-                res.send({user})
+                res.send({organization})
             }
         } catch (error) {
             if(error instanceof Error) {

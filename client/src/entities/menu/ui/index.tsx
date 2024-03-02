@@ -7,7 +7,9 @@ import {
     getMenuItems,
     getNameUser,
     getIdUser,
-    getSurnameUser
+    getSurnameUser,
+    getIdOrganization,
+    getNameOrganization
 } from '../model/selectors'
 
 import styles from './index.module.sass'
@@ -25,6 +27,8 @@ export const Menu = () => {
     const userName = useSelector(getNameUser)
     const userSurname = useSelector(getSurnameUser)
     const userId = useSelector(getIdUser)
+    const organizationId = useSelector(getIdOrganization)
+    const organizationName = useSelector(getNameOrganization)
 
 
     const renderMenu = useMemo(() => (
@@ -46,20 +50,25 @@ export const Menu = () => {
             </nav>
             <nav className={styles.navigationCabinet}>
                 <ul>
-                    {!userId && <li>
-                        <AppLink to={'/login'}>
+                    {!userId && !organizationId && <li>
+                        <AppLink to={'/login/user'}>
                             Вход
                         </AppLink>
                     </li>}
-                    {userId && <li>
+                    {userId &&  <li>
                         <AppLink to={`cabinet/profile/${userId}`}>
                             {userSurname}&nbsp;{userName?.slice(0,1)}.
+                        </AppLink>
+                    </li>}
+                    {organizationId && <li>
+                        <AppLink to={`cabinet/profile/${organizationId}`}>
+                            {organizationName}
                         </AppLink>
                     </li>}
                 </ul>
             </nav>
         </>
-    ), [menuItems, userId, userSurname, userName])
+    ), [menuItems, userId, organizationId, organizationName, userSurname, userName])
     
 
     const menuForMobileAndTablet = (

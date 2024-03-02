@@ -10,7 +10,9 @@ export interface DtoRequestCreation {
     status: StatusRequest
 }
 
-export interface DtoRequestsGetAll extends Pagination {}
+export interface DtoRequestsGetAll extends Pagination {
+    userId: number
+}
 export interface DtoRequestGetOne {
     id: number
 }

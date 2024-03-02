@@ -8,7 +8,11 @@ export const fetchRequests = createAsyncThunk<RequestsResponse, number, ThunkApi
         try {
             const { extra} = thunkAPI
 
-            const response = await extra.api.get('/api/request')
+            const response = await extra.api.get('/api/request', {
+                params: {
+                    userId: id
+                }
+            })
 
             return response.data
         } catch (error) {

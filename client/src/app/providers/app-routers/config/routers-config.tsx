@@ -11,7 +11,8 @@ import {
     PageGarage,
     PageMyDetail,
     PageUsers,
-    PageMyRequest
+    PageMyRequest,
+    PageLoginOrganization
 } from '@pages'
 
 
@@ -22,7 +23,8 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.Organization]: '/organizations',
     [Routes.DetailPage]: '/detail/', // :id
     [Routes.OrganizationPage]: '/organization/', // :id
-    [Routes.LoginPage]: '/login/',
+    [Routes.LoginPage]: '/login/user',
+    [Routes.LoginOrganization]: '/login/organization',
     [Routes.ProfilePage]: '/cabinet/profile/', // :id
     [Routes.GaragePage]: '/cabinet/garage/', // :id
     [Routes.UsersPage]: '/cabinet/users/',
@@ -61,6 +63,12 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.LoginPage]: {
         path: RoutePaths.LoginPage,
         element: <PageLogin />,
+        onlyAuth: false
+    },
+
+    [Routes.LoginOrganization]: {
+        path: RoutePaths.LoginOrganization,
+        element: <PageLoginOrganization />,
         onlyAuth: false
     },
 
