@@ -60,8 +60,6 @@ class ControllerUser {
                 next(ApiError.bedRequest(err.message))
             }
         }
-
-
     }
 
     async update(req:RequestCreation<UserRequestParams> , res: Response, next: NextFunction) {

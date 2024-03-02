@@ -3,11 +3,15 @@ import {
     DtoOrganizationRegistration, 
     DtoOrganizationGetAll,
     DtoOrganizationLogin,
-    DtoOrganizationGetOne
+    DtoOrganizationGetOne,
+    DtoInitOrganization
 } from './types'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
 import { Bans, StatusOrganization } from '@common/enums'
+import {Cookies} from '@common/interfaces'
+import {serviceToken} from '@services/service-token'
+
 
 class DtoOrganization {
     getDtoOrganizationRegistration(organization: OrganizationRequestParams, fileName:string): DtoOrganizationRegistration {
@@ -43,6 +47,11 @@ class DtoOrganization {
             email: organization.email,
             password: organization.password,
         }
+    }
+
+    getDtoInitOrganization(cookies: Cookies): DtoInitOrganization {
+        const token = cookies.refreshToken
+        return serviceToken.validationToken(token)
     }
 }
 

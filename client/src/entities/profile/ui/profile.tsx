@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import {getDataUser, getIsEditing} from '../model/selectors'
+import {getDataUser, getIsEditing, getDataOrganization} from '../model/selectors'
 import { Form, Input, Button as Btn} from 'antd';
 import {Select, UserRoles, useAppDispatch, Button} from '@shared'
 import {FieldType} from '../types/types'
@@ -13,8 +13,13 @@ import styles from './profile.module.sass'
 export const Profile = () => {
     const dispatch = useAppDispatch()
     const user = useSelector(getDataUser)
+    const organization = useSelector(getDataOrganization)
     const isEditing = useSelector(getIsEditing)
       
+    const data = user.id ? user : organization
+    const surname = user.surname
+    const role = user.role
+
     const onFinishHandler = (errorInfo: any) => {
         dispatch(featchUpdateUser())
     };
@@ -42,23 +47,23 @@ export const Profile = () => {
                 <Form.Item<FieldType>
                     label="Имя"
                     name="name"
-                    initialValue={user.name}
+                    initialValue={data.name}
                 >
                     <Input />
                 </Form.Item>
 
-                <Form.Item<FieldType>
+                {surname && <Form.Item<FieldType>
                     label="Фамилия"
                     name="surname"
-                    initialValue={user.surname}
+                    initialValue={surname}
                 >
                     <Input />
-                </Form.Item>
+                </Form.Item>}
 
                 <Form.Item<FieldType>
                     label="Email"
                     name="email"
-                    initialValue={user.email}
+                    initialValue={data.email}
                 >
                     <Input disabled />
                 </Form.Item>
@@ -66,15 +71,15 @@ export const Profile = () => {
                 <Form.Item<FieldType>
                     label="Телефон"
                     name="phoneNumber"
-                    initialValue={user.phoneNumber}
+                    initialValue={data.phoneNumber}
                 >
                     <Input />
                 </Form.Item>
                 
-                <Form.Item<FieldType>
+                {role && <Form.Item<FieldType>
                     label="Роль"
                     name="role"
-                    initialValue={user.role}
+                    initialValue={role}
                 >
                     <Select
                         disabled
@@ -84,7 +89,7 @@ export const Profile = () => {
                             {label: UserRoles.Person, value: UserRoles.Person},
                         ]}
                     />
-                </Form.Item>
+                </Form.Item>}
 
                 <Form.Item className={styles.button}>
                     <Btn disabled={!isEditing} type="primary" htmlType="submit">

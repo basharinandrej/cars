@@ -23,6 +23,7 @@ export {
 } from './profile/model/slices/profile-slice'
 export {ProfileResponse} from './profile/interfaces'
 export {featchInitUser} from './profile/model/async-actions/fetch-init-user'
+export {featchInitOrganization} from './profile/model/async-actions/fetch-init-organization'
 export {getUserRole, getUserId, getOrganizationId} from './profile/model/selectors'
 export {Profile} from './profile/ui/profile'
 

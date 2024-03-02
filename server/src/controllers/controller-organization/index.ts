@@ -75,6 +75,20 @@ class ControllerOrganization {
         }
     }
 
+    async initOrganization(req: RequestGetOne<void>, res: Response, next: NextFunction) {
+        try{
+            const dtoUserInit = dtoOrganization.getDtoInitOrganization(req.cookies)
+            const {organization, refreshToken} = await serviceOrganization.initUser(dtoUserInit, next)
+            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+
+            res.send({organization})
+        } catch(err) {
+            if(err instanceof Error) {
+                next(ApiError.bedRequest(err.message))
+            }
+        }
+    }
+
     async getByIdOrganization(req: RequestGetOne<ParamsOrganizationGetById>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationGetOne = dtoOrganization.getDtoOrganizationGetOne(req.query)

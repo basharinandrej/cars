@@ -27,4 +27,6 @@ routers.get('/getById',
     controllerOrganization.getByIdOrganization
 )
 
+routers.get('/init', controllerOrganization.initOrganization)
+
 export const routerOrganization = routers

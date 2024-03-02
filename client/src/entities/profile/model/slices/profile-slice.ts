@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {ProfileResponse, User} from '../../interfaces'
-import { UserRoles, Bans, APP_CAR_KEY_LS_USER_ID, APP_CAR_KEY_LS_USER_ROLE, StatusOrganization } from '@shared'
+import { UserRoles, Bans, APP_CAR_KEY_LS_USER_ID, APP_CAR_KEY_LS_USER_ROLE, APP_CAR_KEY_LS_ORGANIZATION_ID,StatusOrganization } from '@shared'
 import {featchInitUser} from '../async-actions/fetch-init-user'
 import {featchUpdateUser} from '../async-actions/fetch-update-user'
 import {logout} from '../async-actions/logout'
+import { featchInitOrganization } from '../async-actions/fetch-init-organization'
 
 
 export interface ProfileSchema extends ProfileResponse{
@@ -22,7 +23,7 @@ const initialState: ProfileSchema = {
     ban: Bans.Null
   },
   organization: {
-    id: JSON.parse(localStorage.getItem(APP_CAR_KEY_LS_USER_ID)),
+    id: JSON.parse(localStorage.getItem(APP_CAR_KEY_LS_ORGANIZATION_ID)),
     name: null,
     email: null,
     avatar: null,
@@ -61,6 +62,12 @@ export const profileSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(featchInitOrganization.fulfilled, (state, action: PayloadAction<ProfileResponse>) => {
+        state.organization.id = action.payload?.organization.id
+        state.organization.name = action.payload?.organization.name
+        state.organization.email = action.payload?.organization.email
+        state.organization.phoneNumber = action.payload?.organization.phoneNumber
+      })
       .addCase(featchInitUser.fulfilled, (state, action: PayloadAction<ProfileResponse>) => {
         state.user.id = action.payload?.user.id
         state.user.name = action.payload?.user.name

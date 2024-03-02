@@ -9,7 +9,7 @@ export interface User {
     phoneNumber: number | null
     ban: Bans
 }
-interface Organization {
+export interface Organization {
     id: number | null
     name: string | null
     email: string | null

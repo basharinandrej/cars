@@ -1,4 +1,4 @@
-import { Pagination } from "@common/types"
+import { Pagination, PayloadToken } from "@common/types"
 import { Bans, StatusOrganization } from "@common/enums"
 
 
@@ -26,3 +26,6 @@ export interface DtoOrganizationLogin {
     email: string
     password: string
 }
+
+export interface DtoInitOrganization extends PayloadToken {}
+

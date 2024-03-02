@@ -4,7 +4,8 @@ import {
     DtoOrganizationGetAll,
     DtoOrganizationGetOne, 
     DtoOrganizationRegistration,
-    DtoOrganizationLogin
+    DtoOrganizationLogin,
+    DtoInitOrganization
 } from '@dtos/dto-organization/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
@@ -119,6 +120,28 @@ class ServiceOrganization {
 
             return mapperOrganizationsGetAll(organizations)
 
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error))
+            }
+        }
+    }
+
+    async initUser(dtoUserInit:DtoInitOrganization,next: NextFunction) {
+        try {
+            if(dtoUserInit.id) {
+                const organization = await Organization.findOne({
+                    where: {id: dtoUserInit.id}
+                })
+                const {refreshToken} = serviceToken.generateTokens({
+                    id: organization.dataValues.id,
+                    name: organization.dataValues.name,
+                })
+                return {
+                    refreshToken,
+                    organization
+                }
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
