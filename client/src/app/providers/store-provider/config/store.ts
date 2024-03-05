@@ -10,7 +10,8 @@ import {
     addNewCarReducer,
     addNewDetailReducer,
     addNewRequestReducer,
-    loginOrganizationReducer
+    loginOrganizationReducer,
+    addNewCategoryDetailReducer
 } from '@features'
 import {
     menuSliceReducer,
@@ -52,7 +53,8 @@ const getStore = () => {
         users: usersReducers,
         addNewRequest: addNewRequestReducer,
         request: requestReducer,
-        categoryDetails: categoryDetailsReducer
+        categoryDetails: categoryDetailsReducer,
+        addNewCategoryDetail: addNewCategoryDetailReducer
     }
 
     return configureStore({

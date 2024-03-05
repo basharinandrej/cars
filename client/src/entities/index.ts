@@ -53,3 +53,5 @@ export {requestReducer, RequestsSchema} from '../features/listing-requests/model
 //Category Details
 export {categoryDetailsReducer, CategoryDetailsSchema} from './category-details/model/slices/category-details-slice'
 export {CategoryDetails} from './category-details/ui/category-details'
+export {fetchCategoryDetails} from './category-details/model/async-actions/fetch-category-details'
+export {FormAddNewCategoryDetailValueTypes, CategoryDetail} from './category-details/interfaces'

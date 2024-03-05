@@ -7,10 +7,6 @@ export interface CategoryDetailsResponse {
     items: CategoryDetail[]
 }
 
-// export interface FormAddNewCarValueTypes {
-//     vinCode: string
-//     brand: string
-//     model: string
-//     color: string
-//     year: string
-// }
+export interface FormAddNewCategoryDetailValueTypes {
+    name: string
+}
