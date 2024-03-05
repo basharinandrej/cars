@@ -19,7 +19,8 @@ import {
     sidebarSliceReducer, 
     carsReduces,
     usersReducers,
-    requestReducer
+    requestReducer,
+    categoryDetailsReducer
 } from '@entities'
 import {instanceAxios, getErrorMessage} from '@shared'
 import {notification} from 'antd'
@@ -50,7 +51,8 @@ const getStore = () => {
         addNewDetail: addNewDetailReducer,
         users: usersReducers,
         addNewRequest: addNewRequestReducer,
-        request: requestReducer
+        request: requestReducer,
+        categoryDetails: categoryDetailsReducer
     }
 
     return configureStore({

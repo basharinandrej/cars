@@ -49,3 +49,7 @@ export {usersReducers, UsersSchema} from './user/model/slices/users-slice'
 //Request
 export {IRequest, RequestsResponse} from './request/interfaces'
 export {requestReducer, RequestsSchema} from '../features/listing-requests/model/slices/request-slice'
+
+//Category Details
+export {categoryDetailsReducer, CategoryDetailsSchema} from './category-details/model/slices/category-details-slice'
+export {CategoryDetails} from './category-details/ui/category-details'

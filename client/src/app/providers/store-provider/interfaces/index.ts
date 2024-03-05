@@ -18,7 +18,8 @@ import {
     SidebarSchema,
     CarSchema,
     UsersSchema,
-    RequestsSchema
+    RequestsSchema,
+    CategoryDetailsSchema
 } from '@entities'
 import { AxiosInstance } from 'axios'
 import {NotificationInstance} from 'antd/es/notification/interface'
@@ -48,6 +49,7 @@ export interface StateSchema {
     users: UsersSchema
     addNewRequest: AddNewRequestSchema
     request: RequestsSchema
+    categoryDetails: CategoryDetailsSchema
 }
 
 interface thunkMiddleware {

@@ -12,7 +12,8 @@ import {
     PageMyDetail,
     PageUsers,
     PageMyRequest,
-    PageLoginOrganization
+    PageLoginOrganization,
+    PageCategoryDetails
 } from '@pages'
 
 
@@ -106,7 +107,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
 
     [Routes.CategoryDetailPage]: {
         path: `${RoutePaths.CategoryDetailPage}`,
-        element: <PageGarage />,
+        element: <PageCategoryDetails />,
         onlyAuth: true,
         userRole: UserRoles.Admin
     },
