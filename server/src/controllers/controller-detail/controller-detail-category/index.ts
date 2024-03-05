@@ -1,9 +1,9 @@
 import ApiError from "@api-error/index"
 import { NextFunction, Response } from "express"
-import {ParamsGetAllCategories} from '@routers/router-detail/router-detail-category/types'
+import {ParamsGetAllCategories, ParamsDeleteCategoryDetail} from '@routers/router-detail/router-detail-category/types'
 import serviceCategory from "@services/service-detail/service-detail-category"
 import dtoDetailCategory from '@dtos/dto-detail/dto-detail-category/dto-detail-category'
-import { RequestCreation, RequestGetAll } from "@common/types"
+import { RequestCreation, RequestDelete, RequestGetAll } from "@common/types"
 import { DetailCategoryAttributes } from '@models/detail/detail-category/types'
 
 
@@ -31,6 +31,16 @@ class ControllerCategory {
             res.send(categoriesAll)
         } catch (error) {
             next(ApiError.bedRequest(error))
+        }
+    }
+
+
+    async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryDetail>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceCategory.dropCategoryDetail(req.query.id, next)
+            res.send(id)
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }

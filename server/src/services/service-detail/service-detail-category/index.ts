@@ -40,6 +40,18 @@ class ServiceDetailCategory {
             }
         }
     }
+
+    async dropCategoryDetail(id: number, next: NextFunction) {
+        try {
+            const result = await Category.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
 }
 
 export default new ServiceDetailCategory()

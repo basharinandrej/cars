@@ -17,10 +17,10 @@ export const mapperDetailGetById = (detail: Deteail) => {
             name: detail.dataValues.Model.dataValues.name,
             brandId: detail.dataValues.Model.dataValues.id
         },
-        detailCategory: {
-            id: detail.dataValues.DetailCategory.dataValues.id,
-            name: detail.dataValues.DetailCategory.dataValues.name
-        },
+        // detailCategory: {
+        //     id: detail.dataValues.DetailCategory.dataValues.id,
+        //     name: detail.dataValues.DetailCategory.dataValues.name
+        // },
         user: {
             id: detail.dataValues.User.dataValues.id,
             name: detail.dataValues.User.dataValues.name,

@@ -5,6 +5,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import {getCategoryDetailsItems} from '../model/selectors'
 import {fetchCategoryDetails} from '../model/async-actions/fetch-category-details'
 import { useSelector } from 'react-redux'
+import {deleteCategoryDetail} from '../model/async-actions/delete-category-detail'
 // import {FormUpdateCar} from './components/form-update-car/form-update-car'
 
 import styles from './category-details.module.sass'
@@ -27,7 +28,7 @@ export const CategoryDetails:FC<Props> = () => {
     })
 
     const onClickDeleteHandler = (id: number) => {
-        // dispatch(deleteCarUser(vinCode))
+        dispatch(deleteCategoryDetail(id))
     }
 
     const onClickEditHandler = (id: number) => {
