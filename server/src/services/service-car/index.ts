@@ -7,7 +7,6 @@ import {mapperCarCreation} from './car-mappers/mapper-car-creation'
 import {mapperCarGetAll} from './car-mappers/mapper-car-get-all'
 import {mapperCarGetByVinCode} from './car-mappers/mapper-car-get-by-vin-code'
 import { errorStrings } from "@common/error-strings";
-import { where } from "sequelize";
 
 
 class ServiceCar {
@@ -46,10 +45,13 @@ class ServiceCar {
         }
     }
 
-    async getAllCars({limit, offset}: DtoCarGetAll, next: NextFunction) {
+    async getAllCars({limit, offset, userId}: DtoCarGetAll, next: NextFunction) {
         try {
+            const params: Partial<DtoCarGetAll> = {}
+            if(userId) params.userId = userId
+
             const cars = await Car.findAndCountAll({
-                limit, offset
+                limit, offset, where: params
             })
 
             return mapperCarGetAll(cars)

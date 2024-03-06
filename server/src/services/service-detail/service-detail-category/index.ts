@@ -45,7 +45,7 @@ class ServiceDetailCategory {
 
         try {
             const result = await Category.update({
-                name: dtoCategoryDetailUpdation.name.toLocaleLowerCase()
+                name: dtoCategoryDetailUpdation.name
             }, {where: {id: dtoCategoryDetailUpdation.id}})
 
             return result ? 'updated' : false

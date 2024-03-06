@@ -35,7 +35,8 @@ class DtoCar {
     getDtoGetAllCars(query: ParamsGetAllCars): DtoCarGetAll {
         return {
             limit: query.limit,
-            offset: query.offset
+            offset: query.offset,
+            userId: query.userId
         }
     }
 

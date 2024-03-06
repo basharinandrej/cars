@@ -18,7 +18,9 @@ export interface DtoCarUpdation {
 }
 
 
-export interface DtoCarGetAll extends Pagination{}
+export interface DtoCarGetAll extends Pagination{
+    userId: number
+}
 
 export interface DtoCarGetByVinCode {
     vinCode: string

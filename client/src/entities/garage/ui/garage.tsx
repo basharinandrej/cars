@@ -22,14 +22,14 @@ const header = (
         <div className={styles.headButton} />
     </div>
 )
-export const Garage:FC<Props> = () => {
+export const Garage:FC<Props> = ({id}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const dispatch = useAppDispatch()
     const cars = useSelector(getItems)
 
     useMount(() => {
-        dispatch(fetchCarUser())
+        dispatch(fetchCarUser(id))
     })
 
     const onClickDeleteHandler = (vinCode: string) => {
@@ -78,4 +78,6 @@ export const Garage:FC<Props> = () => {
     )
 }
 
-interface Props {}
+interface Props {
+    id: number
+}
