@@ -42,21 +42,21 @@ const initialState: SidebarSchema = {
       id: 9,
       path: '/cabinet/category-details',
       text: 'Категории услуг',
-      iconType: 'category-detail',
+      iconType: 'category-services',
       userRole: UserRoles.Admin
     },
     {
         id: 6,
         path: '/cabinet/category-details',
         text: 'Бренды',
-        iconType: 'category-detail',
+        iconType: 'brands',
         userRole: UserRoles.Admin
     },
     {
         id: 7,
         path: '/cabinet/category-details',
         text: 'Модели',
-        iconType: 'category-detail',
+        iconType: 'models',
         userRole: UserRoles.Admin
     },
     {
