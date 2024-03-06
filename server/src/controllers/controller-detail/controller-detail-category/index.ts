@@ -35,6 +35,17 @@ class ControllerCategory {
     }
 
 
+    async updateCategoryDetail(req: RequestCreation<DetailCategoryAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoCarUpdation = dtoDetailCategory.getDtoCategoryDetailUpdation(req.body)
+            const car = await serviceCategory.updateCategoryDetail(dtoCarUpdation, next)
+
+            res.status(200).send(car)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
+
     async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryDetail>, res: Response, next: NextFunction) {
         try {
             const id = await serviceCategory.dropCategoryDetail(req.query.id, next)

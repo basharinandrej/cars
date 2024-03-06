@@ -1,6 +1,6 @@
 import { NextFunction } from "express";
 import Category from "@models/detail/detail-category"
-import { DtoDetailCategoryCreation, DtoDetailCategoryGetAll} from '@dtos/dto-detail/dto-detail-category/types'
+import { DtoCategoryDetailUpdation, DtoDetailCategoryCreation, DtoDetailCategoryGetAll} from '@dtos/dto-detail/dto-detail-category/types'
 import ApiError from "@api-error/index";
 import {mapperCreateCategory} from './service-mappers/mapper-create-category'
 import {mapperGetAllCategories} from './service-mappers/mapper-get-all-categories'
@@ -38,6 +38,19 @@ class ServiceDetailCategory {
             if(error instanceof Error) {
                 next(ApiError.internal(error))
             }
+        }
+    }
+
+    async updateCategoryDetail(dtoCategoryDetailUpdation: DtoCategoryDetailUpdation, next: NextFunction) {
+
+        try {
+            const result = await Category.update({
+                name: dtoCategoryDetailUpdation.name.toLocaleLowerCase()
+            }, {where: {id: dtoCategoryDetailUpdation.id}})
+
+            return result ? 'updated' : false
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 

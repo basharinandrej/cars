@@ -29,16 +29,16 @@ class ServiceCar {
         }
     }
 
-    async updateCar(dtoCarCreatio: DtoCarUpdation, next: NextFunction) {
+    async updateCar(dtoCarUpdation: DtoCarUpdation, next: NextFunction) {
 
         try {
             const result = await Car.update({
-                vinCode: dtoCarCreatio.vinCode.toLocaleLowerCase(),
-                color: dtoCarCreatio.color,
-                year: dtoCarCreatio.year,
-                brand: dtoCarCreatio.brand,
-                model: dtoCarCreatio.model,
-            }, {where: {vinCode: dtoCarCreatio.vinCode.toLocaleLowerCase()}})
+                vinCode: dtoCarUpdation.vinCode.toLocaleLowerCase(),
+                color: dtoCarUpdation.color,
+                year: dtoCarUpdation.year,
+                brand: dtoCarUpdation.brand,
+                model: dtoCarUpdation.model,
+            }, {where: {vinCode: dtoCarUpdation.vinCode.toLocaleLowerCase()}})
 
             return result ? 'updated' : false
         } catch (error) {
