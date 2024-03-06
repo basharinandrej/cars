@@ -20,7 +20,8 @@ import {
     CarSchema,
     UsersSchema,
     RequestsSchema,
-    CategoryDetailsSchema
+    CategoryDetailsSchema,
+    CategoryServicesSchema
 } from '@entities'
 import { AxiosInstance } from 'axios'
 import {NotificationInstance} from 'antd/es/notification/interface'
@@ -51,6 +52,7 @@ export interface StateSchema {
     addNewRequest: AddNewRequestSchema
     request: RequestsSchema
     categoryDetails: CategoryDetailsSchema
+    categoryServices :CategoryServicesSchema
     addNewCategoryDetail: AddNewCategoryDetailSchema
 }
 

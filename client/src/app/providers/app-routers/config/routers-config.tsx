@@ -13,7 +13,8 @@ import {
     PageUsers,
     PageMyRequest,
     PageLoginOrganization,
-    PageCategoryDetails
+    PageCategoryDetails,
+    PageCategoryServices
 } from '@pages'
 
 
@@ -31,6 +32,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.UsersPage]: '/cabinet/users/',
     [Routes.MyDetails]: '/cabinet/my-details/',
     [Routes.CategoryDetailPage]: '/cabinet/category-details/',
+    [Routes.CategoryServicePage]: '/cabinet/category-services/',
     [Routes.MyRequest]: '/cabinet/my-request/', // :id
 
     [Routes.NotFoundPage]: '*'
@@ -108,6 +110,13 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.CategoryDetailPage]: {
         path: `${RoutePaths.CategoryDetailPage}`,
         element: <PageCategoryDetails />,
+        onlyAuth: true,
+        userRole: UserRoles.Admin
+    },
+
+    [Routes.CategoryServicePage]: {
+        path: `${RoutePaths.CategoryServicePage}`,
+        element: <PageCategoryServices />,
         onlyAuth: true,
         userRole: UserRoles.Admin
     },

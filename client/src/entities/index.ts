@@ -55,3 +55,9 @@ export {categoryDetailsReducer, CategoryDetailsSchema} from './category-details/
 export {CategoryDetails} from './category-details/ui/category-details'
 export {fetchCategoryDetails} from './category-details/model/async-actions/fetch-category-details'
 export {FormAddNewCategoryDetailValueTypes, CategoryDetail} from './category-details/interfaces'
+
+
+export {categoryServicesReducer, CategoryServicesSchema} from './category-services/model/slices/category-service-slice'
+export {CategoryServices} from './category-services/ui/category-service'
+export {fetchCategoryServices} from './category-services/model/async-actions/fetch-category-service'
+export {FormAddNewCategoryServiceValueTypes, CategoryService} from './category-services/interfaces'

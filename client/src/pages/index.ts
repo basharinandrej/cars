@@ -12,6 +12,7 @@ import { PageUsers } from './page-users/page-users.async';
 import {PageMyRequest} from './page-my-requests/page-my-requests.async'
 import {PageLoginOrganization} from './page-login-organization/page-login-organization.async'
 import { PageCategoryDetails } from './page-category-details/page-category-details.async';
+import { PageCategoryServices } from './page-category-services/page-category-services.async';
 
 
 export {
@@ -26,5 +27,6 @@ export {
     PageMyDetail,
     PageMyRequest,
     PageUsers,
-    PageCategoryDetails
+    PageCategoryDetails,
+    PageCategoryServices
 }

@@ -40,7 +40,7 @@ const initialState: SidebarSchema = {
     },
     {
       id: 9,
-      path: '/cabinet/category-details',
+      path: '/cabinet/category-services',
       text: 'Категории услуг',
       iconType: 'category-services',
       userRole: UserRoles.Admin
