@@ -1,9 +1,9 @@
 import {NextFunction, Response} from 'express'
-import {ParamsGetServiceCategories} from '@controllers/controller-service-category/types'
+import {ParamsGetServiceCategories, ParamsDeleteCategoryService} from '@controllers/controller-service-category/types'
 import ApiError from '@api-error/index'
 import dtoServiceCategory from '@dtos/dto-service/dto-service-category/dto-service-category'
 import serviceServiceCategory from '@services/service-service/service-service-category'
-import { RequestCreation, RequestGetAll } from '@common/types'
+import { RequestCreation, RequestDelete, RequestGetAll } from '@common/types'
 import { ServiceCategoryAttributes } from "@models/service-category/types";
 
 
@@ -31,6 +31,15 @@ class ControllerServiceCategory {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
             }
+        }
+    }
+
+    async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryService>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceServiceCategory.dropCategoryService(req.query.id, next)
+            res.send(id)
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }

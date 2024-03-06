@@ -18,5 +18,7 @@ routers.get('',
     controllerServiceCategory.getAllServiceCategories
 )
 
+routers.delete('', controllerServiceCategory.dropCategoryDetail)
+
 
 export const routerServiceCategory = routers

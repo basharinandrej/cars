@@ -38,7 +38,7 @@ export const CategoryServices:FC<Props> = () => {
 
     return (
         <>
-            <h2 className={styles.title}>Категории деталей</h2>
+            <h2 className={styles.title}>Категории услуг</h2>
             <FormUpdateCategoryService isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
             
             {categoryServices.length 

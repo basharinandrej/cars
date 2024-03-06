@@ -36,6 +36,18 @@ class ServiceServiceCategory {
         }
     }
 
+    async dropCategoryService(id: number, next: NextFunction) {
+        try {
+            const result = await ServiceCategory.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
+
 }
 
 
