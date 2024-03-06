@@ -6,8 +6,8 @@ import {getCategoryDetailsItems} from '../model/selectors'
 import {fetchCategoryDetails} from '../model/async-actions/fetch-category-details'
 import { useSelector } from 'react-redux'
 import {deleteCategoryDetail} from '../model/async-actions/delete-category-detail'
-// import {FormUpdateCar} from './components/form-update-car/form-update-car'
-
+import {FormUpdateCategoryDetail} from './components/form-update-category-detail/form-update-category-detail'
+import {selectedCategoryDetailForUpdate} from '../model/slices/category-details-slice'
 import styles from './category-details.module.sass'
 
 const header = (
@@ -18,7 +18,7 @@ const header = (
     </div>
 )
 export const CategoryDetails:FC<Props> = () => {
-    // const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
   
     const dispatch = useAppDispatch()
     const categoryDetails = useSelector(getCategoryDetailsItems)
@@ -32,14 +32,14 @@ export const CategoryDetails:FC<Props> = () => {
     }
 
     const onClickEditHandler = (id: number) => {
-        // setIsModalOpen(true)
-        // dispatch(selectedCarForUpdate(vinCode))
+        setIsModalOpen(true)
+        dispatch(selectedCategoryDetailForUpdate(id))
     }
 
     return (
         <>
             <h2 className={styles.title}>Категории деталей</h2>
-            {/* <FormUpdateCar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/> */}
+            <FormUpdateCategoryDetail isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
             
             {categoryDetails.length 
                 ? <div className={styles.scroll}>

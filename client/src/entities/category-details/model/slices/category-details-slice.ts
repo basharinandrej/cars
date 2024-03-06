@@ -1,8 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {CategoryDetail, CategoryDetailsResponse} from '../../interfaces'
 import {fetchCategoryDetails} from '../async-actions/fetch-category-details'
-// import {deleteCarUser} from '../async-actions/delete-car-user'
-// import {FormAddNewCarValueTypes} from '../../interfaces'
 
 export interface CategoryDetailsSchema extends CategoryDetailsResponse {
   selectedCategoryDetailForUpdate: CategoryDetail
@@ -33,10 +31,6 @@ export const categoryDetailsSlice = createSlice({
         state.items = action.payload.items
         state.total = action.payload.total
       })
-    //   .addCase(deleteCarUser.fulfilled, (state, action: PayloadAction<number|null>) => {
-    //     state.items = state.items.filter((item) => item.id !== action.payload)
-    //     state.total = state.items.filter((item) => item.id !== action.payload).length
-    //   })
   }
 })
 
