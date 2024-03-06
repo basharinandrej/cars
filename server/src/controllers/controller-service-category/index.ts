@@ -34,6 +34,16 @@ class ControllerServiceCategory {
         }
     }
 
+    async updateCategoryService(req: RequestCreation<ServiceCategoryAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoCategoryServiceUpdation = dtoServiceCategory.getDtoServiceCategoryUpdation(req.body)
+            const serviceCategory = await serviceServiceCategory.updateCategoryService(dtoCategoryServiceUpdation, next)
+
+            res.status(200).send(serviceCategory)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
     async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryService>, res: Response, next: NextFunction) {
         try {
             const id = await serviceServiceCategory.dropCategoryService(req.query.id, next)

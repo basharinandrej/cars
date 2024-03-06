@@ -1,4 +1,4 @@
-import {DtoServiceCategoryCreation, DtoServiceCategoryGetAll} from '@dtos/dto-service/dto-service-category/types'
+import {DtoServiceCategoryCreation, DtoCategoryServiceUpdation, DtoServiceCategoryGetAll} from '@dtos/dto-service/dto-service-category/types'
 import { NextFunction } from 'express'
 import ApiError from '@api-error/index'
 import ServiceCategory from '@models/service-category'
@@ -48,6 +48,18 @@ class ServiceServiceCategory {
         }
     }
 
+    async updateCategoryService(dtoCategoryServiceUpdation: DtoCategoryServiceUpdation, next: NextFunction) {
+
+        try {
+            const result = await ServiceCategory.update({
+                name: dtoCategoryServiceUpdation.name
+            }, {where: {id: dtoCategoryServiceUpdation.id}})
+
+            return result ? 'updated' : false
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
 }
 
 

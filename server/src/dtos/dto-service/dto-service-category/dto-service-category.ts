@@ -1,6 +1,6 @@
 import { ServiceCategoryAttributes } from "@models/service-category/types";
 import { ParamsGetServiceCategories } from '@controllers/controller-service-category/types'
-import {DtoServiceCategoryCreation, DtoServiceCategoryGetAll} from './types'
+import {DtoServiceCategoryCreation, DtoCategoryServiceUpdation, DtoServiceCategoryGetAll} from './types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 
 class DtoServiceCategory {
@@ -16,6 +16,13 @@ class DtoServiceCategory {
         return {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET
+        }
+    }
+
+    getDtoServiceCategoryUpdation(categoryService: ServiceCategoryAttributes): DtoCategoryServiceUpdation {
+        return {
+            id: categoryService.id,
+            name: categoryService.name
         }
     }
 }

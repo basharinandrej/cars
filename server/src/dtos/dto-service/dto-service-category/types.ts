@@ -7,3 +7,9 @@ export interface DtoServiceCategoryCreation {
 }
 
 export interface DtoServiceCategoryGetAll extends Pagination{}
+
+
+export interface DtoCategoryServiceUpdation {
+    id: number
+    name: string,
+}
