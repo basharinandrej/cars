@@ -10,11 +10,10 @@ export const validationCreateServiceCategory = {
     createChain() {
         return  [
             body('name').notEmpty().withMessage(errorStrings.notBeEmptyField('name')).trim(),
-            header('authorization').custom((value: string) => {
-                const token = extractAccessToken(value)
+            cookie('refreshToken').custom((value: string) => {
 
                 try {
-                    const result = serviceToken.validationToken(token)
+                    const result = serviceToken.validationToken(value)
 
                     if(isAdministrator(result)) {
                         return Promise.resolve(true);
@@ -25,7 +24,7 @@ export const validationCreateServiceCategory = {
                 } catch (error) {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
-            })
+            }),
         ]
     }
 }

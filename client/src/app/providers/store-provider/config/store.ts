@@ -11,7 +11,8 @@ import {
     addNewDetailReducer,
     addNewRequestReducer,
     loginOrganizationReducer,
-    addNewCategoryDetailReducer
+    addNewCategoryDetailReducer,
+    addNewCategoryServiceReducer
 } from '@features'
 import {
     menuSliceReducer,
@@ -56,7 +57,9 @@ const getStore = () => {
         request: requestReducer,
         categoryDetails: categoryDetailsReducer,
         addNewCategoryDetail: addNewCategoryDetailReducer,
+
         categoryServices: categoryServicesReducer,
+        addNewCategoryService: addNewCategoryServiceReducer,
     }
 
     return configureStore({

@@ -1,10 +1,10 @@
 import {CategoryServices} from '@entities'
-import {FormNewCategoryDetail} from '@features'
+import {FormNewCategoryService} from '@features'
 
 const PageCategoryServices = () => {
 
     return <>
-        <FormNewCategoryDetail />
+        <FormNewCategoryService />
         <CategoryServices />
     </>
 }

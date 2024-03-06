@@ -1,4 +1,3 @@
-import { organizationInformationReducer } from './organization-information/model/slices/organization-information-slice';
 export {ListingDetails} from './listing-details/ui/listing-details'
 export {listingDetailsReducer, ListingDetailsSchema} from './listing-details/model/slices/listing-details-slice'
 
@@ -35,3 +34,6 @@ export {RequestsLisintg} from './listing-requests/ui/listing-requests'
 
 export {addNewCategoryDetailReducer, AddNewCategoryDetailSchema} from './add-new-category-detail/model/slices/add-new-car-slice'
 export {FormNewCategoryDetail} from './add-new-category-detail/ui/add-new-category-detail'
+
+export {addNewCategoryServiceReducer, AddNewCategoryServiceSchema} from './add-new-category-service/model/slices/add-new-category-service-slice'
+export {FormNewCategoryService} from './add-new-category-service/ui/add-new-category-service'
