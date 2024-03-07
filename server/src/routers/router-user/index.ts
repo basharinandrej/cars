@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import controllerUser from '@controllers/controller-user'
-import {validationUser} from './validation-user'
+import {validationUser, validationUserUpdation} from './validation-user'
 import middlewareValidation from '../middlewares/middleware-validation'
 
 const routers = Router()
@@ -26,7 +26,7 @@ routers.get('',
 
 routers.get('/init', controllerUser.initUser)
 
-routers.put('', controllerUser.update)
+routers.put('', validationUserUpdation.createChain(), middlewareValidation, controllerUser.update)
 
 routers.get('/logout', controllerUser.logout)
 

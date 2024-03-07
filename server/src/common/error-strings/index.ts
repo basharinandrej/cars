@@ -1,5 +1,5 @@
 import { SortOrderBy, UserRoles } from "@common/enums";
-import {MAX_TOTAL_PHOTOS_PER_DETAIL} from '@common/constans'
+import {MAX_COUNT_ADMINS, MAX_TOTAL_PHOTOS_PER_DETAIL} from '@common/constans'
 
 export const errorStrings = {
 
@@ -40,5 +40,6 @@ export const errorStrings = {
     sort: {
         brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`
     },
-    withoutOrganization: () => `Организация не может закрепить за собой машину`
+    withoutOrganization: () => `Организация не может закрепить за собой машину`,
+    maxCountAdmins: () => `Максимальное число администраторов ${MAX_COUNT_ADMINS}`
 }
