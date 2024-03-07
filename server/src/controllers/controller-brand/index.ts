@@ -57,6 +57,18 @@ class ControllerBrand {
             next(ApiError.internal(error))
         }
     }
+
+
+    async updateBrand(req: RequestCreation<BrandAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoBrandUpdation = dtoBrand.getDtoBrandUpdation(req.body)
+            const brand = await serviceBrand.updateBrand(dtoBrandUpdation, next)
+
+            res.status(200).send(brand)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
 }
 
 export default new ControllerBrand()

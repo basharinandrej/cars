@@ -14,3 +14,8 @@ export interface DtoBrandsGetAll extends Pagination {
 export interface DtoBrandGetById {
     id: number
 }
+
+export interface DtoBrandUpdation {
+    name: string
+    id: number
+}

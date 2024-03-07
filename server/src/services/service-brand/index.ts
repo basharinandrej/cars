@@ -1,6 +1,6 @@
 import { Op } from 'sequelize'
 import {NextFunction} from 'express'
-import {DtoBrandCreation, DtoBrandsGetAll, DtoBrandGetById} from '@dtos/dto-brand/types'
+import {DtoBrandCreation, DtoBrandsGetAll, DtoBrandGetById, DtoBrandUpdation} from '@dtos/dto-brand/types'
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
@@ -98,6 +98,19 @@ class ServiceBrand {
         } catch (error) {
             next(ApiError.internal(error))
 
+        }
+    }
+
+    async updateBrand(dtoBrandUpdation: DtoBrandUpdation, next: NextFunction) {
+
+        try {
+            const result = await Brand.update({
+                name: dtoBrandUpdation.name.toLocaleLowerCase(),
+            }, {where: {id: dtoBrandUpdation.id}})
+
+            return result ? 'updated' : false
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }

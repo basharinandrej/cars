@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import controllerBrand from '@controllers/controller-brand'
-import {validationCreateBrand, validationGetAllBrands} from './validation-brand'
+import {validationCreateBrand, validationBrandUpdation, validationGetAllBrands} from './validation-brand'
 import middlewareValidation from '../middlewares/middleware-validation'
 
 const routers = Router()
@@ -22,6 +22,14 @@ routers.get('',
 routers.get('/getById',
     controllerBrand.getByIdBrand
 )
+
+
+routers.put('', 
+    validationBrandUpdation.createChain(),
+    middlewareValidation,
+    controllerBrand.updateBrand
+)
+
 
 routers.delete('', controllerBrand.dropBrand)
 
