@@ -37,3 +37,6 @@ export {FormNewCategoryDetail} from './add-new-category-detail/ui/add-new-catego
 
 export {addNewCategoryServiceReducer, AddNewCategoryServiceSchema} from './add-new-category-service/model/slices/add-new-category-service-slice'
 export {FormNewCategoryService} from './add-new-category-service/ui/add-new-category-service'
+
+export {addNewBrandReducer, AddNewBrandSchema} from './add-new-brand/model/slices/add-new-brand-slice'
+export {FormAddNewBrand} from './add-new-brand/ui/form-add-new-brand';

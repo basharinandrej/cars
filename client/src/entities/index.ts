@@ -65,3 +65,5 @@ export {FormAddNewCategoryServiceValueTypes, CategoryService} from './category-s
 //Brand
 export {brandReducer, BrandSchema} from './brand/model/slices/brand-slice'
 export {Brands} from './brand/ui/brand'
+export { fetchBrands } from './brand/model/async-action/fetch-brands';
+export {Brand, FormAddNewBrandValueTypes} from './brand/interfaces'
