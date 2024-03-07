@@ -88,6 +88,18 @@ class ServiceBrand {
             }
         }
     }
+
+    async dropBrand(id: number, next: NextFunction) {
+        try {
+            const result = await Brand.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
 }
 
 

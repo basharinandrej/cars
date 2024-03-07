@@ -12,3 +12,6 @@ export interface ParamsGetOneBrand {
     id: number
 }
 
+export interface ParamsDeleteBrand {
+    id: number
+}

@@ -23,4 +23,6 @@ routers.get('/getById',
     controllerBrand.getByIdBrand
 )
 
+routers.delete('', controllerBrand.dropBrand)
+
 export const routerBrand = routers

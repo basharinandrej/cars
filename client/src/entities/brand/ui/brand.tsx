@@ -4,8 +4,8 @@ import { Empty, List } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import {getBrandsItems} from '../model/selectors'
 import {fetchBrands} from '../model/async-action/fetch-brands'
+import {deleteBrand} from '../model/async-action/delete-brand'
 import { useSelector } from 'react-redux'
-// import {deleteBrand} from '../model/async-actions/delete-category-detail'
 // import {selectedBrandForUpdate} from '../model/slices/category-details-slice'
 import styles from './brand.module.sass'
 
@@ -27,7 +27,7 @@ export const Brands:FC<Props> = () => {
     })
 
     const onClickDeleteHandler = (id: number) => {
-        // dispatch(deleteBrand(id))
+        dispatch(deleteBrand(id))
     }
 
     const onClickEditHandler = (id: number) => {
