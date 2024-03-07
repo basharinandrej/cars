@@ -6,7 +6,9 @@ import {getBrandsItems} from '../model/selectors'
 import {fetchBrands} from '../model/async-action/fetch-brands'
 import {deleteBrand} from '../model/async-action/delete-brand'
 import { useSelector } from 'react-redux'
-// import {selectedBrandForUpdate} from '../model/slices/category-details-slice'
+import {FormUpdateBrand} from '../ui/components/form-update-brand/form-update-brand'
+import {selectedBrandForUpdate} from '../model/slices/brand-slice'
+
 import styles from './brand.module.sass'
 
 const header = (
@@ -32,13 +34,13 @@ export const Brands:FC<Props> = () => {
 
     const onClickEditHandler = (id: number) => {
         setIsModalOpen(true)
-        // dispatch(selectedBrandForUpdate(id))
+        dispatch(selectedBrandForUpdate(id))
     }
 
     return (
         <>
             <h2 className={styles.title}>Бренды автомобилей</h2>
-            {/* <FormUpdatebrand isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/> */}
+            <FormUpdateBrand isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
             
             {brands?.length 
                 ? <div className={styles.scroll}>

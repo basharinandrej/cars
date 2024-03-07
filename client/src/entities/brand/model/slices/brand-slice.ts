@@ -3,13 +3,13 @@ import {Brand, BrandResponse} from '../../interfaces'
 import { fetchBrands } from '../async-action/fetch-brands'
 
 export interface BrandSchema extends BrandResponse {
-  selectedCategoryDetailForUpdate: Brand
+  selectedBrandForUpdate: Brand
 }
 
 const initialState: BrandSchema = {
     total: null,
     items: [],
-    selectedCategoryDetailForUpdate: null
+    selectedBrandForUpdate: null
 }
 
 export const brandSlice = createSlice({
@@ -17,11 +17,11 @@ export const brandSlice = createSlice({
   initialState,
   reducers: {
     selectedBrandForUpdate: (state, action: PayloadAction<number>) => {
-      state.selectedCategoryDetailForUpdate = state.items.find((item) => item.id === action.payload)
+      state.selectedBrandForUpdate = state.items.find((item) => item.id === action.payload)
     },
     updateSelectedBrand: (state, action: PayloadAction<Partial<unknown>>) => {
-      state.selectedCategoryDetailForUpdate = {
-          ...state.selectedCategoryDetailForUpdate, ...action.payload
+      state.selectedBrandForUpdate = {
+          ...state.selectedBrandForUpdate, ...action.payload
       }
     }
   },
