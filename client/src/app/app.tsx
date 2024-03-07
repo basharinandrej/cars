@@ -28,7 +28,7 @@ export const App = () => {
 
     return (
         <ErrorBoundary>
-            <Suspense fallback={<h1>Suspense....</h1>}>
+            <Suspense fallback={<h1>Загрузка....</h1>}>
                 <Layout>
                     <YMaps>
                         <AppRoutes />

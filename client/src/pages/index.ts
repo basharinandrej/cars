@@ -13,6 +13,7 @@ import {PageMyRequest} from './page-my-requests/page-my-requests.async'
 import {PageLoginOrganization} from './page-login-organization/page-login-organization.async'
 import { PageCategoryDetails } from './page-category-details/page-category-details.async';
 import { PageCategoryServices } from './page-category-services/page-category-services.async';
+import {PageBrands} from './page-brand/page-brands.async'
 
 
 export {
@@ -28,5 +29,6 @@ export {
     PageMyRequest,
     PageUsers,
     PageCategoryDetails,
-    PageCategoryServices
+    PageCategoryServices,
+    PageBrands
 }

@@ -22,7 +22,8 @@ import {
     UsersSchema,
     RequestsSchema,
     CategoryDetailsSchema,
-    CategoryServicesSchema
+    CategoryServicesSchema,
+    BrandSchema
 } from '@entities'
 import { AxiosInstance } from 'axios'
 import {NotificationInstance} from 'antd/es/notification/interface'
@@ -56,6 +57,8 @@ export interface StateSchema {
     categoryServices :CategoryServicesSchema
     addNewCategoryDetail: AddNewCategoryDetailSchema
     addNewCategoryService: AddNewCategoryServiceSchema
+
+    brand: BrandSchema
 }
 
 interface thunkMiddleware {

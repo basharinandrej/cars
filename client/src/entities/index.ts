@@ -61,3 +61,7 @@ export {categoryServicesReducer, CategoryServicesSchema} from './category-servic
 export {CategoryServices} from './category-services/ui/category-service'
 export {fetchCategoryServices} from './category-services/model/async-actions/fetch-category-service'
 export {FormAddNewCategoryServiceValueTypes, CategoryService} from './category-services/interfaces'
+
+//Brand
+export {brandReducer, BrandSchema} from './brand/model/slices/brand-slice'
+export {Brands} from './brand/ui/brand'

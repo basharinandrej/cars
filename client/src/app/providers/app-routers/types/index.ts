@@ -13,6 +13,7 @@ export const enum Routes {
     UsersPage = 'UsersPage',
     CategoryDetailPage = 'CategoryDetailPage',
     CategoryServicePage = 'CategoryServicePage',
+    Brands = 'Brands',
     MyDetails = 'MyDetails',
     MyRequest = 'MyRequest',
 

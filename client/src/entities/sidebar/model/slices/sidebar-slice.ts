@@ -50,7 +50,7 @@ const initialState: SidebarSchema = {
     },
     {
         id: 6,
-        path: '/cabinet/category-details',
+        path: '/cabinet/brands',
         text: 'Бренды',
         iconType: 'brands',
         userRole: UserRoles.Admin
