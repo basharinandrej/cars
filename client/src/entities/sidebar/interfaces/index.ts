@@ -1,6 +1,6 @@
 import { UserRoles } from "@shared"
 
-interface SidebarItem {
+export interface SidebarItem {
     id: number
     path: string
     text: string

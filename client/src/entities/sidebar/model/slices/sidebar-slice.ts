@@ -1,10 +1,13 @@
-import {createSlice } from '@reduxjs/toolkit'
+import {PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {Sidebar} from '../../interfaces'
 import { UserRoles } from '@shared'
 
-export interface SidebarSchema extends Sidebar {}
+export interface SidebarSchema extends Sidebar {
+  currentItem: number
+}
 
 const initialState: SidebarSchema = {
+  currentItem: 1,
   items: [
     {
         id:1,
@@ -72,8 +75,17 @@ export const sidebarSlice = createSlice({
   name: 'sibebar',
   initialState,
   reducers: {
-
+    initCurrentSidebarItem: (state,  action: PayloadAction<{pathname: string}>) => {
+      state.currentItem = state.items.find((item) => {
+        return item.path.includes(action.payload.pathname.slice(0, action.payload.pathname.length-2))
+      })?.id
+    },
+    setCurrentSidebarItem: (state, action: PayloadAction<number>) => {
+      state.currentItem = action.payload
+    }
   }
 })
+
+export const {initCurrentSidebarItem, setCurrentSidebarItem} = sidebarSlice.actions
 
 export const sidebarSliceReducer = sidebarSlice.reducer

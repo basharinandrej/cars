@@ -27,3 +27,5 @@ export const getSidebarItems = createSelector(
         })
     }
 )
+
+export const getCurrentSidebarItem = (state: RootState) => state.sidebar.currentItem
