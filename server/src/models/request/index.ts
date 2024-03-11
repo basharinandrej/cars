@@ -24,7 +24,7 @@ Request.init({
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM(StatusRequest.APPROVED, StatusRequest.DECLINED, StatusRequest.IN_VIEWING),
+        type: DataTypes.ENUM(StatusRequest.APPROVED, StatusRequest.DECLINED, StatusRequest.IN_VIEWING, StatusRequest.FINISHED),
         allowNull: false
     }
 }, { 

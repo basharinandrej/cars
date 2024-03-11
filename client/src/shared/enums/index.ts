@@ -8,7 +8,8 @@ export const enum DetailWears {
 export const enum StatusRequest {
     APPROVED = 'Approved',
     DECLINED = 'Declined',
-    IN_VIEWING = 'In_Viewing'
+    IN_VIEWING = 'In_Viewing',
+    FINISHED = 'Finished'
 }
 
 export const enum Bans {

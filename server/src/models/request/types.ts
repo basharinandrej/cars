@@ -6,7 +6,8 @@ import { Optional } from "sequelize"
 export const enum StatusRequest {
     APPROVED = 'Approved',
     DECLINED = 'Declined',
-    IN_VIEWING = 'In_Viewing'
+    IN_VIEWING = 'In_Viewing',
+    FINISHED = 'Finished'
 }
 
 export interface RequestAttributes {

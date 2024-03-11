@@ -20,7 +20,7 @@ export const Profile = () => {
     const surname = user.surname
     const role = user.role
 
-    const onFinishHandler = (errorInfo: any) => {
+    const onFinishHandler = () => {
         dispatch(featchUpdateUser())
     };
 
