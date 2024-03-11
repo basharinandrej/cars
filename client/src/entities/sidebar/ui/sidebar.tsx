@@ -25,8 +25,8 @@ export const Sidebar = () => {
   const isCollapsed = getIsMobile() || getIsTablet()
 
   const items = sidebarItems.map((sidebarItem) => {
-    if(sidebarItem.userRole) {
-      if(sidebarItem.userRole !== userRole) {
+    if(Array.isArray(sidebarItem.permissionForUserRole)) {
+      if(!sidebarItem.permissionForUserRole.includes(userRole)) {
         return 
       }
     }

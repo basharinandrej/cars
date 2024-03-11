@@ -86,7 +86,8 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.GaragePage]: {
         path: `${RoutePaths.GaragePage}:id`,
         element: <PageGarage />,
-        onlyAuth: true
+        onlyAuth: true,
+        permissionForUserRole: [UserRoles.Admin, UserRoles.Moderator, UserRoles.Person]
     },
 
     [Routes.MyDetails]: {
@@ -106,21 +107,21 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
         path: `${RoutePaths.UsersPage}`,
         element: <PageUsers />,
         onlyAuth: true,
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
 
     [Routes.CategoryDetailPage]: {
         path: `${RoutePaths.CategoryDetailPage}`,
         element: <PageCategoryDetails />,
         onlyAuth: true,
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
 
     [Routes.CategoryServicePage]: {
         path: `${RoutePaths.CategoryServicePage}`,
         element: <PageCategoryServices />,
         onlyAuth: true,
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
 
 
@@ -128,7 +129,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
         path: `${RoutePaths.Brands}`,
         element: <PageBrands />,
         onlyAuth: true,
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
 
     /*not found page - всегда последний в мапе*/

@@ -23,5 +23,5 @@ export const enum Routes {
 
 export type AppRouteProps =  RouteProps & {
     onlyAuth: boolean
-    userRole?: UserRoles
+    permissionForUserRole?: UserRoles[]
 }

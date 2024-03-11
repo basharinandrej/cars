@@ -39,7 +39,11 @@ DetailPhoto.belongsTo(Detail, {foreignKey: 'detailId'})
 User.hasMany(Detail, {foreignKey: 'userId'})
 Detail.belongsTo(User, {foreignKey: 'userId'})
 
+Organization.hasMany(Detail, {foreignKey: 'organizationId'})
+Detail.belongsTo(Organization, {foreignKey: 'organizationId'})
 
+
+//todo  delete ?
 User.hasOne(Token, {foreignKey: 'userId'})
 Token.belongsTo(User, {foreignKey: 'userId'})
 

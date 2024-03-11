@@ -86,7 +86,7 @@ export const profileSlice = createSlice({
           name: null,
           surname: null,
           email: null,
-          role: UserRoles.Person,
+          role: null,
           phoneNumber: null,
           ban: Bans.Null
         },

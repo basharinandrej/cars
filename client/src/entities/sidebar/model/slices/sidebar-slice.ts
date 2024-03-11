@@ -19,7 +19,8 @@ const initialState: SidebarSchema = {
         id: 2,
         path: '/cabinet/garage/:id',
         text: 'Гараж',
-        iconType: 'car'
+        iconType: 'car',
+        permissionForUserRole: [UserRoles.Admin, UserRoles.Moderator, UserRoles.Person]
     },
     {
         id: 3,
@@ -32,35 +33,35 @@ const initialState: SidebarSchema = {
         path: '/cabinet/users',
         text: 'Пользователи',
         iconType: 'users',
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
     {
         id: 5,
         path: '/cabinet/category-details',
         text: 'Категории деталей',
         iconType: 'category-detail',
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
     {
       id: 9,
       path: '/cabinet/category-services',
       text: 'Категории услуг',
       iconType: 'category-services',
-      userRole: UserRoles.Admin
+      permissionForUserRole: [UserRoles.Admin]
     },
     {
         id: 6,
         path: '/cabinet/brands',
         text: 'Бренды',
         iconType: 'brands',
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
     {
         id: 7,
         path: '/cabinet/category-details',
         text: 'Модели',
         iconType: 'models',
-        userRole: UserRoles.Admin
+        permissionForUserRole: [UserRoles.Admin]
     },
     {
         id: 8,

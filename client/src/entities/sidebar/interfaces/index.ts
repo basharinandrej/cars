@@ -5,7 +5,7 @@ export interface SidebarItem {
     path: string
     text: string
     iconType: string
-    userRole?: UserRoles
+    permissionForUserRole?: UserRoles[]
 }
 
 export interface Sidebar {

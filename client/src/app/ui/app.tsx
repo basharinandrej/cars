@@ -6,7 +6,7 @@ import {ProtectedRoute} from '../providers/app-routers/config/protected-route'
 
 export const AppRoutes = () => {
 
-    const renderRoutes = useCallback(({element, path, onlyAuth, userRole}: AppRouteProps, idx: number) => {
+    const renderRoutes = useCallback(({element, path, onlyAuth, permissionForUserRole}: AppRouteProps, idx: number) => {
         if(!path) return
         return (
                 <Route
@@ -14,7 +14,7 @@ export const AppRoutes = () => {
                     path={path}
                     element={
                         onlyAuth
-                            ? <ProtectedRoute userRole={userRole} children={element as JSX.Element}/>
+                            ? <ProtectedRoute permissionForUserRole={permissionForUserRole} children={element as JSX.Element}/>
                             : element
                     }
                 />
