@@ -25,7 +25,14 @@ export const updateRequest = createAsyncThunk<string|boolean, number, ThunkApiCo
 
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при обновлении заявки',
+                description: errorMessage
+            })
+            throw errorMessage      
         }
     }
 )

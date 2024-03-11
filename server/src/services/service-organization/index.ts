@@ -127,7 +127,7 @@ class ServiceOrganization {
         }
     }
 
-    async initUser(dtoUserInit:DtoInitOrganization,next: NextFunction) {
+    async initOrganization(dtoUserInit:DtoInitOrganization,next: NextFunction) {
         try {
             if(dtoUserInit.id) {
                 const organization = await Organization.findOne({
@@ -136,6 +136,7 @@ class ServiceOrganization {
                 const {refreshToken} = serviceToken.generateTokens({
                     id: organization.dataValues.id,
                     name: organization.dataValues.name,
+                    isOrganization: true
                 })
                 return {
                     refreshToken,

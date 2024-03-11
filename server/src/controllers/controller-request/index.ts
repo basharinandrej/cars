@@ -48,6 +48,17 @@ class ControllerRequest {
             }
         }
     }
+
+    async updateRequest(req: RequestCreation<RequestAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoRequestUpdation = dtoRequest.getDtoRequestUpdation(req.body)
+            const request = await serviceRequest.updateRequest(dtoRequestUpdation, next)
+
+            res.status(200).send(request)
+        } catch (error) {
+            next(ApiError.internal(error))
+        }
+    }
 }
 
 export default new ControllerRequest()

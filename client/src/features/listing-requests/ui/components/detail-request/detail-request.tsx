@@ -5,6 +5,8 @@ import { IRequest } from "@entities";
 import {Select, StatusRequest} from '@shared'
 import { useSelector } from "react-redux";
 import {getIsUser, getIsOrganization} from '../../../model/selectors/selectors'
+import {statusMap} from '../../../dictonaries/status-map'
+
 
 const {TextArea} = Input
 
@@ -58,10 +60,10 @@ export const DetailRequest: FC<Props> = ({
                     <Select
                         disabled={Boolean(isUser)}
                         options={[
-                            {label: 'Однобренно', value: StatusRequest.APPROVED},
-                            {label: 'Отклонено', value: StatusRequest.DECLINED},
-                            {label: 'Решено', value: StatusRequest.FINISHED},
-                            {label: 'Рассматривается', value: StatusRequest.IN_VIEWING},
+                            {label: statusMap[StatusRequest.APPROVED], value: StatusRequest.APPROVED},
+                            {label: statusMap[StatusRequest.DECLINED], value: StatusRequest.DECLINED},
+                            {label: statusMap[StatusRequest.FINISHED], value: StatusRequest.FINISHED},
+                            {label: statusMap[StatusRequest.IN_VIEWING], value: StatusRequest.IN_VIEWING},
                         ]}
                     />
                 </Form.Item>}

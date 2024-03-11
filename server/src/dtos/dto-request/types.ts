@@ -17,3 +17,8 @@ export interface DtoRequestsGetAll extends Pagination {
 export interface DtoRequestGetOne {
     id: number
 }
+export interface DtoRequestUpdation {
+    id: number
+    status: StatusRequest
+    description: string
+}

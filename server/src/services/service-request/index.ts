@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {DtoRequestCreation, DtoRequestsGetAll, DtoRequestGetOne} from '@dtos/dto-request/types'
+import {DtoRequestCreation, DtoRequestUpdation, DtoRequestsGetAll, DtoRequestGetOne} from '@dtos/dto-request/types'
 import Request from '@models/request'
 import ApiError from '@api-error/index'
 import User from '@models/user'
@@ -80,6 +80,22 @@ class ServiceRequest {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message))
             }
+        }
+    }
+
+
+    async updateRequest(dtoRequestUpdation: DtoRequestUpdation, next: NextFunction) {
+
+        try {
+            const result = await Request.update({
+                id: dtoRequestUpdation.id,
+                description: dtoRequestUpdation.description,
+                status: dtoRequestUpdation.status
+            }, {where: {id: dtoRequestUpdation.id}})
+
+            return result ? 'updated' : false
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }
