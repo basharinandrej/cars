@@ -36,6 +36,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.CategoryServicePage]: '/cabinet/category-services/',
     [Routes.Brands]: '/cabinet/brands',
     [Routes.MyRequest]: '/cabinet/my-request/', // :id
+    [Routes.MyServices]: '/cabinet/my-services/', // :id
 
     [Routes.NotFoundPage]: '*'
 }
@@ -124,12 +125,18 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
         permissionForUserRole: [UserRoles.Admin]
     },
 
-
     [Routes.Brands]: {
         path: `${RoutePaths.Brands}`,
         element: <PageBrands />,
         onlyAuth: true,
         permissionForUserRole: [UserRoles.Admin]
+    },
+
+    [Routes.MyServices]: {
+        path: `${RoutePaths.MyServices}:id`,
+        element: <PageGarage />,
+        onlyAuth: true,
+        onlyOrganization: true
     },
 
     /*not found page - всегда последний в мапе*/

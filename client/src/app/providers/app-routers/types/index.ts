@@ -16,6 +16,7 @@ export const enum Routes {
     Brands = 'Brands',
     MyDetails = 'MyDetails',
     MyRequest = 'MyRequest',
+    MyServices = 'MyServices',
 
     // last
     NotFoundPage = 'NotFoundPage',
@@ -24,4 +25,5 @@ export const enum Routes {
 export type AppRouteProps =  RouteProps & {
     onlyAuth: boolean
     permissionForUserRole?: UserRoles[]
+    onlyOrganization?: boolean
 }

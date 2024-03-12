@@ -1,5 +1,5 @@
 import { StatusOrganization, Bans } from '@shared'
-
+import {IService} from '@entities'
 
 interface Address {
     id: number
@@ -11,14 +11,7 @@ interface Address {
 interface ServiceCategory {
     id: number
     name: string
-    service: Service
-}
-
-interface Service {
-    id: number
-    name: string
-    description: string
-    price: number
+    service: IService
 }
 
 export interface OrganizationInformationResponse {

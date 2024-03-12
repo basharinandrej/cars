@@ -3,10 +3,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { Bans } from '@shared'
 import {OrganizationInformationResponse} from '../../interfaces'
 import {fetchByIdOrganization} from '../async-actions/fetch-by-id-organization'
+import { IService } from '@entities'
 
 
 export interface OrganizationInformationSchema extends Omit<OrganizationInformationResponse, 'serviceCategories'> {
-  service: {}
+  services: IService[]
 }
 
 const initialState: OrganizationInformationSchema = {
@@ -17,7 +18,7 @@ const initialState: OrganizationInformationSchema = {
     ban: Bans.Null,
     status: null,
     addresses: [],
-    service: []
+    services: []
 }
 
 export const organizationInformationSlice = createSlice({
@@ -38,7 +39,7 @@ export const organizationInformationSlice = createSlice({
             state.avatar = action.payload.avatar
 
             state.addresses = action.payload.addresses
-            state.service = action.payload.serviceCategories.map((serviceCategory) => {
+            state.services = action.payload.serviceCategories.map((serviceCategory) => {
               return {
                 id: serviceCategory.service.id,
                 name: serviceCategory.service.name,

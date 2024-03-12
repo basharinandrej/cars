@@ -15,7 +15,8 @@ import {
     getServicesOrganization
 } from '../model/selectors'
 
-import { Badge, List } from 'antd'
+import {Services} from '@entities'
+import { Badge } from 'antd'
 import { Map, FullscreenControl } from '@pbe/react-yandex-maps'
 
 import styles from './organization-information.module.sass'
@@ -33,9 +34,6 @@ export const OrganizationInformation: FC<Props> = ({
     const detailInformation = useSelector(getInfoOrganization)
     const addresses = useSelector(getAddressesOrganization)
     const services = useSelector(getServicesOrganization)
-
-    const hasServices = Array.isArray(services) && services.length
-
 
     const textBadge = mapBadgeOrganizationStatus[detailInformation.status]?.value
     const colorBadge = mapBadgeOrganizationStatus[detailInformation.status]?.color
@@ -59,20 +57,7 @@ export const OrganizationInformation: FC<Props> = ({
             <p className={styles.phoneNumber}>Телефон - {detailInformation.phoneNumber}</p>
 
 
-            {hasServices ? <div className={styles.servicesBox}>
-                <h2 className={styles.title}>Услуги</h2>
-                <List
-                    size="small"
-                    dataSource={services}
-                    renderItem={
-                        (service) => <List.Item
-                            className={styles.item}
-                        >
-                            <p>{service.name}</p> <strong>от - {service.price}</strong>
-                        </List.Item>
-                    }
-                />
-            </div>:null}
+            <Services services={services} />
 
             <Map
                 className={styles.map}

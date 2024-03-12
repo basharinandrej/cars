@@ -13,4 +13,4 @@ export const getInfoOrganization = (state: RootState) => {
 
 export const getAddressesOrganization = (state: RootState) => state.organizationInformation.addresses
 
-export const getServicesOrganization = (state: RootState) => state.organizationInformation.service
+export const getServicesOrganization = (state: RootState) => state.organizationInformation.services

@@ -68,6 +68,13 @@ const initialState: SidebarSchema = {
         path: '/cabinet/my-request/:id',
         text: 'Мои заявки',
         iconType: 'my-request'
+    },
+    {
+        id: 10,
+        path: '/cabinet/my-services/:id',
+        text: 'Мои услуги',
+        iconType: 'my-services',
+        onlyOrganization: true
     }
   ]
 }

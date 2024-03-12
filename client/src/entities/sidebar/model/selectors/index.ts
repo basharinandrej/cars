@@ -22,7 +22,8 @@ export const getSidebarItems = createSelector(
                 path: preparePath,
                 text: sidebarItem.text,
                 iconType: sidebarItem.iconType,
-                permissionForUserRole: sidebarItem.permissionForUserRole
+                permissionForUserRole: sidebarItem.permissionForUserRole,
+                onlyOrganization: sidebarItem.onlyOrganization
             }
         })
     }

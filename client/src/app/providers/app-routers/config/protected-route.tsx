@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import {getUserRole,getOrganizationId, getUserId} from '@entities'
 import { UserRoles } from '@shared'
 
-export const ProtectedRoute = ({children, permissionForUserRole}: ProtectedRouteProps): JSX.Element => {
+export const ProtectedRoute = ({children, permissionForUserRole, onlyOrganization}: ProtectedRouteProps): JSX.Element => {
     const userId = useSelector(getUserId)
     const organizationId = useSelector(getOrganizationId)
     const roleFromStore = useSelector(getUserRole)
@@ -14,6 +14,9 @@ export const ProtectedRoute = ({children, permissionForUserRole}: ProtectedRoute
             return <Navigate to={RoutePaths.Home} replace />
         }
     }
+
+    if(Boolean(userId) && onlyOrganization) return
+
 
     if(!(userId || organizationId)) {
         return <Navigate to={RoutePaths.Home} replace />
@@ -25,4 +28,5 @@ export const ProtectedRoute = ({children, permissionForUserRole}: ProtectedRoute
 interface ProtectedRouteProps {
     children: JSX.Element
     permissionForUserRole: UserRoles | UserRoles[]
+    onlyOrganization: boolean
 }

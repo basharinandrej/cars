@@ -6,6 +6,7 @@ export interface SidebarItem {
     text: string
     iconType: string
     permissionForUserRole?: UserRoles[]
+    onlyOrganization?: boolean
 }
 
 export interface Sidebar {

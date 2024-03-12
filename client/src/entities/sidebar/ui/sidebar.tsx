@@ -3,7 +3,7 @@ import {SelectInfo} from 'rc-menu/lib/interface'
 import { AppLink, getIsMobile, getIsTablet, useAppDispatch, useMount } from '@shared';
 import { useSelector } from 'react-redux';
 import {useLocation} from 'react-router-dom'
-import {getSidebarItems,getCurrentSidebarItem, getUserRole} from '../model/selectors'
+import {getSidebarItems,getCurrentSidebarItem, getUserRole, getUserId} from '../model/selectors'
 import {SidebarItem} from '../interfaces'
 import {setCurrentSidebarItem, initCurrentSidebarItem} from '../model/slices/sidebar-slice'
 import {iconMap} from '../dictonaries/icon-map'
@@ -21,6 +21,7 @@ export const Sidebar = () => {
   const sidebarItems = useSelector(getSidebarItems)
   const userRole = useSelector(getUserRole)
   const currentSidebarItem = useSelector(getCurrentSidebarItem)
+  const isUser = Boolean(useSelector(getUserId))
 
   const isCollapsed = getIsMobile() || getIsTablet()
 
@@ -30,6 +31,11 @@ export const Sidebar = () => {
         return 
       }
     }
+
+    if(isUser && sidebarItem.onlyOrganization) {
+      return
+    }
+
     return {
       key: sidebarItem.key,
       label: <AppLink to={sidebarItem.path}>{sidebarItem.text}</AppLink>,

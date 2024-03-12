@@ -7,7 +7,8 @@ import {
   UnorderedListOutlined, 
   UserSwitchOutlined, 
   SnippetsOutlined,
-  BuildOutlined
+  BuildOutlined,
+  ToolOutlined
 } from '@ant-design/icons';
 import { ReactNode } from 'react';
 
@@ -20,5 +21,6 @@ export const iconMap: Record<string, ReactNode> = {
     'my-request': <SnippetsOutlined />,
     'category-services': <CustomerServiceOutlined />,
     'brands': <RubyOutlined />,
-    'models': <LinuxOutlined />
+    'models': <LinuxOutlined />,
+    'my-services': <ToolOutlined />
   }
