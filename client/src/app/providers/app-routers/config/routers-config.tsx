@@ -15,7 +15,8 @@ import {
     PageLoginOrganization,
     PageCategoryDetails,
     PageCategoryServices,
-    PageBrands
+    PageBrands,
+    PageServices
 } from '@pages'
 
 
@@ -134,7 +135,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
 
     [Routes.MyServices]: {
         path: `${RoutePaths.MyServices}:id`,
-        element: <PageGarage />,
+        element: <PageServices />,
         onlyAuth: true,
         onlyOrganization: true
     },

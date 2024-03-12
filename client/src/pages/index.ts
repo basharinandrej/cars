@@ -14,6 +14,8 @@ import {PageLoginOrganization} from './page-login-organization/page-login-organi
 import { PageCategoryDetails } from './page-category-details/page-category-details.async';
 import { PageCategoryServices } from './page-category-services/page-category-services.async';
 import {PageBrands} from './page-brand/page-brands.async'
+import {PageServices} from './page-services/page-services.async'
+
 
 
 export {
@@ -30,5 +32,6 @@ export {
     PageUsers,
     PageCategoryDetails,
     PageCategoryServices,
-    PageBrands
+    PageBrands,
+    PageServices
 }
