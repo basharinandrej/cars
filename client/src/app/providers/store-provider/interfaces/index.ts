@@ -12,7 +12,8 @@ import {
     LoginOrganizationSchema,
     AddNewCategoryDetailSchema,
     AddNewCategoryServiceSchema,
-    AddNewBrandSchema
+    AddNewBrandSchema,
+    ServiceSchema
 } from '@features'
 import {
     MenuSchema, 
@@ -61,6 +62,7 @@ export interface StateSchema {
 
     brand: BrandSchema
     addNewBrand: AddNewBrandSchema
+    services: ServiceSchema
 }
 
 interface thunkMiddleware {

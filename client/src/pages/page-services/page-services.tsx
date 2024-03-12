@@ -1,9 +1,9 @@
-import { Services } from "@entities"
+import { ListingServices } from "@features"
 
 
 const PageServices = () => {
 
-    return <Services services={[]}/>
+    return <ListingServices />
 }
 
 export default PageServices

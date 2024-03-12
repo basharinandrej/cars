@@ -6,3 +6,8 @@ export interface IService {
     name: string
     price: number
 }
+
+export interface ServicesResponse {
+    rows: IService[]
+    count: number
+}

@@ -2,10 +2,8 @@ import { DtoOrganizationServiceCategoryCreation, DtoOrganizationServiceCategoryG
 import { NextFunction } from 'express'
 import ApiError from "@api-error/index";
 import OrganizationServiceCategory from '@models/organization-service-category';
-import ServiceCategory from '@models/service-category';
-import Organization from '@models/organization';
+import {OrganizationServiceCategoryAttributes} from '@models/organization-service-category/types'
 import {mapperServiceCreation} from './mappers-service/mapper-service-creation'
-import {mapperServiceGetAll} from './mappers-service/mapper-service-get-all'
 
 
 
@@ -29,18 +27,18 @@ class ServiceOrganizationServiceCategory {
         }
     }
 
-    async getAllServiceOrganizationServiceCategories({limit, offset, serviceCategoryId}: DtoOrganizationServiceCategoryGetAll, next: NextFunction) {
+    async getAllServiceOrganizationServiceCategories({limit, offset, serviceCategoryId, organizationId}: DtoOrganizationServiceCategoryGetAll, next: NextFunction) {
         try {
+            const params: Partial<OrganizationServiceCategoryAttributes> = {}
+            if(serviceCategoryId) params.serviceCategoryId = serviceCategoryId
+            if(organizationId) params.organizationId = organizationId
+
             const organizationServiceCategories = await OrganizationServiceCategory.findAndCountAll({
                 limit, offset,
-                where: {
-                    serviceCategoryId
-                },
-                include: [Organization, ServiceCategory]
+                where: params,
             })
             
-
-            return mapperServiceGetAll(organizationServiceCategories)
+            return organizationServiceCategories
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.bedRequest(error))

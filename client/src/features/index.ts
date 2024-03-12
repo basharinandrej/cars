@@ -39,4 +39,7 @@ export {addNewCategoryServiceReducer, AddNewCategoryServiceSchema} from './add-n
 export {FormNewCategoryService} from './add-new-category-service/ui/add-new-category-service'
 
 export {addNewBrandReducer, AddNewBrandSchema} from './add-new-brand/model/slices/add-new-brand-slice'
-export {FormAddNewBrand} from './add-new-brand/ui/form-add-new-brand';
+export {FormAddNewBrand} from './add-new-brand/ui/form-add-new-brand'
+
+export {ListingServices} from './listing-services/ui/listing-services'
+export {servicesReducer, ServiceSchema} from './listing-services/model/slices/listing-services-slice'

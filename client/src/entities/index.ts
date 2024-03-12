@@ -70,4 +70,4 @@ export {Brand, FormAddNewBrandValueTypes} from './brand/interfaces'
 
 //Service
 export {Services} from './services/ui/services'
-export {IService} from './services/interfaces'
+export {IService, ServicesResponse} from './services/interfaces'

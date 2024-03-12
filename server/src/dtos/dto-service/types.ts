@@ -11,4 +11,5 @@ export interface DtoOrganizationServiceCategoryGetAll {
     limit: number
     offset: number
     serviceCategoryId: number
+    organizationId: number
 }

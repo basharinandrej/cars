@@ -13,7 +13,6 @@ routers.post('',
 )
 
 routers.get('',
-    middlewareValidation, 
     controllerOrganizationServiceCategory.getAllOrganizationServiceCategories
 )
 

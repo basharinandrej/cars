@@ -29,7 +29,7 @@ class ControllerOrganizationServiceCategory {
             const services = await serviceService.getAllServiceOrganizationServiceCategories(dtoOrganizationServiceCategoriesGetAll, next)
 
             if(services) {
-                res.send(services)
+                res.status(200).send(services)
             }
         } catch (error) {
             if(error instanceof Error) {
