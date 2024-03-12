@@ -71,6 +71,11 @@ Request.belongsTo(Organization, {as:'organizaiton', foreignKey: 'recipientId'})
 Organization.belongsToMany(ServiceCategory, { through: OrganizationServiceCategory, as: 'serviceCategories', foreignKey: 'organizationId' });
 ServiceCategory.belongsToMany(Organization, { through: OrganizationServiceCategory, as: 'organizaitons', foreignKey: 'serviceCategoryId' });
 
+OrganizationServiceCategory.belongsTo(Organization, {as: 'organizaiton', foreignKey: 'organizationId'})
+Organization.hasMany(OrganizationServiceCategory, {as: 'organizaiton', foreignKey: 'organizationId'})
+
+OrganizationServiceCategory.belongsTo(ServiceCategory, {as: 'serviceCategory', foreignKey: 'serviceCategoryId'})
+ServiceCategory.hasMany(OrganizationServiceCategory, {as: 'serviceCategory', foreignKey: 'serviceCategoryId'})
 
 Organization.hasMany(Post, {foreignKey: 'organizationId'})
 Post.belongsTo(Organization, {foreignKey: 'organizationId'})

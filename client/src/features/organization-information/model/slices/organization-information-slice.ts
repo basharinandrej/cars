@@ -44,7 +44,8 @@ export const organizationInformationSlice = createSlice({
                 id: serviceCategory.service.id,
                 name: serviceCategory.service.name,
                 price: serviceCategory.service.price,
-                description: serviceCategory.service.description
+                description: serviceCategory.service.description,
+                serviceCategory: serviceCategory.service.serviceCategory
               }
             })
         })

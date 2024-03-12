@@ -15,7 +15,8 @@ const initialState: AddNewServiceSchema = {
         description: null,
         price: null,
         organizationId: null,
-        serviceCategoryId: null
+        serviceCategoryId: null,
+        serviceCategory: {id: null, name: null},
     },
     serviceCategories: {
         items: [],
@@ -35,14 +36,15 @@ export const addNewServiceSlice = createSlice({
       }
     },
     dropServiceData: (state) => {
-        state.service = {
-            name: '',
-            description: '',
-            price: null,
-            organizationId: null,
-            serviceCategoryId: null
-        }
-      },
+      state.service = {
+          name: '',
+          description: '',
+          price: null,
+          organizationId: null,
+          serviceCategoryId: null,
+          serviceCategory: {id: null, name: null},
+      }
+    },
   },
   extraReducers: (builder) => {
     builder

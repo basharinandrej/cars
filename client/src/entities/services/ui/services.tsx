@@ -24,6 +24,7 @@ export const Services:FC<Props> = ({
                         <p>{service.name}</p>
                         <strong>от - {service.price}</strong>
                         <p>{service.description}</p>
+                        <p>{service.serviceCategory.name}</p>
                     </List.Item>
                 }
             />

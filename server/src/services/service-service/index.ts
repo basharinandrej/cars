@@ -4,6 +4,8 @@ import ApiError from "@api-error/index";
 import OrganizationServiceCategory from '@models/organization-service-category';
 import {OrganizationServiceCategoryAttributes} from '@models/organization-service-category/types'
 import {mapperServiceCreation} from './mappers-service/mapper-service-creation'
+import ServiceCategory from '@models/service-category';
+import Organization from '@models/organization';
 
 
 
@@ -36,6 +38,18 @@ class ServiceOrganizationServiceCategory {
             const organizationServiceCategories = await OrganizationServiceCategory.findAndCountAll({
                 limit, offset,
                 where: params,
+                include: [
+                    {
+                        model: Organization,
+                        as: 'organizaiton',
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: ServiceCategory,
+                        as: 'serviceCategory',
+                        attributes: ['id', 'name']
+                    }
+                ]
             })
             
             return organizationServiceCategories

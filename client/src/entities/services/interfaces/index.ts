@@ -5,6 +5,10 @@ export interface IService {
     description: string 
     name: string
     price: number
+    serviceCategory: {
+        id: number
+        name: string
+    }
 }
 
 export interface IServiceRequest extends Omit<IService, 'id'> {
