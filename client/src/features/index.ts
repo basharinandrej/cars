@@ -43,3 +43,7 @@ export {FormAddNewBrand} from './add-new-brand/ui/form-add-new-brand'
 
 export {ListingServices} from './listing-services/ui/listing-services'
 export {servicesReducer, ServiceSchema} from './listing-services/model/slices/listing-services-slice'
+
+
+export {AddNewServices} from './add-new-service/ui/add-new-service'
+export {addNewServiceReducer, AddNewServiceSchema} from './add-new-service/model/slices/add-new-service-slice'

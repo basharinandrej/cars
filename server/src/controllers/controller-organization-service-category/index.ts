@@ -10,8 +10,8 @@ import { OrganizationServiceCategoryAttributes } from "@models/organization-serv
 class ControllerOrganizationServiceCategory {
     async createOrganizationServiceCategory(req: RequestCreation<OrganizationServiceCategoryAttributes>, res: Response, next: NextFunction) {
         try {
-            const authorization = req.get('Authorization')
-            const dtoOrganizationServiceCategoryCreation = dtoService.getDtoOrganizationServiceCategoryCreation(req.body, authorization)
+
+            const dtoOrganizationServiceCategoryCreation = dtoService.getDtoOrganizationServiceCategoryCreation(req.body, req.cookies)
             const service = await serviceService.createServiceOrganizationServiceCategory(dtoOrganizationServiceCategoryCreation, next)
 
             res.send(service)

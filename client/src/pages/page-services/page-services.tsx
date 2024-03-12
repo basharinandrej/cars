@@ -1,9 +1,12 @@
-import { ListingServices } from "@features"
+import { ListingServices, AddNewServices } from "@features"
 
 
 const PageServices = () => {
 
-    return <ListingServices />
+    return <>
+        <AddNewServices />
+        <ListingServices />
+        </> 
 }
 
 export default PageServices

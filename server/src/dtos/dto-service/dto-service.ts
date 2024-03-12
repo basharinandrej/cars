@@ -4,10 +4,12 @@ import {ParamsGetAllServices} from '@controllers/controller-organization-service
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from "@common/constans";
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
+import {Cookies} from '@common/interfaces'
+
 
 class DtoService {
-    getDtoOrganizationServiceCategoryCreation(service: OrganizationServiceCategoryAttributes, authorization: string): DtoOrganizationServiceCategoryCreation {
-        const token = extractAccessToken(authorization)
+    getDtoOrganizationServiceCategoryCreation(service: OrganizationServiceCategoryAttributes, cookies: Cookies): DtoOrganizationServiceCategoryCreation {
+        const token = cookies.refreshToken
         const {id: organizationId} = serviceToken.validationToken(token)
 
         return {

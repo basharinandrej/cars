@@ -14,7 +14,8 @@ import {
     addNewCategoryDetailReducer,
     addNewCategoryServiceReducer,
     addNewBrandReducer,
-    servicesReducer
+    servicesReducer,
+    addNewServiceReducer
 } from '@features'
 import {
     menuSliceReducer,
@@ -66,7 +67,8 @@ const getStore = () => {
 
         brand: brandReducer,
         addNewBrand: addNewBrandReducer,
-        services: servicesReducer
+        services: servicesReducer,
+        addNewService: addNewServiceReducer
     }
 
     return configureStore({

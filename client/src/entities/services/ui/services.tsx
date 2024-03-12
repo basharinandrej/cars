@@ -21,7 +21,9 @@ export const Services:FC<Props> = ({
                     (service) => <List.Item
                         className={styles.item}
                     >
-                        <p>{service.name}</p> <strong>от - {service.price}</strong>
+                        <p>{service.name}</p>
+                        <strong>от - {service.price}</strong>
+                        <p>{service.description}</p>
                     </List.Item>
                 }
             />
