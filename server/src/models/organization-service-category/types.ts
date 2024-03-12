@@ -14,7 +14,7 @@ export interface OrganizationServiceCategoryAttributes {
 
     
     Organization?: OrganizationAttributes
-    ServiceCategory?: ServiceCategoryAttributes
+    serviceCategory?: ServiceCategoryAttributes
 }
 
 

@@ -88,6 +88,18 @@ export const AddNewServices = () => {
                     label="Цена"
                     name="price"
                     required
+                    rules={[
+                        () => {
+                            return {
+                                validator: (_:unknown, value: number) => {
+                                    if(typeof value === 'number' && value>0) {
+                                        return Promise.resolve()
+                                    }
+                                    return Promise.reject('Цена должна быть положительным числом');
+                                },
+                            }
+                        }
+                    ]}
                 >
                     <InputNumber className={styles.price} />
                 </Form.Item>
