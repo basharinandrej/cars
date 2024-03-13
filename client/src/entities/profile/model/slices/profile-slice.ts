@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {ProfileResponse, User} from '../../interfaces'
+import {Organization, ProfileResponse, User} from '../../interfaces'
 import { UserRoles, Bans, APP_CAR_KEY_LS_USER_ID, APP_CAR_KEY_LS_USER_ROLE, APP_CAR_KEY_LS_ORGANIZATION_ID,StatusOrganization } from '@shared'
 import {featchInitUser} from '../async-actions/fetch-init-user'
 import {featchUpdateUser} from '../async-actions/fetch-update-user'
@@ -58,6 +58,12 @@ export const profileSlice = createSlice({
       state.user = {
         ...state.user, ...action.payload
       }
+    },
+    //@todo добавить endpoint для редактирования организации
+    setOrganizationData: (state, action: PayloadAction<Partial<Organization>>) => {
+      state.organization = {
+        ...state.organization, ...action.payload
+      }
     }
   },
   extraReducers(builder) {
@@ -102,6 +108,6 @@ export const profileSlice = createSlice({
   }
 })
 
-export const {setProfileInformation, setProfileOrganizationInformation, setIsEditing, setUserData} = profileSlice.actions
+export const {setProfileInformation, setProfileOrganizationInformation, setIsEditing, setOrganizationData, setUserData} = profileSlice.actions
 
 export const profileReducer = profileSlice.reducer

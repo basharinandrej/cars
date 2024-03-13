@@ -3,16 +3,20 @@ import { List } from 'antd'
 import {IService} from '../interfaces'
 
 import styles from './services.module.sass'
+import classNames from 'classnames'
 
 
 
 export const Services:FC<Props> = ({
-    services
+    services,
+    isFullContainer = false
 }) => {
     const hasServices = Array.isArray(services) && services.length
 
 
-    return (hasServices ? <div className={styles.servicesBox}>
+    return (hasServices ? <div className={classNames(styles.servicesBox, styles.scroll, {
+        [styles.servicesBoxFull]: isFullContainer
+    })}>
             <h2 className={styles.title}>Услуги</h2>
             <List
                 size="small"
@@ -24,7 +28,7 @@ export const Services:FC<Props> = ({
                         <p>{service.name}</p>
                         <strong>от - {service.price}</strong>
                         <p>{service.description}</p>
-                        <p>{service.serviceCategory.name}</p>
+                        {service.serviceCategory?.name && <p>{service.serviceCategory?.name}</p>}
                     </List.Item>
                 }
             />
@@ -33,4 +37,5 @@ export const Services:FC<Props> = ({
 
 interface Props {
     services: IService[]
+    isFullContainer?: boolean
 }

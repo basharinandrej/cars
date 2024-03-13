@@ -59,6 +59,18 @@ class ServiceOrganizationServiceCategory {
             }
         }
     }
+
+    async dropOrganizationServiceCategory(id: string, next: NextFunction) {
+        try {
+            const result = await OrganizationServiceCategory.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            next(ApiError.internal(error))
+
+        }
+    }
 }
 
 

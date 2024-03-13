@@ -2,8 +2,8 @@ import { NextFunction, Response } from "express";
 import ApiError from "@api-error/index";
 import serviceService from "@services/service-service";
 import dtoService from '@dtos/dto-service/dto-service'
-import { RequestCreation, RequestGetAll } from "@common/types";
-import {ParamsGetAllServices} from './types'
+import { RequestCreation, RequestGetAll, RequestDelete } from "@common/types";
+import {ParamsGetAllServices, OrganizationServiceCategories} from './types'
 import { OrganizationServiceCategoryAttributes } from "@models/organization-service-category/types";
 
 
@@ -35,6 +35,15 @@ class ControllerOrganizationServiceCategory {
             if(error instanceof Error) {
                 next(ApiError.bedRequest(error))
             }
+        }
+    }
+
+    async dropOrganizationServiceCategories(req: RequestDelete<OrganizationServiceCategories>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceService.dropOrganizationServiceCategory(req.query.id, next)
+            res.send(id)
+        } catch (error) {
+            next(ApiError.internal(error))
         }
     }
 }

@@ -5,9 +5,13 @@
     @media(min-width: 960px)
         width: 50%
 
+.servicesBoxFull
+    @media(min-width: 960px)
+        width: 100%
+
 .item
-    display: flex !important
-    justify-content: space-between
+    display: grid !important
+    grid-template-columns: 50px 100px 210px 140px
 
 .title
     margin-bottom: 0
@@ -15,3 +19,6 @@
 
     @media(min-width: 960px)
         font-size: 32px
+
+.scroll
+    overflow-x: scroll

@@ -16,5 +16,7 @@ routers.get('',
     controllerOrganizationServiceCategory.getAllOrganizationServiceCategories
 )
 
+routers.delete('', controllerOrganizationServiceCategory.dropOrganizationServiceCategories)
+
 
 export const routerOrganizationServiceCategory = routers

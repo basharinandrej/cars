@@ -3,7 +3,7 @@ import {getDataUser, getIsEditing, getDataOrganization} from '../model/selectors
 import { Form, Input, Button as Btn} from 'antd';
 import {Select, UserRoles, useAppDispatch, Button} from '@shared'
 import {FieldType} from '../types/types'
-import {setIsEditing, setUserData} from '../model/slices/profile-slice'
+import {setIsEditing, setUserData, setOrganizationData} from '../model/slices/profile-slice'
 import {featchUpdateUser} from '../model/async-actions/fetch-update-user'
 import {logout} from '../model/async-actions/logout'
 
@@ -26,7 +26,7 @@ export const Profile = () => {
 
     const onChangeHandler = (value: FieldType) => {
         dispatch(setIsEditing(true))
-        dispatch(setUserData(value))
+        user.id ? dispatch(setUserData(value)) : dispatch(setOrganizationData(value))
     }
 
     const logoutHandler = () => dispatch(logout())
