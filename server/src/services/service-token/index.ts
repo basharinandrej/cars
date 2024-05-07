@@ -23,26 +23,14 @@ class ServiceToken {
     public validationToken(token: string): PayloadToken {
         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
     }
-    
-    // Удалить нахуй - saveToken
-    public async saveToken(token: string, userId: number,) {
-        return await Token?.create({
-            refreshToken: token, 
-            userId,
-        })
-    }
-    
+
+    // Удалить нахой    
     public async saveTokenOrganization(token: string, organizationId: number) {
         return await Token?.create({
             refreshToken: token, 
             organizationId,
         })
     }
-    // public async dropToken(refreshToken: string) {
-    //     return await Token?.destroy(
-    //         {where: {refreshToken}
-    //     })
-    // }
 }
 
 export const serviceToken = new ServiceToken()

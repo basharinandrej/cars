@@ -37,8 +37,6 @@ class ServiceUser {
                 role: user.dataValues.role
             })
 
-            await serviceToken.saveToken(refreshToken, user.dataValues.id)
-
             return {
                 refreshToken,
                 user
@@ -70,7 +68,6 @@ class ServiceUser {
                     name: canditate.dataValues.name,
                     role: canditate.dataValues.role
                 })
-                await serviceToken.saveToken(refreshToken, canditate.dataValues.id)
 
                 return {
                     refreshToken,
