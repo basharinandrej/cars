@@ -56,12 +56,16 @@ class ControllerUser {
         try{
             const dtoUserInit = dtoUser.getDtoInitUser(req.cookies)
             const {user, refreshToken} = await serviceUser.initUser(dtoUserInit, next)
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
 
-            res.send({user})
+            if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
+            if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+
+            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+            res.send(user)
+            
         } catch(err) {
             if(err instanceof Error) {
-                next(ApiError.bedRequest(err.message))
+                next(ApiError.internal(err.message, 'ControllerUser.initUser'))
             }
         }
     }
