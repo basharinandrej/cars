@@ -5,6 +5,7 @@ import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
 import { RequestCreation, RequestGetAll, RequestGetOne, RequestDelete } from "@common/types"
 import {UserRequestParams, UserDeleteParams} from '@common/interfaces'
+import { errorStrings } from "@common/error-strings"
 
 class ControllerUser {
     async registration(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {
@@ -12,12 +13,15 @@ class ControllerUser {
             const dtoUserRegistration = dtoUser.registrationUserDto(req.body)
             const {refreshToken, user} = await serviceUser.registration(dtoUserRegistration, next)
 
+            if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
+            if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+
             res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
             res.send(user)
 
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ControllerUser.registration'))
             }
         }
     }

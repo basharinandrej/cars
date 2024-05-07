@@ -4,6 +4,8 @@ import {MAX_COUNT_ADMINS, MAX_TOTAL_PHOTOS_PER_DETAIL} from '@common/constans'
 export const errorStrings = {
 
     notBeEmptyField: (field: string) => `Значение поля ${field} не должно быть пустым`,
+    notBeEmptyVariable: (variable: string) => `Значение переменной ${variable} не должно быть пустым`,
+
     minLength: (field: string, lenght: number) => `Значение поля ${field} должно быть больше ${lenght} символов`,
     maxLength: (field: string, lenght: number) => `Значение поля ${field} должно быть меньше ${lenght} символов`,
     beNumber: (field: string) => `Значение поля ${field} должно быть числом`,

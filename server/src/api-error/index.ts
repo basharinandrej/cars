@@ -2,13 +2,15 @@ class ApiError extends Error{
     status: number
     message: string
     type: string
+    source: string
 
-    constructor(status: number, message: string) {
+    constructor(status: number, message: string, source?: string) {
         super()
 
         this.message = message
         this.status = status
-        this.type = status === 500 ? 'internalError' :  'validationError'
+        this.type = status === 500 ? 'internalError' :  'validationError',
+        this.source = process.env.NODE_ENV === 'development' ? source : 'information only for development env'
     }
 
     static bedRequest(message) {
@@ -17,10 +19,10 @@ class ApiError extends Error{
         return new ApiError(404, message || defaultMessage)
     }
 
-    static internal(message) {
+    static internal(message, source?: string) {
         const defaultMessage = 'Ошибка сервера'
 
-        return new ApiError(500, message || defaultMessage)
+        return new ApiError(500, message || defaultMessage, source)
     }
 
     static unauthorized(message) {
