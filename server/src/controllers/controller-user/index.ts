@@ -33,12 +33,13 @@ class ControllerUser {
             if(result) {
                 const {refreshToken, user} = result
                 res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-                res.send({user})
+                res.send(user)
+            } else {
+                throw Error(errorStrings.notBeEmptyVariable('result'))
             }
         } catch (error) {                
-
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ControllerUser.login'))
             }
         }
     }
