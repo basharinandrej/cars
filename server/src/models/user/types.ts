@@ -10,7 +10,8 @@ export interface UserAttributes {
     phoneNumber: number
     password: string
     ban: Bans
-
+    
+    createdAt?: string
     avatarId?: number
 }
 

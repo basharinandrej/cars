@@ -47,7 +47,13 @@ User.init({
 }, { 
   sequelize, 
   tableName: 'users',
-  updatedAt: false
+  updatedAt: false,
+  hooks: {
+    afterCreate: (record) => {
+        delete record.dataValues.password
+        delete record.dataValues.createdAt
+    }
+  }
 })
 
 export default User

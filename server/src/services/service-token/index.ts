@@ -24,6 +24,7 @@ class ServiceToken {
         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
     }
     
+    // Удалить нахуй - saveToken
     public async saveToken(token: string, userId: number,) {
         return await Token?.create({
             refreshToken: token, 

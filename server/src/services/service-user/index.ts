@@ -6,7 +6,6 @@ import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import {compareHashPassword} from '@common/utils/compare-hash-password'
-import {mapperUserLogin} from './user-mappers/mapper-user-login'
 import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
 import { UserRoles } from "@common/enums"
 
@@ -31,7 +30,6 @@ class ServiceUser {
                 phoneNumber: dtoUserRegistration.phoneNumber,
                 ban: dtoUserRegistration.ban
             })
-            //todo добавить почту
 
             const {refreshToken} = serviceToken.generateTokens({
                 id: user.dataValues.id,
@@ -42,9 +40,8 @@ class ServiceUser {
             await serviceToken.saveToken(refreshToken, user.dataValues.id)
 
             return {
-                refreshToken, 
-                //todo добавить mapper для реги
-                user: mapperUserLogin(user)
+                refreshToken,
+                user
             }
         } catch (error) {
             if(error instanceof Error) {
@@ -55,7 +52,10 @@ class ServiceUser {
 
     async login(dtoUserLogin: DtoUserLogin, next: NextFunction) {
         try {
-            const canditate = await User.findOne({where: {email: dtoUserLogin.email}})
+            const canditate = await User.findOne({
+                where: {email: dtoUserLogin.email},
+                attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban']
+            })
 
             if(!canditate) {
                 return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserLogin.email)))
@@ -74,7 +74,7 @@ class ServiceUser {
 
                 return {
                     refreshToken,
-                    user: mapperUserLogin(canditate)
+                    user: canditate
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
@@ -117,7 +117,8 @@ class ServiceUser {
         try {
             if(dtoUserInit.id) {
                 const user = await User.findOne({
-                    where: {id: dtoUserInit.id}
+                    where: {id: dtoUserInit.id},
+                    attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban']
                 })
                 const {refreshToken} = serviceToken.generateTokens({
                     id: user.dataValues.id,
@@ -126,7 +127,7 @@ class ServiceUser {
                 })
                 return {
                     refreshToken,
-                    user: mapperUserLogin(user)
+                    user
                 }
             }
         } catch (error) {

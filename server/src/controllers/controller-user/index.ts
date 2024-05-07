@@ -12,9 +12,8 @@ class ControllerUser {
             const dtoUserRegistration = dtoUser.registrationUserDto(req.body)
             const {refreshToken, user} = await serviceUser.registration(dtoUserRegistration, next)
 
-            // отправка картинки на Яндекс диск
             res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-            res.send({user})
+            res.send(user)
 
         } catch (error) {
             if(error instanceof Error) {
