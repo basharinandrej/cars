@@ -117,6 +117,10 @@ class ServiceUser {
                     where: {id: dtoUserInit.id},
                     attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban']
                 })
+                if(!user) {
+                    return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserInit.id.toString())))
+                }
+
                 const {refreshToken} = serviceToken.generateTokens({
                     id: user.dataValues.id,
                     name: user.dataValues.name,
@@ -155,6 +159,10 @@ class ServiceUser {
             const candidate = await User.findOne({
                 where: {id}
             })
+            if(!candidate) {
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(id.toString())))
+            }
+
             if(candidate.dataValues.role === UserRoles.Admin) {
                 return next(ApiError.bedRequest(errorStrings.canNotDeleteAdmin))
             } else {

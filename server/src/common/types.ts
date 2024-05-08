@@ -20,6 +20,6 @@ export interface RequestDelete<T> extends Request<Record<string, unknown>, Empty
 
 
 export interface Pagination {
-    limit?: number,
-    offset?: number
+    limit: number,
+    offset: number
 }

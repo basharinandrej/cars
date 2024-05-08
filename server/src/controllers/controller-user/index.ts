@@ -11,13 +11,20 @@ class ControllerUser {
     async registration(req: RequestCreation<UserRequestParams>, res: Response, next: NextFunction) {
         try {
             const dtoUserRegistration = dtoUser.registrationUserDto(req.body)
-            const {refreshToken, user} = await serviceUser.registration(dtoUserRegistration, next)
+            const result = await serviceUser.registration(dtoUserRegistration, next)
 
-            if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
-            if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+            if(result) {
+                const {refreshToken, user} = result
 
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-            res.send(user)
+                if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
+                if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+    
+                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.send(user)
+            } else {
+                throw Error(errorStrings.notBeEmptyVariable('result'))
+            }
+
 
         } catch (error) {
             if(error instanceof Error) {
@@ -60,14 +67,19 @@ class ControllerUser {
     async initUser(req: RequestGetOne<void>, res: Response, next: NextFunction) {
         try{
             const dtoUserInit = dtoUser.getDtoInitUser(req.cookies)
-            const {user, refreshToken} = await serviceUser.initUser(dtoUserInit, next)
+            const result = await serviceUser.initUser(dtoUserInit, next)
 
-            if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
-            if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+            if(result) {
+                const {user, refreshToken} = result
 
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
-            res.send(user)
-
+                if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
+                if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
+    
+                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.send(user)
+            } else {
+                throw Error(errorStrings.notBeEmptyVariable('result'))
+            }
         } catch(err) {
             if(err instanceof Error) {
                 next(ApiError.internal(err.message, 'ControllerUser.initUser'))
@@ -83,7 +95,6 @@ class ControllerUser {
             res.send(user)
         } catch (error) {
             if(error instanceof Error) {
-                //source
                 next(ApiError.bedRequest(error.message))
             }
         }

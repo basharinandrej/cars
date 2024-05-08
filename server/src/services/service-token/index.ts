@@ -6,7 +6,7 @@ import {PayloadToken} from '@common/types'
 class ServiceToken {
     private secretString = process.env.SECRET_KEY || EMPTY_STRING
 
-    private createToken(payloadToken: PayloadToken, expiresIn: string) {
+    private createToken(payloadToken: PayloadToken, expiresIn: string): string {
         return jwt.sign(
             payloadToken, 
             this.secretString, 
@@ -21,7 +21,7 @@ class ServiceToken {
     }
 
     public validationToken(token: string): PayloadToken {
-        return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING)
+        return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING) as PayloadToken
     }
 
     // Удалить нахой    
