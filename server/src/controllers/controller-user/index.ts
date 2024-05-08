@@ -95,7 +95,7 @@ class ControllerUser {
             res.send(user)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error.message))
+                next(ApiError.internal(error.message, 'ControllerUser.update'))
             }
         }
     }
@@ -106,7 +106,7 @@ class ControllerUser {
             res.send('logout')
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error.message))
+                next(ApiError.internal(error.message, 'ControllerUser.logout'))
             }
         }
     }
@@ -118,7 +118,9 @@ class ControllerUser {
                 res.send(id)
             }
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerUser.dropUser'))
+            }
         }
     }
 

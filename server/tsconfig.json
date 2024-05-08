@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "strict": true,
+    "noErrorTruncation": true,
     "paths": {
       "@models*": ["models/*"],
       "@routers*": ["routers/*"],

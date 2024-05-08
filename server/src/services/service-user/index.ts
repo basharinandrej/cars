@@ -149,7 +149,7 @@ class ServiceUser {
             return user
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceUser.updateUser'))
             }
         }
     }
