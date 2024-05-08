@@ -45,11 +45,16 @@ class ControllerUser {
     }
 
     async getAllUsers(req: RequestGetAll<ParamsUserGetAll>, res: Response, next: NextFunction) {
-
-        const dtoUserGetAll = dtoUser.getAllUsersDto(req.query)
-        const users = await serviceUser.getAllUsers(dtoUserGetAll, next)
-
-        res.send(users)
+        try {
+            const dtoUserGetAll = dtoUser.getAllUsersDto(req.query)
+            const users = await serviceUser.getAllUsers(dtoUserGetAll, next)
+    
+            res.send(users)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerUser.getAllUsers'))
+            }
+        }
     }
 
     async initUser(req: RequestGetOne<void>, res: Response, next: NextFunction) {
@@ -62,7 +67,7 @@ class ControllerUser {
 
             res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
             res.send(user)
-            
+
         } catch(err) {
             if(err instanceof Error) {
                 next(ApiError.internal(err.message, 'ControllerUser.initUser'))
@@ -78,6 +83,7 @@ class ControllerUser {
             res.send(user)
         } catch (error) {
             if(error instanceof Error) {
+                //source
                 next(ApiError.bedRequest(error.message))
             }
         }

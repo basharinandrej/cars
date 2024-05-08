@@ -6,7 +6,6 @@ import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import {compareHashPassword} from '@common/utils/compare-hash-password'
-import {getAllUserMapper} from './user-mappers/get-all-user-mapper'
 import { UserRoles } from "@common/enums"
 
 
@@ -84,33 +83,34 @@ class ServiceUser {
     }
 
     async getAllUsers({role, limit, offset}: DtoUserGetAll, next: NextFunction) {
-
         try {
             if(role) {
                 const users = await User.findAndCountAll({
                     limit,
                     offset,
-                    where: { role }
+                    where: { role },
+                    attributes: ['id', 'name', 'surname', 'email', 'role', 'ban']
                 })
-                return getAllUserMapper(users)
+                return users
             }
             
-            if(limit && (offset || offset === 0)) {
+            if(limit && offset >= 0) {
                 const users = await User.findAndCountAll({
                     limit,
                     offset,
+                    attributes: ['id', 'name', 'surname', 'email', 'role', 'ban']
                 })
-                return getAllUserMapper(users)
+                return users
             }
 
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceUser.getAllUsers'))
             }
         }
     }
 
-    async initUser(dtoUserInit:DtoInitUser,next: NextFunction) {
+    async initUser(dtoUserInit: DtoInitUser, next: NextFunction) {
         try {
             if(dtoUserInit.id) {
                 const user = await User.findOne({
@@ -138,7 +138,9 @@ class ServiceUser {
         try {
             const user = await User.update(
                 dtoUpdateUser,
-                {where: {id: dtoUpdateUser.id}}
+                {
+                    where: {id: dtoUpdateUser.id}
+                },
             )
             return user
         } catch (error) {
