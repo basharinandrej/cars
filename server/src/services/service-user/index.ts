@@ -1,7 +1,7 @@
 import { NextFunction } from "express"
 import ApiError from '@api-error/index'
 import User from '@models/user'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserUpdate} from '@dtos/dto-user/types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserUpdate, DtoUserChangePassword} from '@dtos/dto-user/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
@@ -51,15 +51,14 @@ class ServiceUser {
         try {
             const canditate = await User.findOne({
                 where: {email: dtoUserLogin.email},
-                attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban']
+                attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban', 'password']
             })
 
             if(!canditate) {
                 return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserLogin.email)))
             } 
 
-            const hashPassword = await getHashPassword(dtoUserLogin.password)
-            const isMatchPasswords = await compareHashPassword(dtoUserLogin.password, hashPassword)
+            const isMatchPasswords = await compareHashPassword(dtoUserLogin.password, canditate.dataValues.password)
 
             if(isMatchPasswords) {
                 const {refreshToken} = serviceToken.generateTokens({
@@ -70,7 +69,15 @@ class ServiceUser {
 
                 return {
                     refreshToken,
-                    user: canditate
+                    user: {
+                        id: canditate.dataValues.id,
+                        name: canditate.dataValues.name,
+                        surname: canditate.dataValues.surname, 
+                        email: canditate.dataValues.email,
+                        role: canditate.dataValues.role,
+                        phoneNumber: canditate.dataValues.phoneNumber,
+                        ban: canditate.dataValues.ban
+                    }
                 }
             } else {
                 next(ApiError.bedRequest(errorStrings.errorPassword()))
@@ -173,8 +180,41 @@ class ServiceUser {
             }
             
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceUser.dropUser'))
+            }
+        }
+    }
 
+    async changePassword({userId, oldPassword, newPassword}: DtoUserChangePassword, next: NextFunction) {
+        try {
+            const candidate = await User.findOne({
+                where: {id: userId},
+                attributes: ['id', 'password']
+            })
+            if(!candidate) {
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(userId.toString())))
+            }
+
+            const hashNewPassword = await getHashPassword(newPassword)
+            const isMatchOldPasswords = await compareHashPassword(oldPassword, candidate.dataValues.password)
+            
+            if(isMatchOldPasswords) {
+                const user = await User.update(
+                    {password: hashNewPassword},
+                    {
+                        where: {id: userId}
+                    },
+                )
+                return user
+            } else {
+                next(ApiError.bedRequest(errorStrings.errorPassword()))
+            }
+
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceUser.changePassword'))
+            }
         }
     }
 }

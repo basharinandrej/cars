@@ -4,7 +4,8 @@ import {ParamsUserGetAll} from '@controllers/controller-user/types'
 import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
 import { RequestCreation, RequestGetAll, RequestGetOne, RequestDelete } from "@common/types"
-import {UserRequestParams, UserDeleteParams} from '@common/interfaces'
+import { TIME_TO_FILE_OF_TOKEN } from '@common/constans'
+import {UserRequestParams, UserDeleteParams, UserChangePasswordParams} from '@common/interfaces'
 import { errorStrings } from "@common/error-strings"
 
 class ControllerUser {
@@ -19,7 +20,7 @@ class ControllerUser {
                 if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
                 if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
     
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -39,7 +40,7 @@ class ControllerUser {
 
             if(result) {
                 const {refreshToken, user} = result
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -75,7 +76,7 @@ class ControllerUser {
                 if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
                 if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
     
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -124,9 +125,21 @@ class ControllerUser {
         }
     }
 
-    // async dropPassword
+    async changePassword(req: RequestCreation<UserChangePasswordParams>, res: Response, next: NextFunction) {
+        try {
+            const dtoUserChangePassword = dtoUser.getDtoChangePassword(req.body, req.cookies)
+            const result = await serviceUser.changePassword(dtoUserChangePassword, next)
 
-    // async changePassword ?
+            if(result) {
+                res.status(200).send(result)
+            }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerUser.changePassword'))
+            }
+        }
+    }
+    // async dropPassword
 }
 
 export default new ControllerUser()

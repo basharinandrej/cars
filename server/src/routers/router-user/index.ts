@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import controllerUser from '@controllers/controller-user'
-import {validationUser, validationUserUpdation} from './validation-user'
+import {validationUser, validationUserUpdation, validationUserChangePassword} from './validation-user'
 import middlewareValidation from '../middlewares/middleware-validation'
 
 const routers = Router()
@@ -31,6 +31,8 @@ routers.put('', validationUserUpdation.createChain(), middlewareValidation, cont
 routers.get('/logout', controllerUser.logout)
 
 routers.delete('', controllerUser.dropUser)
+
+routers.post('/change-password', validationUserChangePassword.createChain(), middlewareValidation, controllerUser.changePassword)
 
 //todo добавить endpoint getUserById
 

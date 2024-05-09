@@ -36,3 +36,9 @@ export interface DtoUserUpdate {
     ban?: Bans
     avatar?: string
 }
+
+export interface DtoUserChangePassword {
+    oldPassword: string
+    newPassword: string
+    userId: number
+}

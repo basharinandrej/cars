@@ -132,3 +132,29 @@ export const validationUserUpdation = {
         ]
     }
 }
+
+export const validationUserChangePassword = {
+    createChain() {
+        return [
+            cookie('refreshToken').custom((value: string) => {
+                try {
+                    const result = serviceToken.validationToken(value)
+                    if(result.id) {
+                        return Promise.resolve(true);
+                    }
+                } catch (error) {
+                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                }
+            }),
+
+            body('oldPassword')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+
+            
+            body('newPassword')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+        ]
+    }
+}

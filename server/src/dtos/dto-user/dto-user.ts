@@ -1,8 +1,8 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserUpdate} from './types'
+import {DtoUserRegistration, DtoUserLogin, DtoUserGetAll, DtoInitUser, DtoUserChangePassword, DtoUserUpdate} from './types'
 import { ParamsUserGetAll} from '@controllers/controller-user/types'
 import { Bans } from '@common/enums'
-import {UserRequestParams, Cookies} from '@common/interfaces'
+import {UserRequestParams, Cookies, UserChangePasswordParams} from '@common/interfaces'
 import {serviceToken} from '@services/service-token'
 
 
@@ -44,17 +44,28 @@ class DtoUser {
         return serviceToken.validationToken(token)
     }
 
-    getDtoUpdateUser(user: UserRequestParams): DtoUserUpdate {
+    getDtoUpdateUser(body: UserRequestParams): DtoUserUpdate {
 
         return {
-            id: user.id,
-            name: user.name,
-            surname: user.surname,
-            email: user.email,
-            role: user.role,
-            phoneNumber: user.phoneNumber,
-            password: user.password,
-            ban: user.ban
+            id: body.id,
+            name: body.name,
+            surname: body.surname,
+            email: body.email,
+            role: body.role,
+            phoneNumber: body.phoneNumber,
+            password: body.password,
+            ban: body.ban
+        }
+    }
+
+    getDtoChangePassword(body: UserChangePasswordParams, cookies: Cookies): DtoUserChangePassword {
+        const token = cookies.refreshToken
+        const payload = serviceToken.validationToken(token)
+
+        return {
+            oldPassword: body.oldPassword,
+            newPassword: body.newPassword,
+            userId: payload.id
         }
     }
 }

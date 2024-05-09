@@ -17,3 +17,8 @@ export interface Tokens {
 export interface Cookies {
     refreshToken: string
 }
+
+export interface UserChangePasswordParams {
+    oldPassword: string
+    newPassword: string
+}

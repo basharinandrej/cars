@@ -11,3 +11,5 @@ export const MAX_LENGTH_VIN_CODE = 17
 export const LENGTH_VIN_CODE = 17
 
 export const MAX_COUNT_ADMINS = 2
+
+export const TIME_TO_FILE_OF_TOKEN = 30 * 24 * 60 * 60 * 1000
