@@ -1,4 +1,3 @@
-import Token from '@models/user/token'
 import { EMPTY_STRING } from '@common/constans';
 import jwt from 'jsonwebtoken'
 import {PayloadToken} from '@common/types'
@@ -22,14 +21,6 @@ class ServiceToken {
 
     public validationToken(token: string): PayloadToken {
         return jwt.verify(token, process.env.SECRET_KEY || EMPTY_STRING) as PayloadToken
-    }
-
-    // Удалить нахой    
-    public async saveTokenOrganization(token: string, organizationId: number) {
-        return await Token?.create({
-            refreshToken: token, 
-            organizationId,
-        })
     }
 }
 

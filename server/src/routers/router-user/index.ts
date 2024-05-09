@@ -35,5 +35,6 @@ routers.delete('', controllerUser.dropUser)
 routers.post('/change-password', validationUserChangePassword.createChain(), middlewareValidation, controllerUser.changePassword)
 
 //todo добавить endpoint getUserById
+//todo добавить endpoint dropPassword
 
 export const routerUser = routers

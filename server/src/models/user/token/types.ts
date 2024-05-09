@@ -7,4 +7,3 @@ export interface TokenAttributes {
     organizationId?: number
 }
   
-export interface TokenCreation extends Optional<TokenAttributes, 'id'> {}

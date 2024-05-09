@@ -46,8 +46,6 @@ class ServiceOrganization {
                 isOrganization: true
             })
 
-            await serviceToken.saveTokenOrganization(refreshToken, organization.dataValues.id)
-
             return {
                 refreshToken, 
                 organization: mapperOrganizationCreation(organization)
@@ -76,7 +74,6 @@ class ServiceOrganization {
                     name: canditate.dataValues.name,
                     isOrganization: true
                 })
-                await serviceToken.saveTokenOrganization(refreshToken, canditate.dataValues.id)
 
                 return {
                     refreshToken,

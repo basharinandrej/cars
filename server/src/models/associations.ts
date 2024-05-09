@@ -7,7 +7,6 @@ import DetailPhoto from './detail/detail-photo'
 
 import Address from './address'
 import Car from './car'
-import Token from './user/token'
 import User from './user'
 import OrganizationServiceCategory from './organization-service-category'
 import ServiceCategory from './service-category'
@@ -41,15 +40,6 @@ Detail.belongsTo(User, {foreignKey: 'userId'})
 
 Organization.hasMany(Detail, {foreignKey: 'organizationId'})
 Detail.belongsTo(Organization, {foreignKey: 'organizationId'})
-
-
-//todo  delete ?
-User.hasOne(Token, {foreignKey: 'userId'})
-Token.belongsTo(User, {foreignKey: 'userId'})
-
-
-Organization.hasOne(Token, {foreignKey: 'organizationId'})
-Token.belongsTo(Organization, {foreignKey: 'organizationId'})
 
 
 User.hasMany(Car, {foreignKey: 'userId'})
