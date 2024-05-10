@@ -4,6 +4,7 @@ import ApiError from '@api-error/index'
 import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import dtoOrganization from '@dtos/dto-organization/dto-organization'
 import dtoAddress from '@dtos/dto-address/dto-address'
+import {TIME_TO_LIFE_OF_TOKEN} from '@common/constans'
 import {OrganizationRequestParams} from '@common/interfaces'
 import serviceOrganization from '@services/service-organization'
 import serviceAddress from '@services/service-address'
@@ -15,30 +16,35 @@ import path from 'path'
 class ControllerOrganization {
     async registrationOrganization(req: RequestCreation<OrganizationRequestParams>, res: Response, next: NextFunction) {
         try {
-            const avatar = req.files.avatar
+            const avatar = req.files?.avatar
 
-            if(!Array.isArray(avatar)) {
-                const fileName = v4() + '.jpg'
-                avatar.mv(path.resolve(__dirname, '../..', 'static', fileName))
+            if(Array.isArray(avatar) || !avatar) {
+                return next(ApiError.bedRequest(errorStrings.onlyOnePhoto))
+            }
+
+            const fileName = v4() + '.jpg'
+            avatar.mv(path.resolve(__dirname, '../..', 'static', fileName))
+            
+            const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
+            const result = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
+
+            if(result) {
+                const {refreshToken, organization} = result
                 
-                const dtoOrganizationRegistration = dtoOrganization.getDtoOrganizationRegistration(req.body, fileName)
-                const {refreshToken, organization} = await serviceOrganization.registrationOrganization(dtoOrganizationRegistration, next)
-    
-                const dtoAddressCreation = dtoAddress.getDtoAddressCreation(req.body, organization.id)
+                const dtoAddressCreation = dtoAddress.getDtoAddressCreation(req.body, organization.dataValues.id)
                 const address = await serviceAddress.createAddress(dtoAddressCreation, next)
 
                 // отправка картинки на Яндекс диск
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 if(organization) {
-                    res.send({organization, address})
+                    res.status(200).send({organization, address})
                 }
             } else {
-                next(ApiError.bedRequest(errorStrings.onlyOnePhoto))
+                throw Error(errorStrings.notBeEmptyVariable('result'))
             }
- 
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerOrganization.registrationOrganization'))
             }
         }
     }
@@ -50,12 +56,12 @@ class ControllerOrganization {
 
             if(result) {
                 const {refreshToken, organization} = result
-                res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 res.send({organization})
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerOrganization.login'))
             }
         }
     }
@@ -70,7 +76,7 @@ class ControllerOrganization {
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerOrganization.getAllOrganization'))
             }
         }
     }
@@ -78,13 +84,17 @@ class ControllerOrganization {
     async initOrganization(req: RequestGetOne<void>, res: Response, next: NextFunction) {
         try{
             const dtoUserInit = dtoOrganization.getDtoInitOrganization(req.cookies)
-            const {organization, refreshToken} = await serviceOrganization.initOrganization(dtoUserInit, next)
-            res.cookie('refreshToken', refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000,  httpOnly: true})
+            const result = await serviceOrganization.initOrganization(dtoUserInit, next)
 
-            res.send({organization})
+            if(result) {
+                const {organization, refreshToken} = result
+
+                res.cookie('refreshToken', refreshToken, {maxAge:TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
+                res.status(200).send({organization})
+            }
         } catch(err) {
             if(err instanceof Error) {
-                next(ApiError.bedRequest(err.message))
+                next(ApiError.internal(err.message, 'ControllerOrganization.initOrganization'))
             }
         }
     }
@@ -92,14 +102,14 @@ class ControllerOrganization {
     async getByIdOrganization(req: RequestGetOne<ParamsOrganizationGetById>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationGetOne = dtoOrganization.getDtoOrganizationGetOne(req.query)
-            const organization = await serviceOrganization.getOrganizationGetOne(dtoOrganizationGetOne, next)
+            const organization = await serviceOrganization.getByIdOrganization(dtoOrganizationGetOne, next)
        
             if(organization) {
                 res.send(organization)
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerOrganization.getByIdOrganization'))
             }
         }
     }

@@ -15,6 +15,7 @@ export interface OrganizationAttributes {
     
     Addresses?: Address[]
     serviceCategories?: ServiceCategory[]
+    createdAt?: number
 }
 
 export interface OrganizationCreation extends Optional<OrganizationAttributes, 'id'> {}

@@ -43,7 +43,13 @@ Organization.init({
 }, { 
   sequelize, 
   tableName: 'organizations',
-  updatedAt: false
+  updatedAt: false,
+  hooks: {
+    afterCreate: (record) => {
+        delete record.dataValues.password
+        delete record.dataValues.createdAt
+    }
+  }
 })
 
 export default Organization

@@ -12,9 +12,6 @@ import {serviceToken} from '@services/service-token'
 import {getHashPassword} from '@common/utils/get-hash-password'
 import Organization from "@models/organization"
 import {compareHashPassword} from '@common/utils/compare-hash-password'
-import {mapperOrganizationCreation} from './mappers-organization/mapper-organization-creation'
-import {mapperOrganizationsGetAll} from './mappers-organization/mapper-organizations-get-all'
-import {mapperOrganizationGetOne} from './mappers-organization/mapper-organization-get-one'
 import Address from "@models/address"
 import ServiceCategory from '@models/service-category'
 
@@ -48,18 +45,21 @@ class ServiceOrganization {
 
             return {
                 refreshToken, 
-                organization: mapperOrganizationCreation(organization)
+                organization
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceOrganization.registrationOrganization'))
             }
         }
     }
 
     async login(dtoOrganizationLogin: DtoOrganizationLogin, next: NextFunction) {
         try {
-            const canditate = await Organization.findOne({where: {email: dtoOrganizationLogin.email}})
+            const canditate = await Organization.findOne({
+                where: {email: dtoOrganizationLogin.email},
+                attributes: ['id', 'name', 'email', 'phoneNumber', 'status', 'avatar' ]
+            })
 
             if(!canditate) {
                 return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoOrganizationLogin.email)))
@@ -84,7 +84,7 @@ class ServiceOrganization {
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceOrganization.login'))
             }
         }
     }
@@ -107,47 +107,51 @@ class ServiceOrganization {
                     {
                         model: ServiceCategory,
                         as: "serviceCategories",
-                        where: paramsServiceCategory
+                        where: paramsServiceCategory,
+                        attributes: ['id', 'name']
                     },
                     {
-                        model: Address
+                        model: Address,
+                        attributes: ['id', 'city', 'street', 'house'],
                     }
                 ]
             })
 
-            return mapperOrganizationsGetAll(organizations)
+            return organizations
 
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceOrganization.getAllOrganizations'))
             }
         }
     }
 
     async initOrganization(dtoUserInit:DtoInitOrganization,next: NextFunction) {
         try {
-            if(dtoUserInit.id) {
-                const organization = await Organization.findOne({
-                    where: {id: dtoUserInit.id}
-                })
-                const {refreshToken} = serviceToken.generateTokens({
-                    id: organization.dataValues.id,
-                    name: organization.dataValues.name,
-                    isOrganization: true
-                })
-                return {
-                    refreshToken,
-                    organization
-                }
+            const organization = await Organization.findOne({
+                where: {id: dtoUserInit.id}
+            })
+            if(!organization) {
+                return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserInit.id.toString())))
+            }
+
+            const {refreshToken} = serviceToken.generateTokens({
+                id: organization.dataValues.id,
+                name: organization.dataValues.name,
+                isOrganization: true
+            })
+            return {
+                refreshToken,
+                organization
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceOrganization.initOrganization'))
             }
         }
     }
 
-    async getOrganizationGetOne(dtoOrganizationGetOne: DtoOrganizationGetOne, next: NextFunction) {
+    async getByIdOrganization(dtoOrganizationGetOne: DtoOrganizationGetOne, next: NextFunction) {
         try {
             const organization = await Organization.findOne({
                 where: {id: dtoOrganizationGetOne.id},
@@ -165,10 +169,10 @@ class ServiceOrganization {
                 ] 
             })
 
-            return mapperOrganizationGetOne(organization)
+            return organization
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceOrganization.getByIdOrganization'))
             }
         }
     }
