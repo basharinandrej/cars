@@ -20,7 +20,7 @@ class ServiceAddress {
             return await Address.create(data)
        } catch (error) {
         if(error instanceof Error) {
-            next(ApiError.bedRequest(error))
+            next(ApiError.internal(error.message, 'ServiceAddress.createAddress'))
         }
        }
     }

@@ -14,6 +14,9 @@ import Organization from "@models/organization"
 import {compareHashPassword} from '@common/utils/compare-hash-password'
 import Address from "@models/address"
 import ServiceCategory from '@models/service-category'
+import type { Includeable } from "sequelize";
+import OrganizationServiceCategory from "@models/organization-service-category"
+
 
 class ServiceOrganization {
     async registrationOrganization(dtoOrganizationRegistration: DtoOrganizationRegistration, next: NextFunction) {
@@ -96,29 +99,34 @@ class ServiceOrganization {
 
             if(status) params.status = status
 
-            const paramsServiceCategory: Partial<{id: number}> = {}
-            if(serviceCategoryId) paramsServiceCategory.id = serviceCategoryId
+
+            const include: Includeable[] = [
+                {
+                    model: Address,
+                    as: "addresses",
+                    attributes: ['id', 'city', 'street', 'house'],
+                }
+            ]
+            if(serviceCategoryId) {
+                const paramsServiceCategory: Partial<{id: number}> = {id: serviceCategoryId}
+                
+                include.push({
+                    model: ServiceCategory,
+                    as: "serviceCategories",
+                    where: paramsServiceCategory,
+                    attributes: ['id', 'name']
+                })
+            }
 
             const organizations = await Organization.findAndCountAll({
                 limit,
                 offset,
                 where: params,
-                include: [
-                    {
-                        model: ServiceCategory,
-                        as: "serviceCategories",
-                        where: paramsServiceCategory,
-                        attributes: ['id', 'name']
-                    },
-                    {
-                        model: Address,
-                        attributes: ['id', 'city', 'street', 'house'],
-                    }
-                ]
+                attributes: ['id', 'email', 'avatar', 'phoneNumber', 'ban', 'status'],
+                include
             })
 
             return organizations
-
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ServiceOrganization.getAllOrganizations'))
@@ -164,6 +172,7 @@ class ServiceOrganization {
                     },
                     {
                         model: Address,
+                        as: "addresses",
                         attributes: ['id', 'city', 'street', 'house'],
                     }
                 ] 

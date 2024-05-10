@@ -25,7 +25,12 @@ Address.init({
 }, { 
   sequelize, 
   tableName: 'addresses',
-  updatedAt: false
+  updatedAt: false,
+  hooks: {
+    afterCreate: (record) => {
+      delete record.dataValues.createdAt
+    }
+  }
 })
 
 export default Address

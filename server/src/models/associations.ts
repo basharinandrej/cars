@@ -70,6 +70,5 @@ ServiceCategory.hasMany(OrganizationServiceCategory, {as: 'serviceCategory', for
 Organization.hasMany(Post, {foreignKey: 'organizationId'})
 Post.belongsTo(Organization, {foreignKey: 'organizationId'})
 
-
-Organization.hasMany(Address, {foreignKey: 'organizationId'})
+Organization.hasMany(Address, {as: 'addresses', foreignKey: 'organizationId'})
 Address.belongsTo(Organization, {foreignKey: 'organizationId'})

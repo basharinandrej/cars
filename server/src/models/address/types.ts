@@ -5,6 +5,8 @@ export interface AddressAttributes {
     city: string
     street: string
     house: number
+
+    createdAt?: string
 }
 
 export interface AddressCreation extends Optional<AddressAttributes, 'id'> {}

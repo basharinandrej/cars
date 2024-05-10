@@ -30,7 +30,7 @@ export const validationServiceCreation = {
                         }
                     })
         
-                    if(result.dataValues.id) {
+                    if(result?.dataValues.id) {
                         return Promise.reject(ApiError.bedRequest(`Услуга с категорией - ${result.dataValues.serviceCategory.name}  уже есть`));
 
                     } else {
