@@ -24,15 +24,29 @@ routers.get('',
     controllerUser.getAllUsers
 )
 
-routers.get('/init', controllerUser.initUser)
+routers.get('/init', 
+    controllerUser.initUser
+)
 
-routers.put('', validationUserUpdation.createChain(), middlewareValidation, controllerUser.update)
+routers.put('', 
+    validationUserUpdation.createChain(), 
+    middlewareValidation, 
+    controllerUser.update
+)
 
-routers.get('/logout', controllerUser.logout)
+routers.get('/logout', 
+    controllerUser.logout
+)
 
-routers.delete('', controllerUser.dropUser)
+routers.delete('', 
+    controllerUser.dropUser
+)
 
-routers.post('/change-password', validationUserChangePassword.createChain(), middlewareValidation, controllerUser.changePassword)
+routers.post('/change-password', 
+    validationUserChangePassword.createChain(), 
+    middlewareValidation, 
+    controllerUser.changePassword
+)
 
 //todo добавить endpoint getUserById
 //todo добавить endpoint dropPassword

@@ -4,7 +4,7 @@ import {ParamsUserGetAll} from '@controllers/controller-user/types'
 import serviceUser from '@services/service-user'
 import dtoUser from '@dtos/dto-user/dto-user'
 import { RequestCreation, RequestGetAll, RequestGetOne, RequestDelete } from "@common/types"
-import { TIME_TO_FILE_OF_TOKEN } from '@common/constans'
+import { TIME_TO_LIFE_OF_TOKEN } from '@common/constans'
 import {UserRequestParams, UserDeleteParams, UserChangePasswordParams} from '@common/interfaces'
 import { errorStrings } from "@common/error-strings"
 
@@ -20,7 +20,7 @@ class ControllerUser {
                 if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
                 if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
     
-                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -40,7 +40,7 @@ class ControllerUser {
 
             if(result) {
                 const {refreshToken, user} = result
-                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -76,7 +76,7 @@ class ControllerUser {
                 if(!refreshToken) throw Error(errorStrings.notBeEmptyVariable('refreshToken'))
                 if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
     
-                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_FILE_OF_TOKEN,  httpOnly: true})
+                res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 res.send(user)
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
