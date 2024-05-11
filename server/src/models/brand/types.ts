@@ -6,6 +6,7 @@ export interface BrandAttributes {
     name: string
     
     Models?: Model[]
+    createdAt?: string
 }
   
 export interface BrandCreation extends Optional<BrandAttributes, 'id'> {}

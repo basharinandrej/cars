@@ -18,7 +18,12 @@ Brand.init({
 }, { 
   sequelize, 
   tableName: 'brands', 
-  updatedAt: false 
+  updatedAt: false,
+  hooks: {
+    afterCreate: (record) => {
+      delete record.dataValues.createdAt
+    }
+  }
 })
 
 

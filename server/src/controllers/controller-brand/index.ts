@@ -16,7 +16,7 @@ class ControllerBrand {
             res.send(brand)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerBrand.createBrand'))
             }
         }
     }
@@ -29,7 +29,7 @@ class ControllerBrand {
             res.send(brands)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerBrand.getAllBrands'))
             }
         }
     }
@@ -44,7 +44,7 @@ class ControllerBrand {
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerBrand.getByIdBrand'))
             }
         }
     }
@@ -54,7 +54,9 @@ class ControllerBrand {
             const id = await serviceBrand.dropBrand(req.query.id, next)
             res.send(id)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerBrand.dropBrand'))
+            }    
         }
     }
 
@@ -66,7 +68,9 @@ class ControllerBrand {
 
             res.status(200).send(brand)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerBrand.updateBrand'))
+            }
         }
     }
 }

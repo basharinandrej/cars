@@ -15,7 +15,7 @@ import Organization from './organization'
 import Post from './organization/post'
 
 
-Brand.hasMany(Model, {foreignKey: 'brandId'})
+Brand.hasMany(Model, {as: 'model', foreignKey: 'brandId'})
 Model.belongsTo(Brand, {foreignKey: 'brandId'})
 
 

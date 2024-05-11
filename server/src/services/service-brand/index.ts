@@ -4,9 +4,6 @@ import {DtoBrandCreation, DtoBrandsGetAll, DtoBrandGetById, DtoBrandUpdation} fr
 import Brand from '@models/brand'
 import Model from '@models/model'
 import ApiError from '@api-error/index'
-import {mapperBrandCreation} from './brand-mapper/mapper-brand-creation'
-import {mapperBrandGetAll} from './brand-mapper/mapper-brand-get-all'
-import {mappperBrandGetById} from './brand-mapper/mapper-brand-get-by-id'
 import { errorStrings } from '@common/error-strings'
 
 
@@ -18,10 +15,10 @@ class ServiceBrand {
                 name: dtoBrandCreation.name.toLocaleLowerCase()
             })
 
-            return mapperBrandCreation(brand)
+            return brand
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceBrand.createBrand'))
             }
         }
     }
@@ -36,9 +33,10 @@ class ServiceBrand {
                     offset,
                     order: [
                         [sortBy, orderBy],
-                    ]
+                    ],
+                    attributes: ['id', 'name']
                 })
-                return mapperBrandGetAll(brands)
+                return brands
 
             }  else if(orderBy && sortBy && keyword){
                 const brands = await Brand.findAndCountAll({
@@ -51,21 +49,23 @@ class ServiceBrand {
                         [Op.or]: [
                             {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
                         ]
-                    }
+                    },
+                    attributes: ['id', 'name']
                 })
-                return mapperBrandGetAll(brands)
+                return brands
 
             } else {
                 const brands = await Brand?.findAndCountAll({
                     limit,
-                    offset
+                    offset,
+                    attributes: ['id', 'name']
                 })
         
-                return mapperBrandGetAll(brands)
+                return brands
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceBrand.getAllBrands'))
             }
         }
     }
@@ -74,17 +74,22 @@ class ServiceBrand {
         try {
             const brand = await Brand.findOne({
                 where: {id: dtoBrandGetById.id},
-                include: Model
+                include: {
+                    model: Model,
+                    as: 'model',
+                    attributes: ['id']
+                },
+                attributes: ['id', 'name']
             })
 
             if(!brand) {
                 return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoBrandGetById.id)))
             }
 
-            return mappperBrandGetById(brand)
+            return brand
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceBrand.getByIdBrand'))
             }
         }
     }
@@ -96,8 +101,9 @@ class ServiceBrand {
             })
             return result ? id : false
         } catch (error) {
-            next(ApiError.internal(error))
-
+            if(error instanceof Error) {
+                next(ApiError.internal(error, 'ServiceBrand.dropBrand'))
+            }
         }
     }
 
@@ -110,7 +116,9 @@ class ServiceBrand {
 
             return result ? 'updated' : false
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error, 'ServiceBrand.updateBrand'))
+            }        
         }
     }
 }
