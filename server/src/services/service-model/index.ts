@@ -73,6 +73,19 @@ class ServiceModel {
             }
         }
     }
+
+    async dropModel(id: number, next: NextFunction) {
+        try {
+            const result = await Model.destroy({
+                where: {id},
+            })
+            return result ? id : false
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceModel.dropModel'))
+            }
+        }
+    }
 }
 
 

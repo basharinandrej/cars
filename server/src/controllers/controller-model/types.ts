@@ -9,3 +9,6 @@ export interface ParamsGetOneModel {
     id: number
 }
 
+export interface ParamsDeleteModel {
+    id: number
+}

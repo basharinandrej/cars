@@ -20,4 +20,6 @@ routers.get('/getById',
     controllerModel.getByIdModel
 )
 
+routers.delete('', controllerModel.dropModel)
+
 export const routerModel = routers

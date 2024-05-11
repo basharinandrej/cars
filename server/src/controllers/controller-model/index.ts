@@ -2,9 +2,9 @@ import {NextFunction, Response} from 'express'
 import serviceModel from '@services/service-model'
 import ApiError from '@api-error/index'
 import dtoModel from '@dtos/dto-model/dto-model'
-import {RequestCreation, RequestGetAll, RequestGetOne} from '@common/types'
+import {RequestCreation, RequestGetAll, RequestGetOne, RequestDelete} from '@common/types'
 import { ModelAttributes } from '@models/model/types'
-import { ParamsGetAllModels, ParamsGetOneModel } from './types'
+import { ParamsGetAllModels, ParamsGetOneModel, ParamsDeleteModel } from './types'
 
 
 class ControllerModel {
@@ -44,6 +44,17 @@ class ControllerModel {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ControllerModel.getByIdModel'))
             }
+        }
+    }
+
+    async dropModel(req: RequestDelete<ParamsDeleteModel>, res: Response, next: NextFunction) {
+        try {
+            const id = await serviceModel.dropModel(req.query.id, next)
+            res.send(id)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerModel.dropModel'))
+            }    
         }
     }
 }
