@@ -18,7 +18,12 @@ Model.init({
 }, { 
   sequelize,
   tableName: 'models', 
-  updatedAt: false
+  updatedAt: false,
+  hooks: {
+    afterCreate: (record) => {
+      delete record.dataValues.createdAt
+    }
+  }
 })
 
 export default Model

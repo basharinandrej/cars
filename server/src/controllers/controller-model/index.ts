@@ -16,7 +16,7 @@ class ControllerModel {
             res.send(model)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerModel.createModel'))
             }
         }
     }
@@ -29,7 +29,7 @@ class ControllerModel {
             res.send(models)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerModel.getAllModels'))
             }
         }
     }
@@ -42,7 +42,7 @@ class ControllerModel {
             res.send(models)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerModel.getByIdModel'))
             }
         }
     }

@@ -16,10 +16,10 @@ import Post from './organization/post'
 
 
 Brand.hasMany(Model, {as: 'model', foreignKey: 'brandId'})
-Model.belongsTo(Brand, {foreignKey: 'brandId'})
+Model.belongsTo(Brand, {as: 'brand', foreignKey: 'brandId'})
 
 
-Model.hasMany(Detail, {foreignKey: 'modelId'})
+Model.hasMany(Detail, {as: 'details', foreignKey: 'modelId'})
 Detail.belongsTo(Model, {foreignKey: 'modelId'})
 
 

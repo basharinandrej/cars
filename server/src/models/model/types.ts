@@ -12,6 +12,7 @@ export interface ModelAttributes {
 
     
     brandId?: number,
+    createdAt?: string
 }
   
 export interface ModelCreation extends Optional<ModelAttributes, 'id'> {}

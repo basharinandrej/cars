@@ -77,7 +77,7 @@ class ServiceBrand {
                 include: {
                     model: Model,
                     as: 'model',
-                    attributes: ['id']
+                    attributes: ['id', 'name']
                 },
                 attributes: ['id', 'name']
             })

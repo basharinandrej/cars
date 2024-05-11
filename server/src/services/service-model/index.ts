@@ -4,9 +4,6 @@ import Model from '@models/model'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
 import Detail from '@models/detail'
-import {mapperModelCreation} from './model-mappers/mapper-model-creation'
-import {mapperModelGetAll} from './model-mappers/mapper-model-get-all'
-import {mapperModelGetById} from './model-mappers/mapper-model-get-by-id'
 
 class ServiceModel {
     async createModel(dtoModelCreation: DtoModelCreation, next: NextFunction) {
@@ -16,10 +13,10 @@ class ServiceModel {
                 name: dtoModelCreation.name,
                 brandId: dtoModelCreation.brandId,
             })
-            return mapperModelCreation(model)
+            return model
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceModel.createModel'))
             }
         }
     }
@@ -35,12 +32,17 @@ class ServiceModel {
                 limit: dtoModelsGetAll.limit,
                 offset: dtoModelsGetAll.offset,
                 where: params,
-                include: [Brand]
+                attributes: ['id', 'name'],
+                include: [{
+                    model: Brand,
+                    as: 'brand',
+                    attributes: ['id', 'name']
+                }]
             })
-            return mapperModelGetAll(models)
+            return models
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceModel.getAllModels'))
             }
         }
     }
@@ -51,14 +53,23 @@ class ServiceModel {
             const model = await Model.findOne({
                 where: {
                     id: dtoModelGetById.id
-                    
                 },
-                include: [Detail, Brand]
+                attributes: ['id', 'name'],
+                include: [
+                    {
+                        model: Brand,
+                        as: 'brand',
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: Detail,
+                        as: 'details'
+                    }]
             })
-            return mapperModelGetById(model)
+            return model
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceModel.getByIdModel'))
             }
         }
     }
