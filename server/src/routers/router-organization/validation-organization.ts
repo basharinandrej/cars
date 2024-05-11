@@ -1,5 +1,5 @@
 
-import { header, body } from 'express-validator';
+import { header, body, cookie } from 'express-validator';
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
@@ -55,6 +55,32 @@ export const validationOrganization = {
 
             body('house').isNumeric().withMessage(errorStrings.beNumber('house')).trim(),
             body('street').notEmpty().withMessage(errorStrings.notBeEmptyField('street')).trim(),
+        ]
+    }
+}
+
+export const validationOrganizationChangePassword = {
+    createChain() {
+        return [
+            cookie('refreshToken').custom((value: string) => {
+                try {
+                    const result = serviceToken.validationToken(value)
+                    if(result.id) {
+                        return Promise.resolve(true);
+                    }
+                } catch (error) {
+                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                }
+            }),
+
+            body('oldPassword')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+
+            
+            body('newPassword')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
+                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
         ]
     }
 }

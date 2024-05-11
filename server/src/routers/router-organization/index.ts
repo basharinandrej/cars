@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import controllerOrganization from '@controllers/controller-organization'
 import middlewareValidation from '../middlewares/middleware-validation'
-import {validationOrganization} from './validation-organization'
+import {validationOrganization, validationOrganizationChangePassword} from './validation-organization'
 
 const routers = Router()
 
@@ -19,7 +19,6 @@ routers.post('/login',
 )
 
 routers.get('',
-    middlewareValidation,
     controllerOrganization.getAllOrganization
 )
 
@@ -28,5 +27,11 @@ routers.get('/getById',
 )
 
 routers.get('/init', controllerOrganization.initOrganization)
+
+routers.post('/change-password', 
+    validationOrganizationChangePassword.createChain(), 
+    middlewareValidation, 
+    controllerOrganization.changePassword
+)
 
 export const routerOrganization = routers

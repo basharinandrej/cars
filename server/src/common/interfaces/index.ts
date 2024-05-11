@@ -22,3 +22,8 @@ export interface UserChangePasswordParams {
     oldPassword: string
     newPassword: string
 }
+
+export interface OrganizationChangePasswordParams {
+    oldPassword: string
+    newPassword: string
+}

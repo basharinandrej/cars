@@ -1,10 +1,11 @@
-import {OrganizationRequestParams} from '@common/interfaces'
+import {OrganizationChangePasswordParams, OrganizationRequestParams} from '@common/interfaces'
 import {
     DtoOrganizationRegistration, 
     DtoOrganizationGetAll,
     DtoOrganizationLogin,
     DtoOrganizationGetOne,
-    DtoInitOrganization
+    DtoInitOrganization,
+    DtoOrganizationChangePassword
 } from './types'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
@@ -52,6 +53,18 @@ class DtoOrganization {
     getDtoInitOrganization(cookies: Cookies): DtoInitOrganization {
         const token = cookies.refreshToken
         return serviceToken.validationToken(token)
+    }
+
+
+    getDtoChangePassword(body: OrganizationChangePasswordParams, cookies: Cookies): DtoOrganizationChangePassword {
+        const token = cookies.refreshToken
+        const payload = serviceToken.validationToken(token)
+
+        return {
+            oldPassword: body.oldPassword,
+            newPassword: body.newPassword,
+            organizationId: payload.id
+        }
     }
 }
 

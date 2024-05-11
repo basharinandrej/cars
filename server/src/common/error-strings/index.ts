@@ -15,8 +15,9 @@ export const errorStrings = {
     categoryAlreadyExist: (value: string) => `Категория - ${value} уже есть. Категория должна быть уникальной`,
     organizationAlreadyExist: (email: string) => `Организация с таким email - ${email} уже существует`,
 
-    notFound: (candidate) => `Не найден ${candidate}`,
+    notFound: (candidate: string) => `Не найден ${candidate}`,
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
+    notFoundOrganization: (email: string) => `Организация с таким email - ${email} не найдена`,
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
     notFoundCar: (vinCode: string) => `Car с таким vinCode - ${vinCode} не найден`,
     errorPassword: () => `Неверный пароль`,

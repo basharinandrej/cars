@@ -5,7 +5,8 @@ import {
     DtoOrganizationGetOne, 
     DtoOrganizationRegistration,
     DtoOrganizationLogin,
-    DtoInitOrganization
+    DtoInitOrganization,
+    DtoOrganizationChangePassword
 } from '@dtos/dto-organization/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
@@ -15,7 +16,6 @@ import {compareHashPassword} from '@common/utils/compare-hash-password'
 import Address from "@models/address"
 import ServiceCategory from '@models/service-category'
 import type { Includeable } from "sequelize";
-import OrganizationServiceCategory from "@models/organization-service-category"
 
 
 class ServiceOrganization {
@@ -61,15 +61,14 @@ class ServiceOrganization {
         try {
             const canditate = await Organization.findOne({
                 where: {email: dtoOrganizationLogin.email},
-                attributes: ['id', 'name', 'email', 'phoneNumber', 'status', 'avatar' ]
+                attributes: ['id', 'name', 'email', 'phoneNumber', 'status', 'avatar', 'password' ]
             })
 
             if(!canditate) {
-                return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoOrganizationLogin.email)))
+                return next(ApiError.bedRequest(errorStrings.notFoundOrganization(dtoOrganizationLogin.email)))
             } 
 
-            const hashPassword = await getHashPassword(dtoOrganizationLogin.password)
-            const isMatchPasswords = await compareHashPassword(dtoOrganizationLogin.password, hashPassword)
+            const isMatchPasswords = await compareHashPassword(dtoOrganizationLogin.password, canditate.dataValues.password)
 
             if(isMatchPasswords) {
                 const {refreshToken} = serviceToken.generateTokens({
@@ -140,7 +139,7 @@ class ServiceOrganization {
                 where: {id: dtoUserInit.id}
             })
             if(!organization) {
-                return next(ApiError.bedRequest(errorStrings.notFoundUser(dtoUserInit.id.toString())))
+                return next(ApiError.bedRequest(errorStrings.notFoundOrganization(dtoUserInit.id.toString())))
             }
 
             const {refreshToken} = serviceToken.generateTokens({
@@ -182,6 +181,38 @@ class ServiceOrganization {
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ServiceOrganization.getByIdOrganization'))
+            }
+        }
+    }
+
+    async changePassword({organizationId, oldPassword, newPassword}: DtoOrganizationChangePassword, next: NextFunction) {
+        try {
+            const candidate = await Organization.findOne({
+                where: {id: organizationId},
+                attributes: ['id', 'password']
+            })
+            if(!candidate) {
+                return next(ApiError.bedRequest(errorStrings.notFoundOrganization(organizationId.toString())))
+            }
+
+            const hashNewPassword = await getHashPassword(newPassword)
+            const isMatchOldPasswords = await compareHashPassword(oldPassword, candidate.dataValues.password)
+            
+            if(isMatchOldPasswords) {
+                const organization = await Organization.update(
+                    {password: hashNewPassword},
+                    {
+                        where: {id: organizationId}
+                    },
+                )
+                return organization
+            } else {
+                next(ApiError.bedRequest(errorStrings.errorPassword()))
+            }
+
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceOrganization.changePassword'))
             }
         }
     }

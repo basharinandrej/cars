@@ -29,3 +29,9 @@ export interface DtoOrganizationLogin {
 
 export interface DtoInitOrganization extends PayloadToken {}
 
+export interface DtoOrganizationChangePassword {
+    oldPassword: string
+    newPassword: string
+    organizationId: number
+}
+

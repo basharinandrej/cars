@@ -5,7 +5,7 @@ import { RequestCreation, RequestGetAll, RequestGetOne } from '@common/types'
 import dtoOrganization from '@dtos/dto-organization/dto-organization'
 import dtoAddress from '@dtos/dto-address/dto-address'
 import {TIME_TO_LIFE_OF_TOKEN} from '@common/constans'
-import {OrganizationRequestParams} from '@common/interfaces'
+import {OrganizationChangePasswordParams, OrganizationRequestParams} from '@common/interfaces'
 import serviceOrganization from '@services/service-organization'
 import serviceAddress from '@services/service-address'
 import { errorStrings } from '@common/error-strings'
@@ -37,7 +37,7 @@ class ControllerOrganization {
                 // отправка картинки на Яндекс диск
                 res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
                 if(organization) {
-                    res.status(200).send({organization, address})
+                    res.status(201).send({organization, address})
                 }
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
@@ -105,11 +105,26 @@ class ControllerOrganization {
             const organization = await serviceOrganization.getByIdOrganization(dtoOrganizationGetOne, next)
        
             if(organization) {
-                res.send(organization)
+                res.status(200).send(organization)
             }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ControllerOrganization.getByIdOrganization'))
+            }
+        }
+    }
+
+    async changePassword(req: RequestCreation<OrganizationChangePasswordParams>, res: Response, next: NextFunction) {
+        try {
+            const dtoOrganizationChangePassword = dtoOrganization.getDtoChangePassword(req.body, req.cookies)
+            const result = await serviceOrganization.changePassword(dtoOrganizationChangePassword, next)
+
+            if(result) {
+                res.status(200).send(result)
+            }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerOrganization.changePassword'))
             }
         }
     }
