@@ -10,6 +10,16 @@ class ServiceModel {
     async createModel(dtoModelCreation: DtoModelCreation, next: NextFunction) {
 
         try {
+            const brandCandidate = await Brand.findOne({
+                where: {
+                    id: dtoModelCreation.brandId
+                }
+            })
+
+            if(!brandCandidate) {
+                return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoModelCreation.brandId)))
+            }
+
             const model = await Model.create({
                 name: dtoModelCreation.name,
                 brandId: dtoModelCreation.brandId,
@@ -21,7 +31,6 @@ class ServiceModel {
             }
         }
     }
-
 
     async getAllModels(dtoModelsGetAll: DtoModelGetAll, next: NextFunction) {
 
