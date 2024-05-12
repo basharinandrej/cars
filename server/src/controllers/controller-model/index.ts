@@ -57,6 +57,21 @@ class ControllerModel {
             }    
         }
     }
+
+    async updateModel(req: RequestCreation<ModelAttributes>, res: Response, next: NextFunction) {
+        try {
+            const dtoModelUpdation = dtoModel.getDtoModelUpdation(req.body)
+            const model = await serviceModel.updateModel(dtoModelUpdation, next)
+
+            if(model) {
+                res.status(200).send(model)
+            }
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerModel.updateModel'))
+            }   
+        }
+    }
 }
 
 export default new ControllerModel()

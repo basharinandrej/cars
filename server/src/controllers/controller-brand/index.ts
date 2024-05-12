@@ -66,7 +66,9 @@ class ControllerBrand {
             const dtoBrandUpdation = dtoBrand.getDtoBrandUpdation(req.body)
             const brand = await serviceBrand.updateBrand(dtoBrandUpdation, next)
 
-            res.status(200).send(brand)
+            if(brand) {
+                res.status(200).send(brand)
+            }
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ControllerBrand.updateBrand'))

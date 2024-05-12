@@ -1,5 +1,5 @@
 import {NextFunction} from 'express'
-import {DtoModelCreation, DtoModelGetAll, DtoModelGetById} from '@dtos/dto-model/types'
+import {DtoModelCreation, DtoModelGetAll, DtoModelGetById, DtoModelUpdation} from '@dtos/dto-model/types'
 import Model from '@models/model'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
@@ -16,8 +16,8 @@ class ServiceModel {
                 }
             })
 
-            if(!brandCandidate) {
-                return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoModelCreation.brandId)))
+            if(!brandCandidate && dtoModelCreation?.brandId) {
+                return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoModelCreation?.brandId)))
             }
 
             const model = await Model.create({
@@ -96,6 +96,30 @@ class ServiceModel {
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ServiceModel.dropModel'))
+            }
+        }
+    }
+
+    async updateModel(dtoModelUpdation: DtoModelUpdation, next: NextFunction) {
+        try {
+            const model = await Model.findOne({
+                where: {
+                    id: dtoModelUpdation.id
+                }
+            })
+
+            if(!model) {
+                return next(ApiError.bedRequest(errorStrings.notFoundModel(dtoModelUpdation.id)))
+            }
+
+            const result = await Model.update({
+                name: dtoModelUpdation.name.toLocaleLowerCase(),
+            }, {where: {id: dtoModelUpdation.id}})
+
+            return result[0] ? 'updated' : false
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceModel.updateModel'))
             }
         }
     }

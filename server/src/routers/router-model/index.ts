@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import controllerModel from '@controllers/controller-model'
 import middlewareValidation from '../middlewares/middleware-validation'
-import { validationCreateModel } from './validation-model'
+import { validationCreateModel, validationModelUpdation } from './validation-model'
 
 const routers = Router()
 
@@ -21,5 +21,11 @@ routers.get('/getById',
 )
 
 routers.delete('', controllerModel.dropModel)
+
+routers.put('', 
+    validationModelUpdation.createChain(),
+    middlewareValidation, 
+    controllerModel.updateModel
+)
 
 export const routerModel = routers

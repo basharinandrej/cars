@@ -110,11 +110,21 @@ class ServiceBrand {
     async updateBrand(dtoBrandUpdation: DtoBrandUpdation, next: NextFunction) {
 
         try {
+
+            const brand = await Brand.findOne({
+                where: {
+                    id: dtoBrandUpdation.id
+                }
+            })
+
+            if(!brand) {
+                return next(ApiError.bedRequest(errorStrings.notFoundBrand(dtoBrandUpdation.id)))
+            }
             const result = await Brand.update({
                 name: dtoBrandUpdation.name.toLocaleLowerCase(),
             }, {where: {id: dtoBrandUpdation.id}})
 
-            return result ? 'updated' : false
+            return result[0] ? 'updated' : false
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error, 'ServiceBrand.updateBrand'))

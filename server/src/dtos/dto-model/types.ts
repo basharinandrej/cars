@@ -1,6 +1,6 @@
 export interface DtoModelCreation {
     name: string
-    brandId: number
+    brandId?: number
 }
 
 export interface DtoModelGetAll {
@@ -10,5 +10,10 @@ export interface DtoModelGetAll {
 }
 
 export interface DtoModelGetById {
+    id: number
+}
+
+export interface DtoModelUpdation {
+    name: string
     id: number
 }

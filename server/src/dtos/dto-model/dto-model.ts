@@ -1,5 +1,5 @@
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
-import {DtoModelCreation, DtoModelGetAll, DtoModelGetById} from './types'
+import {DtoModelCreation, DtoModelGetAll, DtoModelGetById, DtoModelUpdation} from './types'
 import {ModelAttributes} from '@models/model/types'
 import {ParamsGetAllModels, ParamsGetOneModel} from '@controllerscontroller-model/types'
 
@@ -22,6 +22,13 @@ class DtoModels {
     getDtoModelGetById(query: ParamsGetOneModel): DtoModelGetById {
         return {
             id: query.id
+        }
+    }
+
+    getDtoModelUpdation(model: ModelAttributes): DtoModelUpdation {
+        return {
+            id: model.id,
+            name: model.name,
         }
     }
 }
