@@ -4,6 +4,7 @@ import Model from '@models/model'
 import Brand from '@models/brand'
 import ApiError from '@api-error/index'
 import Detail from '@models/detail'
+import { errorStrings } from '@common/error-strings'
 
 class ServiceModel {
     async createModel(dtoModelCreation: DtoModelCreation, next: NextFunction) {
@@ -66,6 +67,9 @@ class ServiceModel {
                         as: 'details'
                     }]
             })
+            if(!model) {
+                return next(ApiError.bedRequest(errorStrings.notFoundModel(dtoModelGetById.id)))
+            }
             return model
         } catch (error) {
             if(error instanceof Error) {

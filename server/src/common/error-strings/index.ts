@@ -19,6 +19,7 @@ export const errorStrings = {
     notFoundUser: (email: string) => `Пользователь с таким email - ${email} не найден`,
     notFoundOrganization: (email: string) => `Организация с таким email - ${email} не найдена`,
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
+    notFoundModel: (id: number) => `Model с таким id - ${id} не найдена`,
     notFoundCar: (vinCode: string) => `Car с таким vinCode - ${vinCode} не найден`,
     errorPassword: () => `Неверный пароль`,
 
