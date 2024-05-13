@@ -18,7 +18,12 @@ DetailCategory.init({
 }, { 
     sequelize,
     tableName: 'detail-categories',
-    updatedAt: false
+    updatedAt: false,
+    hooks: {
+        afterCreate: (record) => {
+            delete record.dataValues.createdAt
+        }
+    }
 })
 
 export default DetailCategory

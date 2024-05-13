@@ -7,7 +7,7 @@ import { RequestCreation, RequestDelete, RequestGetAll } from "@common/types"
 import { DetailCategoryAttributes } from '@models/detail/detail-category/types'
 
 
-class ControllerCategory {
+class ControllerDetailCategory {
 
    async createDetailCategory(req: RequestCreation<DetailCategoryAttributes>, res:Response, next: NextFunction) {
 
@@ -16,10 +16,12 @@ class ControllerCategory {
             const category = await serviceCategory.createDetailCategory(dtoDetailCategoryCreation, next)
 
             if(category) {
-                res.send(category)
+                res.status(200).send(category)
             }
         } catch (error) {
-            next(ApiError.bedRequest(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerDetailCategory.createDetailCategory'))
+            }
         }
     }
 
@@ -28,9 +30,11 @@ class ControllerCategory {
             const dtoDetailCategoryGetAll = dtoDetailCategory.getDtoGetAllDetailCategory(req.query)
             const categoriesAll = await serviceCategory.getAllDetailCategory(dtoDetailCategoryGetAll, next)
 
-            res.send(categoriesAll)
+            res.status(200).send(categoriesAll)
         } catch (error) {
-            next(ApiError.bedRequest(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerDetailCategory.getAllDetailCategory'))
+            }    
         }
     }
 
@@ -42,18 +46,22 @@ class ControllerCategory {
 
             res.status(200).send(car)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerDetailCategory.updateCategoryDetail'))
+            }   
         }
     }
 
     async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryDetail>, res: Response, next: NextFunction) {
         try {
             const id = await serviceCategory.dropCategoryDetail(req.query.id, next)
-            res.send(id)
+            res.status(200).send(id)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerDetailCategory.dropCategoryDetail'))
+            }   
         }
     }
 }
 
-export default new ControllerCategory()
+export default new ControllerDetailCategory()
