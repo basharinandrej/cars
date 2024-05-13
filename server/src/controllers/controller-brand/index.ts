@@ -60,7 +60,6 @@ class ControllerBrand {
         }
     }
 
-
     async updateBrand(req: RequestCreation<BrandAttributes>, res: Response, next: NextFunction) {
         try {
             const dtoBrandUpdation = dtoBrand.getDtoBrandUpdation(req.body)

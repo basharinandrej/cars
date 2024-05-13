@@ -114,6 +114,7 @@ class ServiceModel {
 
             const result = await Model.update({
                 name: dtoModelUpdation.name.toLocaleLowerCase(),
+                brandId: dtoModelUpdation.brandId
             }, {where: {id: dtoModelUpdation.id}})
 
             return result[0] ? 'updated' : false

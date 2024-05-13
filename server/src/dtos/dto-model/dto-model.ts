@@ -29,6 +29,7 @@ class DtoModels {
         return {
             id: model.id,
             name: model.name,
+            brandId: model.brandId
         }
     }
 }

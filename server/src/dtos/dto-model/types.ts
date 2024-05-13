@@ -16,4 +16,5 @@ export interface DtoModelGetById {
 export interface DtoModelUpdation {
     name: string
     id: number
+    brandId?: number
 }

@@ -23,7 +23,6 @@ class ServiceBrand {
         }
     }
 
-
     async getAllBrands({orderBy, sortBy, limit, offset, keyword}: DtoBrandsGetAll, next: NextFunction) {
 
         try {
