@@ -3,7 +3,7 @@ import path from 'path'
 import {UploadedFile} from 'express-fileupload'
 
 export const moveDetailPhotosToStatic = (photos: UploadedFile[]) => {
-    const fileNames = []
+    const fileNames: string[] = []
 
     if(Array.isArray(photos)) {
         photos.forEach((photo) => {

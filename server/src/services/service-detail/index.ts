@@ -1,11 +1,8 @@
-import { Op } from 'sequelize'
+import { Op, WhereOptions } from 'sequelize'
 import {NextFunction} from 'express'
 import {DtoDetailCreation, DtoDetailGetAll, DtoDetailGetById} from '@dtos/dto-detail/types'
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
-import {mapperDetailCreation} from './detail-mapper/mapper-detail-creation'
-import {mapperGetAllDetails} from './detail-mapper/mapper-get-all-details'
-import {mapperDetailGetById} from './detail-mapper/mapper-detail-get-by-id'
 import Model from '@models/model'
 import Address from '@models/address'
 import User from '@models/user'
@@ -29,7 +26,6 @@ class ServiceDetail {
                 if(!value) return next(ApiError.bedRequest(errorStrings.notFound(key)))
             })
 
-
             const detail = await Detail.create({
                 name: dtoDetailCreation.name.toLocaleLowerCase(),
                 vendorCode: dtoDetailCreation.vendorCode,
@@ -43,69 +39,128 @@ class ServiceDetail {
                 userId: dtoDetailCreation.userId
             })
 
-            return mapperDetailCreation(detail)
+            return detail
        } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceDetail.createDetail'))
             }
        }
     }
 
-
     async getAllDetails({limit, offset, modelId, detailCategoryId, keyword, userId}: DtoDetailGetAll, next: NextFunction) {
-
+        const attributes = [
+            'id', 
+            'name', 
+            'vendorCode', 
+            'wear',
+            'year', 
+            'description', 
+            'price', 
+            'createdAt', 
+            'modelId', 
+            'detailCategoryId',
+            'userId'
+        ]
         try {
-            const params: Partial<DetailAttributes> = {}
+            const params: WhereOptions<DetailAttributes> = {}
 
             if(modelId) params.modelId = modelId
             if(detailCategoryId) params.detailCategoryId = detailCategoryId
             if(userId) params.userId = userId
-            if(keyword) params[Op.or] = [
-                {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
-                {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}
-            ]
-
-            const details = await Detail?.findAndCountAll({
-                limit,
-                offset,
-                where: params, include: DetailPhoto
-            })
-            return mapperGetAllDetails(details)
             
+            if(keyword) {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: {
+                        ...params, 
+                        [Op.or]: [
+                            {name: {[Op.substring]: keyword.toLocaleLowerCase() }},
+                            {vendorCode: {[Op.substring]: keyword.toLocaleLowerCase() }}
+                        ]
+                    },
+                    attributes,
+                    include: [
+                        {
+                            model: DetailPhoto,
+                            as: 'detailPhoto',
+                            attributes: ['id', 'url']
+                        }
+                    ]
+                })
+                return details
+            } else {
+                const details = await Detail?.findAndCountAll({
+                    limit,
+                    offset,
+                    where: params,
+                    attributes,
+                    include: [
+                        {
+                            model: DetailPhoto,
+                            as: 'detailPhoto',
+                            attributes: ['id', 'url']
+                        }
+                    ]
+                })
+                return details
+            }
+
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceDetail.getAllDetails'))
             }
         }
     }
-
 
     async getByIdDetail(dtoDetailGetById: DtoDetailGetById, next: NextFunction) {
         try {
 
             const detail = await Detail.findOne({
                 where: {id: dtoDetailGetById.id},
-                include: [Model, Address, User, DetailCategory, DetailPhoto]
+                include: [
+                    {
+                        model: DetailPhoto,
+                        as: 'detailPhoto',
+                        attributes: ['id', 'url']
+                    },
+                    {
+                        model: Model,
+                        as: 'model',
+                        attributes: ['id', 'name', 'brandId']
+                    },
+                    {
+                        model: DetailCategory,
+                        as: 'detailCategory',
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: User,
+                        as: 'user',
+                        attributes: ['id', 'name', 'surname', 'email', 'role', 'phoneNumber', 'ban']
+                    }
+                ]
             })
 
-            return mapperDetailGetById(detail)
+            return detail
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceDetail.getByIdDetail'))
             }
         }
     }
 
 
-    async dropCar(id: number, next: NextFunction) {
+    async dropDetail(id: number, next: NextFunction) {
         try {
             const result = await Detail.destroy({
                 where: {id},
             })
             return result ? id : false
         } catch (error) {
-            next(ApiError.internal(error))
-
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceDetail.dropDetail'))
+            }
         }
     }
 }

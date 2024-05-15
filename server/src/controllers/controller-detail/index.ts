@@ -8,27 +8,35 @@ import dtoDetail from '@dtos/dto-detail/dto-detail'
 import dtoDetailPhoto from '@dtos/dto-detail/dto-detail-photo/dto-detail-photo'
 import {DetailAttributes} from '@models/detail/types'
 import {moveDetailPhotosToStatic, moveDetailOnePhotoToStatic} from './utils'
+import { errorStrings } from '@common/error-strings'
 
 
 class ControllerDetail {
     async createDetail(req: RequestCreation<DetailAttributes>, res: Response, next: NextFunction) {
         try {
-            const photos = req.files.photos
-
+            const photos = req.files?.photos
+            if(!photos) {
+                return next(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto))
+            }
+            
             const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, req.cookies)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 
+            if(!detail) {
+                return next(ApiError.internal(errorStrings.failedToCreateDetail))
+            }
+
             if(Array.isArray(photos)) {
                 const fileNames = moveDetailPhotosToStatic(photos)
-                const detailPhotosCreation = dtoDetailPhoto.getDtoDetailAllPhotosCreation(fileNames, detail.id);
+                const detailPhotosCreation = dtoDetailPhoto.getDtoDetailAllPhotosCreation(fileNames, detail.dataValues.id);
                 const detailPhotos = await serviceDetailPhoto.createDetailPhotos(detailPhotosCreation, next)
 
                 if(detail && detailPhotos.length) {
-                    res.send({detail, detailPhotos})
+                    res.status(201).send({detail, detailPhotos})
                 }
             } else {
                 const fileName = moveDetailOnePhotoToStatic(photos)
-                const oneDetailPhotoCreation = dtoDetailPhoto.getDtoDetailOnePhotoCreation(fileName, detail.id);
+                const oneDetailPhotoCreation = dtoDetailPhoto.getDtoDetailOnePhotoCreation(fileName, detail.dataValues.id);
                 const detailPhotos = await serviceDetailPhoto.createOneDetailPhoto(oneDetailPhotoCreation, next)
                 
                 if(detail && detailPhotos.id) {
@@ -37,7 +45,7 @@ class ControllerDetail {
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerDetail.createDetail'))
             }
         }
     }
@@ -47,10 +55,10 @@ class ControllerDetail {
             const dtoDetailGetById = dtoDetail.getDtoDetailsGetAll(req.query)
             const details = await serviceDetail.getAllDetails(dtoDetailGetById, next)
 
-            res.send(details)
+            res.status(200).send(details)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerDetail.getAllDetails'))
             }
         }
     }
@@ -60,20 +68,22 @@ class ControllerDetail {
             const dtoDetailGetById = dtoDetail.getDtoDetailGetById(req.query)
             const detail = await serviceDetail.getByIdDetail(dtoDetailGetById, next)
 
-            res.send(detail)
+            res.status(200).send(detail)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerDetail.getByIdDetail'))
             }
         }
     }
 
     async dropDetail(req: RequestDelete<ParamsDeleteDelete>, res: Response, next: NextFunction) {
         try {
-            const id = await serviceDetail.dropCar(req.query.id, next)
-            res.send(id)
+            const id = await serviceDetail.dropDetail(req.query.id, next)
+            res.status(200).send(id)
         } catch (error) {
-            next(ApiError.internal(error))   
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerDetail.dropDetail'))
+            }
         }
     }
 }

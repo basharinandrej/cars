@@ -8,8 +8,8 @@ export interface DtoDetailCreation {
     year: string
     description: string
     price: number
-    modelId: number
-    detailCategoryId: number
+    modelId?: number
+    detailCategoryId?: number
     userId: number
 }
 

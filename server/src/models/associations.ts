@@ -20,23 +20,23 @@ Model.belongsTo(Brand, {as: 'brand', foreignKey: 'brandId'})
 
 
 Model.hasMany(Detail, {as: 'details', foreignKey: 'modelId'})
-Detail.belongsTo(Model, {foreignKey: 'modelId'})
+Detail.belongsTo(Model, {as: 'model', foreignKey: 'modelId'})
 
 
 DetailCategory.hasMany(Detail, {foreignKey: 'detailCategoryId'})
-Detail.belongsTo(DetailCategory, {foreignKey: 'detailCategoryId'})
+Detail.belongsTo(DetailCategory, {as: 'detailCategory', foreignKey: 'detailCategoryId'})
 
 
 Address.hasMany(Detail, {foreignKey: 'addressId'})
 Detail.belongsTo(Address, {foreignKey: 'addressId'})
 
 
-Detail.hasMany(DetailPhoto, {foreignKey: 'detailId'})
+Detail.hasMany(DetailPhoto, {as: 'detailPhoto', foreignKey: 'detailId'})
 DetailPhoto.belongsTo(Detail, {foreignKey: 'detailId'})
 
 
 User.hasMany(Detail, {foreignKey: 'userId'})
-Detail.belongsTo(User, {foreignKey: 'userId'})
+Detail.belongsTo(User, {as: 'user', foreignKey: 'userId'})
 
 Organization.hasMany(Detail, {foreignKey: 'organizationId'})
 Detail.belongsTo(Organization, {foreignKey: 'organizationId'})

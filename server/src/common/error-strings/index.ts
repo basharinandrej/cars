@@ -45,5 +45,7 @@ export const errorStrings = {
         brandSort: (value: string, errorValue: string) => `Сортировать brand можно только по полю ${value}, а не по полю ${errorValue}`
     },
     withoutOrganization: () => `Организация не может закрепить за собой машину`,
-    maxCountAdmins: () => `Максимальное число администраторов ${MAX_COUNT_ADMINS}`
+    maxCountAdmins: () => `Максимальное число администраторов ${MAX_COUNT_ADMINS}`,
+
+    failedToCreateDetail: 'Не удалось создать деталь'
 }
