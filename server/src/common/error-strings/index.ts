@@ -21,6 +21,7 @@ export const errorStrings = {
     notFoundBrand: (id: number) => `Brand с таким id - ${id} не найден`,
     notFoundModel: (id: number) => `Model с таким id - ${id} не найдена`,
     notFoundCar: (vinCode: string) => `Car с таким vinCode - ${vinCode} не найден`,
+    notFoundDetail: (id: number) => `Detail с таким id - ${id} не найдена`,
     errorPassword: () => `Неверный пароль`,
 
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,

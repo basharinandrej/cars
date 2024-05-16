@@ -4,7 +4,6 @@ import {DtoDetailCreation, DtoDetailGetAll, DtoDetailGetById} from '@dtos/dto-de
 import Detail from '@models/detail'
 import ApiError from '@api-error/index'
 import Model from '@models/model'
-import Address from '@models/address'
 import User from '@models/user'
 import DetailCategory from '@models/detail/detail-category'
 import { errorStrings } from '@common/error-strings'
@@ -142,6 +141,9 @@ class ServiceDetail {
                 ]
             })
 
+            if(!detail) {
+                return next(ApiError.bedRequest(errorStrings.notFoundDetail(dtoDetailGetById.id)))
+            }
             return detail
         } catch (error) {
             if(error instanceof Error) {

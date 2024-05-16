@@ -16,14 +16,14 @@ class ControllerDetail {
         try {
             const photos = req.files?.photos
             if(!photos) {
-                return next(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto))
+                return next(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto()))
             }
             
             const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, req.cookies)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 
             if(!detail) {
-                return next(ApiError.internal(errorStrings.failedToCreateDetail))
+                return next(ApiError.internal(errorStrings.failedToCreateDetail, 'ControllerDetail.createDetail'))
             }
 
             if(Array.isArray(photos)) {
