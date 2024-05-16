@@ -13,15 +13,16 @@ import {
 import {calcOffset} from '@shared'
 
 
-export interface ListingDetailsSchema extends ListingDetailsResponse {
+export interface ListingDetailsSchema extends Omit<ListingDetailsResponse, 'rows'> {
+  items: ListingDetailsResponse['rows']
   isLoading: boolean
   canPaginationMore: boolean
   scrollPostion: number
 }
 
-const initialState: ListingDetailsSchema = {
+const initialState: ListingDetailsSchema  = {
   items: [],
-  total: 0,
+  count: 0,
   isLoading: false,
   limit: DEFAULT_VALUE_LIMIT_LISTING_DETAILS,
   offset: INITIAL_VALUE_OFFSET_LISTING_DETAILS,
@@ -46,24 +47,24 @@ export const listingDetailsSlice = createSlice({
             const data = action.payload
 
             state.isLoading = false
-            state.items = data.items
-            state.total = data.total
-            state.offset = INITIAL_VALUE_OFFSET_LISTING_DETAILS + data.items?.length
-            state.canPaginationMore = data?.total > data.items?.length
+            state.items = data.rows
+            state.count = data.count
+            state.offset = INITIAL_VALUE_OFFSET_LISTING_DETAILS + data.rows?.length
+            state.canPaginationMore = data?.count > data.rows?.length
         })
 
 
         .addCase(fetchListingDetailsNextPart.pending, (state) => {
           state.isLoading = true
         })
-        .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<ListingDetailsResponse>) => {
+        .addCase(fetchListingDetailsNextPart.fulfilled, (state, action: PayloadAction<any>) => {
           const data = action.payload
 
           state.isLoading = false
-          state.total = data.total
-          state.items = state.items.concat(data.items)
+          state.count = data.count
+          state.items = state.items.concat(data.rows)
           state.offset = calcOffset(state)
-          state.canPaginationMore = data.total > state.items?.length && !!action.payload.items.length
+          state.canPaginationMore = data.count > state.items?.length && !!action.payload.rows.length
         })
   }
 })

@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {ListingDetailsSchema} from '@features'
 import {ThunkApiConfig} from '@app'
 import {
     getLimitListingDetails,
@@ -10,13 +9,14 @@ import {
 } from '../selectors'
 
 import {ParamsFetchListingDetails} from '../interfaces'
+import {ListingDetailsResponse} from '../../interfaces'
 
 import {INITIAL_VALUE_OFFSET_LISTING_DETAILS} from '../../constans'
 
 import {addQueryParams} from '@shared'
 
 
-export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsSchema, number|void, ThunkApiConfig>(
+export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsResponse, number|void, ThunkApiConfig>(
     'listing-details/fetchInitialDetails',
     async (userId, thunkAPI) => {
         const {getState, extra} = thunkAPI

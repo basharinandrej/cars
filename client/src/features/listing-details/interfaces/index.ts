@@ -21,7 +21,7 @@ export interface Detail {
     detailCategoryId?: number
 }
 export interface ListingDetailsResponse extends CommonListing {
-    items: Detail[],
+    rows: Detail[],
 }
 
 

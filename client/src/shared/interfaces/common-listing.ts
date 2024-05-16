@@ -2,6 +2,7 @@
 
 export interface CommonListing {
     limit: number
-    total: number
     offset: number
+    count?: number
+    total?: number // TODO delete
 }
