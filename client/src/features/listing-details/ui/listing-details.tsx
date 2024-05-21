@@ -1,7 +1,6 @@
 import {FC, useEffect} from 'react'
 import { useInView } from 'react-intersection-observer';
 import {useSelector} from 'react-redux'
-import moment from 'moment'
 import { Empty } from 'antd';
 
 import { 
@@ -9,11 +8,10 @@ import {
     useWindowPosition, 
     mapBadge, 
     useMount,
-    Card,
     setScrollToDocument
 } from '@shared'
 
-import {Detail} from '../interfaces'
+import {IDetail, DetailCard} from '@entities'
 import {
     getItemsListingDetails,
     getCanPaginationMoreListingDetails,
@@ -61,24 +59,19 @@ export const ListingDetails:FC<Props> = ({id}) => {
 
     return hasDetails 
             ? <div className={styles.listingDetails}>
-                {details?.map((detail: Detail) => {
+                {details?.map((detail: IDetail) => {
                     const textBadge = mapBadge[detail.wear].value
                     const colorBadge = mapBadge[detail.wear].color
 
-                    return <Card
-                        loading={isLoading}
-                        key={detail.id}
-                        textBadge={textBadge}
-                        colorBadge={colorBadge}
-                        to={`/detail/${detail.id}`}
-                        src={`details/${detail.detailPhoto?.url}`}
-                    >
-                        <div className={styles.wrapper}>
-                            <h3 className={styles.title}>{detail.name}</h3>
-                            <p className={styles.price}>Цена: <strong>{detail.price}</strong>&nbsp;p.</p>
-                            <p className={styles.date}>{moment(detail.createdAt).format('DD.MM.YYYY')}</p>
-                        </div>
-                    </Card>
+                    return <DetailCard 
+                            key={detail.id}
+                            textBadge={textBadge}
+                            colorBadge={colorBadge}
+                            isLoading={isLoading}
+                            detail={detail}
+                            href={`/detail/${detail.id}`}
+                            photoUrl={`details/${detail.detailPhoto[0]?.url}`}
+                        />
                 })}
                 <div ref={ref}/>
             </div>

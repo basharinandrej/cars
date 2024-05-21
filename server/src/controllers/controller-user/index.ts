@@ -77,7 +77,7 @@ class ControllerUser {
                 if(!user.dataValues.id) throw Error(errorStrings.notBeEmptyField('id'))
     
                 res.cookie('refreshToken', refreshToken, {maxAge: TIME_TO_LIFE_OF_TOKEN,  httpOnly: true})
-                res.send(user)
+                res.send({user})
             } else {
                 throw Error(errorStrings.notBeEmptyVariable('result'))
             }

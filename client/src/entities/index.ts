@@ -56,7 +56,7 @@ export {CategoryDetails} from './category-details/ui/category-details'
 export {fetchCategoryDetails} from './category-details/model/async-actions/fetch-category-details'
 export {FormAddNewCategoryDetailValueTypes, CategoryDetail} from './category-details/interfaces'
 
-
+//Category Services
 export {categoryServicesReducer, CategoryServicesSchema} from './category-services/model/slices/category-service-slice'
 export {CategoryServices} from './category-services/ui/category-service'
 export {fetchCategoryServices} from './category-services/model/async-actions/fetch-category-service'
@@ -71,3 +71,8 @@ export {Brand, FormAddNewBrandValueTypes} from './brand/interfaces'
 //Service
 export {Services} from './services/ui/services'
 export {IService, ServicesResponse, FormAddNewServiceValueTypes, IServiceRequest, ServiceCategoryResponse} from './services/interfaces'
+
+
+//Detail
+export {IDetail} from './detail/interfaces/detail-interface'
+export {DetailCard} from './detail/ui/detail-card/detail-card'
