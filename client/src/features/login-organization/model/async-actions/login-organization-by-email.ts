@@ -23,7 +23,13 @@ export const fetchLoginOrganizationByEmail = createAsyncThunk<void, void, ThunkA
             dispatch(setProfileOrganizationInformation(response.data))
             
         } catch (error) {
-            console.log('>>> error', error)
-        }
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка авторизации',
+                description: errorMessage
+            })
+            throw errorMessage        }
     }
 )

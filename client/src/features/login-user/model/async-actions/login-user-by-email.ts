@@ -25,7 +25,14 @@ export const fetchLoginUserByEmail = createAsyncThunk<void, void, ThunkApiConfig
             dispatch(setProfileInformation(response.data))
             
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка авторизации',
+                description: errorMessage
+            })
+            throw errorMessage
         }
     }
 )

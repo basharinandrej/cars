@@ -55,8 +55,8 @@ export const LoginUser = () => {
             <Input.Password id="password" />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+        <Form.Item >
+            <Button className={styles.button} type="primary" htmlType="submit">
                 Отправить
             </Button>
         </Form.Item>

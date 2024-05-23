@@ -82,7 +82,7 @@ class ServiceOrganization {
                     organization: canditate
                 }
             } else {
-                next(ApiError.bedRequest(errorStrings.errorPassword()))
+                next(ApiError.bedRequest(errorStrings.errorPasswordOrEmail()))
             }
         } catch (error) {
             if(error instanceof Error) {
@@ -207,7 +207,7 @@ class ServiceOrganization {
                 )
                 return organization
             } else {
-                next(ApiError.bedRequest(errorStrings.errorPassword()))
+                next(ApiError.bedRequest(errorStrings.errorPasswordOrEmail()))
             }
 
         } catch (error) {

@@ -22,7 +22,6 @@ export const errorStrings = {
     notFoundModel: (id: number) => `Model с таким id - ${id} не найдена`,
     notFoundCar: (vinCode: string) => `Car с таким vinCode - ${vinCode} не найден`,
     notFoundDetail: (id: number) => `Detail с таким id - ${id} не найдена`,
-    errorPassword: () => `Неверный пароль`,
 
     onlyForAdmin: () => `Доступно только для пользователя с ролью ${UserRoles.Admin}`,
 
@@ -31,6 +30,7 @@ export const errorStrings = {
     unauthorized: () => `Неавторизон`,
     expireToken: () => `Токен истёк`,
     uncorrectEmail: () => `Некорректный email`,
+    errorPasswordOrEmail: () => `Некорректный email или пароль`,
     uncorrectRole: () => `Некорректная роль у пользователя`,
     uncorrectAddress: (key: string) => `Некорректный адрес ${key}`,
     checkLengthPhoneNumber: () => `Количество символов для phoneNumber === 11`,

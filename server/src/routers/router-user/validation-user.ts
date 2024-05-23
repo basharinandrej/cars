@@ -13,9 +13,9 @@ export const validationUser = {
         return [
             body('password')
                 .notEmpty().withMessage(errorStrings.notBeEmptyField('password'))
-                .isLength({min: 8}).withMessage(errorStrings.minLength('password', 8)).trim(),
+                .isLength({min: 8}).withMessage(errorStrings.errorPasswordOrEmail()).trim(),
 
-            body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
+            body('email').isEmail().withMessage(errorStrings.errorPasswordOrEmail()).trim(),
         ]
     },
     deleteChain() {

@@ -80,7 +80,7 @@ class ServiceUser {
                     }
                 }
             } else {
-                next(ApiError.bedRequest(errorStrings.errorPassword()))
+                next(ApiError.bedRequest(errorStrings.errorPasswordOrEmail()))
             }
         } catch (error) {
             if(error instanceof Error) {
@@ -208,7 +208,7 @@ class ServiceUser {
                 )
                 return user
             } else {
-                next(ApiError.bedRequest(errorStrings.errorPassword()))
+                next(ApiError.bedRequest(errorStrings.errorPasswordOrEmail()))
             }
 
         } catch (error) {
