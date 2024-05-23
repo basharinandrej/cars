@@ -10,8 +10,8 @@ export const getScrollPositionListingDetails = (state: RootState) => state.listi
 
 export const getSearchGlobalFilterListingDetails = (state: RootState) => state.filterListingDetails.searchGlobal
 
-export const getFilterListingBrands = (state: RootState) => state.filterListingDetails.brand.items
-export const getFilterListingModels = (state: RootState) => state.filterListingDetails.model.items
+export const getFilterListingBrands = (state: RootState) => state.filterListingDetails.brand.rows
+export const getFilterListingModels = (state: RootState) => state.filterListingDetails.model.rows
 export const getFilterListingCategories = (state: RootState) => state.filterListingDetails.category.rows
 
 export const getFilterSelectedBrandValue = (state: RootState) => state.filterListingDetails.brand.selected?.value

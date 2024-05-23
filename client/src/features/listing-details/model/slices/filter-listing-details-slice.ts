@@ -55,13 +55,13 @@ const initialState: FilterListingDetailsSchema = {
   },
   model: {
     selected: null,
-    items:[],
-    total: 0
+    rows:[],
+    count: 0
   },
   brand: {
     selected: null,
-    items: [],
-    total: 0
+    rows: [],
+    count: 0
   }
 }
 
@@ -107,13 +107,13 @@ export const filterListingDetailsSlice = createSlice({
       }
       state.model = {
         selected: null,
-        items:[],
-        total: 0
+        rows:[],
+        count: 0
       }
       state.brand =  {
         selected: null,
-        items: [],
-        total: 0
+        rows: [],
+        count: 0
       }
     },
 
@@ -128,7 +128,7 @@ export const filterListingDetailsSlice = createSlice({
 
     setSelectedBrand: (state, action: PayloadAction<number>) => {
       addQueryParams('brandId', action.payload)
-      state.brand.selected = state.brand.items.find((brandItem) => brandItem.value === action.payload)
+      state.brand.selected = state.brand.rows.find((brandItem) => brandItem.value === action.payload)
     },
     dropSelectedBrand: (state) => {
       deleteOneQueryParam('brandId')
@@ -137,7 +137,7 @@ export const filterListingDetailsSlice = createSlice({
 
     setSelectedModel: (state, action: PayloadAction<number>) => {
       addQueryParams('modelId', action.payload)
-      state.model.selected = state.model.items.find((modelItem) => modelItem.value === action.payload)
+      state.model.selected = state.model.rows.find((modelItem) => modelItem.value === action.payload)
     },
     dropSelectedModel: (state) => {
       deleteOneQueryParam('modelId')
@@ -159,8 +159,8 @@ export const filterListingDetailsSlice = createSlice({
       .addCase(fetchListingBrands.fulfilled, (state, action: PayloadAction<BrandResponse>) => {
         const data = action.payload
 
-        state.brand.items = data?.items
-        state.brand.total = data?.total
+        state.brand.rows = data?.rows
+        state.brand.count = data?.count
       })
 
 
@@ -168,8 +168,8 @@ export const filterListingDetailsSlice = createSlice({
       .addCase(fetchListingModels.fulfilled, (state, action: PayloadAction<ModelResponse>) => {
         const data = action.payload
 
-        state.model.items = data?.items
-        state.model.total = data?.total
+        state.model.rows = data?.rows
+        state.model.count = data?.count
       })
 
 

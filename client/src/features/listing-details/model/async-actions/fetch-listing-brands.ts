@@ -15,14 +15,14 @@ export const fetchListingBrands = createAsyncThunk<BrandResponse, string, ThunkA
                 keyword: value,
                 limit: DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS
             }
-            const response = await extra.api.get('/api/brand', {
+            const response = await extra.api.get<BrandResponse>('/api/brand', {
                 params
             })
 
 
             return {
-                total: response.data.total,
-                items: response.data.items.map((brand:any) => {
+                count: response.data.count,
+                rows: response.data.rows.map((brand: any) => {
                     return {
                         value: brand.id,
                         label: brand.name

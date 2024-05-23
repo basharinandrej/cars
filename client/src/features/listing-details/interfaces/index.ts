@@ -11,8 +11,8 @@ export interface Brand {
     value: number
 }
 export interface BrandResponse {
-    items: Brand[]
-    total: number
+    rows: Brand[]
+    count: number
 }
 
 
@@ -21,8 +21,8 @@ export interface Model {
     value: number
 }
 export interface ModelResponse {
-    items: Model[]
-    total: number
+    rows: Model[]
+    count: number
 }
 
 

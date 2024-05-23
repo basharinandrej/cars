@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {BrandResponse} from '../../interfaces'
+import {ModelResponse} from '../../interfaces'
 import {ThunkApiConfig} from '@app'
 import {ParamsFetchListingModel} from '../../model/interfaces'
 import {getFilterSelectedBrandValue} from '../selectors'
 import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
 
-export const fetchListingModels = createAsyncThunk<BrandResponse, void, ThunkApiConfig>(
+export const fetchListingModels = createAsyncThunk<ModelResponse, void, ThunkApiConfig>(
     'listing-models/fetchListingModels',
     async (_, thunkAPI) => {
         try {
@@ -24,8 +24,8 @@ export const fetchListingModels = createAsyncThunk<BrandResponse, void, ThunkApi
 
 
             return {
-                total: response.data.total,
-                items: response.data.items.map((model:any) => {
+                count: response.data.count,
+                rows: response.data.rows.map((model:any) => {
                     return {
                         value: model.id,
                         label: model.name

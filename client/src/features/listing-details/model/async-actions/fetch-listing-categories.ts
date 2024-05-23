@@ -18,7 +18,7 @@ export const fetchListingCategories = createAsyncThunk<CategoryResponse, void, T
 
             return {
                 count: response.data.count,
-                rows: response.data.rows.map((category:any) => {
+                rows: response.data.rows.map((category: any) => {
                     return {
                         value: category.id,
                         label: category.name
