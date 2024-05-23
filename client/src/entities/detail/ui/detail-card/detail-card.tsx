@@ -17,7 +17,6 @@ export const DetailCard: FC<Props> = ({
 }) => {
 
 
-
     return (
         <Card
             loading={isLoading}

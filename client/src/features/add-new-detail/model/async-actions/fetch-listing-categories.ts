@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
+import { DetailCategoryResponse } from '../../interfaces'
 
-export const fetchListingCategories = createAsyncThunk<any, void, ThunkApiConfig>(
+export const fetchListingCategories = createAsyncThunk<DetailCategoryResponse, void, ThunkApiConfig>(
     'listing-categories/fetchListingCategories',
     async (_, thunkAPI) => {
         try {
@@ -16,8 +17,8 @@ export const fetchListingCategories = createAsyncThunk<any, void, ThunkApiConfig
 
 
             return {
-                total: response.data.total,
-                items: response.data.items.map((category:any) => {
+                count: response.data.count,
+                rows: response.data.rows.map((category:any) => {
                     return {
                         value: category.id,
                         label: category.name

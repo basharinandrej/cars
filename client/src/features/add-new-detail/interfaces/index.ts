@@ -16,8 +16,8 @@ export interface DetailCategory {
 }
 
 export interface DetailCategoryResponse {
-    items: DetailCategory[]
-    total: number
+    rows: DetailCategory[]
+    count: number
 }
 
 export interface Model {
@@ -26,7 +26,7 @@ export interface Model {
 }
 
 export interface ModelsResponse {
-    items: Model[]
-    total: number
+    rows: Model[]
+    count: number
 }
   

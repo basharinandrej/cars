@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
 import {DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS} from '@shared'
+import { ModelsResponse } from '../../interfaces'
 
-export const fetchListinModels = createAsyncThunk<any, void, ThunkApiConfig>(
+export const fetchListinModels = createAsyncThunk<ModelsResponse, void, ThunkApiConfig>(
     'listing-models/fetchListinModels',
     async (_, thunkAPI) => {
         try {
@@ -16,8 +17,8 @@ export const fetchListinModels = createAsyncThunk<any, void, ThunkApiConfig>(
 
 
             return {
-                total: response.data.total,
-                items: response.data.items.map((model:any) => {
+                count: response.data.total,
+                rows: response.data.rows.map((model:any) => {
                     return {
                         value: model.id,
                         label: model.name

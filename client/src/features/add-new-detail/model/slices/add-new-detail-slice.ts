@@ -36,8 +36,8 @@ export interface AddNewDetailSchema {
 
 const initialState: AddNewDetailSchema = {
   detailCategories: {
-    items: [],
-    total: 0
+    rows: [],
+    count: 0
   },
   optionsWear: [
     {label: 'Можо использовать', value: DetailWears.CanBeUsed},
@@ -45,8 +45,8 @@ const initialState: AddNewDetailSchema = {
     {label: 'Новая', value: DetailWears.New}
   ],
   models: {
-    items: [],
-    total: 0
+    rows: [],
+    count: 0
   },
   detail: {
     name: '',
@@ -93,15 +93,15 @@ export const addNewDetailSlice = createSlice({
       .addCase(fetchListingCategories.fulfilled, (state, action: PayloadAction<DetailCategoryResponse>) => {
         const data = action.payload
 
-        state.detailCategories.items = data?.items
-        state.detailCategories.total = data?.total
+        state.detailCategories.rows = data?.rows
+        state.detailCategories.count = data?.count
       })
 
       .addCase(fetchListinModels.fulfilled, (state, action: PayloadAction<ModelsResponse>) => {
         const data = action.payload
 
-        state.models.items = data?.items
-        state.models.total = data?.total
+        state.models.rows = data?.rows
+        state.models.count = data?.count
       })
   }
 })
