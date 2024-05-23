@@ -17,8 +17,8 @@ export interface Organization {
     addresses: Address[]
 }
 
-export interface ListingOrganizationsResponse  extends CommonListing{
-    items: Organization[],
+export interface ListingOrganizationsResponse  extends CommonListing {
+    rows: Organization[],
 }
 
 export interface ServiceCategory {
