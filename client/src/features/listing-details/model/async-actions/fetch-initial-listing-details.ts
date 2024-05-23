@@ -14,6 +14,7 @@ import {ListingDetailsResponse} from '../../interfaces'
 import {INITIAL_VALUE_OFFSET_LISTING_DETAILS} from '../../constans'
 
 import {addQueryParams} from '@shared'
+import { AxiosError } from 'axios'
 
 
 export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsResponse, number|void, ThunkApiConfig>(
@@ -50,7 +51,10 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsRespons
             })
             return response.data
         } catch (error) {
-            return error
+            console.log('>>> error', error)
+            if(error instanceof AxiosError) {
+                return error.response.data.message
+            }
         }
     }
 )

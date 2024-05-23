@@ -50,8 +50,8 @@ const initialState: FilterListingDetailsSchema = {
   searchGlobal: EMPTY_STRING,
   category: {
     selected: null,
-    total: 0,
-    items: []
+    count: 0,
+    rows: []
   },
   model: {
     selected: null,
@@ -102,8 +102,8 @@ export const filterListingDetailsSlice = createSlice({
       state.searchGlobal = EMPTY_STRING
       state.category = {
         selected: null,
-        total: 0,
-        items: []
+        count: 0,
+        rows: []
       }
       state.model = {
         selected: null,
@@ -146,7 +146,7 @@ export const filterListingDetailsSlice = createSlice({
 
     setSelectedCategory: (state, action: PayloadAction<number>) => {
       addQueryParams('detailCategoryId', action.payload)
-      state.category.selected = state.category.items.find((categoryDetailItem) => categoryDetailItem.value === action.payload)
+      state.category.selected = state.category.rows.find((categoryDetailItem) => categoryDetailItem.value === action.payload)
     },
     dropSelectedCategory: (state) => {
       deleteOneQueryParam('detailCategoryId')
@@ -191,11 +191,11 @@ export const filterListingDetailsSlice = createSlice({
       .addCase(fetchListingCategories.fulfilled, (state, action: PayloadAction<CategoryResponse>) => {
         const data = action.payload
 
-        state.category.items = data?.items
-        state.category.total = data?.total
+        state.category.rows = data?.rows
+        state.category.count = data?.count
 
         if(state.category.selected?.value && !state.category.selected?.label) {
-          const selectedCategory = data.items.find((category) => category.value === state.category.selected.value)
+          const selectedCategory = data.rows.find((category) => category.value === state.category.selected.value)
 
           state.category.selected.label = selectedCategory.label
           state.category.selected.value = selectedCategory.value

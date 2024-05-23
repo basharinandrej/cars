@@ -82,6 +82,6 @@ export const ListingDetails:FC<Props> = ({id}) => {
 export default ListingDetails
 
 
-interface Props{
+interface Props {
     id?: number
 }

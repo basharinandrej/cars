@@ -30,9 +30,10 @@ export interface Category {
     label: string,
     value: number
 }
+
 export interface CategoryResponse {
-    total: number,
-    items: Category[]
+    count: number,
+    rows: Category[]
 }
 
 

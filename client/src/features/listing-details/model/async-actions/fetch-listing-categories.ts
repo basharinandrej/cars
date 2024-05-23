@@ -9,7 +9,7 @@ export const fetchListingCategories = createAsyncThunk<CategoryResponse, void, T
         try {
             const { extra} = thunkAPI
       
-            const response = await extra.api.get('/api/detail-category', {
+            const response = await extra.api.get<CategoryResponse>('/api/detail-category', {
                 params: {
                     limit: DEFAULT_VALUE_LIMIT_FOR_FILTER_CONTROLS
                 }
@@ -17,8 +17,8 @@ export const fetchListingCategories = createAsyncThunk<CategoryResponse, void, T
 
 
             return {
-                total: response.data.total,
-                items: response.data.items.map((category:any) => {
+                count: response.data.count,
+                rows: response.data.rows.map((category:any) => {
                     return {
                         value: category.id,
                         label: category.name
