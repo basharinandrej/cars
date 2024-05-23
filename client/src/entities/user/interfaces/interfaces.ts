@@ -11,8 +11,8 @@ export interface User {
 }
 
 export interface UsersResponse {
-    total: number,
-    items: User[]
+    count: number,
+    rows: User[]
 }
 
 export interface FormUpdateUserValueTypes {

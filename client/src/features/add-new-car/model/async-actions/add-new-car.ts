@@ -14,6 +14,9 @@ export const addNewCar = createAsyncThunk<Car, void, ThunkApiConfig>(
 
             const response = await extra.api.post<Car>('/api/car', car)
 
+            extra.notificationApi.success({
+                message:  `Машина с vinCode - ${response.data.vinCode} добавлена`,
+            })
             dispatch(fetchCarUser())
             return response.data
             

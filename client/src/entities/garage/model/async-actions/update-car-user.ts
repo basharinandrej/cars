@@ -15,10 +15,19 @@ export const updateCarUser = createAsyncThunk<string|boolean, void, ThunkApiConf
 
             const response = await extra.api.put('/api/car', selectedCar)
             dispatch(fetchCarUser())
-
+            extra.notificationApi.success({
+                message: `Машина с vinCode - ${selectedCar.vinCode} обновлёна`
+            })
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при удалении машины',
+                description: errorMessage
+            })
+            throw errorMessage       
         }
     }
 )

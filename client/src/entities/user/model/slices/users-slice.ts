@@ -17,8 +17,8 @@ export interface UsersSchema extends UsersResponse {
 }
 
 const initialState: UsersSchema = {
-    items: [],
-    total: 0,
+    rows: [],
+    count: 0,
     selectedUserForUpdate: null,
     roleOptions: [
       {label: 'Администратор', value: UserRoles.Admin},
@@ -33,7 +33,7 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     selectedUserForUpdate: (state, action:PayloadAction<number>) => {
-      state.selectedUserForUpdate = state.items.find((item) => item.id === action.payload)
+      state.selectedUserForUpdate = state.rows.find((item) => item.id === action.payload)
     },
     updateSelectedUser: (state, action: PayloadAction<Partial<FormUpdateUserValueTypes>>) => {
       state.selectedUserForUpdate = {
@@ -48,8 +48,8 @@ export const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<UsersResponse>) => {
-          state.items = action.payload.items
-          state.total = action.payload.total
+          state.rows = action.payload.rows
+          state.count = action.payload.count
       })
   }
 })

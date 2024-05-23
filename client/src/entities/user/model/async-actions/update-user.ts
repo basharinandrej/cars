@@ -28,6 +28,7 @@ export const updateUser = createAsyncThunk<string|boolean, void, ThunkApiConfig>
                 message: 'Ошибка при обновлении пользователя',
                 description: errorMessage
             })
-            throw errorMessage        }
+            throw errorMessage     
+        }
     }
 )

@@ -13,7 +13,13 @@ export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
 
             await extra.api.put('/api/user', user)
         } catch (error) {
-            console.log('>>> error', error)
-        }
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при обновлении пользователя',
+                description: errorMessage
+            })
+            throw errorMessage            }
     }
 )
