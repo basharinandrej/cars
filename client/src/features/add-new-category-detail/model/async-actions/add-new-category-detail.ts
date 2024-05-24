@@ -15,6 +15,9 @@ export const addNewCategoryDetail = createAsyncThunk<CategoryDetail, void, Thunk
             const response = await extra.api.post<CategoryDetail>('/api/detail-category', categoryDetail)
 
             dispatch(fetchCategoryDetails())
+            extra.notificationApi.success({
+                message: `Категория детали с ID - ${response.data.id} добавлена`,
+            })
             return response.data
             
         } catch (error: unknown) {

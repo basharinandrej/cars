@@ -15,10 +15,19 @@ export const updateCategoryDetail = createAsyncThunk<void, void, ThunkApiConfig>
 
             const response = await extra.api.put('/api/detail-category', selectedCategoryDetail)
             dispatch(fetchCategoryDetails())
-
+            extra.notificationApi.success({
+                message: `Категория детали с ID - ${selectedCategoryDetail.id} обновлена`,
+            })
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при обновлении категории детали',
+                description: errorMessage
+            })
+            throw errorMessage      
         }
     }
 )

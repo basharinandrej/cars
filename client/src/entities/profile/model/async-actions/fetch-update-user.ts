@@ -20,6 +20,7 @@ export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
                 message: 'Ошибка при обновлении пользователя',
                 description: errorMessage
             })
-            throw errorMessage            }
+            throw errorMessage       
+        }
     }
 )

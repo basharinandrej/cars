@@ -7,8 +7,8 @@ export interface CategoryDetailsSchema extends CategoryDetailsResponse {
 }
 
 const initialState: CategoryDetailsSchema = {
-    total: null,
-    items: [],
+    count: null,
+    rows: [],
     selectedCategoryDetailForUpdate: null
 }
 
@@ -17,7 +17,7 @@ export const categoryDetailsSlice = createSlice({
   initialState,
   reducers: {
     selectedCategoryDetailForUpdate: (state, action: PayloadAction<number>) => {
-      state.selectedCategoryDetailForUpdate = state.items.find((item) => item.id === action.payload)
+      state.selectedCategoryDetailForUpdate = state.rows.find((item) => item.id === action.payload)
     },
     updateSelectedCategoryDetail: (state, action: PayloadAction<Partial<unknown>>) => {
       state.selectedCategoryDetailForUpdate = {
@@ -28,8 +28,8 @@ export const categoryDetailsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchCategoryDetails.fulfilled, (state, action: PayloadAction<CategoryDetailsResponse>) => {
-        state.items = action.payload.items
-        state.total = action.payload.total
+        state.rows = action.payload.rows
+        state.count = action.payload.count
       })
   }
 })

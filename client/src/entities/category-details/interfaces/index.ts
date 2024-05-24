@@ -3,8 +3,8 @@ export interface CategoryDetail {
     name: string
 }
 export interface CategoryDetailsResponse {
-    total: number
-    items: CategoryDetail[]
+    count: number
+    rows: CategoryDetail[]
 }
 
 export interface FormAddNewCategoryDetailValueTypes {
