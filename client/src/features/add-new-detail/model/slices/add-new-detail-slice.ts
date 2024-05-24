@@ -7,6 +7,7 @@ import {
   ModelsResponse,
   DetailCategoryResponse
 } from '../../interfaces'
+import { fetchAddNewDetail } from '../async-actions/fetch-add-new-detail'
 
 
 interface OptionWear {
@@ -102,6 +103,11 @@ export const addNewDetailSlice = createSlice({
 
         state.models.rows = data?.rows
         state.models.count = data?.count
+      })
+
+
+      .addCase(fetchAddNewDetail.fulfilled, (state, action) => {
+        
       })
   }
 })
