@@ -3,8 +3,8 @@ export interface Brand {
     name: string
 }
 export interface BrandResponse {
-    total: number
-    items: Brand[]
+    count: number
+    rows: Brand[]
 }
 
 export interface FormAddNewBrandValueTypes {

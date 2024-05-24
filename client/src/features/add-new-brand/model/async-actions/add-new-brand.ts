@@ -15,6 +15,9 @@ export const addNewBrand = createAsyncThunk<Brand, void, ThunkApiConfig>(
             const response = await extra.api.post<Brand>('/api/brand', brand)
 
             dispatch(fetchBrands())
+            extra.notificationApi.success({
+                message: `Бренд с ID - ${response.data.id} добавлен`,
+            })
             return response.data
             
         } catch (error: unknown) {

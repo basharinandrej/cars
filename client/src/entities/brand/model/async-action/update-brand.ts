@@ -14,11 +14,21 @@ export const updateBrand = createAsyncThunk<void, void, ThunkApiConfig>(
 
 
             const response = await extra.api.put('/api/brand', selectedCategoryDetail)
+            extra.notificationApi.success({
+                message: `Бренд с ID - ${selectedCategoryDetail.id} обновлён`,
+            })
             dispatch(fetchBrands())
 
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
+            const {extra} = thunkAPI
+            const errorMessage = extra.getErrorMessage(error)
+
+            extra.notificationApi.error({
+                message: 'Ошибка при обновлении бренда',
+                description: errorMessage
+            })
+            throw errorMessage         
         }
     }
 )

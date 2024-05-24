@@ -7,8 +7,8 @@ export interface BrandSchema extends BrandResponse {
 }
 
 const initialState: BrandSchema = {
-    total: null,
-    items: [],
+    count: null,
+    rows: [],
     selectedBrandForUpdate: null
 }
 
@@ -17,7 +17,7 @@ export const brandSlice = createSlice({
   initialState,
   reducers: {
     selectedBrandForUpdate: (state, action: PayloadAction<number>) => {
-      state.selectedBrandForUpdate = state.items.find((item) => item.id === action.payload)
+      state.selectedBrandForUpdate = state.rows.find((item) => item.id === action.payload)
     },
     updateSelectedBrand: (state, action: PayloadAction<Partial<unknown>>) => {
       state.selectedBrandForUpdate = {
@@ -28,8 +28,8 @@ export const brandSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchBrands.fulfilled, (state, action: PayloadAction<BrandResponse>) => {
-        state.items = action.payload?.items
-        state.total = action.payload?.total
+        state.rows = action.payload?.rows
+        state.count = action.payload?.count
       })
   }
 })
