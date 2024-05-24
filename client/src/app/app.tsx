@@ -5,7 +5,7 @@ import { AppRoutes } from "./ui/app"
 import {ErrorBoundary} from './providers/error-boundary'
 import {MainLayout, InnerLayout} from '@widgets';
 import { YMaps} from '@pbe/react-yandex-maps'
-import { useMount, useAppDispatch } from '@shared';
+import { useMount, useAppDispatch, Loader } from '@shared';
 import {featchInitUser, featchInitOrganization, getUserId, getOrganizationId} from '@entities'
 
 import '../styles/index.sass'
@@ -28,7 +28,7 @@ export const App = () => {
 
     return (
         <ErrorBoundary>
-            <Suspense fallback={<h1>Загрузка....</h1>}>
+            <Suspense fallback={<Loader />}>
                 <Layout>
                     <YMaps>
                         <AppRoutes />

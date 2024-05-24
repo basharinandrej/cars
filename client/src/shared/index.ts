@@ -16,6 +16,7 @@ export {Select} from './ui/select/select'
 export {Button} from './ui/button/'
 export {AppLink} from './ui/app-link/'
 export {Card} from './ui/card/card'
+export {Loader} from './ui/loader/loader'
 
 
 export {addQueryParams} from './libs/add-query-params'
@@ -43,8 +44,6 @@ export {
 export {ParsedUrl} from './interfaces/parsed-url'
 export {CommonListing} from './interfaces/common-listing'
 
-
-export {HTMLElementEvent} from './types/html-element-event'
 
 export {DetailWears, StatusOrganization, Bans, UserRoles, StatusRequest} from './enums'
 
