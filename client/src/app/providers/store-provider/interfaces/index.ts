@@ -14,7 +14,8 @@ import {
     AddNewCategoryServiceSchema,
     AddNewBrandSchema,
     ServiceSchema,
-    AddNewServiceSchema
+    AddNewServiceSchema,
+    AddNewModelSchema
 } from '@features'
 import {
     MenuSchema, 
@@ -26,7 +27,8 @@ import {
     RequestsSchema,
     CategoryDetailsSchema,
     CategoryServicesSchema,
-    BrandSchema
+    BrandSchema,
+    ModelSchema
 } from '@entities'
 import { AxiosInstance } from 'axios'
 import {NotificationInstance} from 'antd/es/notification/interface'
@@ -62,7 +64,9 @@ export interface StateSchema {
     addNewCategoryService: AddNewCategoryServiceSchema
 
     brand: BrandSchema
+    model: ModelSchema
     addNewBrand: AddNewBrandSchema
+    addNewModel: AddNewModelSchema
     services: ServiceSchema
     addNewService: AddNewServiceSchema
 }

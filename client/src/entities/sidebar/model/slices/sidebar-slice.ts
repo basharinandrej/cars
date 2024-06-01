@@ -58,7 +58,7 @@ const initialState: SidebarSchema = {
     },
     {
         id: 7,
-        path: '/cabinet/category-details',
+        path: '/cabinet/models',
         text: 'Модели',
         iconType: 'models',
         permissionForUserRole: [UserRoles.Admin]

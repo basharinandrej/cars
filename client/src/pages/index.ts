@@ -15,6 +15,7 @@ import { PageCategoryDetails } from './page-category-details/page-category-detai
 import { PageCategoryServices } from './page-category-services/page-category-services.async';
 import {PageBrands} from './page-brand/page-brands.async'
 import {PageServices} from './page-services/page-services.async'
+import {PageModels} from './page-model/page-models.async'
 
 
 
@@ -33,5 +34,6 @@ export {
     PageCategoryDetails,
     PageCategoryServices,
     PageBrands,
-    PageServices
+    PageServices,
+    PageModels
 }

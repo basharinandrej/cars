@@ -1,20 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
-import {fetchBrands} from './fetch-brands'
+import {fetchModels} from './fetch-models'
 
-export const deleteBrand = createAsyncThunk<number, number, ThunkApiConfig>(
-    'delete-brand/deleteBrand',
+export const deleteModel = createAsyncThunk<number, number, ThunkApiConfig>(
+    'delete-model/deleteModel',
     async (id, thunkAPI) => {
         try {
             const { extra, dispatch} = thunkAPI
 
-            const response = await extra.api.delete('/api/brand', {
+            const response = await extra.api.delete('/api/model', {
                 params: {id}
             })
             
-            dispatch(fetchBrands())
+            dispatch(fetchModels())
             extra.notificationApi.success({
-                message: `Бренд с id - ${id} удален`
+                message: `Модель с id - ${id} удалена`
             })
             return response.data
         } catch (error) {

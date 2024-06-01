@@ -1,23 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
-import {getSelectedBrand} from '../selectors/index'
-import {fetchBrands} from '../async-action/fetch-brands'
+import {getSelectedModel} from '../selectors/index'
+import {fetchModels} from './fetch-models'
 
-export const updateBrand = createAsyncThunk<void, void, ThunkApiConfig>(
-    'update-brand/updateBrand',
+export const updateModel = createAsyncThunk<void, void, ThunkApiConfig>(
+    'update-model/updateModel',
     async (_, thunkAPI) => {
         try {
             const {getState, extra, dispatch} = thunkAPI
             const state = getState()
 
-            const selectedBrand = getSelectedBrand(state)
+            const selectedModel = getSelectedModel(state)
 
 
-            const response = await extra.api.put('/api/brand', selectedBrand)
+            const response = await extra.api.put('/api/model', selectedModel)
             extra.notificationApi.success({
-                message: `Бренд с ID - ${selectedBrand.id} обновлён`,
+                message: `Модель с ID - ${selectedModel.id} обновлёна`,
             })
-            dispatch(fetchBrands())
+            dispatch(fetchModels())
 
             return response.data
         } catch (error) {
@@ -25,7 +25,7 @@ export const updateBrand = createAsyncThunk<void, void, ThunkApiConfig>(
             const errorMessage = extra.getErrorMessage(error)
 
             extra.notificationApi.error({
-                message: 'Ошибка при обновлении бренда',
+                message: 'Ошибка при обновлении модели',
                 description: errorMessage
             })
             throw errorMessage         

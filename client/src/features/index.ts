@@ -41,6 +41,10 @@ export {FormNewCategoryService} from './add-new-category-service/ui/add-new-cate
 export {addNewBrandReducer, AddNewBrandSchema} from './add-new-brand/model/slices/add-new-brand-slice'
 export {FormAddNewBrand} from './add-new-brand/ui/form-add-new-brand'
 
+export {addNewModelReducer, AddNewModelSchema} from './add-new-model/model/slices/add-new-model-slice'
+export {FormAddNewModel} from './add-new-model/ui/form-add-new-model'
+
+
 export {ListingServices} from './listing-services/ui/listing-services'
 export {servicesReducer, ServiceSchema} from './listing-services/model/slices/listing-services-slice'
 

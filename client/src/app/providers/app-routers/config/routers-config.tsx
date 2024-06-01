@@ -16,7 +16,8 @@ import {
     PageCategoryDetails,
     PageCategoryServices,
     PageBrands,
-    PageServices
+    PageServices,
+    PageModels
 } from '@pages'
 
 
@@ -36,6 +37,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.CategoryDetailPage]: '/cabinet/category-details/',
     [Routes.CategoryServicePage]: '/cabinet/category-services/',
     [Routes.Brands]: '/cabinet/brands',
+    [Routes.Models]: '/cabinet/models',
     [Routes.MyRequest]: '/cabinet/my-request/', // :id
     [Routes.MyServices]: '/cabinet/my-services/', // :id
 
@@ -129,6 +131,14 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.Brands]: {
         path: `${RoutePaths.Brands}`,
         element: <PageBrands />,
+        onlyAuth: true,
+        permissionForUserRole: [UserRoles.Admin]
+    },
+
+
+    [Routes.Models]: {
+        path: `${RoutePaths.Models}`,
+        element: <PageModels />,
         onlyAuth: true,
         permissionForUserRole: [UserRoles.Admin]
     },

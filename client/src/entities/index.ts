@@ -68,6 +68,12 @@ export {Brands} from './brand/ui/brand'
 export { fetchBrands } from './brand/model/async-action/fetch-brands';
 export {Brand, FormAddNewBrandValueTypes} from './brand/interfaces'
 
+//Model
+export {modelReducer, ModelSchema} from './model/model/slices/model-slice'
+export {Models} from './model/ui/model'
+export {Model, FormAddNewModelValueTypes} from './model/interfaces'
+export { fetchModels } from './model/model/async-action/fetch-models';
+
 //Service
 export {Services} from './services/ui/services'
 export {IService, ServicesResponse, FormAddNewServiceValueTypes, IServiceRequest, ServiceCategoryResponse} from './services/interfaces'
