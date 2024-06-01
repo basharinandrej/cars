@@ -1,11 +1,12 @@
 import { Dispatch,useEffect, FC, SetStateAction } from "react"
 import {Form, Input, Modal } from 'antd'
-import {getSelectedModel} from '../../../model/selectors'
+import {getSelectedModel, getBrands} from '../../../model/selectors'
 import {updateSelectedModel} from '../../../model/slices/model-slice'
 import { useSelector } from "react-redux"
-import {useAppDispatch} from '@shared'
+import {SelectSearch, useAppDispatch, useMount} from '@shared'
 import {FormAddNewModelValueTypes} from '../../../interfaces'
 import { updateModel } from '../../../model/async-action/update-model';
+import {fetchListinBrands} from '../../../model/async-action/fetch-listing-brands'
 
 export const FormUpdateModel:FC<Props> = ({
     isModalOpen,
@@ -15,7 +16,11 @@ export const FormUpdateModel:FC<Props> = ({
     const handleOk = () => setIsModalOpen(false)
 
     const seletedModel = useSelector(getSelectedModel)
+    const brands = useSelector(getBrands)
 
+    useMount(() => {
+        dispatch(fetchListinBrands())
+    })
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -55,6 +60,14 @@ export const FormUpdateModel:FC<Props> = ({
             >
                 <Form.Item<FormAddNewModelValueTypes> label="Название" name="name" required>
                     <Input />
+                </Form.Item>
+
+                <Form.Item<FormAddNewModelValueTypes> 
+                   label="Модель"
+                   name="brandId"
+                   required
+                >
+                    <SelectSearch options={brands} />
                 </Form.Item>
             </Form>
         </Modal>

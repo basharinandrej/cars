@@ -9,6 +9,7 @@ export interface ModelResponse {
 
 export interface FormAddNewModelValueTypes {
     name: string
+    brandId: number
 }
 
 
@@ -17,3 +18,14 @@ export interface ParamsFetchListingModel {
     orderBy: 'asc' | 'desc'
     limit: number
 }
+
+export interface Brand {
+    label: string
+    value: number
+}
+
+export interface BrandsResponse {
+    rows: Brand[]
+    count: number
+}
+  
