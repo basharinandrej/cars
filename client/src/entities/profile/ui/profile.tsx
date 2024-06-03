@@ -21,7 +21,6 @@ export const Profile = () => {
     const role = user.role
 
     const onFinishHandler = () => {
-        console.log('>>>> onFinishHandler')
         dispatch(featchUpdateUser())
     };
 

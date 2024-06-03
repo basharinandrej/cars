@@ -10,18 +10,21 @@ export const Button:FC<Props> = ({
     type = 'primary',
     htmlType,
     danger = false,
-    icon
+    icon,
+    disabled,
+    className
 }) => {
 
     return (
         <Btn
-            className={classNames(styles.button, {
+            className={classNames(styles.button, className, {
                 [styles.large]: size === 'large'
             })}
             type={type}
             onClick={onClick}
             htmlType={htmlType}
             danger={danger}
+            disabled={disabled}
         >
             {text || icon}
         </Btn>
