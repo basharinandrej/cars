@@ -14,7 +14,18 @@ export const fetchModels = createAsyncThunk<ModelResponse, void, ThunkApiConfig>
             }
             const response = await extra.api.get('/api/model', {params})
 
-            return response.data
+            return {
+                count: response.data.count,
+                rows: response.data.rows.map((model: any) => {
+                    return {
+                        ...model,
+                        brand: {
+                            value: model.brand.id,
+                            label: model.brand.name
+                        }
+                    }
+                })
+            }
         } catch (error) {
             console.log('>>> error', error)
         }

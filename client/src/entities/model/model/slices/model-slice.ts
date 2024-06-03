@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import {BrandsResponse, Model, ModelResponse} from '../../interfaces'
+import {Brand, BrandsResponse, Model, ModelResponse} from '../../interfaces'
 import { fetchModels } from '../async-action/fetch-models'
 import { fetchListinBrands } from '../async-action/fetch-listing-brands';
 
 export interface ModelSchema extends ModelResponse {
-  selectedModelForUpdate: Model
+  selectedModelForUpdate: Model & {
+    brand: Brand
+  }
   brands: BrandsResponse
 }
 
@@ -23,11 +25,14 @@ export const modelSlice = createSlice({
   initialState,
   reducers: {
     selectedModelForUpdate: (state, action: PayloadAction<number>) => {
-      state.selectedModelForUpdate = state.rows.find((item) => item.id === action.payload)
-    },
-    updateSelectedModel: (state, action: PayloadAction<Partial<unknown>>) => {
       state.selectedModelForUpdate = {
-          ...state.selectedModelForUpdate, ...action.payload
+        ...state.rows.find((item) => item.id === action.payload),
+      }
+    },
+    updateSelectedModel: (state, action: PayloadAction<Partial<{brandId: number}>>) => {
+      state.selectedModelForUpdate = {
+          ...state.selectedModelForUpdate,
+          brand: state.brands.rows.find((brand) => brand.value === action.payload.brandId)
       }
     }
   },

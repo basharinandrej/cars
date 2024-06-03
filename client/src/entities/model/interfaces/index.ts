@@ -4,7 +4,11 @@ export interface Model {
 }
 export interface ModelResponse {
     count: number
-    rows: Model[]
+    rows: {
+        id: number
+        name: string
+        brand: Brand
+    }[]
 }
 
 export interface FormAddNewModelValueTypes {

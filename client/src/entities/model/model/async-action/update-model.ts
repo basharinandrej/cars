@@ -13,7 +13,11 @@ export const updateModel = createAsyncThunk<void, void, ThunkApiConfig>(
             const selectedModel = getSelectedModel(state)
 
 
-            const response = await extra.api.put('/api/model', selectedModel)
+            const response = await extra.api.put('/api/model', {
+                id: selectedModel.id,
+                name: selectedModel.name,
+                brandId: selectedModel.brand.value
+            })
             extra.notificationApi.success({
                 message: `Модель с ID - ${selectedModel.id} обновлёна`,
             })

@@ -3,13 +3,13 @@ import {Form, Input, Modal } from 'antd'
 import {getSelectedModel, getBrands} from '../../../model/selectors'
 import {updateSelectedModel} from '../../../model/slices/model-slice'
 import { useSelector } from "react-redux"
-import {SelectSearch, useAppDispatch, useMount} from '@shared'
+import {Select, useAppDispatch, useMount} from '@shared'
 import {FormAddNewModelValueTypes} from '../../../interfaces'
 import { updateModel } from '../../../model/async-action/update-model';
 import {fetchListinBrands} from '../../../model/async-action/fetch-listing-brands'
 
 export const FormUpdateModel:FC<Props> = ({
-    isModalOpen,
+    isModalOpen = true,
     setIsModalOpen,
 }) => {
     const dispatch = useAppDispatch()
@@ -24,9 +24,9 @@ export const FormUpdateModel:FC<Props> = ({
     const [form] = Form.useForm();
 
     useEffect(() => {
-
         form.setFieldsValue({
-            name: seletedModel?.name
+            name: seletedModel?.name,
+            brandId: seletedModel?.brand.value
         })
     }, [seletedModel]);
 
@@ -63,11 +63,11 @@ export const FormUpdateModel:FC<Props> = ({
                 </Form.Item>
 
                 <Form.Item<FormAddNewModelValueTypes> 
-                   label="Модель"
+                   label="Бренд"
                    name="brandId"
                    required
                 >
-                    <SelectSearch options={brands} />
+                    <Select options={brands}/>
                 </Form.Item>
             </Form>
         </Modal>
