@@ -14,12 +14,14 @@ export interface UsersSchema extends UsersResponse {
   selectedUserForUpdate: User
   roleOptions: Array<RoleOption>
   isDisabledRoleSelect: boolean
+  idCurrentUser: number
 }
 
 const initialState: UsersSchema = {
     rows: [],
     count: 0,
     selectedUserForUpdate: null,
+    idCurrentUser: null,
     roleOptions: [
       {label: 'Администратор', value: UserRoles.Admin},
       {label: 'Модератор', value: UserRoles.Moderator},
@@ -46,6 +48,9 @@ export const usersSlice = createSlice({
       const isMe = Number(myId) === state.selectedUserForUpdate.id
 
       state.isDisabledRoleSelect = isMe || roleOfProfile !== UserRoles.Admin
+    },
+    setCurrentUser: (state) => {
+      state.idCurrentUser = Number(localStorage.getItem(APP_CAR_KEY_LS_USER_ID))
     }
   },
   extraReducers: (builder) => {
@@ -57,6 +62,6 @@ export const usersSlice = createSlice({
   }
 })
 
-export const {selectedUserForUpdate, updateSelectedUser, setIsDisabledRoleSelect} = usersSlice.actions
+export const {selectedUserForUpdate, updateSelectedUser, setCurrentUser, setIsDisabledRoleSelect} = usersSlice.actions
 
 export const usersReducers = usersSlice.reducer
