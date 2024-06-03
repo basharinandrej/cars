@@ -59,8 +59,9 @@ export const ListingUsers = () => {
                     className={styles.list}
                     renderItem={
                         (user) => {
+                            const isMe = user.id === idCurrentUser
 
-                            return <List.Item className={classNames(styles.item, {[styles.currentUser]: user.id === idCurrentUser })}>
+                            return <List.Item className={classNames(styles.item, {[styles.currentUser]: isMe })}>
                                 <p>{user.id}</p>
                                 <p>{user.name}</p>
                                 <p>{user.surname}</p>
@@ -72,9 +73,9 @@ export const ListingUsers = () => {
                                     <div className={styles.buttonEdit}>
                                         <Button icon={<EditOutlined />} onClick={() => onClickEditHandler(user.id)} />
                                     </div>
-                                    <div className={styles.buttonDelete}>
+                                    {!isMe && <div className={styles.buttonDelete}>
                                         <Button icon={<DeleteOutlined />} onClick={() => onClickDeleteHandler(user.id)} danger />
-                                    </div>
+                                    </div>}
                                 </div>
                             </List.Item>
                         }
