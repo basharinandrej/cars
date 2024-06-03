@@ -16,6 +16,7 @@ import { PageCategoryServices } from './page-category-services/page-category-ser
 import {PageBrands} from './page-brand/page-brands.async'
 import {PageServices} from './page-services/page-services.async'
 import {PageModels} from './page-model/page-models.async'
+import {PageRegistration} from './page-registration/page-registration.async'
 
 
 
@@ -35,5 +36,6 @@ export {
     PageCategoryServices,
     PageBrands,
     PageServices,
-    PageModels
+    PageModels,
+    PageRegistration
 }

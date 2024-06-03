@@ -62,5 +62,6 @@ export const LoginUser = () => {
         </Form.Item>
 
         <AppLink to={'/login/organization'}>Войти как организация</AppLink>
+        <AppLink to={'/registration/user'}>Регистрация</AppLink>
     </Form>
 }
