@@ -1,5 +1,5 @@
 import { Button, Form, Input } from 'antd'
-import {useAppDispatch, AppLink} from '@shared'
+import {useAppDispatch, AppLink, APP_CAR_KEY_LS_USER_ID} from '@shared'
 import {FieldTypeLoginForm} from '../interfaces'
 import { setPassword, setEmail } from '../model/slices/login-user-slice'
 import {fetchLoginUserByEmail} from '../model/async-actions/login-user-by-email'
@@ -12,7 +12,7 @@ export const LoginUser = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const onSuccessLogin = () => navigate('/')
+    const onSuccessLogin = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_USER_ID)}`)
 
     const onFinishHandler = async () => {
         const result = await dispatch(fetchLoginUserByEmail())

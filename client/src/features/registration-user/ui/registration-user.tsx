@@ -17,7 +17,7 @@ export const RegistrationUser = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const onSuccessRegistration = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_USER_ID)}`) // cabinet/profile/58
+    const onSuccessRegistration = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_USER_ID)}`)
 
     const onChangeHandler = (value: FormRegistrationUserValueTypes) => {
         value.name && dispatch(setName(value.name))
