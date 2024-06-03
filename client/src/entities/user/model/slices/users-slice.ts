@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {UsersResponse, FormUpdateUserValueTypes} from '../../interfaces/interfaces'
 import { fetchUsers } from '../async-actions/fetch-users'
 import {User} from '../../interfaces/interfaces'
-import { UserRoles } from '@shared'
+import { APP_CAR_KEY_LS_USER_ID, APP_CAR_KEY_LS_USER_ROLE, UserRoles } from '@shared'
 
 
 interface RoleOption {
@@ -41,8 +41,11 @@ export const usersSlice = createSlice({
       }
     },
     setIsDisabledRoleSelect: (state) => {
+      const roleOfProfile = JSON.parse(localStorage.getItem(APP_CAR_KEY_LS_USER_ROLE))
+      const myId = localStorage.getItem(APP_CAR_KEY_LS_USER_ID)
+      const isMe = Number(myId) === state.selectedUserForUpdate.id
 
-      state.isDisabledRoleSelect = state.selectedUserForUpdate.role ===  UserRoles.Admin
+      state.isDisabledRoleSelect = isMe || roleOfProfile !== UserRoles.Admin
     }
   },
   extraReducers: (builder) => {
