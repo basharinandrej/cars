@@ -32,7 +32,6 @@ export interface DtoUserUpdate {
     email?: string
     role?: UserRoles
     phoneNumber?: number
-    password?: string
     ban?: Bans
     avatar?: string
 }

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
-import {getDataUser} from '../selectors'
+import {getDataUserForUpdate} from '../selectors'
 
 export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
     'profile/featchUpdateUser',
@@ -9,15 +9,17 @@ export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
             const {getState, extra} = thunkAPI
             const state = getState()
 
-            const user = getDataUser(state)
-
-            await extra.api.put('/api/user', user)
+            const user = getDataUserForUpdate(state)
+            extra.notificationApi.success({
+                message: `Профиль успешно обновлён `,
+            })
+            await extra.api.patch('/api/user', user)
         } catch (error) {
             const {extra} = thunkAPI
             const errorMessage = extra.getErrorMessage(error)
 
             extra.notificationApi.error({
-                message: 'Ошибка при обновлении пользователя',
+                message: 'Ошибка при обновлении профиля',
                 description: errorMessage
             })
             throw errorMessage       

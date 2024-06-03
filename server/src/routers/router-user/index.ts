@@ -28,7 +28,7 @@ routers.get('/init',
     controllerUser.initUser
 )
 
-routers.put('', 
+routers.patch('', 
     validationUserUpdation.createChain(), 
     middlewareValidation, 
     controllerUser.update

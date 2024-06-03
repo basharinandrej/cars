@@ -1,6 +1,20 @@
 import {RootState} from '@app'
+import {createSelector} from "@reduxjs/toolkit";
 
 export const getDataUser = (state: RootState) => state.profile.user
+export const getDataUserForUpdate = createSelector(
+    getDataUser,
+    (user) => {
+        return {
+            id: user.id,
+            name: user.name,
+            phoneNumber: user.phoneNumber,
+            surname: user.surname,
+            email: user.email
+        }
+    }
+)
+
 export const getDataOrganization = (state: RootState) => state.profile.organization
 
 export const getIsEditing = (state: RootState) => state.profile.isEditing

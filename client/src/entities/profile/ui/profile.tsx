@@ -21,6 +21,7 @@ export const Profile = () => {
     const role = user.role
 
     const onFinishHandler = () => {
+        console.log('>>>> onFinishHandler')
         dispatch(featchUpdateUser())
     };
 
@@ -52,13 +53,13 @@ export const Profile = () => {
                     <Input />
                 </Form.Item>
 
-                {surname && <Form.Item<FieldType>
+                <Form.Item<FieldType>
                     label="Фамилия"
                     name="surname"
                     initialValue={surname}
                 >
                     <Input />
-                </Form.Item>}
+                </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Email"

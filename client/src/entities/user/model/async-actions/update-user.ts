@@ -13,8 +13,7 @@ export const updateUser = createAsyncThunk<string|boolean, void, ThunkApiConfig>
 
             const selectedUser = getSelectedUserUpdate(state)
 
-
-            const response = await extra.api.put('/api/user', selectedUser)
+            const response = await extra.api.patch('/api/user', selectedUser)
             dispatch(fetchUsers())
             extra.notificationApi.success({
                 message: `Пользователь с ID - ${selectedUser.id} обновлён`

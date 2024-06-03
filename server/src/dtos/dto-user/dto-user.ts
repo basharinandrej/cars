@@ -53,7 +53,6 @@ class DtoUser {
             email: body.email,
             role: body.role,
             phoneNumber: body.phoneNumber,
-            password: body.password,
             ban: body.ban
         }
     }

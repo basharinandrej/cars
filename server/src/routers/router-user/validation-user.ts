@@ -1,4 +1,3 @@
-
 import { cookie, body } from 'express-validator';
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
@@ -98,6 +97,7 @@ export const validationUserUpdation = {
 
                 try {
                     const result = serviceToken.validationToken(value)
+                    console.log('>>>> result', result)
 
                     if(isAdministrator(result)) {
                         return Promise.resolve(true);
@@ -109,26 +109,6 @@ export const validationUserUpdation = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             }),
-            body('name')
-                .notEmpty().withMessage(errorStrings.notBeEmptyField('name'))
-                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
-
-            body('surname')
-                .notEmpty().withMessage(errorStrings.notBeEmptyField('surname'))
-                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
-
-            body('role').custom(async(value: UserRoles) => {
-
-                if(value === UserRoles.Admin) {
-                    const users = await User.findAndCountAll({
-                        where: {role: UserRoles.Admin}
-                    })
-
-                    if(users.count >= MAX_COUNT_ADMINS){
-                        return Promise.reject(ApiError.bedRequest(errorStrings.maxCountAdmins()));
-                    }
-                }
-            })
         ]
     }
 }
