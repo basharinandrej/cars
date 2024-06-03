@@ -3,10 +3,12 @@ import {Brand, BrandsResponse, Model, ModelResponse} from '../../interfaces'
 import { fetchModels } from '../async-action/fetch-models'
 import { fetchListinBrands } from '../async-action/fetch-listing-brands';
 
+interface SelectedModelForUpdate extends Model {
+  brand: Brand
+}
+
 export interface ModelSchema extends ModelResponse {
-  selectedModelForUpdate: Model & {
-    brand: Brand
-  }
+  selectedModelForUpdate: SelectedModelForUpdate
   brands: BrandsResponse
 }
 
@@ -29,11 +31,19 @@ export const modelSlice = createSlice({
         ...state.rows.find((item) => item.id === action.payload),
       }
     },
-    updateSelectedModel: (state, action: PayloadAction<Partial<{brandId: number}>>) => {
-      state.selectedModelForUpdate = {
-          ...state.selectedModelForUpdate,
-          brand: state.brands.rows.find((brand) => brand.value === action.payload.brandId)
+    updateSelectedModelName: (state, action: PayloadAction<Partial<string>>) => {
+      const updatedState = {
+        ...state.selectedModelForUpdate,
+        name: action.payload
       }
+      state.selectedModelForUpdate = updatedState
+    },
+    updateSelectedBrandOfModel: (state, action: PayloadAction<Partial<number>>) => {
+      const updatedState = {
+        ...state.selectedModelForUpdate,
+        brand: state.brands.rows.find((brand) => brand.value === action.payload)
+      }
+      state.selectedModelForUpdate = updatedState
     }
   },
   extraReducers(builder) {
@@ -52,5 +62,5 @@ export const modelSlice = createSlice({
   }
 })
 
-export const {selectedModelForUpdate, updateSelectedModel} = modelSlice.actions
+export const {selectedModelForUpdate, updateSelectedBrandOfModel, updateSelectedModelName} = modelSlice.actions
 export const modelReducer = modelSlice.reducer

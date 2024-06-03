@@ -1,7 +1,7 @@
 import { Dispatch,useEffect, FC, SetStateAction } from "react"
 import {Form, Input, Modal } from 'antd'
 import {getSelectedModel, getBrands} from '../../../model/selectors'
-import {updateSelectedModel} from '../../../model/slices/model-slice'
+import {updateSelectedModelName, updateSelectedBrandOfModel} from '../../../model/slices/model-slice'
 import { useSelector } from "react-redux"
 import {Select, useAppDispatch, useMount} from '@shared'
 import {FormAddNewModelValueTypes} from '../../../interfaces'
@@ -26,7 +26,7 @@ export const FormUpdateModel:FC<Props> = ({
     useEffect(() => {
         form.setFieldsValue({
             name: seletedModel?.name,
-            brandId: seletedModel?.brand.value
+            brandId: seletedModel?.brand?.value
         })
     }, [seletedModel]);
 
@@ -34,7 +34,8 @@ export const FormUpdateModel:FC<Props> = ({
         setIsModalOpen(false)
     }
     const onChangeHandler = (value: FormAddNewModelValueTypes) => {
-        dispatch(updateSelectedModel(value))
+        value.brandId && dispatch(updateSelectedBrandOfModel(value.brandId))
+        value.name && dispatch(updateSelectedModelName(value.name))
     }
     const onOkHandler = () => {
         dispatch(updateModel())
