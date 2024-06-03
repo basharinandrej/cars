@@ -1,11 +1,11 @@
-import {useAppDispatch, Button} from '@shared'
+import {useAppDispatch, Button, Select} from '@shared'
 import {useState, useEffect} from 'react'
 import {Form, Input, Modal } from 'antd'
 import {FormAddNewBrandValueTypes} from '@entities'
 import {setModel} from '../model/slices/add-new-model-slice'
 import {addNewModel} from '../model/async-actions/add-new-model'
 import { useSelector } from 'react-redux'
-import {getIsLoading, getError, getModelData} from '../model/selectors'
+import {getIsLoading, getError, getModelData, getBrands} from '../model/selectors'
 
 import styles from './form-add-new-model.module.sass'
 
@@ -22,7 +22,8 @@ export const FormAddNewModel = () => {
 
     const isLoading = useSelector(getIsLoading)
     const error = useSelector(getError)
-    const brandData = useSelector(getModelData)
+    const modelData = useSelector(getModelData)
+    const brands = useSelector(getBrands)
 
     useEffect(() => {
         !isLoading && !error && handleOk()
@@ -30,9 +31,9 @@ export const FormAddNewModel = () => {
 
     useEffect(() => {
         form.setFieldsValue({
-            name: brandData?.name
+            name: modelData?.name
         })
-    }, [brandData]);
+    }, [modelData]);
     
     const onOkHandler = () => {
         dispatch(addNewModel())
@@ -65,10 +66,16 @@ export const FormAddNewModel = () => {
                     autoComplete="off"
                     form={form}
                 >
-                    
-
                     <Form.Item<FormAddNewBrandValueTypes> label="Название" name="name" required>
                         <Input />
+                    </Form.Item>
+
+                    <Form.Item<FormAddNewBrandValueTypes> 
+                        label="Бренд"
+                        name="brandId"
+                        required
+                    >
+                        <Select options={brands} />
                     </Form.Item>
                 </Form>
             </Modal>

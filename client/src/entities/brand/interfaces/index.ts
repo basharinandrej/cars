@@ -9,6 +9,7 @@ export interface BrandResponse {
 
 export interface FormAddNewBrandValueTypes {
     name: string
+    brandId: number
 }
 
 
