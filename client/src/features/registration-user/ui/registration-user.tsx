@@ -7,14 +7,17 @@ import {
     setPhoneNumber
 } from '../model/slices/registration-user-slice'
 import {FormRegistrationUserValueTypes} from '../interfaces'
-import { Button, useAppDispatch } from '@shared';
+import { APP_CAR_KEY_LS_USER_ID, Button, useAppDispatch } from '@shared';
 import {registrationUser} from '../model/async-actions/registration-user'
 import styles from './registration-user.module.sass'
+import { useNavigate } from 'react-router-dom';
 
 export const RegistrationUser = () => {
     const [form] = Form.useForm();
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
+    const onSuccessRegistration = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_USER_ID)}`) // cabinet/profile/58
 
     const onChangeHandler = (value: FormRegistrationUserValueTypes) => {
         value.name && dispatch(setName(value.name))
@@ -25,8 +28,12 @@ export const RegistrationUser = () => {
 
     }
 
-    const registrationUserHandler = () => {
-        dispatch(registrationUser())
+    const registrationUserHandler = async () => {
+        const result = await dispatch(registrationUser())
+
+        if(result.meta.requestStatus === 'fulfilled') {
+            onSuccessRegistration()
+        }
     }
 
     return (

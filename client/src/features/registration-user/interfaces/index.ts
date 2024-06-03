@@ -1,3 +1,4 @@
+import { Bans, UserRoles } from "@shared"
 
 
 export interface FormRegistrationUserValueTypes {
@@ -12,6 +13,11 @@ export interface FormRegistrationUserValueTypes {
 export interface RegistrationUserResponse {
     user: {
         id: number
-        //other fields
+        name: string
+        surname: string
+        email: string
+        role: UserRoles
+        phoneNumber: number
+        ban: Bans
     }
 }
