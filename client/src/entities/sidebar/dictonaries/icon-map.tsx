@@ -5,7 +5,8 @@ import {
   CustomerServiceOutlined, 
   RubyOutlined, 
   UnorderedListOutlined, 
-  UserSwitchOutlined, 
+  UserSwitchOutlined,
+  CompassOutlined,
   SnippetsOutlined,
   BuildOutlined,
   ToolOutlined
@@ -17,6 +18,7 @@ export const iconMap: Record<string, ReactNode> = {
     'car': <CarOutlined />,
     'list': <UnorderedListOutlined />,
     'users': <UserSwitchOutlined />,
+    'organizations': <CompassOutlined />,
     'category-detail': <BuildOutlined />,
     'my-request': <SnippetsOutlined />,
     'category-services': <CustomerServiceOutlined />,

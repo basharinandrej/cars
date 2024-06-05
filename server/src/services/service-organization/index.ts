@@ -121,7 +121,7 @@ class ServiceOrganization {
                 limit,
                 offset,
                 where: params,
-                attributes: ['id', 'email', 'avatar', 'phoneNumber', 'ban', 'status'],
+                attributes: ['id', 'name', 'email', 'avatar', 'phoneNumber', 'ban', 'status'],
                 include
             })
 

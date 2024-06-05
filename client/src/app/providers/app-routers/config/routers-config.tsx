@@ -35,6 +35,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.ProfilePage]: '/cabinet/profile/', // :id
     [Routes.GaragePage]: '/cabinet/garage/', // :id
     [Routes.UsersPage]: '/cabinet/users/',
+    [Routes.AllOrganizationsPage]: '/cabinet/organizations/',
     [Routes.MyDetails]: '/cabinet/my-details/',
     [Routes.CategoryDetailPage]: '/cabinet/category-details/',
     [Routes.CategoryServicePage]: '/cabinet/category-services/',
@@ -118,6 +119,13 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.UsersPage]: {
         path: `${RoutePaths.UsersPage}`,
         element: <PageUsers />,
+        onlyAuth: true,
+        permissionForUserRole: [UserRoles.Admin]
+    },
+
+    [Routes.AllOrganizationsPage]: {
+        path: `${RoutePaths.AllOrganizationsPage}`,
+        element: <PageListingOrganizations />,
         onlyAuth: true,
         permissionForUserRole: [UserRoles.Admin]
     },
