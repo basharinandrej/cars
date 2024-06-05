@@ -147,7 +147,6 @@ class ServiceUser {
 
     async updateUser(dtoUpdateUser: DtoUserUpdate, next: NextFunction) {
         try {
-            console.log('>>>> dtoUpdateUser', dtoUpdateUser)
             const user = await User.update(
                 dtoUpdateUser,
                 {

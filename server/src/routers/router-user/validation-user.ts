@@ -93,12 +93,18 @@ export const validationUser = {
 export const validationUserUpdation = {
     createChain() {
         return  [
-            cookie('refreshToken').custom((value: string) => {
+            cookie('refreshToken').custom(async(value: string) => {
 
                 try {
                     const result = serviceToken.validationToken(value)
-                    console.log('>>>> result', result)
-
+                    const totalAdminsNow = await User.findAndCountAll({
+                        where: {
+                            role: UserRoles.Admin
+                        }
+                    })
+                    if(totalAdminsNow.count >= MAX_COUNT_ADMINS) {
+                        return Promise.reject(ApiError.bedRequest(errorStrings.maxCountAdmins()));
+                    }
                     if(isAdministrator(result)) {
                         return Promise.resolve(true);
                     } else {
