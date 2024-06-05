@@ -10,10 +10,10 @@ export const featchUpdateUser = createAsyncThunk<void, void, ThunkApiConfig>(
             const state = getState()
 
             const user = getDataUserForUpdate(state)
+            await extra.api.patch('/api/user', user)
             extra.notificationApi.success({
                 message: `Профиль успешно обновлён `,
             })
-            await extra.api.patch('/api/user', user)
         } catch (error) {
             const {extra} = thunkAPI
             const errorMessage = extra.getErrorMessage(error)

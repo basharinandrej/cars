@@ -12,6 +12,7 @@ import {
 
 import {fetchInitialListingOrganizations} from '../model/async-actions/fetch-initial-listing-organizations'
 import {fetchListingOrganizationNextPart} from '../model/async-actions/fetch-listing-organization-next-part'
+import {setBanOrganization} from '../model/async-actions/set-ban-organization'
 
 import {
     getItemsListingOrganizations,
@@ -50,8 +51,11 @@ export const ListingOrganization = ({
         }
     }, [inView, canPaginationMore, dispatch])
 
-    const onClickHandler = (id: number) => {
-        setIdSelectedOrganization(id)
+    const onClickHandler = (organizationId: number) => {
+        setIdSelectedOrganization(organizationId)
+    }
+    const onSendBanOrganizationHandler = (organizationId: number) => {
+        dispatch(setBanOrganization(organizationId))
     }
 
 
@@ -63,7 +67,7 @@ export const ListingOrganization = ({
                 </AppLink>
 
                 <div className={styles.btnWrapper}>
-                    <Button type={'primary'} onClick={() => onClickHandler(organizationId)} text={'Забанить'} /> 
+                    <Button type={'primary'} onClick={() => onSendBanOrganizationHandler(organizationId)} text={'Забанить'} /> 
                 </div>   
 
                 {/* <div className={styles.btnWrapper}>
