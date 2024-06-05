@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react'
+import { FC, useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Empty } from 'antd';
@@ -26,7 +26,9 @@ import styles from './listing-organizations.module.sass'
 
 
 
-export const ListingOrganization = () => {
+export const ListingOrganization = ({
+    isCabinet = false
+}: Props) => {
     const dispatch = useAppDispatch()
     const [idSelectedOrganization, setIdSelectedOrganization] = useState<number|false>(false);
 
@@ -51,6 +53,34 @@ export const ListingOrganization = () => {
     const onClickHandler = (id: number) => {
         setIdSelectedOrganization(id)
     }
+
+
+    const renderButtons = (organizationId: number) => {
+        return isCabinet ? (
+            <>
+                <AppLink to={`/organization/${organizationId}`}>
+                    <Button type={'default'} text={'Подробнее'}/> 
+                </AppLink>
+
+                <div className={styles.btnWrapper}>
+                    <Button type={'primary'} onClick={() => onClickHandler(organizationId)} text={'Забанить'} /> 
+                </div>   
+
+                {/* <div className={styles.btnWrapper}>
+                    <Button danger type={'primary'} onClick={() => onClickHandler(organizationId)} text={'Удалить'} /> 
+                </div>    */}
+            </>
+        ) : (<>
+            <AppLink to={`/organization/${organizationId}`}>
+                <Button text={'Подробнее'}/> 
+            </AppLink>
+
+            <div className={styles.btnWrapper}>
+                <Button onClick={() => onClickHandler(organizationId)} text={'Оставить заявку'} type={'default'}/> 
+            </div>   
+        </>)
+    }
+
     return (
         hasOrganizations 
             ? <div className={styles.listingOrganizations}>
@@ -77,15 +107,8 @@ export const ListingOrganization = () => {
 
 
                                 <div className={styles.boxButtons}>
-                                    <AppLink to={`/organization/${organization.id}`}>
-                                        <Button text={'Подробнее'}/> 
-                                    </AppLink>
-
-                                    <div className={styles.btnWrapper}>
-                                        <Button onClick={() => onClickHandler(organization.id)} text={'Оставить заявку'} type={'default'}/> 
-                                    </div>
+                                    {renderButtons(organization.id)}
                                 </div>
-
                             </div>
                         </Card>
                     )
@@ -94,4 +117,8 @@ export const ListingOrganization = () => {
             </div>
             : <Empty description={'Нет автосервисов'}  />
     )
+}
+
+interface Props {
+    isCabinet?: boolean 
 }

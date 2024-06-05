@@ -18,7 +18,8 @@ import {
     PageBrands,
     PageServices,
     PageModels,
-    PageRegistration
+    PageRegistration,
+    PageListingOrganizationsIntoCabinet
 } from '@pages'
 
 
@@ -125,7 +126,7 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
 
     [Routes.AllOrganizationsPage]: {
         path: `${RoutePaths.AllOrganizationsPage}`,
-        element: <PageListingOrganizations />,
+        element: <PageListingOrganizationsIntoCabinet />,
         onlyAuth: true,
         permissionForUserRole: [UserRoles.Admin]
     },
