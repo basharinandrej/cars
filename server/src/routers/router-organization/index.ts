@@ -22,6 +22,13 @@ routers.get('',
     controllerOrganization.getAllOrganization
 )
 
+routers.patch('',
+    validationOrganization.updateChain(),
+    middlewareValidation,
+    controllerOrganization.updateOrganization
+)
+
+
 routers.get('/getById',
     controllerOrganization.getByIdOrganization
 )

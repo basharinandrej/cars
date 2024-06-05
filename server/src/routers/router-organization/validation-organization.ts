@@ -1,5 +1,5 @@
 
-import { header, body, cookie } from 'express-validator';
+import { header, body, cookie, Meta } from 'express-validator';
 import {extractAccessToken} from '@common/utils/extract-tokens'
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
@@ -15,6 +15,28 @@ export const validationOrganization = {
                 .isLength({min: 8}).withMessage(errorStrings.errorPasswordOrEmail()).trim(),
 
             body('email').isEmail().withMessage(errorStrings.errorPasswordOrEmail()).trim(),
+        ]
+    },
+    updateChain() {
+        return  [
+            cookie('refreshToken').custom(async(value: string, meta: Meta) => {
+                const body = meta.req.body
+
+                try {
+                    const result = serviceToken.validationToken(value)
+            
+                    if(body.ban) {
+                        if(isAdministrator(result)) {
+                            return Promise.resolve(true);
+                        } else {
+                            return Promise.reject(ApiError.bedRequest(errorStrings.onlyForAdmin()));
+                        }
+                    }
+
+                } catch (error) {
+                    return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
+                }
+            }),
         ]
     },
     getAllOrganizationChain() {

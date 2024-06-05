@@ -99,6 +99,19 @@ class ControllerOrganization {
         }
     }
 
+    async updateOrganization(req:RequestCreation<OrganizationRequestParams> , res: Response, next: NextFunction) {
+        try {
+            const dtoOrganizationUpdate = dtoOrganization.getDtoUpdateOrganization(req.body)
+            const organization = await serviceOrganization.updateOrganization(dtoOrganizationUpdate, next)
+
+            res.send(organization)
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ControllerOrganization.updateOrganization'))
+            }
+        }
+    }
+
     async getByIdOrganization(req: RequestGetOne<ParamsOrganizationGetById>, res: Response, next: NextFunction) {
         try {
             const dtoOrganizationGetOne = dtoOrganization.getDtoOrganizationGetOne(req.query)

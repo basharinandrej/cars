@@ -5,7 +5,8 @@ import {
     DtoOrganizationLogin,
     DtoOrganizationGetOne,
     DtoInitOrganization,
-    DtoOrganizationChangePassword
+    DtoOrganizationChangePassword,
+    DtoOrganizationUpdate
 } from './types'
 import {ParamsOrganizationGetAll, ParamsOrganizationGetById} from '@controllers/controller-organization/types'
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_OFFSET } from '@common/constans'
@@ -64,6 +65,19 @@ class DtoOrganization {
             oldPassword: body.oldPassword,
             newPassword: body.newPassword,
             organizationId: payload.id
+        }
+    }
+
+    getDtoUpdateOrganization(body: OrganizationRequestParams ): DtoOrganizationUpdate {
+
+        return {
+            id: body.id,
+            name: body.name,
+            email: body.email,
+            phoneNumber: body.phoneNumber,
+            ban: body.ban,
+            status: body.status,
+            avatar: body.avatar
         }
     }
 }

@@ -1,4 +1,4 @@
-import { cookie, body } from 'express-validator';
+import { cookie, body, Meta } from 'express-validator';
 import {serviceToken} from '@services/service-token'
 import ApiError from '@api-error/index'
 import { UserRoles } from '@common/enums';
@@ -93,7 +93,8 @@ export const validationUser = {
 export const validationUserUpdation = {
     createChain() {
         return  [
-            cookie('refreshToken').custom(async(value: string) => {
+            cookie('refreshToken').custom(async(value: string, meta: Meta) => {
+                const body = meta.req.body
 
                 try {
                     const result = serviceToken.validationToken(value)
@@ -102,7 +103,7 @@ export const validationUserUpdation = {
                             role: UserRoles.Admin
                         }
                     })
-                    if(totalAdminsNow.count >= MAX_COUNT_ADMINS) {
+                    if(totalAdminsNow.count >= MAX_COUNT_ADMINS && body.role === UserRoles.Admin) {
                         return Promise.reject(ApiError.bedRequest(errorStrings.maxCountAdmins()));
                     }
                     if(isAdministrator(result)) {

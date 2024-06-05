@@ -6,7 +6,8 @@ import {
     DtoOrganizationRegistration,
     DtoOrganizationLogin,
     DtoInitOrganization,
-    DtoOrganizationChangePassword
+    DtoOrganizationChangePassword,
+    DtoOrganizationUpdate
 } from '@dtos/dto-organization/types'
 import {errorStrings} from '@common/error-strings'
 import {serviceToken} from '@services/service-token'
@@ -87,6 +88,22 @@ class ServiceOrganization {
         } catch (error) {
             if(error instanceof Error) {
                 next(ApiError.internal(error.message, 'ServiceOrganization.login'))
+            }
+        }
+    }
+
+    async updateOrganization(dtoUpdateOrganization: DtoOrganizationUpdate, next: NextFunction) {
+        try {
+            const organization = await Organization.update(
+                dtoUpdateOrganization,
+                {
+                    where: {id: dtoUpdateOrganization.id}
+                },
+            )
+            return organization
+        } catch (error) {
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceOrganization.updateOrganization'))
             }
         }
     }

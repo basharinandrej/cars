@@ -35,3 +35,12 @@ export interface DtoOrganizationChangePassword {
     organizationId: number
 }
 
+export interface DtoOrganizationUpdate {
+    id: number,
+    name: string,
+    email: string,
+    phoneNumber: number,
+    ban: Bans,
+    status: StatusOrganization,
+    avatar?: string
+}
