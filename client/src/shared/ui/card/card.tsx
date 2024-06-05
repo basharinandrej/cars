@@ -28,25 +28,25 @@ export const Card: FC<Props> = ({
             color={colorBadge}
         >
             <CardFromAntD
-                loading={loading}
-                size={'small'}
-                bodyStyle={bodyStyle}
-                className={classNames(
-                    styles.card,
-                    {
-                        [styles.row]: type === 'row',
-                        [styles.grid]: type === 'grid'
+                    loading={loading}
+                    size={'small'}
+                    bodyStyle={bodyStyle}
+                    className={classNames(
+                        styles.card,
+                        {
+                            [styles.row]: type === 'row',
+                            [styles.grid]: type === 'grid'
+                        }
+                    )}
+                    
+                    cover={
+                        <img
+                            className={classNames(styles.img)}
+                            src={`${APP_SERVER_URL}/${src}`}
+                        />
                     }
-                )}
-                
-                cover={
-                    <img
-                        className={classNames(styles.img)}
-                        src={`${APP_SERVER_URL}/${src}`}
-                    />
-                }
-            >
-                {children}
+                >
+                    {children}
             </CardFromAntD>
         </Badge.Ribbon>
     )

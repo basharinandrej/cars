@@ -7,7 +7,9 @@ import {
     useAppDispatch, 
     mapBadgeOrganizationStatus,
     Card,
-    useMount
+    useMount,
+    Bans,
+    mapBadgeOrganizationBans
 } from '@shared'
 
 import {fetchInitialListingOrganizations} from '../model/async-actions/fetch-initial-listing-organizations'
@@ -24,6 +26,8 @@ import {AddNewRequest} from '../../add-new-request/ui/add-new-request'
 import { Button, AppLink } from '@shared';
 
 import styles from './listing-organizations.module.sass'
+import { Organization } from '../interfaces';
+import { deleteBanOrganization } from '../model/async-actions/delete-ban-organization';
 
 
 
@@ -54,12 +58,14 @@ export const ListingOrganization = ({
     const onClickHandler = (organizationId: number) => {
         setIdSelectedOrganization(organizationId)
     }
-    const onSendBanOrganizationHandler = (organizationId: number) => {
-        dispatch(setBanOrganization(organizationId))
+    const onSendBanOrganizationHandler = (organizationId: number, ban: Bans) => {
+        ban === Bans.Null 
+            ? dispatch(setBanOrganization(organizationId))
+            : dispatch(deleteBanOrganization(organizationId))
     }
 
 
-    const renderButtons = (organizationId: number) => {
+    const renderButtons = (organizationId: number, ban: Bans) => {
         return isCabinet ? (
             <>
                 <AppLink to={`/organization/${organizationId}`}>
@@ -67,7 +73,10 @@ export const ListingOrganization = ({
                 </AppLink>
 
                 <div className={styles.btnWrapper}>
-                    <Button type={'primary'} onClick={() => onSendBanOrganizationHandler(organizationId)} text={'Забанить'} /> 
+                    <Button type={'primary'} 
+                        onClick={() => onSendBanOrganizationHandler(organizationId, ban)} 
+                        text={ban === Bans.Null ?  'Забанить' : 'Снять бан'} 
+                    /> 
                 </div>   
 
                 {/* <div className={styles.btnWrapper}>
@@ -85,13 +94,22 @@ export const ListingOrganization = ({
         </>)
     }
 
+
+    const getTextBadge = (organization: Organization) => {
+        return isCabinet ? mapBadgeOrganizationBans[organization.ban]?.value : mapBadgeOrganizationStatus[organization.status]?.value
+    }
+
+    const getColorBadge = (organization: Organization) => {
+        return isCabinet ? mapBadgeOrganizationBans[organization.ban]?.color : mapBadgeOrganizationStatus[organization.status]?.color
+    }
+
     return (
         hasOrganizations 
             ? <div className={styles.listingOrganizations}>
                 <AddNewRequest setIdSelectedOrganization={setIdSelectedOrganization} idSelectedOrganization={idSelectedOrganization} />
                 {organizations.map((organization) => {
-                    const textBadge = mapBadgeOrganizationStatus[organization.status]?.value
-                    const colorBadge = mapBadgeOrganizationStatus[organization.status]?.color
+                    const textBadge = getTextBadge(organization)
+                    const colorBadge = getColorBadge(organization)
                     const firstAddressOrganization = organization.addresses[0]
 
                     return (
@@ -111,7 +129,7 @@ export const ListingOrganization = ({
 
 
                                 <div className={styles.boxButtons}>
-                                    {renderButtons(organization.id)}
+                                    {renderButtons(organization.id, organization.ban)}
                                 </div>
                             </div>
                         </Card>

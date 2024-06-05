@@ -50,3 +50,4 @@ export {DetailWears, StatusOrganization, Bans, UserRoles, StatusRequest} from '.
 export {mapBadge} from './dictionaries/map-badge'
 export {mapBadgeOrganizationStatus} from './dictionaries/map-badge-status-organization'
 export {mapUserRole} from './dictionaries/map-user-roles'
+export {mapBadgeOrganizationBans} from './dictionaries/map-badge-bans-organization'
