@@ -108,12 +108,13 @@ class ServiceOrganization {
         }
     }
 
-    async getAllOrganizations({ limit, offset, status, serviceCategoryId}: DtoOrganizationGetAll, next: NextFunction) {
+    async getAllOrganizations({ limit, offset, status, serviceCategoryId, ban}: DtoOrganizationGetAll, next: NextFunction) {
 
         try {
             const params: Partial<DtoOrganizationGetAll> = {}
 
             if(status) params.status = status
+            if(ban) params.ban = ban
 
 
             const include: Includeable[] = [

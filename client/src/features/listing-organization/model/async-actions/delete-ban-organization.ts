@@ -1,17 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {ThunkApiConfig} from '@app'
+import { fetchInitialListingOrganizations } from './fetch-initial-listing-organizations'
 
 export const deleteBanOrganization = createAsyncThunk<void, number, ThunkApiConfig>(
     'delete-ban-organization/deleteBanOrganization',
     async (organizationId, thunkAPI) => {
         try {
-            const { extra} = thunkAPI
+            const { extra, dispatch} = thunkAPI
       
             await extra.api.patch('/api/organization', {
                 id:organizationId,
                 ban: "Null"
             })
 
+            dispatch(fetchInitialListingOrganizations(true))
             extra.notificationApi.success({
                 message: `Организация успешно разбанена`,
             })

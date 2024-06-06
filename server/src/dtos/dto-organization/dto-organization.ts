@@ -33,7 +33,8 @@ class DtoOrganization {
             limit: query.limit || PAGINATION_DEFAULT_LIMIT,
             offset: query.offset || PAGINATION_DEFAULT_OFFSET,
             status: query.status,
-            serviceCategoryId: query.serviceCategoryId
+            serviceCategoryId: query.serviceCategoryId,
+            ban: query.ban
         }
     }
 

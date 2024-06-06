@@ -43,7 +43,7 @@ export const ListingOrganization = ({
 
     const hasOrganizations = Array.isArray(organizations) && organizations?.length
 
-    useMount(() => dispatch(fetchInitialListingOrganizations()))
+    useMount(() => dispatch(fetchInitialListingOrganizations(isCabinet)))
 
     const { ref, inView } = useInView({
         threshold: 1.0,
@@ -51,7 +51,7 @@ export const ListingOrganization = ({
 
     useEffect(() => {
         if(inView) {
-            canPaginationMore && dispatch(fetchListingOrganizationNextPart())
+            canPaginationMore && dispatch(fetchListingOrganizationNextPart(isCabinet))
         }
     }, [inView, canPaginationMore, dispatch])
 

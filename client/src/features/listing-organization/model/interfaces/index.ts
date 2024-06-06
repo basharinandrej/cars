@@ -1,3 +1,4 @@
+import { Bans } from "@shared"
 
 
 export interface ParamsFetchListingOrganization {
@@ -5,4 +6,5 @@ export interface ParamsFetchListingOrganization {
     offset: number
     status?: string
     serviceCategoryId?: number
+    ban: Bans
 }

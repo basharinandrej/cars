@@ -8,11 +8,11 @@ import {
 } from '../selectors'
 import {ParamsFetchListingOrganization} from '../interfaces'
 
-import {addQueryParams} from '@shared'
+import {Bans, addQueryParams} from '@shared'
 
-export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganizationSchema, void, ThunkApiConfig>(
+export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganizationSchema, boolean|void, ThunkApiConfig>(
     'listing-organization/fetchListingOrganizationNextPart',
-    async (_, thunkAPI) => {
+    async (isCabinet, thunkAPI) => {
         const {getState, extra} = thunkAPI
         const state = getState()
 
@@ -23,7 +23,8 @@ export const fetchListingOrganizationNextPart = createAsyncThunk<ListingOrganiza
         const params: ParamsFetchListingOrganization = {
             limit,
             offset,
-            status
+            status,
+            ban: isCabinet ? null : Bans.Null
         }
 
         addQueryParams('statusOrganization', params.status)

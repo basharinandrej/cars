@@ -13,11 +13,11 @@ import {
     DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION
 } from '../../constans'
 
-import {addQueryParams} from '@shared'
+import {Bans, addQueryParams} from '@shared'
 
-export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganizationSchema, void, ThunkApiConfig>(
+export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganizationSchema, boolean|void, ThunkApiConfig>(
     'listing-organizations/fetchInitialListingOrganizations',
-    async (_, thunkAPI) => {
+    async (isCabinet, thunkAPI) => {
         const {getState, extra} = thunkAPI
         const state = getState()
 
@@ -27,7 +27,8 @@ export const fetchInitialListingOrganizations = createAsyncThunk<ListingOrganiza
         const params: ParamsFetchListingOrganization = {
             limit: DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION, 
             offset: INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION,
-            status, serviceCategoryId
+            status, serviceCategoryId,
+            ban: isCabinet ? null : Bans.Null,
         }
 
         addQueryParams('statusOrganization', params.status)
