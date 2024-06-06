@@ -50,6 +50,8 @@ export const ListingOrganization = ({
     });
 
     useEffect(() => {
+        console.log('>>>> inView', inView)
+        console.log('>>>> canPaginationMore', canPaginationMore)
         if(inView) {
             canPaginationMore && dispatch(fetchListingOrganizationNextPart(isCabinet))
         }

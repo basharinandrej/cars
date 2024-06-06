@@ -20,7 +20,7 @@ export interface ListingOrganizationSchema extends ListingOrganizationsResponse 
 
 const initialState: ListingOrganizationSchema = {
   rows: [],
-  total: 0,
+  count: 0,
   isLoading: false,
   limit: DEFAULT_VALUE_LIMIT_LISTING_ORGANIZATION,
   offset: INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION,
@@ -42,9 +42,9 @@ export const listingOrganizationSlice = createSlice({
 
             state.isLoading = false
             state.rows = data?.rows
-            state.total = data?.total
+            state.count = data?.count
             state.offset = INITIAL_VALUE_OFFSET_LISTING_ORGANIZATION + data?.rows?.length
-            state.canPaginationMore = data?.total > data?.rows?.length
+            state.canPaginationMore = data?.count > data?.rows?.length
         })
 
 
@@ -55,10 +55,10 @@ export const listingOrganizationSlice = createSlice({
           const data = action.payload
 
           state.isLoading = false
-          state.total = data.total
+          state.count = data.count
           state.rows = state.rows.concat(data.rows)
           state.offset = calcOffset(state)
-          state.canPaginationMore = data.total > state.rows?.length
+          state.canPaginationMore = data.count > state.rows?.length
         })
   }
 })

@@ -34,7 +34,6 @@ export const RegistrationOrganization = () => {
     const registrationUserHandler = async () => {
         const result = await dispatch(registrationOrganization())
 
-        console.log('>>>> result', result)
         if(result.meta.requestStatus === 'fulfilled') {
             onSuccessRegistration()
         }

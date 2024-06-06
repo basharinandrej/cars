@@ -25,7 +25,6 @@ export const registrationOrganization = createAsyncThunk<void, void, ThunkApiCon
 
             const response = await extra.api.post<RegistrationOrganizationResponse>('/api/organization/registration', data)
 
-            console.log('>>>> response', response)
             localStorage.setItem(APP_CAR_KEY_LS_ORGANIZATION_ID, JSON.stringify(response.data.organization.id))
 
             dispatch(setProfileOrganizationInformation(response.data))
