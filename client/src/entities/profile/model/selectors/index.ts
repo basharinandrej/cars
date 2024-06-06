@@ -10,7 +10,8 @@ export const getDataUserForUpdate = createSelector(
             name: user.name,
             phoneNumber: user.phoneNumber,
             surname: user.surname,
-            email: user.email
+            email: user.email,
+            role: user.role
         }
     }
 )

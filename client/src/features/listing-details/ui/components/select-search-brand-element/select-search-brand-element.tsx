@@ -10,7 +10,7 @@ import {
 
 
 import {fetchInitialListingDetails} from '../../../model/async-actions/fetch-initial-listing-details'
-import {fetchListingBrands} from '../../../model/async-actions/fetch-listing-brands'
+import { fetchListingBrands } from '../../../model/async-actions/fetch-listing-brands';
 
 
 import { 
@@ -27,6 +27,9 @@ export const SelectSearchBrandElement = () => {
     const brandLabel = useSelector(getFilterSelectedBrandLabel)
 
 
+    const onFocusModelHandler = () => {
+        dispatch(fetchListingBrands('a'))
+    };
     const onSearchSelectBrandHandler = (value: string) => {
         dispatch(fetchListingBrands(value))
     };
@@ -43,6 +46,7 @@ export const SelectSearchBrandElement = () => {
     return (
         <SelectSearch
             placeholder={'Выбирите бренд'}
+            onFocus={onFocusModelHandler}
             onSearch={onSearchSelectBrandHandler}
             onChange={onChangeSelectBrandHandler}
             onClear={onClearSelectBrandHandler}

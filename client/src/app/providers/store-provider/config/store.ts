@@ -36,6 +36,7 @@ import {instanceAxios, getErrorMessage} from '@shared'
 import {notification} from 'antd'
 
 import {StateSchema} from '../interfaces'
+import { NotificationPlacements } from 'antd/es/notification/interface'
 
 const getStore = () => {
     const rootReducer: ReducersMapObject<StateSchema> = {
@@ -76,6 +77,8 @@ const getStore = () => {
         services: servicesReducer,
         addNewService: addNewServiceReducer
     }
+
+    notification.config({placement: NotificationPlacements[5]})
 
     return configureStore({
         reducer: rootReducer,

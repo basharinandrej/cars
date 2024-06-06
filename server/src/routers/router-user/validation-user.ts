@@ -103,7 +103,7 @@ export const validationUserUpdation = {
                             role: UserRoles.Admin
                         }
                     })
-                    if(totalAdminsNow.count >= MAX_COUNT_ADMINS && body.role === UserRoles.Admin) {
+                    if(totalAdminsNow.count >= MAX_COUNT_ADMINS && body.role === UserRoles.Admin && result.id !== body.id) {
                         return Promise.reject(ApiError.bedRequest(errorStrings.maxCountAdmins()));
                     }
                     if(isAdministrator(result)) {
@@ -116,6 +116,29 @@ export const validationUserUpdation = {
                     return Promise.reject(ApiError.unauthorized(errorStrings.expireToken()));
                 }
             }),
+            body('name')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('name'))
+                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
+
+            body('surname')
+                .notEmpty().withMessage(errorStrings.notBeEmptyField('surname'))
+                .isLength({min: 2}).withMessage(errorStrings.minLength('name', 2)).trim(),
+
+            body('email').isEmail().withMessage(errorStrings.uncorrectEmail()).trim(),
+            
+            body('role').isIn([
+                UserRoles.Admin, 
+                UserRoles.Moderator,  
+                UserRoles.Person
+            ]).withMessage(errorStrings.shouldHaveString('role',[
+                UserRoles.Admin, 
+                UserRoles.Moderator, 
+                UserRoles.Person
+            ])).trim(),
+    
+            body('phoneNumber')
+                .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
+                .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim(),
         ]
     }
 }
