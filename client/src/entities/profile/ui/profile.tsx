@@ -5,6 +5,7 @@ import {Select, UserRoles, useAppDispatch, Button} from '@shared'
 import {FieldType} from '../types/types'
 import {setIsEditing, setUserData, setOrganizationData} from '../model/slices/profile-slice'
 import {featchUpdateUser} from '../model/async-actions/fetch-update-user'
+import { featchUpdateOrganization } from '../model/async-actions/fetch-update-organization';
 import {logout} from '../model/async-actions/logout'
 
 import styles from './profile.module.sass'
@@ -21,7 +22,8 @@ export const Profile = () => {
     const role = user.role
 
     const onFinishHandler = () => {
-        dispatch(featchUpdateUser())
+        user.id && dispatch(featchUpdateUser())
+        organization.id && dispatch(featchUpdateOrganization())
     };
 
     const onChangeHandler = (value: FieldType) => {
@@ -52,13 +54,13 @@ export const Profile = () => {
                     <Input />
                 </Form.Item>
 
-                <Form.Item<FieldType>
+                {user.id && <Form.Item<FieldType>
                     label="Фамилия"
                     name="surname"
                     initialValue={surname}
                 >
                     <Input />
-                </Form.Item>
+                </Form.Item>}
 
                 <Form.Item<FieldType>
                     label="Email"
