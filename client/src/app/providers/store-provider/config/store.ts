@@ -17,7 +17,8 @@ import {
     servicesReducer,
     addNewServiceReducer,
     addNewModelReducer,
-    registrationUserReducer
+    registrationUserReducer,
+    registrationOrganizationReducer
 } from '@features'
 import {
     menuSliceReducer,
@@ -50,6 +51,7 @@ const getStore = () => {
         organizationInformation: organizationInformationReducer,
         
         registrationUser: registrationUserReducer,
+        registrationOrganization: registrationOrganizationReducer,
         loginUser: loginUserReducer,
         loginOrganization: loginOrganizationReducer,
         profile: profileReducer,

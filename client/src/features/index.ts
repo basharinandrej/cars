@@ -56,3 +56,7 @@ export {addNewServiceReducer, AddNewServiceSchema} from './add-new-service/model
 
 export {RegistrationUser} from './registration-user/ui/registration-user'
 export {RegistrationUserSchema, registrationUserReducer} from './registration-user/model/slices/registration-user-slice'
+
+
+export {RegistrationOrganization} from './registration-organization/ui/registration-organization'
+export {RegistrationOrganizationSchema, registrationOrganizationReducer} from './registration-organization/model/slices/registration-organization-slice'

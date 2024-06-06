@@ -19,7 +19,8 @@ import {
     PageServices,
     PageModels,
     PageRegistration,
-    PageListingOrganizationsIntoCabinet
+    PageListingOrganizationsIntoCabinet,
+    PageRegistrationOrganization
 } from '@pages'
 
 
@@ -32,6 +33,7 @@ export const RoutePaths:Record<Routes,string> = {
     [Routes.OrganizationPage]: '/organization/', // :id
     [Routes.LoginPage]: '/login/user',
     [Routes.RegistrationPage]: '/registration/user',
+    [Routes.PageRegistrationOrganization]: '/registration/organization',
     [Routes.LoginOrganization]: '/login/organization',
     [Routes.ProfilePage]: '/cabinet/profile/', // :id
     [Routes.GaragePage]: '/cabinet/garage/', // :id
@@ -82,6 +84,12 @@ export const mapRoutes: Record<Routes, AppRouteProps> = {
     [Routes.RegistrationPage]: {
         path: RoutePaths.RegistrationPage,
         element: <PageRegistration />,
+        onlyAuth: false
+    },
+
+    [Routes.PageRegistrationOrganization]: {
+        path: RoutePaths.PageRegistrationOrganization,
+        element: <PageRegistrationOrganization />,
         onlyAuth: false
     },
 

@@ -18,7 +18,7 @@ import {PageServices} from './page-services/page-services.async'
 import {PageModels} from './page-model/page-models.async'
 import {PageRegistration} from './page-registration/page-registration.async'
 import {PageListingOrganizationsIntoCabinet} from './page-listing-organizations-into-cabinet/page-listing-organizations-into-cabinet.async'
-
+import {PageRegistrationOrganization} from './page-registration-organization/page-registration-organization.async'
 
 export {
     PageListingOrganizations,
@@ -38,5 +38,6 @@ export {
     PageServices,
     PageModels,
     PageRegistration,
-    PageListingOrganizationsIntoCabinet
+    PageListingOrganizationsIntoCabinet,
+    PageRegistrationOrganization
 }

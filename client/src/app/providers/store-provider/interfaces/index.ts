@@ -16,7 +16,8 @@ import {
     ServiceSchema,
     AddNewServiceSchema,
     AddNewModelSchema,
-    RegistrationUserSchema
+    RegistrationUserSchema,
+    RegistrationOrganizationSchema
 } from '@features'
 import {
     MenuSchema, 
@@ -46,6 +47,7 @@ export interface StateSchema {
     organizationInformation: OrganizationInformationSchema
     
     registrationUser: RegistrationUserSchema,
+    registrationOrganization: RegistrationOrganizationSchema,
     loginUser: LoginUserSchema,
     loginOrganization: LoginOrganizationSchema,
     profile: ProfileSchema,

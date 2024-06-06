@@ -1,36 +1,40 @@
 import {Form, FormInstance, Input, InputNumber} from 'antd'
 import {
     setName,
-    setSurname,
     setEmail,
     setPassword,
-    setPhoneNumber
-} from '../model/slices/registration-user-slice'
-import {FormRegistrationUserValueTypes} from '../interfaces'
-import { APP_CAR_KEY_LS_USER_ID, AppLink, Button, useAppDispatch } from '@shared';
-import {registrationUser} from '../model/async-actions/registration-user'
-import styles from './registration-user.module.sass'
+    setPhoneNumber,
+    setHouseNumber,
+    setStreet
+} from '../model/slices/registration-organization-slice'
+import {FormRegistrationOrganizationValueTypes} from '../interfaces'
+import { APP_CAR_KEY_LS_ORGANIZATION_ID, AppLink, Button, useAppDispatch } from '@shared';
+import {registrationOrganization} from '../model/async-actions/registration-organization'
+import styles from './registration-organization.module.sass'
 import { useNavigate } from 'react-router-dom';
+import { UploadAvatarOrganization } from './components/upload-avatar-organization/upload-avatar-organization';
 
-export const RegistrationUser = () => {
+export const RegistrationOrganization = () => {
     const [form] = Form.useForm();
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const onSuccessRegistration = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_USER_ID)}`)
+    const onSuccessRegistration = () => navigate(`/cabinet/profile/${localStorage.getItem(APP_CAR_KEY_LS_ORGANIZATION_ID)}`)
 
-    const onChangeHandler = (value: FormRegistrationUserValueTypes) => {
+    const onChangeHandler = (value: FormRegistrationOrganizationValueTypes) => {
+        console.log(value)
         value.name && dispatch(setName(value.name))
-        value.surname && dispatch(setSurname(value.surname))
         value.email && dispatch(setEmail(value.email))
         value.password && dispatch(setPassword(value.password))
         value.phoneNumber && dispatch(setPhoneNumber(value.phoneNumber))
-
+        value.street && dispatch(setStreet(value.street))
+        value.house && dispatch(setHouseNumber(value.house))
     }
 
     const registrationUserHandler = async () => {
-        const result = await dispatch(registrationUser())
+        const result = await dispatch(registrationOrganization())
 
+        console.log('>>>> result', result)
         if(result.meta.requestStatus === 'fulfilled') {
             onSuccessRegistration()
         }
@@ -38,7 +42,7 @@ export const RegistrationUser = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Регистрация</h1>
+            <h1 className={styles.title}>Регистрация автосервиса</h1>
 
             <Form
                 form={form}
@@ -52,7 +56,9 @@ export const RegistrationUser = () => {
                 onFinish={registrationUserHandler}
                 autoComplete="off"
             >
-                <Form.Item<FormRegistrationUserValueTypes>
+
+                <UploadAvatarOrganization />
+                <Form.Item<FormRegistrationOrganizationValueTypes>
                     className={styles.formItem}
                     label="Имя"
                     name="name"
@@ -73,28 +79,7 @@ export const RegistrationUser = () => {
                     <Input />
                 </Form.Item>
 
-                <Form.Item<FormRegistrationUserValueTypes>
-                    className={styles.formItem}
-                    label="Фамилия"
-                    name="surname"
-                    rules={[
-                        {
-                            min: 2,
-                            message: 'Поле "Фамилия" должно содержать минимум два символа'
-                        },
-                        {
-                            type: 'string'
-                        },
-                        {
-                            required: true,
-                            message: 'Поле "Фамилия" является обязательным'
-                        }
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item<FormRegistrationUserValueTypes>
+                <Form.Item<FormRegistrationOrganizationValueTypes>
                     className={styles.formItem}
                     label="E-mail"
                     name="email"
@@ -112,7 +97,7 @@ export const RegistrationUser = () => {
                     <Input />
                 </Form.Item>
 
-                <Form.Item<FormRegistrationUserValueTypes>
+                <Form.Item<FormRegistrationOrganizationValueTypes>
                     className={styles.formItem}
                     label="Пароль"
                     name="password"
@@ -126,7 +111,7 @@ export const RegistrationUser = () => {
                             required: true,
                             message: 'Поле "Пароль" является обязательным'
                         },
-                        (form: FormInstance<FormRegistrationUserValueTypes>) => {
+                        (form: FormInstance<FormRegistrationOrganizationValueTypes>) => {
                             form.setFieldValue('passwordDouble', '')
 
                             return {
@@ -138,7 +123,7 @@ export const RegistrationUser = () => {
                     <Input.Password />
                 </Form.Item>
                 
-                <Form.Item<FormRegistrationUserValueTypes>
+                <Form.Item<FormRegistrationOrganizationValueTypes>
                     className={styles.formItem}
                     label="Повторите пароль"
                     name="passwordDouble"
@@ -151,7 +136,7 @@ export const RegistrationUser = () => {
                             required: true,
                             message: 'Поле "Повторите пароль" является обязательным'
                         },
-                        (form: FormInstance<FormRegistrationUserValueTypes>) => {
+                        (form: FormInstance<FormRegistrationOrganizationValueTypes>) => {
                             const password = form.getFieldValue('password')
 
                             return {
@@ -168,7 +153,7 @@ export const RegistrationUser = () => {
                     <Input.Password />
                 </Form.Item>
             
-                    <Form.Item<FormRegistrationUserValueTypes>
+                <Form.Item<FormRegistrationOrganizationValueTypes>
                     className={styles.formItem}
                     label="Номер телефона"
                     name="phoneNumber"
@@ -192,15 +177,60 @@ export const RegistrationUser = () => {
                     <InputNumber className={styles.phoneNumber} controls={false} />
                 </Form.Item>
 
+                <Form.Item<FormRegistrationOrganizationValueTypes>
+                    className={styles.formItem}
+                    label="Улица"
+                    name="street"
+                    rules={[
+                        {
+                            min: 2,
+                            message: 'Поле "Улица" должно содержать минимум два символа'
+                        },
+                        {
+                            type: 'string'
+                        },
+                        {
+                            required: true,
+                            message: 'Поле "Улица" является обязательным'
+                        }
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item<FormRegistrationOrganizationValueTypes>
+                    className={styles.formItem}
+                    label="Номер дома"
+                    name="house"
+                    rules={[
+                        () => {
+                            return {
+                                validator: (_:unknown, value: number) => {
+                                    if(typeof value === 'number' && value>0) {
+                                        return Promise.resolve()
+                                    }
+                                    return Promise.reject('Поле "house" принимает только числа');
+                                },
+                            }
+                        },
+                        {
+                            required: true,
+                            message: 'Поле "house" является обязательным'
+                        }
+                    ]}
+                >
+                    <InputNumber className={styles.phoneNumber} controls={false} />
+                </Form.Item>
+
                 <Form.Item className={styles.registrationButton}>
                     <Button
                         className={styles.buttonSubmit}
                         htmlType="submit" 
-                        text='Зарегистрировать пользователя' 
+                        text='Зарегистрировать автосервис' 
                     />
                 </ Form.Item>
             </Form>
-            <AppLink to={'/registration/organization'}>Регистрация как организация</AppLink>
+            <AppLink to={'/registration/user'}>Регистрация пользователя</AppLink>
         </div>
         
     )
