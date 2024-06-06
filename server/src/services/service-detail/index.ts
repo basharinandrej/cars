@@ -63,6 +63,10 @@ class ServiceDetail {
         try {
             const params: WhereOptions<DetailAttributes> = {}
 
+            const sortBy = 'createdAt'
+            const orderBy = 'desc'
+
+
             if(modelId) params.modelId = modelId
             if(detailCategoryId) params.detailCategoryId = detailCategoryId
             if(userId) params.userId = userId
@@ -71,6 +75,9 @@ class ServiceDetail {
                 const details = await Detail?.findAndCountAll({
                     limit,
                     offset,
+                    order: [
+                        [sortBy, orderBy]
+                    ],
                     where: {
                         ...params, 
                         [Op.or]: [
@@ -92,6 +99,9 @@ class ServiceDetail {
                 const details = await Detail?.findAndCountAll({
                     limit,
                     offset,
+                    order: [
+                        [sortBy, orderBy]
+                    ],
                     where: params,
                     attributes,
                     include: [

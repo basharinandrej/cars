@@ -51,7 +51,6 @@ export const fetchInitialListingDetails = createAsyncThunk<ListingDetailsRespons
             })
             return response.data
         } catch (error) {
-            console.log('>>> error', error)
             if(error instanceof AxiosError) {
                 return error.response.data.message
             }

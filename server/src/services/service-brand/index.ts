@@ -101,7 +101,7 @@ class ServiceBrand {
             return result ? id : false
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error, 'ServiceBrand.dropBrand'))
+                next(ApiError.internal(error.message, 'ServiceBrand.dropBrand'))
             }
         }
     }
@@ -126,7 +126,7 @@ class ServiceBrand {
             return result[0] ? 'updated' : false
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error, 'ServiceBrand.updateBrand'))
+                next(ApiError.internal(error.message, 'ServiceBrand.updateBrand'))
             }        
         }
     }

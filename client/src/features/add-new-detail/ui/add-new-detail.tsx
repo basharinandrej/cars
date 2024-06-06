@@ -21,7 +21,7 @@ import {UploadPhotoDetail} from './components/upload-photo-detail/upload-photo-d
 import styles from './add-new-detail.module.sass'
 
 
-export const AddNewDetail = () => {
+export const AddNewDetail = ({onSuccess}: Props) => {
     const dispatch = useAppDispatch()
     const [form] = Form.useForm();
 
@@ -58,8 +58,11 @@ export const AddNewDetail = () => {
         dispatch(setDetailData(value))
     }
 
-    const onOkHandler = () => {
-        dispatch(fetchAddNewDetail())
+    const onOkHandler = async () => {
+        const result = await dispatch(fetchAddNewDetail())
+        if(result.meta.requestStatus === 'fulfilled') {
+            onSuccess()
+        }
         setIsModalOpen(false)
     }
 
@@ -159,4 +162,8 @@ export const AddNewDetail = () => {
             </Modal>
         </div>
     )
+}
+
+interface Props {
+    onSuccess: () => void
 }
