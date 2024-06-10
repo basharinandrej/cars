@@ -18,6 +18,6 @@ export const ListingServices = () => {
 
 
     return (
-        <Services services={services} isFullContainer isShowDelete/>
+        <Services services={services as any} isFullContainer isShowDelete/>
     )
 }

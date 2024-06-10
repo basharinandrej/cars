@@ -1,6 +1,5 @@
 import {FC} from 'react'
 import { List } from 'antd'
-import {IService} from '../interfaces'
 import { DeleteOutlined } from '@ant-design/icons';
 import { useAppDispatch, Button} from '@shared'
 import {deleteService} from '../model/async-actions/delete-service'
@@ -37,7 +36,7 @@ export const Services:FC<Props> = ({
                         <p>{service.name}</p>
                         <strong>от - {service.price}</strong>
                         <p>{service.description}</p>
-                        {service.serviceCategory?.name && <p>{service.serviceCategory?.name}</p>}
+                        {service?.nameCategory && <p>{service?.nameCategory}</p>}
 
                         {isShowDelete && <div className={styles.boxButtons}>
                             <div className={styles.buttonDelete}>
@@ -51,7 +50,15 @@ export const Services:FC<Props> = ({
 }
 
 interface Props {
-    services: IService[]
+    services: {
+        id: number,
+        name: string,
+        nameCategory: string,
+        description: string,
+        price: number,
+        organizationId: number,
+        serviceCategoryId: number
+      }[]
     isFullContainer?: boolean
     isShowDelete?: boolean
 }

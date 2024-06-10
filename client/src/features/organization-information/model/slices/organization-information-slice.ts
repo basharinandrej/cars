@@ -7,7 +7,15 @@ import { IService } from '@entities'
 
 
 export interface OrganizationInformationSchema extends Omit<OrganizationInformationResponse, 'serviceCategories'> {
-  services: IService[]
+  services: {
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+    organizationId: number,
+    serviceCategoryId: number
+    nameCategory: string
+  }[]
 }
 
 const initialState: OrganizationInformationSchema = {
@@ -41,11 +49,13 @@ export const organizationInformationSlice = createSlice({
             state.addresses = action.payload.addresses
             state.services = action.payload.serviceCategories.map((serviceCategory) => {
               return {
-                id: serviceCategory.service.id,
-                name: serviceCategory.service.name,
-                price: serviceCategory.service.price,
-                description: serviceCategory.service.description,
-                serviceCategory: serviceCategory.service.serviceCategory
+                id: serviceCategory.OrganizationServiceCategory.id,
+                name: serviceCategory.OrganizationServiceCategory.name,
+                nameCategory: serviceCategory.name,
+                price: serviceCategory.OrganizationServiceCategory.price,
+                description: serviceCategory.OrganizationServiceCategory.description,
+                serviceCategoryId: serviceCategory.OrganizationServiceCategory.serviceCategoryId,
+                organizationId: serviceCategory.OrganizationServiceCategory.organizationId
               }
             })
         })
