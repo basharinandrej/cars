@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import {getDataUser, getIsEditing, getDataOrganization} from '../model/selectors'
 import { Form, Input, Button as Btn} from 'antd';
-import {Select, UserRoles, useAppDispatch, Button} from '@shared'
+import {Select, UserRoles, useAppDispatch, Button, APP_SERVER_URL} from '@shared'
 import {FieldType} from '../types/types'
 import {setIsEditing, setUserData, setOrganizationData} from '../model/slices/profile-slice'
 import {featchUpdateUser} from '../model/async-actions/fetch-update-user'
@@ -36,6 +36,9 @@ export const Profile = () => {
         <div>
             <h2 className={styles.title}>Личная информация</h2>
 
+            {organization.id && <div className={styles.avatar}>
+                <img src={`${APP_SERVER_URL}/${organization.avatar}`} alt="avatar" />
+            </div>}
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}

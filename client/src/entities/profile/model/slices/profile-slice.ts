@@ -59,7 +59,6 @@ export const profileSlice = createSlice({
         ...state.user, ...action.payload
       }
     },
-    //@todo добавить endpoint для редактирования организации
     setOrganizationData: (state, action: PayloadAction<Partial<Organization>>) => {
       state.organization = {
         ...state.organization, ...action.payload
@@ -73,6 +72,7 @@ export const profileSlice = createSlice({
         state.organization.name = action.payload?.organization.name
         state.organization.email = action.payload?.organization.email
         state.organization.phoneNumber = action.payload?.organization.phoneNumber
+        state.organization.avatar = action.payload?.organization.avatar
       })
       .addCase(featchInitUser.fulfilled, (state, action: PayloadAction<ProfileResponse>) => {
         state.user.id = action.payload?.user.id
