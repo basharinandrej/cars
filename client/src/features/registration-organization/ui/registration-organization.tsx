@@ -10,9 +10,10 @@ import {
 import {FormRegistrationOrganizationValueTypes} from '../interfaces'
 import { APP_CAR_KEY_LS_ORGANIZATION_ID, AppLink, Button, useAppDispatch } from '@shared';
 import {registrationOrganization} from '../model/async-actions/registration-organization'
-import styles from './registration-organization.module.sass'
 import { useNavigate } from 'react-router-dom';
 import { UploadAvatarOrganization } from './components/upload-avatar-organization/upload-avatar-organization';
+
+import styles from './registration-organization.module.sass'
 
 export const RegistrationOrganization = () => {
     const [form] = Form.useForm();

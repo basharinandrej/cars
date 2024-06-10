@@ -50,7 +50,10 @@ export const registrationOrganizationSchema = createSlice({
     },
     setAvatar: (state, action: PayloadAction<Avatar>) => {
         state.avatar = action.payload
-    }
+    },
+    deleteAvatar: (state) => {
+        state.avatar = null
+      }
   }
 })
 
@@ -61,7 +64,8 @@ export const {
     setPhoneNumber,
     setHouseNumber,
     setStreet,
-    setAvatar
+    setAvatar,
+    deleteAvatar
 } = registrationOrganizationSchema.actions
 
 export const registrationOrganizationReducer = registrationOrganizationSchema.reducer
