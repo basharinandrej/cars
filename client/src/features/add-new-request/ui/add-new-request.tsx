@@ -23,6 +23,7 @@ export const AddNewRequest: FC<Props> = ({
     }
     const onOkHandler = () => {
         dispatch(addNewRequest())
+        handleCancel()
     }
     const onChangeHandler = (value: FormAddNewRequestValueTypes) => {
         idSelectedOrganization && dispatch(setRequestData({

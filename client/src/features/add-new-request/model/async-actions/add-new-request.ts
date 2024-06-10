@@ -6,11 +6,14 @@ export const addNewRequest = createAsyncThunk<void, void, ThunkApiConfig>(
     'add-new-request/addNewRequest',
     async (_, thunkAPI) => {
         try {
-            const {getState, extra, dispatch} = thunkAPI
+            const {getState, extra} = thunkAPI
             const state = getState()
             const requestData = getRequestData(state)
 
             const response = await extra.api.post('/api/request', requestData)
+            extra.notificationApi.success({
+                message: 'Новая заявка добавлена',
+            })
 
             return response.data
             
