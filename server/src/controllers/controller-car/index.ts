@@ -10,12 +10,15 @@ import ApiError from "@api-error/index";
 class Car {
     async createCar(req: RequestCreation<CarAttributes>, res: Response, next: NextFunction) {
         try {
+            //@ts-ignore
             const dtoCarCreation = dtoCar.getDtoCarCreation(req.body, req.cookies)
             const car = await serviceCar.createCar(dtoCarCreation, next)
 
             res.status(200).send(car)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'Car.createCar'))
+            }
         }
     }
 
@@ -26,7 +29,9 @@ class Car {
 
             res.status(200).send(car)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'Car.updateCar'))
+            }
         }
     }
 
@@ -37,7 +42,9 @@ class Car {
 
             res.status(200).send(cars)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'Car.getAllCars'))
+            }
         }
     }
 
@@ -50,7 +57,9 @@ class Car {
                 res.status(200).send(car)
             }
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'Car.getByVINCodeCar'))
+            }
         }
     }
 
@@ -59,7 +68,9 @@ class Car {
             const vinCode = await serviceCar.dropCar(req.query.vinCode, next)
             res.send(vinCode)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'Car.dropCar'))
+            }
         }
     }
 }

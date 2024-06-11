@@ -7,6 +7,7 @@ import { errorStrings } from "@common/error-strings";
 import {mapperCreateDetailPhoto} from './detail-photo-mappers/mapper-create-detail-photo'
 
 class ServiceDetailPhoto {
+    //@ts-ignore
     async createOneDetailPhoto(dtoDetailPhotosCreate: DtoDetailPhotoCreation, next: NextFunction): Promise<DetailPhotoAttributes> {
         try {
             const detailPhoto = await DetailPhoto.create({
@@ -17,15 +18,16 @@ class ServiceDetailPhoto {
             return mapperCreateDetailPhoto(detailPhoto)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceDetailPhoto.createOneDetailPhoto'))
             }
         }
     }
     
+    //@ts-ignore
     async createDetailPhotos(dtoDetailPhotosCreate: DtoDetailPhotoCreation[], next: NextFunction): Promise<Array<DetailPhotoAttributes>> {
         try {
             const detailPhotos = new Promise<Array<DetailPhotoAttributes>>(resolve => {
-                const detailPhotos = []
+                const detailPhotos: any[] = []
 
                 dtoDetailPhotosCreate.forEach( async(photo, idx) => {
 
@@ -44,14 +46,13 @@ class ServiceDetailPhoto {
                         resolve(detailPhotos)
                     }
                 })
-
             })
 
             return detailPhotos
 
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error))
+                next(ApiError.internal(error.message, 'ServiceDetailPhoto.createDetailPhotos'))
             }
         }
     }

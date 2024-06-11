@@ -18,7 +18,7 @@ class ControllerRequest {
             res.send(request)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerRequest.createRequest'))
             }
         }
     }
@@ -31,7 +31,7 @@ class ControllerRequest {
             res.send(requests)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ControllerRequest.createRequest'))
             }
         }
     }
@@ -44,7 +44,7 @@ class ControllerRequest {
             res.send(request)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message,  'ControllerRequest.createRequest'))
             }
         }
     }
@@ -56,7 +56,9 @@ class ControllerRequest {
 
             res.status(200).send(request)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message,  'ControllerRequest.updateRequest'))
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ import { PostAttributes, CreationPost } from './types'
 
 class Post extends Model<PostAttributes, CreationPost> {}
 
-Post.init({
+sequelize && Post.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

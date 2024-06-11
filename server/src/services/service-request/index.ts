@@ -25,7 +25,7 @@ class ServiceRequest {
             return request
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceRequest.createRequest'))
             }
         }
     }
@@ -61,7 +61,7 @@ class ServiceRequest {
             return requests
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceRequest.getAllRequests'))
             }
         }
 
@@ -75,10 +75,10 @@ class ServiceRequest {
                 include: [Service, Organization, User]
             })
 
-            return mapperRequestGetById(request)
+            return request ? mapperRequestGetById(request) : null
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceRequest.getByIdRequest'))
             }
         }
     }
@@ -95,7 +95,9 @@ class ServiceRequest {
 
             return result ? 'updated' : false
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceRequest.updateRequest'))
+            }
         }
     }
 }

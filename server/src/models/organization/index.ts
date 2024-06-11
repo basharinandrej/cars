@@ -5,7 +5,7 @@ import { Bans, StatusOrganization } from '@common/enums'
 
 class Organization extends ModelSequelize<OrganizationAttributes, OrganizationCreation> {}
 
-Organization.init({
+sequelize && Organization.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -46,6 +46,7 @@ Organization.init({
   updatedAt: false,
   hooks: {
     afterCreate: (record) => {
+        //@ts-ignore
         delete record.dataValues.password
         delete record.dataValues.createdAt
     }

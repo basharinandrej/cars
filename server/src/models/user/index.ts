@@ -5,7 +5,7 @@ import {UserRoles, Bans} from '@common/enums'
 
 class User extends ModelSequelize<UserAttributes, UserCreation> {}
 
-User.init({
+sequelize && User.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -45,11 +45,12 @@ User.init({
         allowNull: false
     }
 }, { 
-  sequelize, 
+  sequelize,
   tableName: 'users',
   updatedAt: false,
   hooks: {
     afterCreate: (record) => {
+        //@ts-ignore
         delete record.dataValues.password
         delete record.dataValues.createdAt
     }

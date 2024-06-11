@@ -4,7 +4,7 @@ import {CarAttributes} from './types'
 
 class Car extends Model<CarAttributes, CarAttributes> {}
 
-Car.init({
+sequelize && Car.init({
     vinCode: {
         type: DataTypes.STRING,
         primaryKey: true,

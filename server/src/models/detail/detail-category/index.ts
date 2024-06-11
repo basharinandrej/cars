@@ -4,7 +4,7 @@ import {DetailCategoryAttributes, DetailCategoryCreation} from './types'
 
 class DetailCategory extends Model<DetailCategoryAttributes, DetailCategoryCreation> {}
 
-DetailCategory.init({
+sequelize && DetailCategory.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

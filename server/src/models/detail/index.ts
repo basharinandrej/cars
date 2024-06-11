@@ -5,7 +5,7 @@ import {DetailWears} from '@common/enums'
 
 class Detail extends Model<DetailAttributes, CreationDetail> {}
 
-Detail.init({
+sequelize && Detail.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

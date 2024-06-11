@@ -8,6 +8,7 @@ class DtoRequest {
         return {
             description: request.description,
             recipienId: request.recipientId,
+            //@ts-ignore
             serviceId: request.serviceId,
             senderId: request.senderId,
             status: StatusRequest.IN_VIEWING

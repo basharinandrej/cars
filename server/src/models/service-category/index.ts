@@ -4,7 +4,7 @@ import {ServiceCategoryAttributes, CreationServiceCategory} from './types'
 
 class ServiceCategory extends Model<ServiceCategoryAttributes, CreationServiceCategory> {}
 
-ServiceCategory.init({
+sequelize && ServiceCategory.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

@@ -4,7 +4,7 @@ import {AddressAttributes, AddressCreation} from './types'
 
 class Address extends ModelSequelize<AddressAttributes, AddressCreation> {}
 
-Address.init({
+sequelize && Address.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

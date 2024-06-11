@@ -17,6 +17,7 @@ class DtoService {
             name: service.name,
             description: service.description,
             price: service.price,
+            //@ts-ignore
             serviceCategoryId: service.serviceCategoryId
         }
     }

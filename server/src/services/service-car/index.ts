@@ -24,7 +24,9 @@ class ServiceCar {
 
             return mapperCarCreation(car)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceCar.createCar'))
+            }
         }
     }
 
@@ -41,7 +43,9 @@ class ServiceCar {
 
             return result ? 'updated' : false
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceCar.updateCar'))
+            }
         }
     }
 
@@ -56,7 +60,9 @@ class ServiceCar {
 
             return mapperCarGetAll(cars)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceCar.getAllCars'))
+            }
         }
     }
 
@@ -71,8 +77,9 @@ class ServiceCar {
             }
             return mapperCarGetByVinCode(car)
         } catch (error) {
-            next(ApiError.internal(error))
-        }
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceCar.getByVINCodeCar'))
+            }        }
     }
 
     async dropCar(vinCode: string, next: NextFunction) {
@@ -82,8 +89,9 @@ class ServiceCar {
             })
             return result ? vinCode : false
         } catch (error) {
-            next(ApiError.internal(error))
-
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceCar.dropCar'))
+            }
         }
     }
 }

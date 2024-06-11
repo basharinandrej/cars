@@ -5,7 +5,7 @@ import {BrandAttributes, BrandCreation} from './types'
 
 class Brand extends ModelSequelize<BrandAttributes, BrandCreation> {}
 
-Brand.init({
+sequelize && Brand.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

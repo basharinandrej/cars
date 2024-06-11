@@ -5,7 +5,7 @@ import {RequestAttributes, CreationRequest, StatusRequest} from './types'
 
 class Request extends Model<RequestAttributes, CreationRequest> {}
 
-Request.init({
+sequelize && Request.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

@@ -5,7 +5,7 @@ import {ModelAttributes, ModelCreation} from './types'
 
 class Model extends ModelSequelize<ModelAttributes, ModelCreation> {}
 
-Model.init({
+sequelize && Model.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

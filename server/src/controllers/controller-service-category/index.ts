@@ -16,7 +16,7 @@ class ControllerServiceCategory {
             res.send(ServiceCategory)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message,  'ControllerServiceCategory.createServiceCategory'))
             }
         }
     }
@@ -29,7 +29,7 @@ class ControllerServiceCategory {
             res.send(serviceCategories)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message,  'ControllerServiceCategory.getAllServiceCategories'))
             }
         }
     }
@@ -41,7 +41,9 @@ class ControllerServiceCategory {
 
             res.status(200).send(serviceCategory)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message,  'ControllerServiceCategory.updateCategoryService'))
+            }
         }
     }
     async dropCategoryDetail(req: RequestDelete<ParamsDeleteCategoryService>, res: Response, next: NextFunction) {
@@ -49,7 +51,9 @@ class ControllerServiceCategory {
             const id = await serviceServiceCategory.dropCategoryService(req.query.id, next)
             res.send(id)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message,  'ControllerServiceCategory.dropCategoryDetail'))
+            }
         }
     }
 }

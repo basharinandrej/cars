@@ -5,7 +5,7 @@ import { DetailPhotoAttributes, CreationDetailPhoto } from './types'
 
 class DetailPhoto extends Model<DetailPhotoAttributes, CreationDetailPhoto> {}
 
-DetailPhoto.init({
+sequelize && DetailPhoto.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

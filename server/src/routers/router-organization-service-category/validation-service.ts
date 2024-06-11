@@ -31,14 +31,16 @@ export const validationServiceCreation = {
                     })
         
                     if(result?.dataValues.id) {
-                        return Promise.reject(ApiError.bedRequest(`Услуга с категорией - ${result.dataValues.serviceCategory.name}  уже есть`));
+                        return Promise.reject(ApiError.bedRequest(`Услуга с категорией - ${result.dataValues.serviceCategory?.name}  уже есть`));
 
                     } else {
                         return Promise.resolve(true);
                     }
         
                 } catch (error) {
-                    return Promise.reject(ApiError.unauthorized(error));
+                    if(error instanceof Error) {
+                        return Promise.reject(ApiError.unauthorized(error.message));
+                    }
                 }
             }),
             cookie('refreshToken').custom((value: string, meta) => {

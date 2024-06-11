@@ -11,13 +11,14 @@ class ControllerOrganizationServiceCategory {
     async createOrganizationServiceCategory(req: RequestCreation<OrganizationServiceCategoryAttributes>, res: Response, next: NextFunction) {
         try {
 
+            //@ts-ignore
             const dtoOrganizationServiceCategoryCreation = dtoService.getDtoOrganizationServiceCategoryCreation(req.body, req.cookies)
             const service = await serviceService.createServiceOrganizationServiceCategory(dtoOrganizationServiceCategoryCreation, next)
 
             res.send(service)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error))
+                next(ApiError.internal(error.message,  'ControllerOrganizationServiceCategory.createOrganizationServiceCategory'))
             }
         }
     }
@@ -33,7 +34,7 @@ class ControllerOrganizationServiceCategory {
             }
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error))
+                next(ApiError.internal(error.message,  'ControllerOrganizationServiceCategory.getAllOrganizationServiceCategories'))
             }
         }
     }
@@ -43,7 +44,9 @@ class ControllerOrganizationServiceCategory {
             const id = await serviceService.dropOrganizationServiceCategory(req.query.id, next)
             res.send(id)
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message,  'ControllerOrganizationServiceCategory.dropOrganizationServiceCategories'))
+            }
         }
     }
 }

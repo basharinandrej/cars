@@ -5,7 +5,7 @@ import { OrganizationServiceCategoryAttributes, CreationOrganizationServiceCateg
 
 class OrganizationServiceCategory extends Model<OrganizationServiceCategoryAttributes, CreationOrganizationServiceCategory> {}
 
-OrganizationServiceCategory.init({
+sequelize && OrganizationServiceCategory.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

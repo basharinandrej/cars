@@ -17,7 +17,7 @@ class ServiceServiceCategory {
             return mapperServiceCategoryCreation(serviceCategory)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceServiceCategory.createServiceCategory'))
             }
         }
     }
@@ -31,7 +31,7 @@ class ServiceServiceCategory {
             return mapperServiceCategoryGetAll(categories)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.internal(error.message))
+                next(ApiError.internal(error.message, 'ServiceServiceCategory.getAllServiceCategories'))
             }
         }
     }
@@ -43,8 +43,9 @@ class ServiceServiceCategory {
             })
             return result ? id : false
         } catch (error) {
-            next(ApiError.internal(error))
-
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceServiceCategory.dropCategoryService'))
+            }
         }
     }
 
@@ -57,7 +58,9 @@ class ServiceServiceCategory {
 
             return result ? 'updated' : false
         } catch (error) {
-            next(ApiError.internal(error))
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceServiceCategory.updateCategoryService'))
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ class ServiceOrganizationServiceCategory {
             return mapperServiceCreation(service)
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error))
+                next(ApiError.internal(error.message, 'ServiceOrganizationServiceCategory.createServiceOrganizationServiceCategory'))
             }
         }
     }
@@ -55,7 +55,7 @@ class ServiceOrganizationServiceCategory {
             return organizationServiceCategories
         } catch (error) {
             if(error instanceof Error) {
-                next(ApiError.bedRequest(error))
+                next(ApiError.internal(error.message, 'ServiceOrganizationServiceCategory.getAllServiceOrganizationServiceCategories'))
             }
         }
     }
@@ -67,8 +67,9 @@ class ServiceOrganizationServiceCategory {
             })
             return result ? id : false
         } catch (error) {
-            next(ApiError.internal(error))
-
+            if(error instanceof Error) {
+                next(ApiError.internal(error.message, 'ServiceOrganizationServiceCategory.dropOrganizationServiceCategory'))
+            }
         }
     }
 }
