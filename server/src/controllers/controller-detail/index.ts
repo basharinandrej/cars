@@ -19,6 +19,7 @@ class ControllerDetail {
                 return next(ApiError.bedRequest(errorStrings.mustBeAtLeastOnePhoto()))
             }
             
+             //@ts-ignore
             const dtoDetailCreation = dtoDetail.getDtoDetailCreation(req.body, req.cookies)
             const detail = await serviceDetail.createDetail(dtoDetailCreation, next)
 

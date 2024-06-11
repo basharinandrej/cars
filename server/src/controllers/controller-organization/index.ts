@@ -83,6 +83,7 @@ class ControllerOrganization {
 
     async initOrganization(req: RequestGetOne<void>, res: Response, next: NextFunction) {
         try{
+             //@ts-ignore
             const dtoUserInit = dtoOrganization.getDtoInitOrganization(req.cookies)
             const result = await serviceOrganization.initOrganization(dtoUserInit, next)
 
@@ -129,6 +130,7 @@ class ControllerOrganization {
 
     async changePassword(req: RequestCreation<OrganizationChangePasswordParams>, res: Response, next: NextFunction) {
         try {
+            //@ts-ignore
             const dtoOrganizationChangePassword = dtoOrganization.getDtoChangePassword(req.body, req.cookies)
             const result = await serviceOrganization.changePassword(dtoOrganizationChangePassword, next)
 

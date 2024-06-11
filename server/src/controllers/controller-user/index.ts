@@ -67,6 +67,7 @@ class ControllerUser {
 
     async initUser(req: RequestGetOne<void>, res: Response, next: NextFunction) {
         try{
+             //@ts-ignore
             const dtoUserInit = dtoUser.getDtoInitUser(req.cookies)
             const result = await serviceUser.initUser(dtoUserInit, next)
 
@@ -127,6 +128,7 @@ class ControllerUser {
 
     async changePassword(req: RequestCreation<UserChangePasswordParams>, res: Response, next: NextFunction) {
         try {
+            //@ts-ignore
             const dtoUserChangePassword = dtoUser.getDtoChangePassword(req.body, req.cookies)
             const result = await serviceUser.changePassword(dtoUserChangePassword, next)
 
