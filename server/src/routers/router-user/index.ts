@@ -28,6 +28,7 @@ routers.get('/init',
     controllerUser.initUser
 )
 
+// todo добавить ручку обновления профиля
 routers.patch('', 
     validationUserUpdation.createChain(), 
     middlewareValidation, 

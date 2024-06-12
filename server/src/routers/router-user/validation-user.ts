@@ -90,6 +90,7 @@ export const validationUser = {
     }
 }
 
+
 export const validationUserUpdation = {
     createChain() {
         return  [
@@ -135,10 +136,6 @@ export const validationUserUpdation = {
                 UserRoles.Moderator, 
                 UserRoles.Person
             ])).trim(),
-    
-            body('phoneNumber')
-                .isNumeric().withMessage(errorStrings.beNumber('phoneNumber'))
-                .isLength({min: 11, max: 11}).withMessage(errorStrings.checkLengthPhoneNumber()).trim(),
         ]
     }
 }

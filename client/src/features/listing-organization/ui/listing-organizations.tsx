@@ -124,7 +124,7 @@ export const ListingOrganization = ({
                             <div className={styles.wrapper}>
                                 <div className={styles.information}>
                                     <h3 className={styles.title}>{organization.name}</h3>
-                                    <p className={styles.address}>{[firstAddressOrganization.city, firstAddressOrganization.street, firstAddressOrganization.house].join(', ')}</p>
+                                    {firstAddressOrganization && <p className={styles.address}>{[firstAddressOrganization.city, firstAddressOrganization.street, firstAddressOrganization.house].join(', ')}</p>}
                                 </div>
 
 

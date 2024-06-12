@@ -50,6 +50,13 @@ const initialState: SidebarSchema = {
       permissionForUserRole: [UserRoles.Admin]
     },
     {
+      id: 12,
+      path: '/cabinet/category-details',
+      text: 'Категории деталей',
+      iconType: 'category-services',
+      permissionForUserRole: [UserRoles.Admin]
+    },
+    {
         id: 6,
         path: '/cabinet/brands',
         text: 'Бренды',
